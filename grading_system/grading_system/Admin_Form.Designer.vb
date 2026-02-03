@@ -41,7 +41,13 @@ Partial Class Admin_Form
         Me.ToolStripButton3 = New System.Windows.Forms.ToolStripButton
         Me.ToolStripButton4 = New System.Windows.Forms.ToolStripButton
         Me.ToolStripButton5 = New System.Windows.Forms.ToolStripButton
+        Me.tsbtnNew = New System.Windows.Forms.ToolStripButton
+        Me.tsbtnUpdate = New System.Windows.Forms.ToolStripButton
+        Me.tsbtnSearch = New System.Windows.Forms.ToolStripButton
+        Me.tsbtnDelete = New System.Windows.Forms.ToolStripButton
+        Me.tsbtnClose = New System.Windows.Forms.ToolStripButton
         Me.Panel1.SuspendLayout()
+        Me.ToolStrip.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -164,6 +170,7 @@ Partial Class Admin_Form
         '
         'ToolStrip
         '
+        Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbtnNew, Me.tsbtnUpdate, Me.tsbtnSearch, Me.tsbtnDelete, Me.tsbtnClose})
         Me.ToolStrip.Location = New System.Drawing.Point(146, 52)
         Me.ToolStrip.Name = "ToolStrip"
         Me.ToolStrip.Size = New System.Drawing.Size(1198, 25)
@@ -219,6 +226,46 @@ Partial Class Admin_Form
         Me.ToolStripButton5.Size = New System.Drawing.Size(56, 22)
         Me.ToolStripButton5.Text = "Close"
         '
+        'tsbtnNew
+        '
+        Me.tsbtnNew.Image = CType(resources.GetObject("tsbtnNew.Image"), System.Drawing.Image)
+        Me.tsbtnNew.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbtnNew.Name = "tsbtnNew"
+        Me.tsbtnNew.Size = New System.Drawing.Size(51, 22)
+        Me.tsbtnNew.Text = "New"
+        '
+        'tsbtnUpdate
+        '
+        Me.tsbtnUpdate.Image = CType(resources.GetObject("tsbtnUpdate.Image"), System.Drawing.Image)
+        Me.tsbtnUpdate.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbtnUpdate.Name = "tsbtnUpdate"
+        Me.tsbtnUpdate.Size = New System.Drawing.Size(65, 22)
+        Me.tsbtnUpdate.Text = "Update"
+        '
+        'tsbtnSearch
+        '
+        Me.tsbtnSearch.Image = CType(resources.GetObject("tsbtnSearch.Image"), System.Drawing.Image)
+        Me.tsbtnSearch.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbtnSearch.Name = "tsbtnSearch"
+        Me.tsbtnSearch.Size = New System.Drawing.Size(62, 22)
+        Me.tsbtnSearch.Text = "Search"
+        '
+        'tsbtnDelete
+        '
+        Me.tsbtnDelete.Image = CType(resources.GetObject("tsbtnDelete.Image"), System.Drawing.Image)
+        Me.tsbtnDelete.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbtnDelete.Name = "tsbtnDelete"
+        Me.tsbtnDelete.Size = New System.Drawing.Size(60, 22)
+        Me.tsbtnDelete.Text = "Delete"
+        '
+        'tsbtnClose
+        '
+        Me.tsbtnClose.Image = CType(resources.GetObject("tsbtnClose.Image"), System.Drawing.Image)
+        Me.tsbtnClose.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbtnClose.Name = "tsbtnClose"
+        Me.tsbtnClose.Size = New System.Drawing.Size(56, 22)
+        Me.tsbtnClose.Text = "Close"
+        '
         'Admin_Form
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -232,6 +279,8 @@ Partial Class Admin_Form
         Me.Text = "Admin_Form"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.Panel1.ResumeLayout(False)
+        Me.ToolStrip.ResumeLayout(False)
+        Me.ToolStrip.PerformLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -255,4 +304,9 @@ Partial Class Admin_Form
     Friend WithEvents ToolStripButton4 As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripButton5 As System.Windows.Forms.ToolStripButton
     Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
+    Friend WithEvents tsbtnNew As System.Windows.Forms.ToolStripButton
+    Friend WithEvents tsbtnUpdate As System.Windows.Forms.ToolStripButton
+    Friend WithEvents tsbtnSearch As System.Windows.Forms.ToolStripButton
+    Friend WithEvents tsbtnDelete As System.Windows.Forms.ToolStripButton
+    Friend WithEvents tsbtnClose As System.Windows.Forms.ToolStripButton
 End Class
