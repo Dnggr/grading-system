@@ -24,23 +24,28 @@ Partial Class Admin_Form
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Admin_Form))
         Me.Panel1 = New System.Windows.Forms.Panel
-        Me.Panel2 = New System.Windows.Forms.Panel
-        Me.Button1 = New System.Windows.Forms.Button
-        Me.Button2 = New System.Windows.Forms.Button
-        Me.Button3 = New System.Windows.Forms.Button
-        Me.Button4 = New System.Windows.Forms.Button
-        Me.Button5 = New System.Windows.Forms.Button
-        Me.Button6 = New System.Windows.Forms.Button
-        Me.Button7 = New System.Windows.Forms.Button
+        Me.btnExit = New System.Windows.Forms.Button
         Me.Button8 = New System.Windows.Forms.Button
-        Me.Button9 = New System.Windows.Forms.Button
+        Me.Button7 = New System.Windows.Forms.Button
+        Me.Button6 = New System.Windows.Forms.Button
+        Me.Button5 = New System.Windows.Forms.Button
+        Me.Button4 = New System.Windows.Forms.Button
+        Me.Button3 = New System.Windows.Forms.Button
+        Me.Button2 = New System.Windows.Forms.Button
+        Me.Button1 = New System.Windows.Forms.Button
+        Me.Panel2 = New System.Windows.Forms.Panel
         Me.ToolStrip = New System.Windows.Forms.ToolStrip
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton
         Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton
         Me.ToolStripButton3 = New System.Windows.Forms.ToolStripButton
         Me.ToolStripButton4 = New System.Windows.Forms.ToolStripButton
         Me.ToolStripButton5 = New System.Windows.Forms.ToolStripButton
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView
+        Me.tsbtnNew = New System.Windows.Forms.ToolStripButton
+        Me.tsbtnUpdate = New System.Windows.Forms.ToolStripButton
+        Me.tsbtnSearch = New System.Windows.Forms.ToolStripButton
+        Me.tsbtnDelete = New System.Windows.Forms.ToolStripButton
+        Me.tsbtnClose = New System.Windows.Forms.ToolStripButton
         Me.Panel1.SuspendLayout()
         Me.ToolStrip.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -49,7 +54,7 @@ Partial Class Admin_Form
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.SystemColors.Highlight
-        Me.Panel1.Controls.Add(Me.Button9)
+        Me.Panel1.Controls.Add(Me.btnExit)
         Me.Panel1.Controls.Add(Me.Button8)
         Me.Panel1.Controls.Add(Me.Button7)
         Me.Panel1.Controls.Add(Me.Button6)
@@ -64,84 +69,15 @@ Partial Class Admin_Form
         Me.Panel1.Size = New System.Drawing.Size(146, 700)
         Me.Panel1.TabIndex = 0
         '
-        'Panel2
+        'btnExit
         '
-        Me.Panel2.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel2.Location = New System.Drawing.Point(146, 0)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(1198, 52)
-        Me.Panel2.TabIndex = 0
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(32, 26)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 63)
-        Me.Button1.TabIndex = 0
-        Me.Button1.Text = "Section"
-        Me.Button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(32, 95)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 63)
-        Me.Button2.TabIndex = 1
-        Me.Button2.Text = "Teacher"
-        Me.Button2.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.Button2.UseVisualStyleBackColor = True
-        '
-        'Button3
-        '
-        Me.Button3.Location = New System.Drawing.Point(32, 164)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(75, 63)
-        Me.Button3.TabIndex = 2
-        Me.Button3.Text = "Students"
-        Me.Button3.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.Button3.UseVisualStyleBackColor = True
-        '
-        'Button4
-        '
-        Me.Button4.Location = New System.Drawing.Point(32, 233)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(75, 63)
-        Me.Button4.TabIndex = 2
-        Me.Button4.Text = "Dos/DP"
-        Me.Button4.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.Button4.UseVisualStyleBackColor = True
-        '
-        'Button5
-        '
-        Me.Button5.Location = New System.Drawing.Point(32, 302)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(75, 63)
-        Me.Button5.TabIndex = 2
-        Me.Button5.Text = "Sub Grade"
-        Me.Button5.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.Button5.UseVisualStyleBackColor = True
-        '
-        'Button6
-        '
-        Me.Button6.Location = New System.Drawing.Point(32, 371)
-        Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(75, 63)
-        Me.Button6.TabIndex = 2
-        Me.Button6.Text = "Grades"
-        Me.Button6.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.Button6.UseVisualStyleBackColor = True
-        '
-        'Button7
-        '
-        Me.Button7.Location = New System.Drawing.Point(32, 470)
-        Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(75, 63)
-        Me.Button7.TabIndex = 3
-        Me.Button7.Text = "SY Setting"
-        Me.Button7.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.Button7.UseVisualStyleBackColor = True
+        Me.btnExit.Location = New System.Drawing.Point(32, 623)
+        Me.btnExit.Name = "btnExit"
+        Me.btnExit.Size = New System.Drawing.Size(75, 63)
+        Me.btnExit.TabIndex = 5
+        Me.btnExit.Text = "Exit"
+        Me.btnExit.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnExit.UseVisualStyleBackColor = True
         '
         'Button8
         '
@@ -153,24 +89,102 @@ Partial Class Admin_Form
         Me.Button8.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.Button8.UseVisualStyleBackColor = True
         '
-        'Button9
+        'Button7
         '
-        Me.Button9.Location = New System.Drawing.Point(32, 623)
-        Me.Button9.Name = "Button9"
-        Me.Button9.Size = New System.Drawing.Size(75, 63)
-        Me.Button9.TabIndex = 5
-        Me.Button9.Text = "Exit"
-        Me.Button9.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.Button9.UseVisualStyleBackColor = True
+        Me.Button7.Location = New System.Drawing.Point(32, 470)
+        Me.Button7.Name = "Button7"
+        Me.Button7.Size = New System.Drawing.Size(75, 63)
+        Me.Button7.TabIndex = 3
+        Me.Button7.Text = "SY Setting"
+        Me.Button7.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.Button7.UseVisualStyleBackColor = True
+        '
+        'Button6
+        '
+        Me.Button6.Location = New System.Drawing.Point(32, 371)
+        Me.Button6.Name = "Button6"
+        Me.Button6.Size = New System.Drawing.Size(75, 63)
+        Me.Button6.TabIndex = 2
+        Me.Button6.Text = "Grades"
+        Me.Button6.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.Button6.UseVisualStyleBackColor = True
+        '
+        'Button5
+        '
+        Me.Button5.Location = New System.Drawing.Point(32, 302)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(75, 63)
+        Me.Button5.TabIndex = 2
+        Me.Button5.Text = "Sub Grade"
+        Me.Button5.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.Button5.UseVisualStyleBackColor = True
+        '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(32, 233)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(75, 63)
+        Me.Button4.TabIndex = 2
+        Me.Button4.Text = "Dos/DP"
+        Me.Button4.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.Button4.UseVisualStyleBackColor = True
+        '
+        'Button3
+        '
+        Me.Button3.Location = New System.Drawing.Point(32, 164)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(75, 63)
+        Me.Button3.TabIndex = 2
+        Me.Button3.Text = "Students"
+        Me.Button3.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(32, 95)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(75, 63)
+        Me.Button2.TabIndex = 1
+        Me.Button2.Text = "Teacher"
+        Me.Button2.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(32, 26)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 63)
+        Me.Button1.TabIndex = 0
+        Me.Button1.Text = "Section"
+        Me.Button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'Panel2
+        '
+        Me.Panel2.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel2.Location = New System.Drawing.Point(146, 0)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(1198, 52)
+        Me.Panel2.TabIndex = 0
         '
         'ToolStrip
         '
-        Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripButton2, Me.ToolStripButton3, Me.ToolStripButton4, Me.ToolStripButton5})
+        Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbtnNew, Me.tsbtnUpdate, Me.tsbtnSearch, Me.tsbtnDelete, Me.tsbtnClose})
         Me.ToolStrip.Location = New System.Drawing.Point(146, 52)
         Me.ToolStrip.Name = "ToolStrip"
         Me.ToolStrip.Size = New System.Drawing.Size(1198, 25)
         Me.ToolStrip.TabIndex = 3
         Me.ToolStrip.Text = "ToolStrip1"
+        '
+        'DataGridView1
+        '
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DataGridView1.Location = New System.Drawing.Point(146, 77)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.Size = New System.Drawing.Size(1198, 623)
+        Me.DataGridView1.TabIndex = 4
         '
         'ToolStripButton1
         '
@@ -212,14 +226,45 @@ Partial Class Admin_Form
         Me.ToolStripButton5.Size = New System.Drawing.Size(56, 22)
         Me.ToolStripButton5.Text = "Close"
         '
-        'DataGridView1
+        'tsbtnNew
         '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.DataGridView1.Location = New System.Drawing.Point(146, 77)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(1198, 623)
-        Me.DataGridView1.TabIndex = 4
+        Me.tsbtnNew.Image = CType(resources.GetObject("tsbtnNew.Image"), System.Drawing.Image)
+        Me.tsbtnNew.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbtnNew.Name = "tsbtnNew"
+        Me.tsbtnNew.Size = New System.Drawing.Size(51, 22)
+        Me.tsbtnNew.Text = "New"
+        '
+        'tsbtnUpdate
+        '
+        Me.tsbtnUpdate.Image = CType(resources.GetObject("tsbtnUpdate.Image"), System.Drawing.Image)
+        Me.tsbtnUpdate.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbtnUpdate.Name = "tsbtnUpdate"
+        Me.tsbtnUpdate.Size = New System.Drawing.Size(65, 22)
+        Me.tsbtnUpdate.Text = "Update"
+        '
+        'tsbtnSearch
+        '
+        Me.tsbtnSearch.Image = CType(resources.GetObject("tsbtnSearch.Image"), System.Drawing.Image)
+        Me.tsbtnSearch.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbtnSearch.Name = "tsbtnSearch"
+        Me.tsbtnSearch.Size = New System.Drawing.Size(62, 22)
+        Me.tsbtnSearch.Text = "Search"
+        '
+        'tsbtnDelete
+        '
+        Me.tsbtnDelete.Image = CType(resources.GetObject("tsbtnDelete.Image"), System.Drawing.Image)
+        Me.tsbtnDelete.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbtnDelete.Name = "tsbtnDelete"
+        Me.tsbtnDelete.Size = New System.Drawing.Size(60, 22)
+        Me.tsbtnDelete.Text = "Delete"
+        '
+        'tsbtnClose
+        '
+        Me.tsbtnClose.Image = CType(resources.GetObject("tsbtnClose.Image"), System.Drawing.Image)
+        Me.tsbtnClose.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbtnClose.Name = "tsbtnClose"
+        Me.tsbtnClose.Size = New System.Drawing.Size(56, 22)
+        Me.tsbtnClose.Text = "Close"
         '
         'Admin_Form
         '
@@ -248,7 +293,7 @@ Partial Class Admin_Form
     Friend WithEvents Button3 As System.Windows.Forms.Button
     Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents Button9 As System.Windows.Forms.Button
+    Friend WithEvents btnExit As System.Windows.Forms.Button
     Friend WithEvents Button8 As System.Windows.Forms.Button
     Friend WithEvents Button7 As System.Windows.Forms.Button
     Friend WithEvents Button6 As System.Windows.Forms.Button
@@ -259,4 +304,9 @@ Partial Class Admin_Form
     Friend WithEvents ToolStripButton4 As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripButton5 As System.Windows.Forms.ToolStripButton
     Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
+    Friend WithEvents tsbtnNew As System.Windows.Forms.ToolStripButton
+    Friend WithEvents tsbtnUpdate As System.Windows.Forms.ToolStripButton
+    Friend WithEvents tsbtnSearch As System.Windows.Forms.ToolStripButton
+    Friend WithEvents tsbtnDelete As System.Windows.Forms.ToolStripButton
+    Friend WithEvents tsbtnClose As System.Windows.Forms.ToolStripButton
 End Class
