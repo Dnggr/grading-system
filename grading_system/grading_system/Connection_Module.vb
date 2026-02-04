@@ -2,7 +2,7 @@
 
 Module Module_connection
     Public con As New OdbcConnection
-    Private constr As String = "Driver={MySQL ODBC 8.0 Unicode Driver};Server=localhost;Database=gradingsystem_db;Uid=root;Pwd=;Option=3;"
+    Private constr As String = "Driver={MySQL ODBC 8.0 Unicode Driver};Server=localhost;Database=grading_system;Uid=root;Pwd=;Option=3;"
 
     Public Sub Connect_me()
         Try
