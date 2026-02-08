@@ -221,22 +221,28 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="popUpFormAddSection.Designer.vb">
-      <DependentUpon>popUpFormAddSection.vb</DependentUpon>
+    <Compile Include="student popup forms\popUpFormDeleteStudent.Designer.vb">
+      <DependentUpon>popUpFormDeleteStudent.vb</DependentUpon>
     </Compile>
-    <Compile Include="popUpFormAddSection.vb">
+    <Compile Include="student popup forms\popUpFormDeleteStudent.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="popUpFormAddStudent.Designer.vb">
+    <Compile Include="student popup forms\popUpFormAddStudent.Designer.vb">
       <DependentUpon>popUpFormAddStudent.vb</DependentUpon>
     </Compile>
-    <Compile Include="popUpFormAddStudent.vb">
+    <Compile Include="student popup forms\popUpFormAddStudent.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="popUpFormAddTeacher.Designer.vb">
       <DependentUpon>popUpFormAddTeacher.vb</DependentUpon>
     </Compile>
     <Compile Include="popUpFormAddTeacher.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="student popup forms\popUpFormModifyStudent.Designer.vb">
+      <DependentUpon>popUpFormModifyStudent.vb</DependentUpon>
+    </Compile>
+    <Compile Include="student popup forms\popUpFormModifyStudent.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Student_Form.Designer.vb">
@@ -267,11 +273,7 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="popUpFormAddSection.resx">
-      <DependentUpon>popUpFormAddSection.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="popUpFormAddStudent.resx">
+    <EmbeddedResource Include="student popup forms\popUpFormAddStudent.resx">
       <DependentUpon>popUpFormAddStudent.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>

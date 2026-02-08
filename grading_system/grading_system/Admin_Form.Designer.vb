@@ -23,168 +23,111 @@ Partial Class Admin_Form
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Admin_Form))
-        Me.Panel1 = New System.Windows.Forms.Panel
-        Me.btnExit = New System.Windows.Forms.Button
-        Me.Button8 = New System.Windows.Forms.Button
-        Me.Button7 = New System.Windows.Forms.Button
-        Me.Button6 = New System.Windows.Forms.Button
-        Me.Button5 = New System.Windows.Forms.Button
-        Me.Button4 = New System.Windows.Forms.Button
-        Me.Button3 = New System.Windows.Forms.Button
-        Me.Button2 = New System.Windows.Forms.Button
-        Me.Button1 = New System.Windows.Forms.Button
-        Me.Panel2 = New System.Windows.Forms.Panel
-        Me.ToolStrip = New System.Windows.Forms.ToolStrip
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView
+        Me.Navigation_Panel = New System.Windows.Forms.Panel
+        Me.Logout_Button = New System.Windows.Forms.Button
+        Me.School_Year_Button = New System.Windows.Forms.Button
+        Me.Teacher_Button = New System.Windows.Forms.Button
+        Me.Exit_Button = New System.Windows.Forms.Button
+        Me.Student_Button = New System.Windows.Forms.Button
+        Me.Dashboard_Button = New System.Windows.Forms.Button
+        Me.Dashboard_Panel = New System.Windows.Forms.Panel
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton
         Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton
         Me.ToolStripButton3 = New System.Windows.Forms.ToolStripButton
         Me.ToolStripButton4 = New System.Windows.Forms.ToolStripButton
         Me.ToolStripButton5 = New System.Windows.Forms.ToolStripButton
-        Me.tsbtnNew = New System.Windows.Forms.ToolStripButton
-        Me.tsbtnUpdate = New System.Windows.Forms.ToolStripButton
-        Me.tsbtnSearch = New System.Windows.Forms.ToolStripButton
-        Me.tsbtnDelete = New System.Windows.Forms.ToolStripButton
-        Me.tsbtnClose = New System.Windows.Forms.ToolStripButton
-        Me.Panel1.SuspendLayout()
-        Me.ToolStrip.SuspendLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Student_Panel = New System.Windows.Forms.Panel
+        Me.Teacher_Panel = New System.Windows.Forms.Panel
+        Me.School_Year_Panel = New System.Windows.Forms.Panel
+        Me.Add_Student_Button = New System.Windows.Forms.Button
+        Me.Modify_Student_Button = New System.Windows.Forms.Button
+        Me.Delete_Student_Button = New System.Windows.Forms.Button
+        Me.Student_List_DataGridView = New System.Windows.Forms.DataGridView
+        Me.Student_Label = New System.Windows.Forms.Label
+        Me.Search_Student_Label = New System.Windows.Forms.Label
+        Me.Search_Student_TextBox = New System.Windows.Forms.TextBox
+        Me.Navigation_Panel.SuspendLayout()
+        Me.Student_Panel.SuspendLayout()
+        CType(Me.Student_List_DataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'Panel1
+        'Navigation_Panel
         '
-        Me.Panel1.BackColor = System.Drawing.SystemColors.Highlight
-        Me.Panel1.Controls.Add(Me.btnExit)
-        Me.Panel1.Controls.Add(Me.Button8)
-        Me.Panel1.Controls.Add(Me.Button7)
-        Me.Panel1.Controls.Add(Me.Button6)
-        Me.Panel1.Controls.Add(Me.Button5)
-        Me.Panel1.Controls.Add(Me.Button4)
-        Me.Panel1.Controls.Add(Me.Button3)
-        Me.Panel1.Controls.Add(Me.Button2)
-        Me.Panel1.Controls.Add(Me.Button1)
-        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Panel1.Location = New System.Drawing.Point(0, 0)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(146, 700)
-        Me.Panel1.TabIndex = 0
+        Me.Navigation_Panel.BackColor = System.Drawing.SystemColors.Highlight
+        Me.Navigation_Panel.Controls.Add(Me.Logout_Button)
+        Me.Navigation_Panel.Controls.Add(Me.School_Year_Button)
+        Me.Navigation_Panel.Controls.Add(Me.Teacher_Button)
+        Me.Navigation_Panel.Controls.Add(Me.Exit_Button)
+        Me.Navigation_Panel.Controls.Add(Me.Student_Button)
+        Me.Navigation_Panel.Controls.Add(Me.Dashboard_Button)
+        Me.Navigation_Panel.Dock = System.Windows.Forms.DockStyle.Left
+        Me.Navigation_Panel.Location = New System.Drawing.Point(0, 0)
+        Me.Navigation_Panel.Name = "Navigation_Panel"
+        Me.Navigation_Panel.Size = New System.Drawing.Size(197, 700)
+        Me.Navigation_Panel.TabIndex = 0
         '
-        'btnExit
+        'Logout_Button
         '
-        Me.btnExit.Location = New System.Drawing.Point(32, 623)
-        Me.btnExit.Name = "btnExit"
-        Me.btnExit.Size = New System.Drawing.Size(75, 63)
-        Me.btnExit.TabIndex = 5
-        Me.btnExit.Text = "Exit"
-        Me.btnExit.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.btnExit.UseVisualStyleBackColor = True
+        Me.Logout_Button.Location = New System.Drawing.Point(23, 636)
+        Me.Logout_Button.Name = "Logout_Button"
+        Me.Logout_Button.Size = New System.Drawing.Size(146, 23)
+        Me.Logout_Button.TabIndex = 5
+        Me.Logout_Button.Text = "Logout"
+        Me.Logout_Button.UseVisualStyleBackColor = True
         '
-        'Button8
+        'School_Year_Button
         '
-        Me.Button8.Location = New System.Drawing.Point(32, 539)
-        Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(75, 63)
-        Me.Button8.TabIndex = 4
-        Me.Button8.Text = "Users"
-        Me.Button8.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.Button8.UseVisualStyleBackColor = True
+        Me.School_Year_Button.Location = New System.Drawing.Point(23, 310)
+        Me.School_Year_Button.Name = "School_Year_Button"
+        Me.School_Year_Button.Size = New System.Drawing.Size(146, 23)
+        Me.School_Year_Button.TabIndex = 4
+        Me.School_Year_Button.Text = "School year control"
+        Me.School_Year_Button.UseVisualStyleBackColor = True
         '
-        'Button7
+        'Teacher_Button
         '
-        Me.Button7.Location = New System.Drawing.Point(32, 470)
-        Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(75, 63)
-        Me.Button7.TabIndex = 3
-        Me.Button7.Text = "SY Setting"
-        Me.Button7.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.Button7.UseVisualStyleBackColor = True
+        Me.Teacher_Button.Location = New System.Drawing.Point(23, 281)
+        Me.Teacher_Button.Name = "Teacher_Button"
+        Me.Teacher_Button.Size = New System.Drawing.Size(146, 23)
+        Me.Teacher_Button.TabIndex = 3
+        Me.Teacher_Button.Text = "Teacher"
+        Me.Teacher_Button.UseVisualStyleBackColor = True
         '
-        'Button6
+        'Exit_Button
         '
-        Me.Button6.Location = New System.Drawing.Point(32, 371)
-        Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(75, 63)
-        Me.Button6.TabIndex = 2
-        Me.Button6.Text = "Grades"
-        Me.Button6.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.Button6.UseVisualStyleBackColor = True
+        Me.Exit_Button.Location = New System.Drawing.Point(23, 665)
+        Me.Exit_Button.Name = "Exit_Button"
+        Me.Exit_Button.Size = New System.Drawing.Size(146, 23)
+        Me.Exit_Button.TabIndex = 2
+        Me.Exit_Button.Text = "Exit"
+        Me.Exit_Button.UseVisualStyleBackColor = True
         '
-        'Button5
+        'Student_Button
         '
-        Me.Button5.Location = New System.Drawing.Point(32, 302)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(75, 63)
-        Me.Button5.TabIndex = 2
-        Me.Button5.Text = "Sub Grade"
-        Me.Button5.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.Button5.UseVisualStyleBackColor = True
+        Me.Student_Button.Location = New System.Drawing.Point(23, 252)
+        Me.Student_Button.Name = "Student_Button"
+        Me.Student_Button.Size = New System.Drawing.Size(146, 23)
+        Me.Student_Button.TabIndex = 1
+        Me.Student_Button.Text = "Student"
+        Me.Student_Button.UseVisualStyleBackColor = True
         '
-        'Button4
+        'Dashboard_Button
         '
-        Me.Button4.Location = New System.Drawing.Point(32, 233)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(75, 63)
-        Me.Button4.TabIndex = 2
-        Me.Button4.Text = "Dos/DP"
-        Me.Button4.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.Button4.UseVisualStyleBackColor = True
+        Me.Dashboard_Button.Location = New System.Drawing.Point(23, 223)
+        Me.Dashboard_Button.Name = "Dashboard_Button"
+        Me.Dashboard_Button.Size = New System.Drawing.Size(146, 23)
+        Me.Dashboard_Button.TabIndex = 0
+        Me.Dashboard_Button.Text = "Dashboard"
+        Me.Dashboard_Button.UseVisualStyleBackColor = True
         '
-        'Button3
+        'Dashboard_Panel
         '
-        Me.Button3.Location = New System.Drawing.Point(32, 164)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(75, 63)
-        Me.Button3.TabIndex = 2
-        Me.Button3.Text = "Students"
-        Me.Button3.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.Button3.UseVisualStyleBackColor = True
-        '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(32, 95)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 63)
-        Me.Button2.TabIndex = 1
-        Me.Button2.Text = "Teacher"
-        Me.Button2.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.Button2.UseVisualStyleBackColor = True
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(32, 26)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 63)
-        Me.Button1.TabIndex = 0
-        Me.Button1.Text = "Section"
-        Me.Button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'Panel2
-        '
-        Me.Panel2.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel2.Location = New System.Drawing.Point(146, 0)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(1198, 52)
-        Me.Panel2.TabIndex = 0
-        '
-        'ToolStrip
-        '
-        Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbtnNew, Me.tsbtnUpdate, Me.tsbtnSearch, Me.tsbtnDelete, Me.tsbtnClose})
-        Me.ToolStrip.Location = New System.Drawing.Point(146, 52)
-        Me.ToolStrip.Name = "ToolStrip"
-        Me.ToolStrip.Size = New System.Drawing.Size(1198, 25)
-        Me.ToolStrip.TabIndex = 3
-        Me.ToolStrip.Text = "ToolStrip1"
-        '
-        'DataGridView1
-        '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.DataGridView1.Location = New System.Drawing.Point(146, 77)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(1198, 623)
-        Me.DataGridView1.TabIndex = 4
+        Me.Dashboard_Panel.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.Dashboard_Panel.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Dashboard_Panel.Location = New System.Drawing.Point(195, 0)
+        Me.Dashboard_Panel.Name = "Dashboard_Panel"
+        Me.Dashboard_Panel.Size = New System.Drawing.Size(1153, 700)
+        Me.Dashboard_Panel.TabIndex = 0
         '
         'ToolStripButton1
         '
@@ -226,87 +169,136 @@ Partial Class Admin_Form
         Me.ToolStripButton5.Size = New System.Drawing.Size(56, 22)
         Me.ToolStripButton5.Text = "Close"
         '
-        'tsbtnNew
+        'Student_Panel
         '
-        Me.tsbtnNew.Image = CType(resources.GetObject("tsbtnNew.Image"), System.Drawing.Image)
-        Me.tsbtnNew.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbtnNew.Name = "tsbtnNew"
-        Me.tsbtnNew.Size = New System.Drawing.Size(51, 22)
-        Me.tsbtnNew.Text = "New"
+        Me.Student_Panel.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Student_Panel.Controls.Add(Me.Search_Student_TextBox)
+        Me.Student_Panel.Controls.Add(Me.Search_Student_Label)
+        Me.Student_Panel.Controls.Add(Me.Student_Label)
+        Me.Student_Panel.Controls.Add(Me.Student_List_DataGridView)
+        Me.Student_Panel.Controls.Add(Me.Delete_Student_Button)
+        Me.Student_Panel.Controls.Add(Me.Modify_Student_Button)
+        Me.Student_Panel.Controls.Add(Me.Add_Student_Button)
+        Me.Student_Panel.Location = New System.Drawing.Point(195, 0)
+        Me.Student_Panel.Name = "Student_Panel"
+        Me.Student_Panel.Size = New System.Drawing.Size(1153, 700)
+        Me.Student_Panel.TabIndex = 2
         '
-        'tsbtnUpdate
+        'Teacher_Panel
         '
-        Me.tsbtnUpdate.Image = CType(resources.GetObject("tsbtnUpdate.Image"), System.Drawing.Image)
-        Me.tsbtnUpdate.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbtnUpdate.Name = "tsbtnUpdate"
-        Me.tsbtnUpdate.Size = New System.Drawing.Size(65, 22)
-        Me.tsbtnUpdate.Text = "Update"
+        Me.Teacher_Panel.Location = New System.Drawing.Point(195, 0)
+        Me.Teacher_Panel.Name = "Teacher_Panel"
+        Me.Teacher_Panel.Size = New System.Drawing.Size(1153, 700)
+        Me.Teacher_Panel.TabIndex = 2
         '
-        'tsbtnSearch
+        'School_Year_Panel
         '
-        Me.tsbtnSearch.Image = CType(resources.GetObject("tsbtnSearch.Image"), System.Drawing.Image)
-        Me.tsbtnSearch.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbtnSearch.Name = "tsbtnSearch"
-        Me.tsbtnSearch.Size = New System.Drawing.Size(62, 22)
-        Me.tsbtnSearch.Text = "Search"
+        Me.School_Year_Panel.Location = New System.Drawing.Point(195, 0)
+        Me.School_Year_Panel.Name = "School_Year_Panel"
+        Me.School_Year_Panel.Size = New System.Drawing.Size(1153, 700)
+        Me.School_Year_Panel.TabIndex = 2
         '
-        'tsbtnDelete
+        'Add_Student_Button
         '
-        Me.tsbtnDelete.Image = CType(resources.GetObject("tsbtnDelete.Image"), System.Drawing.Image)
-        Me.tsbtnDelete.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbtnDelete.Name = "tsbtnDelete"
-        Me.tsbtnDelete.Size = New System.Drawing.Size(60, 22)
-        Me.tsbtnDelete.Text = "Delete"
+        Me.Add_Student_Button.Location = New System.Drawing.Point(696, 12)
+        Me.Add_Student_Button.Name = "Add_Student_Button"
+        Me.Add_Student_Button.Size = New System.Drawing.Size(138, 23)
+        Me.Add_Student_Button.TabIndex = 0
+        Me.Add_Student_Button.Text = "add student"
+        Me.Add_Student_Button.UseVisualStyleBackColor = True
         '
-        'tsbtnClose
+        'Modify_Student_Button
         '
-        Me.tsbtnClose.Image = CType(resources.GetObject("tsbtnClose.Image"), System.Drawing.Image)
-        Me.tsbtnClose.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbtnClose.Name = "tsbtnClose"
-        Me.tsbtnClose.Size = New System.Drawing.Size(56, 22)
-        Me.tsbtnClose.Text = "Close"
+        Me.Modify_Student_Button.Location = New System.Drawing.Point(840, 12)
+        Me.Modify_Student_Button.Name = "Modify_Student_Button"
+        Me.Modify_Student_Button.Size = New System.Drawing.Size(138, 23)
+        Me.Modify_Student_Button.TabIndex = 1
+        Me.Modify_Student_Button.Text = "modify student"
+        Me.Modify_Student_Button.UseVisualStyleBackColor = True
+        '
+        'Delete_Student_Button
+        '
+        Me.Delete_Student_Button.Location = New System.Drawing.Point(984, 12)
+        Me.Delete_Student_Button.Name = "Delete_Student_Button"
+        Me.Delete_Student_Button.Size = New System.Drawing.Size(138, 23)
+        Me.Delete_Student_Button.TabIndex = 2
+        Me.Delete_Student_Button.Text = "delete student"
+        Me.Delete_Student_Button.UseVisualStyleBackColor = True
+        '
+        'Student_List_DataGridView
+        '
+        Me.Student_List_DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.Student_List_DataGridView.Location = New System.Drawing.Point(31, 127)
+        Me.Student_List_DataGridView.Name = "Student_List_DataGridView"
+        Me.Student_List_DataGridView.Size = New System.Drawing.Size(1091, 561)
+        Me.Student_List_DataGridView.TabIndex = 3
+        '
+        'Student_Label
+        '
+        Me.Student_Label.AutoSize = True
+        Me.Student_Label.Location = New System.Drawing.Point(28, 9)
+        Me.Student_Label.Name = "Student_Label"
+        Me.Student_Label.Size = New System.Drawing.Size(73, 13)
+        Me.Student_Label.TabIndex = 4
+        Me.Student_Label.Text = "Student panel"
+        '
+        'Search_Student_Label
+        '
+        Me.Search_Student_Label.AutoSize = True
+        Me.Search_Student_Label.Location = New System.Drawing.Point(32, 104)
+        Me.Search_Student_Label.Name = "Search_Student_Label"
+        Me.Search_Student_Label.Size = New System.Drawing.Size(81, 13)
+        Me.Search_Student_Label.TabIndex = 5
+        Me.Search_Student_Label.Text = "Search Student"
+        '
+        'Search_Student_TextBox
+        '
+        Me.Search_Student_TextBox.Location = New System.Drawing.Point(171, 101)
+        Me.Search_Student_TextBox.Name = "Search_Student_TextBox"
+        Me.Search_Student_TextBox.Size = New System.Drawing.Size(539, 20)
+        Me.Search_Student_TextBox.TabIndex = 6
         '
         'Admin_Form
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1344, 700)
-        Me.Controls.Add(Me.DataGridView1)
-        Me.Controls.Add(Me.ToolStrip)
-        Me.Controls.Add(Me.Panel2)
-        Me.Controls.Add(Me.Panel1)
+        Me.Controls.Add(Me.Navigation_Panel)
+        Me.Controls.Add(Me.Student_Panel)
+        Me.Controls.Add(Me.Dashboard_Panel)
+        Me.Controls.Add(Me.Teacher_Panel)
+        Me.Controls.Add(Me.School_Year_Panel)
         Me.Name = "Admin_Form"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Admin_Form"
-        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
-        Me.Panel1.ResumeLayout(False)
-        Me.ToolStrip.ResumeLayout(False)
-        Me.ToolStrip.PerformLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Navigation_Panel.ResumeLayout(False)
+        Me.Student_Panel.ResumeLayout(False)
+        Me.Student_Panel.PerformLayout()
+        CType(Me.Student_List_DataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
-    Friend WithEvents Panel1 As System.Windows.Forms.Panel
-    Friend WithEvents Panel2 As System.Windows.Forms.Panel
-    Friend WithEvents Button5 As System.Windows.Forms.Button
-    Friend WithEvents Button4 As System.Windows.Forms.Button
-    Friend WithEvents Button3 As System.Windows.Forms.Button
-    Friend WithEvents Button2 As System.Windows.Forms.Button
-    Friend WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents btnExit As System.Windows.Forms.Button
-    Friend WithEvents Button8 As System.Windows.Forms.Button
-    Friend WithEvents Button7 As System.Windows.Forms.Button
-    Friend WithEvents Button6 As System.Windows.Forms.Button
-    Friend WithEvents ToolStrip As System.Windows.Forms.ToolStrip
+    Friend WithEvents Navigation_Panel As System.Windows.Forms.Panel
+    Friend WithEvents Dashboard_Panel As System.Windows.Forms.Panel
     Friend WithEvents ToolStripButton1 As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripButton2 As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripButton3 As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripButton4 As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripButton5 As System.Windows.Forms.ToolStripButton
-    Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
-    Friend WithEvents tsbtnNew As System.Windows.Forms.ToolStripButton
-    Friend WithEvents tsbtnUpdate As System.Windows.Forms.ToolStripButton
-    Friend WithEvents tsbtnSearch As System.Windows.Forms.ToolStripButton
-    Friend WithEvents tsbtnDelete As System.Windows.Forms.ToolStripButton
-    Friend WithEvents tsbtnClose As System.Windows.Forms.ToolStripButton
+    Friend WithEvents Student_Panel As System.Windows.Forms.Panel
+    Friend WithEvents Teacher_Panel As System.Windows.Forms.Panel
+    Friend WithEvents School_Year_Panel As System.Windows.Forms.Panel
+    Friend WithEvents School_Year_Button As System.Windows.Forms.Button
+    Friend WithEvents Teacher_Button As System.Windows.Forms.Button
+    Friend WithEvents Exit_Button As System.Windows.Forms.Button
+    Friend WithEvents Student_Button As System.Windows.Forms.Button
+    Friend WithEvents Dashboard_Button As System.Windows.Forms.Button
+    Friend WithEvents Logout_Button As System.Windows.Forms.Button
+    Friend WithEvents Student_List_DataGridView As System.Windows.Forms.DataGridView
+    Friend WithEvents Delete_Student_Button As System.Windows.Forms.Button
+    Friend WithEvents Modify_Student_Button As System.Windows.Forms.Button
+    Friend WithEvents Add_Student_Button As System.Windows.Forms.Button
+    Friend WithEvents Search_Student_Label As System.Windows.Forms.Label
+    Friend WithEvents Student_Label As System.Windows.Forms.Label
+    Friend WithEvents Search_Student_TextBox As System.Windows.Forms.TextBox
 End Class
