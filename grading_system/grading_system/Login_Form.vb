@@ -1,6 +1,9 @@
 ﻿Imports System.Data.Odbc
 
 Public Class Login_Form
+
+    Public Shared id As String
+
     Private Sub loginemailTextBox_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles loginemailTextBox.TextChanged
         ' Optional: You can add validation here if needed
     End Sub
@@ -28,7 +31,7 @@ Public Class Login_Form
 
         Try
             ' Query to check username, password, and get role
-            Dim query As String = "SELECT role FROM account WHERE username = ? AND password = ?"
+            Dim query As String = "SELECT acc_id, role FROM account WHERE username = ? AND password = ?"
             Dim cmd As New OdbcCommand(query, con)
 
             ' Add parameters to prevent SQL injection
@@ -40,6 +43,7 @@ Public Class Login_Form
             If reader.Read() Then
                 ' Login successful - get the role
                 Dim userRole As String = reader("role").ToString().Trim().ToLower()
+                id = reader("acc_id").ToString.Trim()
                 reader.Close()
 
                 ' Close login form
@@ -90,5 +94,9 @@ Public Class Login_Form
     Private Sub Login_Form_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
         ' Close the entire application when login form is closed
         Application.Exit()
+    End Sub
+
+    Private Sub Login_Form_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
     End Sub
 End Class
