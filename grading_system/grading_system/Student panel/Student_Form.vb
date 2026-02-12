@@ -36,7 +36,7 @@ Public Class Student_Form
         Dim result As DialogResult = MessageBox.Show("Are you sure you want to logout?", "log out confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
         If result = DialogResult.Yes Then
             login_logic.ClearLogin() ' Clear the login data
-            Me.Hide()
+            Me.Close()
             Login_Form.Show()
         End If
     End Sub
@@ -50,18 +50,27 @@ Public Class Student_Form
 
 #Region "crystal report"
     Private Sub loadGrades()
-        GetFields()
-        Dim reportDoc As New GradesStructure()
+        Dim reportDoc As ReportDocument = Nothing
+        reportDoc = New ReportDocument()
 
-        reportDoc.Load(Application.StartupPath & "\crystalreport\GradeStructure.rpt")
+        Dim path As String = Application.StartupPath & "\crystalreport\GradesStructure.rpt"
+        reportDoc.Load(path)
+        If Not System.IO.File.Exists(path) Then
+            MessageBox.Show("Report file not found: " & path, "Error", _
+                          MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+        'reportDoc.SetDatabaseLogon("root", "", "localhost", "school_db")
+        Dim dt As DataTable = GetFields()
+        reportDoc.SetDataSource(dt)
         s.ReportSource = reportDoc
+        s.Refresh()
 
     End Sub
 #End Region
-
 #Region "database loaders"
-    Private Sub GetFields()
-        Dim dt As New DataTable()
+    Private Function GetFields() As DataTable
+        Dim dt As New DataTable("GradeInfo")
 
         dt.Columns.Add("Profname", GetType(String))
         dt.Columns.Add("Subjects", GetType(String))
@@ -72,33 +81,28 @@ Public Class Student_Form
         dt.Columns.Add("Section", GetType(String))
 
         Try
-            Dim query As String = "SELECT concat(prof.fname, '-' , prof.lname) As Profname, " & _
+            Dim query As String = "SELECT concat(prof.firstname, '-' , prof.lastname) As Profname, " & _
                                   "concat(student.firstname,' ', student.middlename ,' ' , student.lastname) As Studentname," & _
                                   "student.section As Section, student.course As Course, student.stud_id As Studentid," & _
                                   "grades.grade As Grades, concat(subject.sub_code ,' ',subject.sub_name) As Subjects " & _
-                                  "From grades " & _
-                                  "Left Join student On grades.stud_id = student.stud_id " & _
-                                  "Left Join prof On grades.prof_id = prof.prof_id " & _
-                                  "Left Join subject On grades.sub_id = subject.sub_id " & _
-                                  "Where grades.stud_id = ?"
-
+                                  "From student " & _
+                                    " Left Join grades On student.stud_id = grades.stud_id " & _
+                                    " Left Join prof On grades.prof_id = prof.prof_id " & _
+                                    " Left Join subject On grades.sub_id = subject.sub_id " & _
+                                    " Where student.acc_id = ? "
             Connect_me()
-            Using adapter As New OdbcDataAdapter(query, con)
-                ' CORRECTED: Use login_logic.userid instead of Login_Form.id
-                adapter.SelectCommand.Parameters.AddWithValue("?", login_logic.userid)
-                adapter.Fill(dt)
-            End Using
-
+            Dim adapter As New OdbcDataAdapter(query, con)
+            adapter.SelectCommand.Parameters.AddWithValue("?", Login_Form.id)
+            adapter.Fill(dt)
         Catch ex As Exception
-            MessageBox.Show("Error getting data: " & ex.Message, "Error", _
-                          MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Error getting data: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
             If con.State = ConnectionState.Open Then con.Close()
         End Try
-    End Sub
+        Return dt
+    End Function
+
 #End Region
 
-    Private Sub s_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles s.Load
-
-    End Sub
+    
 End Class
