@@ -23,6 +23,7 @@ Partial Class Login_Form
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.loginPanel = New System.Windows.Forms.Panel
+        Me.showpass = New System.Windows.Forms.CheckBox
         Me.passwordLabel = New System.Windows.Forms.Label
         Me.emailLabel = New System.Windows.Forms.Label
         Me.loginLabel = New System.Windows.Forms.Label
@@ -30,7 +31,6 @@ Partial Class Login_Form
         Me.loginButton = New System.Windows.Forms.Button
         Me.loginpasswordTextBox = New System.Windows.Forms.TextBox
         Me.loginemailTextBox = New System.Windows.Forms.TextBox
-        Me.showpass = New System.Windows.Forms.CheckBox
         Me.loginPanel.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -49,6 +49,15 @@ Partial Class Login_Form
         Me.loginPanel.Name = "loginPanel"
         Me.loginPanel.Size = New System.Drawing.Size(655, 333)
         Me.loginPanel.TabIndex = 0
+        '
+        'showpass
+        '
+        Me.showpass.AutoSize = True
+        Me.showpass.Location = New System.Drawing.Point(579, 182)
+        Me.showpass.Name = "showpass"
+        Me.showpass.Size = New System.Drawing.Size(15, 14)
+        Me.showpass.TabIndex = 7
+        Me.showpass.UseVisualStyleBackColor = True
         '
         'passwordLabel
         '
@@ -109,15 +118,6 @@ Partial Class Login_Form
         Me.loginemailTextBox.Name = "loginemailTextBox"
         Me.loginemailTextBox.Size = New System.Drawing.Size(442, 20)
         Me.loginemailTextBox.TabIndex = 0
-        '
-        'showpass
-        '
-        Me.showpass.AutoSize = True
-        Me.showpass.Location = New System.Drawing.Point(579, 182)
-        Me.showpass.Name = "showpass"
-        Me.showpass.Size = New System.Drawing.Size(15, 14)
-        Me.showpass.TabIndex = 7
-        Me.showpass.UseVisualStyleBackColor = True
         '
         'Login_Form
         '

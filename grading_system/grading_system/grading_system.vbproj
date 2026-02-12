@@ -257,6 +257,7 @@
     <Compile Include="admin\student popup forms\popUpFormModifyStudent.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="module\PasswordHelper_Module.vb" />
     <Compile Include="Student panel\profile.Designer.vb">
       <DependentUpon>profile.vb</DependentUpon>
     </Compile>
