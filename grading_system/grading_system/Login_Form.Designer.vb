@@ -30,12 +30,14 @@ Partial Class Login_Form
         Me.loginButton = New System.Windows.Forms.Button
         Me.loginpasswordTextBox = New System.Windows.Forms.TextBox
         Me.loginemailTextBox = New System.Windows.Forms.TextBox
+        Me.showpass = New System.Windows.Forms.CheckBox
         Me.loginPanel.SuspendLayout()
         Me.SuspendLayout()
         '
         'loginPanel
         '
         Me.loginPanel.BackColor = System.Drawing.SystemColors.ActiveBorder
+        Me.loginPanel.Controls.Add(Me.showpass)
         Me.loginPanel.Controls.Add(Me.passwordLabel)
         Me.loginPanel.Controls.Add(Me.emailLabel)
         Me.loginPanel.Controls.Add(Me.loginLabel)
@@ -108,6 +110,15 @@ Partial Class Login_Form
         Me.loginemailTextBox.Size = New System.Drawing.Size(442, 20)
         Me.loginemailTextBox.TabIndex = 0
         '
+        'showpass
+        '
+        Me.showpass.AutoSize = True
+        Me.showpass.Location = New System.Drawing.Point(579, 182)
+        Me.showpass.Name = "showpass"
+        Me.showpass.Size = New System.Drawing.Size(15, 14)
+        Me.showpass.TabIndex = 7
+        Me.showpass.UseVisualStyleBackColor = True
+        '
         'Login_Form
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -130,5 +141,6 @@ Partial Class Login_Form
     Friend WithEvents passwordLabel As System.Windows.Forms.Label
     Friend WithEvents emailLabel As System.Windows.Forms.Label
     Friend WithEvents loginLabel As System.Windows.Forms.Label
+    Friend WithEvents showpass As System.Windows.Forms.CheckBox
 
 End Class
