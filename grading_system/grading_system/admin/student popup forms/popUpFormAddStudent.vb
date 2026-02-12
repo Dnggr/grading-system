@@ -125,14 +125,12 @@ Public Class popUpFormAddStudent
         Try
             Connect_me()
 
-            ' Check for duplicate email using the already-open connection
             If EmailExists(Student_Email_TextBox.Text.Trim()) Then
                 MessageBox.Show("This email address is already registered in the system.", _
                                 "Duplicate Email", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Return
             End If
 
-            ' Get or assign a section (uses the open connection)
             Dim sectionName As String = GetOrCreateSection()
 
             If String.IsNullOrEmpty(sectionName) Then
@@ -141,8 +139,6 @@ Public Class popUpFormAddStudent
                 Return
             End If
 
-            ' Use Module_PasswordHelper.HashPassword (not a local duplicate)
-            ' Default password for new students is "12345"
             Dim hashedPassword As String = HashPassword("12345")
 
             If String.IsNullOrEmpty(hashedPassword) Then
@@ -151,15 +147,14 @@ Public Class popUpFormAddStudent
                 Return
             End If
 
-            ' INSERT into account — trigger trg_student_to_account fires automatically
             Dim accountInserted As Boolean = InsertAccountWithTrigger(hashedPassword, sectionName)
 
             If accountInserted Then
+                ' ✅ FIXED: Removed the "Note: Password is securely hashed" line
                 MessageBox.Show("Student registered successfully!" & vbCrLf & vbCrLf & _
                                 "Email/Username: " & Student_Email_TextBox.Text.Trim() & vbCrLf & _
                                 "Default Password: 12345" & vbCrLf & _
-                                "Section: " & sectionName & vbCrLf & vbCrLf & _
-                                "Note: Password is securely hashed in database.", _
+                                "Section: " & sectionName, _
                                 "Registration Successful", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 ClearFields()
                 Me.Close()
@@ -178,9 +173,6 @@ Public Class popUpFormAddStudent
         End Try
     End Sub
 
-    ''' <summary>
-    ''' Check if email already exists. Assumes connection is already open.
-    ''' </summary>
     Private Function EmailExists(ByVal email As String) As Boolean
         Try
             Dim query As String = "SELECT COUNT(*) FROM account WHERE email = ?"
@@ -195,15 +187,8 @@ Public Class popUpFormAddStudent
         End Try
     End Function
 
-    ''' <summary>
-    ''' INSERT into account table.
-    ''' FIX: Column is `pword` (NOT `password`) per the grading_system schema.
-    ''' The trigger trg_student_to_account will auto-create the matching student row.
-    ''' Assumes connection is already open.
-    ''' </summary>
     Private Function InsertAccountWithTrigger(ByVal hashedPassword As String, ByVal sectionName As String) As Boolean
         Try
-            ' `pword` is the correct column name — NOT `password`
             Dim query As String = "INSERT INTO account " & _
                                   "(email, pword, role, firstname, middlename, lastname, section, gender, course, yr_lvl) " & _
                                   "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
@@ -230,11 +215,6 @@ Public Class popUpFormAddStudent
         End Try
     End Function
 
-    ''' <summary>
-    ''' Finds an available section or creates a new one.
-    ''' Format: "BSIT 1-1", "BSIT 1-2", etc. Max 45 students per section.
-    ''' Assumes connection is already open.
-    ''' </summary>
     Private Function GetOrCreateSection() As String
         Try
             Dim course As String = Student_Course_ComboBox.SelectedItem.ToString()
@@ -245,7 +225,6 @@ Public Class popUpFormAddStudent
             Do While sectionNumber <= 100
                 Dim sectionName As String = course & " " & yearLevel.ToString() & "-" & sectionNumber.ToString()
 
-                ' Check if this section already exists in the section table
                 Dim checkQuery As String = "SELECT section_id FROM section WHERE section = ? AND year_lvl = ?"
                 Dim checkCmd As New OdbcCommand(checkQuery, con)
                 checkCmd.Parameters.AddWithValue("@section", sectionName)
@@ -253,9 +232,7 @@ Public Class popUpFormAddStudent
 
                 Dim result As Object = checkCmd.ExecuteScalar()
 
-                ' FIX: ODBC ExecuteScalar returns DBNull (not Nothing) when no row found
                 If result Is Nothing OrElse IsDBNull(result) Then
-                    ' Section does not exist yet — create it
                     Dim createQuery As String = "INSERT INTO section (year_lvl, section) VALUES (?, ?)"
                     Dim createCmd As New OdbcCommand(createQuery, con)
                     createCmd.Parameters.AddWithValue("@year_lvl", yearLevel)
@@ -264,7 +241,6 @@ Public Class popUpFormAddStudent
                     Return sectionName
                 End If
 
-                ' Section exists — check how many students are in it
                 Dim countQuery As String = "SELECT COUNT(*) FROM student WHERE section = ?"
                 Dim countCmd As New OdbcCommand(countQuery, con)
                 countCmd.Parameters.AddWithValue("@section", sectionName)
@@ -275,11 +251,9 @@ Public Class popUpFormAddStudent
                     Return sectionName
                 End If
 
-                ' Section is full, try next
                 sectionNumber += 1
             Loop
 
-            ' All 100 sections exhausted (extremely unlikely)
             Return ""
 
         Catch ex As Exception
