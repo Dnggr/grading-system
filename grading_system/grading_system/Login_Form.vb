@@ -15,7 +15,7 @@ Public Class Login_Form
     Private Sub loginButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles loginButton.Click
         ' Validate inputs
         If String.IsNullOrEmpty(loginemailTextBox.Text.Trim()) Then
-            MessageBox.Show("Please enter your username.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            MessageBox.Show("Please enter your email.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             loginemailTextBox.Focus()
             Return
         End If
@@ -30,36 +30,36 @@ Public Class Login_Form
         Connect_me()
 
         Try
-            ' Query to check username, password, and get role
-            Dim query As String = "SELECT acc_id, role FROM account WHERE username = ? AND password = ?"
+            ' Query to check email, password, and get role from account table
+            Dim query As String = "SELECT acc_id, role FROM account WHERE email = ? AND password = ?"
             Dim cmd As New OdbcCommand(query, con)
 
             ' Add parameters to prevent SQL injection
-            cmd.Parameters.AddWithValue("@username", loginemailTextBox.Text.Trim())
+            cmd.Parameters.AddWithValue("@email", loginemailTextBox.Text.Trim())
             cmd.Parameters.AddWithValue("@password", loginpasswordTextBox.Text.Trim())
 
             Dim reader As OdbcDataReader = cmd.ExecuteReader()
 
             If reader.Read() Then
-                ' Login successful - get the role
-                Dim userRole As String = reader("role").ToString().Trim().ToLower()
-                id = reader("acc_id").ToString.Trim()
+                ' Login successful - get the role and account ID
+                Dim userRole As String = reader("role").ToString().Trim().ToUpper()
+                id = reader("acc_id").ToString().Trim()
                 reader.Close()
 
                 ' Close login form
                 Me.Hide()
 
-                ' Redirect based on role
+                ' Redirect based on role (roles are uppercase in database)
                 Select Case userRole
-                    Case "admin"
+                    Case "ADMIN"
                         Dim adminForm As New Admin_Form()
                         adminForm.Show()
 
-                    Case "student"
+                    Case "STUDENT"
                         Dim studentForm As New Student_Form()
                         studentForm.Show()
 
-                    Case "teacher", "professor"
+                    Case "TEACHER", "PROFESSOR"
                         Dim teacherForm As New Teacher_Form()
                         teacherForm.Show()
 
@@ -71,7 +71,7 @@ Public Class Login_Form
             Else
                 ' Login failed
                 reader.Close()
-                MessageBox.Show("Invalid username or password. Please try again.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBox.Show("Invalid email or password. Please try again.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 loginpasswordTextBox.Clear()
                 loginemailTextBox.Focus()
             End If
@@ -97,6 +97,7 @@ Public Class Login_Form
     End Sub
 
     Private Sub Login_Form_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
+        ' Optional: You can set default focus or initialize something here
+        loginemailTextBox.Focus()
     End Sub
 End Class

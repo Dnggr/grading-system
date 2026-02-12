@@ -29,21 +29,21 @@ Public Class popUpFormAddStudent
     ''' </summary>
     Private Sub InitializeCourseComboBox()
         Student_Course_ComboBox.Items.Clear()
-        Student_Course_ComboBox.Items.Add("BSIT") ' Bachelor of Science in Information Technology
-        Student_Course_ComboBox.Items.Add("BSCS") ' Bachelor of Science in Computer Science
-        Student_Course_ComboBox.Items.Add("BSA") ' Bachelor of Science in Accountancy
-        Student_Course_ComboBox.Items.Add("BSBA") ' Bachelor of Science in Business Administration
-        Student_Course_ComboBox.Items.Add("BSED") ' Bachelor of Secondary Education
-        Student_Course_ComboBox.Items.Add("BEED") ' Bachelor of Elementary Education
-        Student_Course_ComboBox.Items.Add("BSN") ' Bachelor of Science in Nursing
-        Student_Course_ComboBox.Items.Add("BSECE") ' Bachelor of Science in Electronics and Communications Engineering
-        Student_Course_ComboBox.Items.Add("BSCE") ' Bachelor of Science in Civil Engineering
-        Student_Course_ComboBox.Items.Add("BSME") ' Bachelor of Science in Mechanical Engineering
-        Student_Course_ComboBox.Items.Add("BSEE") ' Bachelor of Science in Electrical Engineering
-        Student_Course_ComboBox.Items.Add("BSCpE") ' Bachelor of Science in Computer Engineering
-        Student_Course_ComboBox.Items.Add("BSPSYCH") ' Bachelor of Science in Psychology
-        Student_Course_ComboBox.Items.Add("BSHRM") ' Bachelor of Science in Hotel and Restaurant Management
-        Student_Course_ComboBox.Items.Add("BSTM") ' Bachelor of Science in Tourism Management
+        Student_Course_ComboBox.Items.Add("BSIT")
+        Student_Course_ComboBox.Items.Add("BSCS")
+        Student_Course_ComboBox.Items.Add("BSA")
+        Student_Course_ComboBox.Items.Add("BSBA")
+        Student_Course_ComboBox.Items.Add("BSED")
+        Student_Course_ComboBox.Items.Add("BEED")
+        Student_Course_ComboBox.Items.Add("BSN")
+        Student_Course_ComboBox.Items.Add("BSECE")
+        Student_Course_ComboBox.Items.Add("BSCE")
+        Student_Course_ComboBox.Items.Add("BSME")
+        Student_Course_ComboBox.Items.Add("BSEE")
+        Student_Course_ComboBox.Items.Add("BSCpE")
+        Student_Course_ComboBox.Items.Add("BSPSYCH")
+        Student_Course_ComboBox.Items.Add("BSHRM")
+        Student_Course_ComboBox.Items.Add("BSTM")
         Student_Course_ComboBox.DropDownStyle = ComboBoxStyle.DropDownList
     End Sub
 
@@ -89,11 +89,66 @@ Public Class popUpFormAddStudent
             Return False
         End If
 
+        ' Validate lastname format (only letters, spaces, hyphens, and apostrophes)
+        If Not IsValidName(Student_Lastname_TextBox.Text.Trim()) Then
+            MessageBox.Show("Last name can only contain letters, spaces, hyphens, and apostrophes.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Student_Lastname_TextBox.Focus()
+            Return False
+        End If
+
+        ' Check lastname length
+        If Student_Lastname_TextBox.Text.Trim().Length < 2 Then
+            MessageBox.Show("Last name must be at least 2 characters long.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Student_Lastname_TextBox.Focus()
+            Return False
+        End If
+
+        If Student_Lastname_TextBox.Text.Trim().Length > 50 Then
+            MessageBox.Show("Last name cannot exceed 50 characters.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Student_Lastname_TextBox.Focus()
+            Return False
+        End If
+
         ' Check if firstname is empty
         If String.IsNullOrEmpty(Student_Firstname_TextBox.Text.Trim()) Then
             MessageBox.Show("Please enter student's first name.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Student_Firstname_TextBox.Focus()
             Return False
+        End If
+
+        ' Validate firstname format
+        If Not IsValidName(Student_Firstname_TextBox.Text.Trim()) Then
+            MessageBox.Show("First name can only contain letters, spaces, hyphens, and apostrophes.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Student_Firstname_TextBox.Focus()
+            Return False
+        End If
+
+        ' Check firstname length
+        If Student_Firstname_TextBox.Text.Trim().Length < 2 Then
+            MessageBox.Show("First name must be at least 2 characters long.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Student_Firstname_TextBox.Focus()
+            Return False
+        End If
+
+        If Student_Firstname_TextBox.Text.Trim().Length > 50 Then
+            MessageBox.Show("First name cannot exceed 50 characters.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Student_Firstname_TextBox.Focus()
+            Return False
+        End If
+
+        ' Validate middlename if provided (optional field)
+        If Not String.IsNullOrEmpty(Student_Middlename_TextBox.Text.Trim()) Then
+            If Not IsValidName(Student_Middlename_TextBox.Text.Trim()) Then
+                MessageBox.Show("Middle name can only contain letters, spaces, hyphens, and apostrophes.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Student_Middlename_TextBox.Focus()
+                Return False
+            End If
+
+            If Student_Middlename_TextBox.Text.Trim().Length > 50 Then
+                MessageBox.Show("Middle name cannot exceed 50 characters.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Student_Middlename_TextBox.Focus()
+                Return False
+            End If
         End If
 
         ' Check if email is empty
@@ -105,7 +160,14 @@ Public Class popUpFormAddStudent
 
         ' Validate email format
         If Not IsValidEmail(Student_Email_TextBox.Text.Trim()) Then
-            MessageBox.Show("Please enter a valid email address.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            MessageBox.Show("Please enter a valid email address." & vbCrLf, "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Student_Email_TextBox.Focus()
+            Return False
+        End If
+
+        ' Check email length
+        If Student_Email_TextBox.Text.Trim().Length > 50 Then
+            MessageBox.Show("Email address cannot exceed 50 characters.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Student_Email_TextBox.Focus()
             Return False
         End If
@@ -135,12 +197,67 @@ Public Class popUpFormAddStudent
     End Function
 
     ''' <summary>
-    ''' Validate email format
+    ''' Validate name format (allows letters, spaces, hyphens, apostrophes, and periods)
+    ''' </summary>
+    Private Function IsValidName(ByVal name As String) As Boolean
+        Try
+            ' Allow letters (including international characters), spaces, hyphens, apostrophes, and periods
+            Dim nameRegex As New System.Text.RegularExpressions.Regex("^[a-zA-Z\s\-'.]+$")
+            Return nameRegex.IsMatch(name)
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    ''' <summary>
+    ''' Validate email format with comprehensive rules
     ''' </summary>
     Private Function IsValidEmail(ByVal email As String) As Boolean
         Try
-            Dim emailRegex As New System.Text.RegularExpressions.Regex("^[^@\s]+@[^@\s]+\.[^@\s]+$")
-            Return emailRegex.IsMatch(email)
+            ' More comprehensive email validation
+            ' Format: localpart@domain.extension
+            ' Local part: alphanumeric, dots, hyphens, underscores
+            ' Domain: alphanumeric, dots, hyphens
+            ' Extension: at least 2 letters
+            Dim emailRegex As New System.Text.RegularExpressions.Regex("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
+
+            If Not emailRegex.IsMatch(email) Then
+                Return False
+            End If
+
+            ' Additional checks
+            ' Must contain exactly one @ symbol
+            If email.Split("@"c).Length <> 2 Then
+                Return False
+            End If
+
+            ' Split email into local part and domain
+            Dim parts() As String = email.Split("@"c)
+            Dim localPart As String = parts(0)
+            Dim domain As String = parts(1)
+
+            ' Local part must not be empty and not start/end with dot
+            If String.IsNullOrEmpty(localPart) OrElse localPart.StartsWith(".") OrElse localPart.EndsWith(".") Then
+                Return False
+            End If
+
+            ' Domain must contain at least one dot
+            If Not domain.Contains(".") Then
+                Return False
+            End If
+
+            ' Domain must not start/end with dot or hyphen
+            If domain.StartsWith(".") OrElse domain.EndsWith(".") OrElse domain.StartsWith("-") OrElse domain.EndsWith("-") Then
+                Return False
+            End If
+
+            ' Check for consecutive dots
+            If email.Contains("..") Then
+                Return False
+            End If
+
+            Return True
+
         Catch ex As Exception
             Return False
         End Try
@@ -149,7 +266,8 @@ Public Class popUpFormAddStudent
 
 #Region "Student Registration"
     ''' <summary>
-    ''' Register student with automatic account creation and section assignment
+    ''' Register student using database triggers
+    ''' The trigger will automatically insert into student table when we insert into account table
     ''' </summary>
     Private Sub RegisterStudent()
         Try
@@ -161,15 +279,7 @@ Public Class popUpFormAddStudent
                 Return
             End If
 
-            ' Step 1: Create account for the student
-            Dim accountId As Integer = CreateStudentAccount()
-
-            If accountId = 0 Then
-                MessageBox.Show("Failed to create student account.", "Registration Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Return
-            End If
-
-            ' Step 2: Get or create appropriate section
+            ' Get or create appropriate section
             Dim sectionName As String = GetOrCreateSection()
 
             If String.IsNullOrEmpty(sectionName) Then
@@ -177,14 +287,30 @@ Public Class popUpFormAddStudent
                 Return
             End If
 
-            ' Step 3: Insert student record
-            Dim studentInserted As Boolean = InsertStudentRecord(accountId, sectionName)
+            ' Insert into account table ONLY - the trigger will handle student table insertion
+            Dim query As String = "INSERT INTO account (email, password, role, firstname, middlename, lastname, section, gender, course, yr_lvl) " & _
+                                  "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
 
-            If studentInserted Then
+            Dim cmd As New OdbcCommand(query, con)
+            cmd.Parameters.AddWithValue("@email", Student_Email_TextBox.Text.Trim().ToLower())
+            cmd.Parameters.AddWithValue("@password", "12345")
+            cmd.Parameters.AddWithValue("@role", "STUDENT")
+            cmd.Parameters.AddWithValue("@firstname", CapitalizeFirstLetter(Student_Firstname_TextBox.Text.Trim()))
+            cmd.Parameters.AddWithValue("@middlename", CapitalizeFirstLetter(Student_Middlename_TextBox.Text.Trim()))
+            cmd.Parameters.AddWithValue("@lastname", CapitalizeFirstLetter(Student_Lastname_TextBox.Text.Trim()))
+            cmd.Parameters.AddWithValue("@section", sectionName)
+            cmd.Parameters.AddWithValue("@gender", Student_Gender_ComboBox.SelectedItem.ToString())
+            cmd.Parameters.AddWithValue("@course", Student_Course_ComboBox.SelectedItem.ToString())
+            cmd.Parameters.AddWithValue("@yr_lvl", Convert.ToInt32(Student_YrLvl_ComboBox.SelectedItem.ToString()))
+
+            Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+
+            If rowsAffected > 0 Then
                 MessageBox.Show("Student registered successfully!" & vbCrLf & vbCrLf & _
-                               "Email/Username: " & Student_Email_TextBox.Text.Trim() & vbCrLf & _
+                               "Email/Username: " & Student_Email_TextBox.Text.Trim().ToLower() & vbCrLf & _
                                "Default Password: 12345" & vbCrLf & _
-                               "Section: " & sectionName, _
+                               "Section: " & sectionName & vbCrLf & vbCrLf & _
+                               "Student record automatically created via database trigger.", _
                                "Registration Successful", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
                 ' Clear all fields
@@ -206,15 +332,39 @@ Public Class popUpFormAddStudent
     End Sub
 
     ''' <summary>
+    ''' Capitalize first letter of each word in a name
+    ''' </summary>
+    Private Function CapitalizeFirstLetter(ByVal text As String) As String
+        If String.IsNullOrEmpty(text) Then
+            Return text
+        End If
+
+        Dim words() As String = text.Split(" "c)
+        Dim result As String = ""
+
+        For i As Integer = 0 To words.Length - 1
+            If words(i).Length > 0 Then
+                words(i) = words(i).Substring(0, 1).ToUpper() & words(i).Substring(1).ToLower()
+            End If
+            result &= words(i)
+            If i < words.Length - 1 Then
+                result &= " "
+            End If
+        Next
+
+        Return result
+    End Function
+
+    ''' <summary>
     ''' Check if email already exists in account table
     ''' </summary>
     Private Function EmailExists(ByVal email As String) As Boolean
         Try
             Connect_me()
 
-            Dim query As String = "SELECT COUNT(*) FROM account WHERE username = ?"
+            Dim query As String = "SELECT COUNT(*) FROM account WHERE LOWER(email) = LOWER(?)"
             Dim cmd As New OdbcCommand(query, con)
-            cmd.Parameters.AddWithValue("@username", email)
+            cmd.Parameters.AddWithValue("@email", email.Trim())
 
             Dim count As Integer = Convert.ToInt32(cmd.ExecuteScalar())
 
@@ -223,35 +373,6 @@ Public Class popUpFormAddStudent
         Catch ex As Exception
             MessageBox.Show("Error checking email: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return False
-        End Try
-    End Function
-
-    ''' <summary>
-    ''' Create account for student (username = email, password = 12345, role = STUDENT)
-    ''' </summary>
-    Private Function CreateStudentAccount() As Integer
-        Try
-            Connect_me()
-
-            ' Insert account record
-            Dim query As String = "INSERT INTO account (username, password, role) VALUES (?, ?, ?)"
-            Dim cmd As New OdbcCommand(query, con)
-            cmd.Parameters.AddWithValue("@username", Student_Email_TextBox.Text.Trim())
-            cmd.Parameters.AddWithValue("@password", "12345")
-            cmd.Parameters.AddWithValue("@role", "STUDENT")
-
-            cmd.ExecuteNonQuery()
-
-            ' Get the last inserted account ID
-            Dim getIdQuery As String = "SELECT LAST_INSERT_ID()"
-            Dim getIdCmd As New OdbcCommand(getIdQuery, con)
-            Dim accountId As Integer = Convert.ToInt32(getIdCmd.ExecuteScalar())
-
-            Return accountId
-
-        Catch ex As Exception
-            MessageBox.Show("Error creating account: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Return 0
         End Try
     End Function
 
@@ -320,37 +441,6 @@ Public Class popUpFormAddStudent
         Catch ex As Exception
             MessageBox.Show("Error managing section: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return ""
-        End Try
-    End Function
-
-    ''' <summary>
-    ''' Insert student record into student table
-    ''' </summary>
-    Private Function InsertStudentRecord(ByVal accountId As Integer, ByVal sectionName As String) As Boolean
-        Try
-            Connect_me()
-
-            Dim query As String = "INSERT INTO student (acc_id, firstname, middlename, lastname, section, gender, email, course, yr_lvl) " & _
-                                  "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
-
-            Dim cmd As New OdbcCommand(query, con)
-            cmd.Parameters.AddWithValue("@acc_id", accountId)
-            cmd.Parameters.AddWithValue("@firstname", Student_Firstname_TextBox.Text.Trim())
-            cmd.Parameters.AddWithValue("@middlename", Student_Middlename_TextBox.Text.Trim())
-            cmd.Parameters.AddWithValue("@lastname", Student_Lastname_TextBox.Text.Trim())
-            cmd.Parameters.AddWithValue("@section", sectionName)
-            cmd.Parameters.AddWithValue("@gender", Student_Gender_ComboBox.SelectedItem.ToString())
-            cmd.Parameters.AddWithValue("@email", Student_Email_TextBox.Text.Trim())
-            cmd.Parameters.AddWithValue("@course", Student_Course_ComboBox.SelectedItem.ToString())
-            cmd.Parameters.AddWithValue("@yr_lvl", Convert.ToInt32(Student_YrLvl_ComboBox.SelectedItem.ToString()))
-
-            Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
-
-            Return rowsAffected > 0
-
-        Catch ex As Exception
-            MessageBox.Show("Error inserting student record: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Return False
         End Try
     End Function
 

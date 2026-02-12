@@ -198,18 +198,22 @@ Public Class Admin_Form
             Connect_me()
 
             ' Create SQL query with CONCAT for full name
+            ' Fixed: Using proper column names from database (firstname, middlename, lastname, gender, course, yr_lvl, section)
             Dim query As String = "SELECT " & _
-                                  "CONCAT(s.firstname, ' ', IFNULL(s.middlename, ''), ' ', s.lastname) AS Name, " & _
                                   "s.stud_id AS StudentID, " & _
+                                  "CONCAT(s.firstname, ' ', IFNULL(s.middlename, ''), ' ', s.lastname) AS Name, " & _
                                   "s.gender AS Gender, " & _
-                                  "s.section AS 'Grade Level' " & _
+                                  "s.course AS Course, " & _
+                                  "s.yr_lvl AS 'Year Level', " & _
+                                  "s.section AS Section " & _
                                   "FROM student s " & _
-                                  "WHERE CONCAT(s.firstname, ' ', s.middlename, ' ', s.lastname) LIKE ? " & _
+                                  "WHERE s.role = 'STUDENT' " & _
+                                  "AND CONCAT(s.firstname, ' ', IFNULL(s.middlename, ''), ' ', s.lastname) LIKE ? " & _
                                   "ORDER BY s.lastname, s.firstname"
 
             ' Create command with parameter
             Dim cmd As New OdbcCommand(query, con)
-            cmd.Parameters.AddWithValue("@search", searchText & "%")
+            cmd.Parameters.AddWithValue("@search", "%" & searchText & "%")
 
             ' Fill DataTable
             Dim adapter As New OdbcDataAdapter(cmd)
@@ -227,14 +231,27 @@ Public Class Admin_Form
             ' Set column headers
             If Student_List_DataGridView.Columns.Contains("Name") Then
                 Student_List_DataGridView.Columns("Name").HeaderText = "Full Name"
+                Student_List_DataGridView.Columns("Name").Width = 200
             End If
 
             If Student_List_DataGridView.Columns.Contains("Gender") Then
                 Student_List_DataGridView.Columns("Gender").HeaderText = "Gender"
+                Student_List_DataGridView.Columns("Gender").Width = 80
             End If
 
-            If Student_List_DataGridView.Columns.Contains("Grade Level") Then
-                Student_List_DataGridView.Columns("Grade Level").HeaderText = "Grade Level"
+            If Student_List_DataGridView.Columns.Contains("Course") Then
+                Student_List_DataGridView.Columns("Course").HeaderText = "Course"
+                Student_List_DataGridView.Columns("Course").Width = 100
+            End If
+
+            If Student_List_DataGridView.Columns.Contains("Year Level") Then
+                Student_List_DataGridView.Columns("Year Level").HeaderText = "Year"
+                Student_List_DataGridView.Columns("Year Level").Width = 60
+            End If
+
+            If Student_List_DataGridView.Columns.Contains("Section") Then
+                Student_List_DataGridView.Columns("Section").HeaderText = "Section"
+                Student_List_DataGridView.Columns("Section").Width = 150
             End If
 
             ' Close connection
