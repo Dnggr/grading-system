@@ -1,18 +1,36 @@
 ﻿Imports System.Data.Odbc
+Imports System.Security.Cryptography
+Imports System.Text
 
 Public Class Login_Form
 
     Public Shared id As String
-
-    Private Sub loginemailTextBox_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles loginemailTextBox.TextChanged
-        ' Optional: You can add validation here if needed
+    'refreshh logic
+    Private Sub refreshme()
+        loginemailTextBox.Text = ""
+        loginpasswordTextBox.Text = ""
+        loginemailTextBox.Focus()
     End Sub
 
-    Private Sub loginpasswordTextBox_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles loginpasswordTextBox.TextChanged
-        ' Optional: You can add validation here if needed
-    End Sub
+    'hash password
+    Private Function md5fromstring(ByVal source As String) As String
+        Dim sb As New StringBuilder()
+        Dim bytes() As Byte
+
+        If String.IsNullOrEmpty(source) Then
+            Throw New ArgumentNullException()
+        End If
+        bytes = Encoding.Default.GetBytes(source)
+        bytes = MD5.Create().ComputeHash(bytes)
+        For Each b As Byte In bytes
+            sb.Append(b.ToString("x2"))
+        Next
+        Return sb.ToString()
+    End Function
 
     Private Sub loginButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles loginButton.Click
+        Dim username As String = loginemailTextBox.Text.Trim()
+        Dim password As String = loginpasswordTextBox.Text.Trim()
         ' Validate inputs
         If String.IsNullOrEmpty(loginemailTextBox.Text.Trim()) Then
             MessageBox.Show("Please enter your username.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -31,19 +49,32 @@ Public Class Login_Form
 
         Try
             ' Query to check username, password, and get role
-            Dim query As String = "SELECT acc_id, role FROM account WHERE username = ? AND password = ?"
+            Dim query As String = "SELECT acc_id, role, firstname, lastname FROM account WHERE email = ? AND password = ?"
             Dim cmd As New OdbcCommand(query, con)
 
             ' Add parameters to prevent SQL injection
-            cmd.Parameters.AddWithValue("@username", loginemailTextBox.Text.Trim())
-            cmd.Parameters.AddWithValue("@password", loginpasswordTextBox.Text.Trim())
+            cmd.Parameters.AddWithValue("email", username)
+            cmd.Parameters.AddWithValue("password", md5fromstring(password))
+
 
             Dim reader As OdbcDataReader = cmd.ExecuteReader()
-
             If reader.Read() Then
-                ' Login successful - get the role
+
+                ' Login successful - get all user info
+                Dim userId As String = reader("acc_id").ToString().Trim()
                 Dim userRole As String = reader("role").ToString().Trim().ToLower()
-                id = reader("acc_id").ToString.Trim()
+                Dim fname As String = reader("firstname").ToString().Trim()
+                Dim lname As String = reader("lastname").ToString().Trim()
+                Dim email As String = loginemailTextBox.Text.Trim()
+
+                ' Store sa module - CORRECT WAY
+                login_logic.userid = userId
+                login_logic.loginuser = email
+                login_logic.firstname = fname
+                login_logic.lastname = lname
+                login_logic.userrole = userRole
+                id = userId ' Para sa compatibility with existing code
+
                 reader.Close()
 
                 ' Close login form
@@ -54,15 +85,17 @@ Public Class Login_Form
                     Case "admin"
                         Dim adminForm As New Admin_Form()
                         adminForm.Show()
+                        refreshme()
 
                     Case "student"
                         Dim studentForm As New Student_Form()
                         studentForm.Show()
+                        refreshme()
 
                     Case "teacher", "professor"
                         Dim teacherForm As New Teacher_Form()
                         teacherForm.Show()
-
+                        refreshme()
                     Case Else
                         MessageBox.Show("Unknown role: " & userRole & ". Please contact administrator.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Error)
                         Me.Show()
@@ -72,8 +105,7 @@ Public Class Login_Form
                 ' Login failed
                 reader.Close()
                 MessageBox.Show("Invalid username or password. Please try again.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                loginpasswordTextBox.Clear()
-                loginemailTextBox.Focus()
+                refreshme()
             End If
 
         Catch ex As Exception
@@ -87,16 +119,22 @@ Public Class Login_Form
     End Sub
 
     Private Sub LinkLabel1_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
-        ' Optional: Add functionality for "Forgot Password" or "Register" link
         MessageBox.Show("Please contact administrator for password reset.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
     End Sub
 
     Private Sub Login_Form_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
-        ' Close the entire application when login form is closed
         Application.Exit()
     End Sub
 
     Private Sub Login_Form_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        loginpasswordTextBox.PasswordChar = ChrW(&H25CF)  ' Sets the masking character to ●
+    End Sub
 
+    Private Sub showpass_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles showpass.CheckedChanged
+        If showpass.Checked Then
+            loginpasswordTextBox.PasswordChar = ChrW(0) ' set to show password
+        Else
+            loginpasswordTextBox.PasswordChar = ChrW(&H25CF) ' hide password
+        End If
     End Sub
 End Class
