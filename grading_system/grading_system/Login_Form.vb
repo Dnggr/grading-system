@@ -13,10 +13,9 @@ Public Class Login_Form
     End Sub
 
     'hash password
-    Private Function md5fromstring(ByVal source As String) As String
+    Public Function md5fromstring(ByVal source As String) As String
         Dim sb As New StringBuilder()
         Dim bytes() As Byte
-
         If String.IsNullOrEmpty(source) Then
             Throw New ArgumentNullException()
         End If
@@ -49,12 +48,12 @@ Public Class Login_Form
 
         Try
             ' Query to check username, password, and get role
-            Dim query As String = "SELECT acc_id, role, firstname, lastname FROM account WHERE email = ? AND password = ?"
+            Dim query As String = "SELECT acc_id, role, firstname, lastname FROM account WHERE email = ? AND pword = ?"
             Dim cmd As New OdbcCommand(query, con)
 
             ' Add parameters to prevent SQL injection
             cmd.Parameters.AddWithValue("email", username)
-            cmd.Parameters.AddWithValue("password", md5fromstring(password))
+            cmd.Parameters.AddWithValue("pword", md5fromstring(password))
 
 
             Dim reader As OdbcDataReader = cmd.ExecuteReader()

@@ -5,11 +5,18 @@ Imports System.Data.Odbc
 Public Class Student_Form
 
     Dim p As New profile()
+    Dim sched As New schedule()
     Private Sub Student_Form_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        'profile view
         p.Dock = DockStyle.Fill
         mainpanel.Controls.Add(p)
         p.Visible = False
+
+        'schedule view
+        sched.Dock = DockStyle.Fill
+        mainpanel.Controls.Add(sched)
+        sched.Visible = False
 
         ' ----- CRYSTAL REPORT VIEWER -----
         s.Dock = DockStyle.Fill
@@ -45,6 +52,11 @@ Public Class Student_Form
         loadGrades()
         s.BringToFront()
         s.Visible = True
+    End Sub
+
+    Private Sub schedule_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles schedule.Click
+        sched.BringToFront()
+        sched.Visible = True
     End Sub
 #End Region
 

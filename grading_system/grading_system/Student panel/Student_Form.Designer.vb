@@ -29,6 +29,7 @@ Partial Class Student_Form
         Me.Button3 = New System.Windows.Forms.Button
         Me.s = New CrystalDecisions.Windows.Forms.CrystalReportViewer
         Me.mainpanel = New System.Windows.Forms.Panel
+        Me.schedule = New System.Windows.Forms.Button
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -43,7 +44,7 @@ Partial Class Student_Form
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(24, 573)
+        Me.Button2.Location = New System.Drawing.Point(24, 646)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(147, 60)
         Me.Button2.TabIndex = 2
@@ -53,6 +54,7 @@ Partial Class Student_Form
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Panel1.Controls.Add(Me.schedule)
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Controls.Add(Me.Button3)
         Me.Panel1.Controls.Add(Me.Button1)
@@ -103,6 +105,15 @@ Partial Class Student_Form
         Me.mainpanel.Size = New System.Drawing.Size(1156, 729)
         Me.mainpanel.TabIndex = 48
         '
+        'schedule
+        '
+        Me.schedule.Location = New System.Drawing.Point(24, 522)
+        Me.schedule.Name = "schedule"
+        Me.schedule.Size = New System.Drawing.Size(147, 60)
+        Me.schedule.TabIndex = 5
+        Me.schedule.Text = "schedule"
+        Me.schedule.UseVisualStyleBackColor = True
+        '
         'Student_Form
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -127,4 +138,5 @@ Partial Class Student_Form
     Friend WithEvents Button3 As System.Windows.Forms.Button
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents mainpanel As System.Windows.Forms.Panel
+    Friend WithEvents schedule As System.Windows.Forms.Button
 End Class
