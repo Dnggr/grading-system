@@ -263,6 +263,7 @@
     <Compile Include="Student panel\schedule.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="module\PasswordHelper_Module.vb" />
     <Compile Include="Student panel\profile.Designer.vb">
       <DependentUpon>profile.vb</DependentUpon>
     </Compile>
@@ -316,6 +317,10 @@
       <DependentUpon>popUpFormDeleteStudent.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="professor panel\Teacher_Form.resx">
+      <DependentUpon>Teacher_Form.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Student panel\profile.resx">
       <DependentUpon>profile.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -357,6 +362,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{967B4E0D-AD0C-4609-AB67-0FA40C0206D8}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\depressedwojak.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\femalewojak.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
