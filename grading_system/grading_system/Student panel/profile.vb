@@ -12,7 +12,10 @@ Public Class profile
         Try
             Connect_me()
 
-            Dim cmdProfile As New OdbcCommand("SELECT * FROM student WHERE email=?", con)
+            Dim cmdProfile As New OdbcCommand("SELECT * , section.section " & _
+                                              "FROM student " & _
+                                              "Left Join section On student.section_id = section.section_id " & _
+                                              "WHERE email=?", con)
             cmdProfile.Parameters.AddWithValue("?", login_logic.loginuser)
 
             Dim reader As OdbcDataReader = cmdProfile.ExecuteReader()
