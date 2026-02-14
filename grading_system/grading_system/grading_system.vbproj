@@ -258,6 +258,24 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="module\PasswordHelper_Module.vb" />
+    <Compile Include="admin\teacher popup forms\popUpFormDeleteTeacher.Designer.vb">
+      <DependentUpon>popUpFormDeleteTeacher.vb</DependentUpon>
+    </Compile>
+    <Compile Include="admin\teacher popup forms\popUpFormDeleteTeacher.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="admin\teacher popup forms\popUpFormModifyTeacher.Designer.vb">
+      <DependentUpon>popUpFormModifyTeacher.vb</DependentUpon>
+    </Compile>
+    <Compile Include="admin\teacher popup forms\popUpFormModifyTeacher.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="admin\teacher popup forms\popUpFormAssignTeacher.Designer.vb">
+      <DependentUpon>popUpFormAssignTeacher.vb</DependentUpon>
+    </Compile>
+    <Compile Include="admin\teacher popup forms\popUpFormAssignTeacher.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Student panel\profile.Designer.vb">
       <DependentUpon>profile.vb</DependentUpon>
     </Compile>

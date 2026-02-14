@@ -29,7 +29,7 @@ Partial Class popUpFormAddTeacher
         Me.Label2 = New System.Windows.Forms.Label
         Me.Label1 = New System.Windows.Forms.Label
         Me.ComboBox1 = New System.Windows.Forms.ComboBox
-        Me.TextBox1 = New System.Windows.Forms.TextBox
+        Me.TextBox = New System.Windows.Forms.TextBox
         Me.TextBox2 = New System.Windows.Forms.TextBox
         Me.GroupBox2 = New System.Windows.Forms.GroupBox
         Me.Button2 = New System.Windows.Forms.Button
@@ -46,7 +46,7 @@ Partial Class popUpFormAddTeacher
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Controls.Add(Me.ComboBox1)
-        Me.GroupBox1.Controls.Add(Me.TextBox1)
+        Me.GroupBox1.Controls.Add(Me.TextBox)
         Me.GroupBox1.Controls.Add(Me.TextBox2)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 67)
         Me.GroupBox1.Name = "GroupBox1"
@@ -107,12 +107,12 @@ Partial Class popUpFormAddTeacher
         Me.ComboBox1.Size = New System.Drawing.Size(253, 21)
         Me.ComboBox1.TabIndex = 4
         '
-        'TextBox1
+        'TextBox
         '
-        Me.TextBox1.Location = New System.Drawing.Point(89, 35)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(253, 20)
-        Me.TextBox1.TabIndex = 0
+        Me.TextBox.Location = New System.Drawing.Point(89, 35)
+        Me.TextBox.Name = "TextBox"
+        Me.TextBox.Size = New System.Drawing.Size(253, 20)
+        Me.TextBox.TabIndex = 0
         '
         'TextBox2
         '
@@ -172,7 +172,7 @@ Partial Class popUpFormAddTeacher
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
-    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
+    Friend WithEvents TextBox As System.Windows.Forms.TextBox
     Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents Button2 As System.Windows.Forms.Button
