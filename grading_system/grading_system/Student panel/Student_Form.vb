@@ -29,6 +29,7 @@ Public Class Student_Form
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         p.profileinfo()
         p.BringToFront()
+        s.Visible = False
         p.Visible = True
     End Sub
 
@@ -44,6 +45,7 @@ Public Class Student_Form
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
         loadGrades()
         s.BringToFront()
+        p.Visible = False
         s.Visible = True
     End Sub
 #End Region
@@ -83,12 +85,13 @@ Public Class Student_Form
         Try
             Dim query As String = "SELECT concat(prof.firstname, '-' , prof.lastname) As Profname, " & _
                                   "concat(student.firstname,' ', student.middlename ,' ' , student.lastname) As Studentname," & _
-                                  "student.section As Section, student.course As Course, student.stud_id As Studentid," & _
+                                  "section.section As Section, student.course As Course, student.stud_id As Studentid," & _
                                   "grades.grade As Grades, concat(subject.sub_code ,' ',subject.sub_name) As Subjects " & _
                                   "From student " & _
                                     " Left Join grades On student.stud_id = grades.stud_id " & _
                                     " Left Join prof On grades.prof_id = prof.prof_id " & _
                                     " Left Join subject On grades.sub_id = subject.sub_id " & _
+                                    " Left Join section On student.section_id = section.section_id " & _
                                     " Where student.acc_id = ? "
             Connect_me()
             Dim adapter As New OdbcDataAdapter(query, con)
