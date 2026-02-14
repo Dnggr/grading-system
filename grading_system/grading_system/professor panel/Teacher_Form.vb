@@ -1,7 +1,9 @@
 ﻿Imports System.Data.Odbc
 Public Class Teacher_Form
     Dim response As DialogResult
-    Dim acc_id As String = Login_Form.id
+    Public Shared acc_id As String = Login_Form.id
+    Public Shared studID, studFN, sectionID As String
+
     Private Sub Teacher_Form_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ComboBox1.Items.Add("1")
         ComboBox1.Items.Add("2")
@@ -41,7 +43,7 @@ Public Class Teacher_Form
         Try
             Dim query As String = "SELECT Distinct student.stud_id As ID," & _
                            "concat(student.firstname,' ',student.middlename,' ',student.lastname) As FullName," & _
-                           "student.course As Course, section.section As Section " & _
+                           "student.course As Course, section.section As Section, student.section_id As SectionID " & _
                            "From student " & _
                            "Left Join section On student.section_id = section.section_id " & _
                            "Left Join profsectionsubject On section.section_id = profsectionsubject.section_id " & _
@@ -100,7 +102,6 @@ Public Class Teacher_Form
         End Try
     End Sub
 #End Region
-
 #Region "CombiBox logic"
     Private Sub ComboBox1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ComboBox1.SelectedIndexChanged
         Dim yearlevel As String = ComboBox1.SelectedItem.ToString()
@@ -123,6 +124,58 @@ Public Class Teacher_Form
             Application.Exit()
         End If
     End Sub
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        Dim addGrade As New AddGrade_Form
+        addGrade.Show()
+    End Sub
 #End Region
+   
     
+    Private Sub DataGridView2_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView2.CellContentClick
+        ' Check if it's not the header row
+        If e.RowIndex >= 0 Then
+            ' Get the clicked row
+            Dim selectedRow As DataGridViewRow = DataGridView2.Rows(e.RowIndex)
+
+            ' Check for NULL values before accessing
+            If selectedRow.Cells("ID").Value IsNot Nothing Then
+                studID = selectedRow.Cells("ID").Value.ToString()
+            End If
+
+            If selectedRow.Cells("FullName").Value IsNot Nothing Then
+                studFN = selectedRow.Cells("FullName").Value.ToString()
+            End If
+
+            If selectedRow.Cells("sectionID").Value IsNot Nothing Then
+                sectionID = selectedRow.Cells("sectionID").Value.ToString()
+            End If
+
+            MessageBox.Show("Selected: " & studFN)
+        End If
+        Label3.Text = studFN
+        Label4.Text = studID
+        Label5.Text = sectionID
+        Dim addGrade As New AddGrade_Form
+        addGrade.Show()
+    End Sub
+
+    Private Sub DataGridView2_SelectionChanged(ByVal sender As Object, ByVal e As EventArgs) Handles DataGridView2.SelectionChanged
+        If DataGridView2.SelectedRows.Count > 0 Then
+            ' Get the selected row
+            Dim selectedRow As DataGridViewRow = DataGridView2.SelectedRows(0)
+
+            ' Access cell values
+            studID = selectedRow.Cells("ID").Value.ToString()
+            studFN = selectedRow.Cells("FullName").Value.ToString()
+            sectionID = selectedRow.Cells("sectionID").Value.ToString()
+
+            Label3.Text = studFN
+            Label4.Text = studID
+            Label5.Text = sectionID
+
+            ' Optional: Show selected
+            GroupBox1.Text = "Selected: " & studFN
+        End If
+    End Sub
 End Class
