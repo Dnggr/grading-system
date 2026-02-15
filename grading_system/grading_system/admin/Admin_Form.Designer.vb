@@ -37,18 +37,29 @@ Partial Class Admin_Form
         Me.ToolStripButton4 = New System.Windows.Forms.ToolStripButton
         Me.ToolStripButton5 = New System.Windows.Forms.ToolStripButton
         Me.Student_Panel = New System.Windows.Forms.Panel
-        Me.Teacher_Panel = New System.Windows.Forms.Panel
-        Me.School_Year_Panel = New System.Windows.Forms.Panel
-        Me.Add_Student_Button = New System.Windows.Forms.Button
-        Me.Modify_Student_Button = New System.Windows.Forms.Button
-        Me.Delete_Student_Button = New System.Windows.Forms.Button
-        Me.Student_List_DataGridView = New System.Windows.Forms.DataGridView
-        Me.Student_Label = New System.Windows.Forms.Label
-        Me.Search_Student_Label = New System.Windows.Forms.Label
         Me.Search_Student_TextBox = New System.Windows.Forms.TextBox
+        Me.Search_Student_Label = New System.Windows.Forms.Label
+        Me.Student_Label = New System.Windows.Forms.Label
+        Me.Student_List_DataGridView = New System.Windows.Forms.DataGridView
+        Me.Delete_Student_Button = New System.Windows.Forms.Button
+        Me.Modify_Student_Button = New System.Windows.Forms.Button
+        Me.Add_Student_Button = New System.Windows.Forms.Button
+        Me.Teacher_Panel = New System.Windows.Forms.Panel
+        Me.Back_Button = New System.Windows.Forms.Button
+        Me.Delete_Teacher_Button = New System.Windows.Forms.Button
+        Me.Assign_Class_To_Teacher_Button = New System.Windows.Forms.Button
+        Me.Modify_Teacher_Button = New System.Windows.Forms.Button
+        Me.Label2 = New System.Windows.Forms.Label
+        Me.Search_Teacher_TextBox = New System.Windows.Forms.TextBox
+        Me.Teacher_List_DataGridView = New System.Windows.Forms.DataGridView
+        Me.Add_Teacher_Button = New System.Windows.Forms.Button
+        Me.Label1 = New System.Windows.Forms.Label
+        Me.School_Year_Panel = New System.Windows.Forms.Panel
         Me.Navigation_Panel.SuspendLayout()
         Me.Student_Panel.SuspendLayout()
         CType(Me.Student_List_DataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Teacher_Panel.SuspendLayout()
+        CType(Me.Teacher_List_DataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Navigation_Panel
@@ -184,63 +195,12 @@ Partial Class Admin_Form
         Me.Student_Panel.Size = New System.Drawing.Size(1153, 700)
         Me.Student_Panel.TabIndex = 2
         '
-        'Teacher_Panel
+        'Search_Student_TextBox
         '
-        Me.Teacher_Panel.Location = New System.Drawing.Point(195, 0)
-        Me.Teacher_Panel.Name = "Teacher_Panel"
-        Me.Teacher_Panel.Size = New System.Drawing.Size(1153, 700)
-        Me.Teacher_Panel.TabIndex = 2
-        '
-        'School_Year_Panel
-        '
-        Me.School_Year_Panel.Location = New System.Drawing.Point(195, 0)
-        Me.School_Year_Panel.Name = "School_Year_Panel"
-        Me.School_Year_Panel.Size = New System.Drawing.Size(1153, 700)
-        Me.School_Year_Panel.TabIndex = 2
-        '
-        'Add_Student_Button
-        '
-        Me.Add_Student_Button.Location = New System.Drawing.Point(696, 12)
-        Me.Add_Student_Button.Name = "Add_Student_Button"
-        Me.Add_Student_Button.Size = New System.Drawing.Size(138, 23)
-        Me.Add_Student_Button.TabIndex = 0
-        Me.Add_Student_Button.Text = "add student"
-        Me.Add_Student_Button.UseVisualStyleBackColor = True
-        '
-        'Modify_Student_Button
-        '
-        Me.Modify_Student_Button.Location = New System.Drawing.Point(840, 12)
-        Me.Modify_Student_Button.Name = "Modify_Student_Button"
-        Me.Modify_Student_Button.Size = New System.Drawing.Size(138, 23)
-        Me.Modify_Student_Button.TabIndex = 1
-        Me.Modify_Student_Button.Text = "modify student"
-        Me.Modify_Student_Button.UseVisualStyleBackColor = True
-        '
-        'Delete_Student_Button
-        '
-        Me.Delete_Student_Button.Location = New System.Drawing.Point(984, 12)
-        Me.Delete_Student_Button.Name = "Delete_Student_Button"
-        Me.Delete_Student_Button.Size = New System.Drawing.Size(138, 23)
-        Me.Delete_Student_Button.TabIndex = 2
-        Me.Delete_Student_Button.Text = "delete student"
-        Me.Delete_Student_Button.UseVisualStyleBackColor = True
-        '
-        'Student_List_DataGridView
-        '
-        Me.Student_List_DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.Student_List_DataGridView.Location = New System.Drawing.Point(31, 127)
-        Me.Student_List_DataGridView.Name = "Student_List_DataGridView"
-        Me.Student_List_DataGridView.Size = New System.Drawing.Size(1091, 561)
-        Me.Student_List_DataGridView.TabIndex = 3
-        '
-        'Student_Label
-        '
-        Me.Student_Label.AutoSize = True
-        Me.Student_Label.Location = New System.Drawing.Point(28, 9)
-        Me.Student_Label.Name = "Student_Label"
-        Me.Student_Label.Size = New System.Drawing.Size(73, 13)
-        Me.Student_Label.TabIndex = 4
-        Me.Student_Label.Text = "Student panel"
+        Me.Search_Student_TextBox.Location = New System.Drawing.Point(171, 101)
+        Me.Search_Student_TextBox.Name = "Search_Student_TextBox"
+        Me.Search_Student_TextBox.Size = New System.Drawing.Size(539, 20)
+        Me.Search_Student_TextBox.TabIndex = 6
         '
         'Search_Student_Label
         '
@@ -251,12 +211,150 @@ Partial Class Admin_Form
         Me.Search_Student_Label.TabIndex = 5
         Me.Search_Student_Label.Text = "Search Student"
         '
-        'Search_Student_TextBox
+        'Student_Label
         '
-        Me.Search_Student_TextBox.Location = New System.Drawing.Point(171, 101)
-        Me.Search_Student_TextBox.Name = "Search_Student_TextBox"
-        Me.Search_Student_TextBox.Size = New System.Drawing.Size(539, 20)
-        Me.Search_Student_TextBox.TabIndex = 6
+        Me.Student_Label.AutoSize = True
+        Me.Student_Label.Location = New System.Drawing.Point(28, 9)
+        Me.Student_Label.Name = "Student_Label"
+        Me.Student_Label.Size = New System.Drawing.Size(73, 13)
+        Me.Student_Label.TabIndex = 4
+        Me.Student_Label.Text = "Student panel"
+        '
+        'Student_List_DataGridView
+        '
+        Me.Student_List_DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.Student_List_DataGridView.Location = New System.Drawing.Point(31, 127)
+        Me.Student_List_DataGridView.Name = "Student_List_DataGridView"
+        Me.Student_List_DataGridView.Size = New System.Drawing.Size(1091, 561)
+        Me.Student_List_DataGridView.TabIndex = 3
+        '
+        'Delete_Student_Button
+        '
+        Me.Delete_Student_Button.Location = New System.Drawing.Point(984, 12)
+        Me.Delete_Student_Button.Name = "Delete_Student_Button"
+        Me.Delete_Student_Button.Size = New System.Drawing.Size(138, 23)
+        Me.Delete_Student_Button.TabIndex = 2
+        Me.Delete_Student_Button.Text = "delete student"
+        Me.Delete_Student_Button.UseVisualStyleBackColor = True
+        '
+        'Modify_Student_Button
+        '
+        Me.Modify_Student_Button.Location = New System.Drawing.Point(840, 12)
+        Me.Modify_Student_Button.Name = "Modify_Student_Button"
+        Me.Modify_Student_Button.Size = New System.Drawing.Size(138, 23)
+        Me.Modify_Student_Button.TabIndex = 1
+        Me.Modify_Student_Button.Text = "modify student"
+        Me.Modify_Student_Button.UseVisualStyleBackColor = True
+        '
+        'Add_Student_Button
+        '
+        Me.Add_Student_Button.Location = New System.Drawing.Point(696, 12)
+        Me.Add_Student_Button.Name = "Add_Student_Button"
+        Me.Add_Student_Button.Size = New System.Drawing.Size(138, 23)
+        Me.Add_Student_Button.TabIndex = 0
+        Me.Add_Student_Button.Text = "add student"
+        Me.Add_Student_Button.UseVisualStyleBackColor = True
+        '
+        'Teacher_Panel
+        '
+        Me.Teacher_Panel.Controls.Add(Me.Back_Button)
+        Me.Teacher_Panel.Controls.Add(Me.Delete_Teacher_Button)
+        Me.Teacher_Panel.Controls.Add(Me.Assign_Class_To_Teacher_Button)
+        Me.Teacher_Panel.Controls.Add(Me.Modify_Teacher_Button)
+        Me.Teacher_Panel.Controls.Add(Me.Label2)
+        Me.Teacher_Panel.Controls.Add(Me.Search_Teacher_TextBox)
+        Me.Teacher_Panel.Controls.Add(Me.Teacher_List_DataGridView)
+        Me.Teacher_Panel.Controls.Add(Me.Add_Teacher_Button)
+        Me.Teacher_Panel.Controls.Add(Me.Label1)
+        Me.Teacher_Panel.Location = New System.Drawing.Point(195, 0)
+        Me.Teacher_Panel.Name = "Teacher_Panel"
+        Me.Teacher_Panel.Size = New System.Drawing.Size(1153, 700)
+        Me.Teacher_Panel.TabIndex = 2
+        '
+        'Back_Button
+        '
+        Me.Back_Button.Location = New System.Drawing.Point(635, 146)
+        Me.Back_Button.Name = "Back_Button"
+        Me.Back_Button.Size = New System.Drawing.Size(75, 23)
+        Me.Back_Button.TabIndex = 8
+        Me.Back_Button.Text = "back"
+        Me.Back_Button.UseVisualStyleBackColor = True
+        '
+        'Delete_Teacher_Button
+        '
+        Me.Delete_Teacher_Button.Location = New System.Drawing.Point(1013, 30)
+        Me.Delete_Teacher_Button.Name = "Delete_Teacher_Button"
+        Me.Delete_Teacher_Button.Size = New System.Drawing.Size(102, 23)
+        Me.Delete_Teacher_Button.TabIndex = 7
+        Me.Delete_Teacher_Button.Text = "Delete teacher"
+        Me.Delete_Teacher_Button.UseVisualStyleBackColor = True
+        '
+        'Assign_Class_To_Teacher_Button
+        '
+        Me.Assign_Class_To_Teacher_Button.Location = New System.Drawing.Point(923, 145)
+        Me.Assign_Class_To_Teacher_Button.Name = "Assign_Class_To_Teacher_Button"
+        Me.Assign_Class_To_Teacher_Button.Size = New System.Drawing.Size(192, 23)
+        Me.Assign_Class_To_Teacher_Button.TabIndex = 6
+        Me.Assign_Class_To_Teacher_Button.Text = "Assign teacher to class"
+        Me.Assign_Class_To_Teacher_Button.UseVisualStyleBackColor = True
+        '
+        'Modify_Teacher_Button
+        '
+        Me.Modify_Teacher_Button.Location = New System.Drawing.Point(905, 30)
+        Me.Modify_Teacher_Button.Name = "Modify_Teacher_Button"
+        Me.Modify_Teacher_Button.Size = New System.Drawing.Size(102, 23)
+        Me.Modify_Teacher_Button.TabIndex = 5
+        Me.Modify_Teacher_Button.Text = "modify teacher"
+        Me.Modify_Teacher_Button.UseVisualStyleBackColor = True
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(74, 155)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(39, 13)
+        Me.Label2.TabIndex = 4
+        Me.Label2.Text = "search"
+        '
+        'Search_Teacher_TextBox
+        '
+        Me.Search_Teacher_TextBox.Location = New System.Drawing.Point(159, 148)
+        Me.Search_Teacher_TextBox.Name = "Search_Teacher_TextBox"
+        Me.Search_Teacher_TextBox.Size = New System.Drawing.Size(470, 20)
+        Me.Search_Teacher_TextBox.TabIndex = 3
+        '
+        'Teacher_List_DataGridView
+        '
+        Me.Teacher_List_DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.Teacher_List_DataGridView.Location = New System.Drawing.Point(35, 189)
+        Me.Teacher_List_DataGridView.Name = "Teacher_List_DataGridView"
+        Me.Teacher_List_DataGridView.Size = New System.Drawing.Size(1087, 470)
+        Me.Teacher_List_DataGridView.TabIndex = 2
+        '
+        'Add_Teacher_Button
+        '
+        Me.Add_Teacher_Button.Location = New System.Drawing.Point(797, 30)
+        Me.Add_Teacher_Button.Name = "Add_Teacher_Button"
+        Me.Add_Teacher_Button.Size = New System.Drawing.Size(102, 23)
+        Me.Add_Teacher_Button.TabIndex = 1
+        Me.Add_Teacher_Button.Text = "Add teacher"
+        Me.Add_Teacher_Button.UseVisualStyleBackColor = True
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(74, 35)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(72, 13)
+        Me.Label1.TabIndex = 0
+        Me.Label1.Text = "teacher panel"
+        '
+        'School_Year_Panel
+        '
+        Me.School_Year_Panel.Location = New System.Drawing.Point(195, 0)
+        Me.School_Year_Panel.Name = "School_Year_Panel"
+        Me.School_Year_Panel.Size = New System.Drawing.Size(1153, 700)
+        Me.School_Year_Panel.TabIndex = 2
         '
         'Admin_Form
         '
@@ -264,9 +362,9 @@ Partial Class Admin_Form
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1344, 700)
         Me.Controls.Add(Me.Navigation_Panel)
+        Me.Controls.Add(Me.Teacher_Panel)
         Me.Controls.Add(Me.Student_Panel)
         Me.Controls.Add(Me.Dashboard_Panel)
-        Me.Controls.Add(Me.Teacher_Panel)
         Me.Controls.Add(Me.School_Year_Panel)
         Me.Name = "Admin_Form"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -275,6 +373,9 @@ Partial Class Admin_Form
         Me.Student_Panel.ResumeLayout(False)
         Me.Student_Panel.PerformLayout()
         CType(Me.Student_List_DataGridView, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Teacher_Panel.ResumeLayout(False)
+        Me.Teacher_Panel.PerformLayout()
+        CType(Me.Teacher_List_DataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -301,4 +402,13 @@ Partial Class Admin_Form
     Friend WithEvents Search_Student_Label As System.Windows.Forms.Label
     Friend WithEvents Student_Label As System.Windows.Forms.Label
     Friend WithEvents Search_Student_TextBox As System.Windows.Forms.TextBox
+    Friend WithEvents Add_Teacher_Button As System.Windows.Forms.Button
+    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents Search_Teacher_TextBox As System.Windows.Forms.TextBox
+    Friend WithEvents Teacher_List_DataGridView As System.Windows.Forms.DataGridView
+    Friend WithEvents Delete_Teacher_Button As System.Windows.Forms.Button
+    Friend WithEvents Assign_Class_To_Teacher_Button As System.Windows.Forms.Button
+    Friend WithEvents Modify_Teacher_Button As System.Windows.Forms.Button
+    Friend WithEvents Back_Button As System.Windows.Forms.Button
 End Class
