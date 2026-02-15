@@ -206,12 +206,6 @@
     <Compile Include="admin\teacher popup forms\popUpFormAssignSubjectToTeacher.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="admin\teacher popup forms\popUpFormDeleteTeacher.Designer.vb">
-      <DependentUpon>popUpFormDeleteTeacher.vb</DependentUpon>
-    </Compile>
-    <Compile Include="admin\teacher popup forms\popUpFormDeleteTeacher.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="module\login_logic.vb" />
     <Compile Include="module\Connection_Module.vb" />
     <Compile Include="crystalreport\GradeFields.Designer.vb">
@@ -274,6 +268,12 @@
       <DependentUpon>popUpFormModifyTeacher.vb</DependentUpon>
     </Compile>
     <Compile Include="admin\teacher popup forms\popUpFormModifyTeacher.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="admin\teacher popup forms\popUpFormDeleteTeacher.Designer.vb">
+      <DependentUpon>popUpFormDeleteTeacher.vb</DependentUpon>
+    </Compile>
+    <Compile Include="admin\teacher popup forms\popUpFormDeleteTeacher.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="professor panel\AddGrade_Form.Designer.vb">

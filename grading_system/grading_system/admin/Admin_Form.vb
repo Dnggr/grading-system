@@ -2,29 +2,42 @@
 
 Public Class Admin_Form
 
-#Region "Shared State - Selected Student ID for Modify/Delete popups"
-    ''' <summary>
-    ''' Stores the currently selected student's acc_id and stud_id.
-    ''' popUpFormModifyStudent and popUpFormDeleteStudent should read these values.
-    ''' </summary>
+#Region "Shared State"
+    ' ── Student shared state (read by popUpFormModifyStudent / popUpFormDeleteStudent) ──
     Public Shared SelectedStudentAccId As Integer = 0
     Public Shared SelectedStudentStudId As Integer = 0
+
+    ' ── Teacher shared state (read by popUpFormModifyTeacher / popUpFormDeleteTeacher / popUpFormAssignSubjectToTeacher) ──
+    Public Shared SelectedTeacherAccId As Integer = 0
+    Public Shared SelectedTeacherProfId As Integer = 0
+
+    ' ── Tracks which view the Teacher DataGridView is in ──
+    Private _teacherViewMode As String = "LIST"   ' "LIST" or "SUBJECTS"
 #End Region
 
+    ' ════════════════════════════════════════════════════════════════════
 #Region "Form Load"
+    ' ════════════════════════════════════════════════════════════════════
+
     Private Sub Admin_Form_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        ' Set Dashboard as default view on form load
+        ' Default view on startup
         ShowDashboard()
 
-        ' Initialize Student DataGridView
+        ' ── Student panel setup ──
         InitializeStudentDataGridView()
-
-        ' Load all students on form load (empty search = all records)
         LoadStudentData("")
+
+        ' ── Teacher panel setup ──
+        InitializeTeacherDataGridView()
+        Back_Button.Visible = False   ' Hidden until drill-down is active
     End Sub
+
 #End Region
 
+    ' ════════════════════════════════════════════════════════════════════
 #Region "Navigation Panel - Button Click Events"
+    ' ════════════════════════════════════════════════════════════════════
+
     Private Sub Dashboard_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Dashboard_Button.Click
         ShowDashboard()
     End Sub
@@ -36,6 +49,7 @@ Public Class Admin_Form
 
     Private Sub Teacher_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Teacher_Button.Click
         ShowTeacherPanel()
+        LoadTeacherData(Search_Teacher_TextBox.Text.Trim())
     End Sub
 
     Private Sub School_Year_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles School_Year_Button.Click
@@ -63,9 +77,13 @@ Public Class Admin_Form
             Application.Exit()
         End If
     End Sub
+
 #End Region
 
+    ' ════════════════════════════════════════════════════════════════════
 #Region "Panel Navigation Helper Methods"
+    ' ════════════════════════════════════════════════════════════════════
+
     Private Sub HideAllPanels()
         Dashboard_Panel.Visible = False
         Student_Panel.Visible = False
@@ -96,89 +114,13 @@ Public Class Admin_Form
         School_Year_Panel.Visible = True
         School_Year_Panel.BringToFront()
     End Sub
+
 #End Region
 
-#Region "Student Panel - Button Click Events"
-    Private Sub Add_Student_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Add_Student_Button.Click
-        Dim addForm As New popUpFormAddStudent()
-        addForm.ShowDialog()
-        LoadStudentData(Search_Student_TextBox.Text.Trim())
-    End Sub
+    ' ════════════════════════════════════════════════════════════════════
+#Region "Student Panel - DataGridView Initialization"
+    ' ════════════════════════════════════════════════════════════════════
 
-    Private Sub Modify_Student_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Modify_Student_Button.Click
-        If Student_List_DataGridView.SelectedRows.Count = 0 Then
-            MessageBox.Show("Please select a student to modify.", "No Selection", _
-                            MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return
-        End If
-
-        If Not SetSelectedStudentId() Then
-            Return
-        End If
-
-        Dim modifyForm As New popUpFormModifyStudent()
-        modifyForm.ShowDialog()
-        LoadStudentData(Search_Student_TextBox.Text.Trim())
-    End Sub
-
-    Private Sub Delete_Student_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Delete_Student_Button.Click
-        If Student_List_DataGridView.SelectedRows.Count = 0 Then
-            MessageBox.Show("Please select a student to delete.", "No Selection", _
-                            MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return
-        End If
-
-        If Not SetSelectedStudentId() Then
-            Return
-        End If
-
-        Dim deleteForm As New popUpFormDeleteStudent()
-        deleteForm.ShowDialog()
-        LoadStudentData(Search_Student_TextBox.Text.Trim())
-    End Sub
-
-    ''' <summary>
-    ''' Reads both acc_id and stud_id from the hidden columns of the selected DataGridView row
-    ''' and stores them in shared state for popup forms to consume.
-    ''' Returns False if the IDs cannot be read.
-    ''' </summary>
-    Private Function SetSelectedStudentId() As Boolean
-        Try
-            Dim selectedRow As DataGridViewRow = Student_List_DataGridView.SelectedRows(0)
-            Dim rawAccId As Object = selectedRow.Cells("AccountID").Value
-            Dim rawStudId As Object = selectedRow.Cells("StudentID").Value
-
-            If rawAccId Is Nothing OrElse IsDBNull(rawAccId) Then
-                MessageBox.Show("Could not retrieve account ID. Please re-select the student.", _
-                                "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                Return False
-            End If
-
-            If rawStudId Is Nothing OrElse IsDBNull(rawStudId) Then
-                MessageBox.Show("Could not retrieve student ID. Please re-select the student.", _
-                                "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                Return False
-            End If
-
-            SelectedStudentAccId = Convert.ToInt32(rawAccId)
-            SelectedStudentStudId = Convert.ToInt32(rawStudId)
-            Return True
-
-        Catch ex As Exception
-            MessageBox.Show("Error reading selected student: " & ex.Message, "Error", _
-                            MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Return False
-        End Try
-    End Function
-#End Region
-
-#Region "Student Panel - Search Functionality"
-    Private Sub Search_Student_TextBox_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Search_Student_TextBox.TextChanged
-        LoadStudentData(Search_Student_TextBox.Text.Trim())
-    End Sub
-#End Region
-
-#Region "Student Panel - DataGridView Configuration"
     Private Sub InitializeStudentDataGridView()
         Try
             Student_List_DataGridView.ReadOnly = True
@@ -190,25 +132,21 @@ Public Class Admin_Form
             Student_List_DataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
             Student_List_DataGridView.AlternatingRowsDefaultCellStyle.BackColor = System.Drawing.Color.LightGray
         Catch ex As Exception
-            MessageBox.Show("Error initializing DataGridView: " & ex.Message, "Error", _
-                            MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Error initializing Student DataGridView: " & ex.Message, _
+                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+
 #End Region
 
+    ' ════════════════════════════════════════════════════════════════════
 #Region "Student Panel - Data Loading"
+    ' ════════════════════════════════════════════════════════════════════
+
     ''' <summary>
-    ''' Loads student records into the DataGridView.
-    '''
-    ''' Flow: student LEFT JOIN section (via section_id FK) → resolves section name.
-    '''
-    ''' FIX: Removed the AND s.email LIKE '%@google.com' filter — it was silently
-    ''' hiding every record because no student in the database has a @google.com email.
-    ''' The only role filter kept is WHERE LOWER(s.role) = 'student', which correctly
-    ''' excludes teachers, admins, and NULL-role seed rows.
-    '''
-    ''' IFNULL wrappers on every nullable column prevent NULL from breaking CONCAT
-    ''' in the search filter or showing blank cells in the grid.
+    ''' Loads student records into Student_List_DataGridView.
+    ''' Joins student to section for the section name.
+    ''' Hides AccountID, StudentID, and Email columns (used internally only).
     ''' </summary>
     Public Sub LoadStudentData(ByVal searchText As String)
         Try
@@ -244,7 +182,7 @@ Public Class Admin_Form
 
             Student_List_DataGridView.DataSource = dt
 
-            ' ── Hide internal ID columns (needed by Modify/Delete, not for display) ──
+            ' ── Hide internal ID columns ──
             If Student_List_DataGridView.Columns.Contains("AccountID") Then
                 Student_List_DataGridView.Columns("AccountID").Visible = False
             End If
@@ -273,20 +211,422 @@ Public Class Admin_Form
             End If
 
         Catch ex As Exception
-            MessageBox.Show("Error loading student data: " & ex.Message, "Error", _
-                            MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Error loading student data: " & ex.Message, _
+                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
-            If con.State = ConnectionState.Open Then
-                con.Close()
-            End If
+            If con.State = ConnectionState.Open Then con.Close()
         End Try
     End Sub
+
 #End Region
 
-#Region "Student Panel - DataGridView Events"
-    Private Sub Student_List_DataGridView_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles Student_List_DataGridView.CellContentClick
-        ' Reserved for future use (e.g. double-click to view student details)
+    ' ════════════════════════════════════════════════════════════════════
+#Region "Student Panel - Button Click Events"
+    ' ════════════════════════════════════════════════════════════════════
+
+    Private Sub Add_Student_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Add_Student_Button.Click
+        Dim addForm As New popUpFormAddStudent()
+        addForm.ShowDialog()
+        LoadStudentData(Search_Student_TextBox.Text.Trim())
     End Sub
+
+    Private Sub Modify_Student_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Modify_Student_Button.Click
+        If Student_List_DataGridView.SelectedRows.Count = 0 Then
+            MessageBox.Show("Please select a student to modify.", "No Selection", _
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        If Not SetSelectedStudentId() Then Return
+
+        Dim modifyForm As New popUpFormModifyStudent()
+        modifyForm.ShowDialog()
+        LoadStudentData(Search_Student_TextBox.Text.Trim())
+    End Sub
+
+    Private Sub Delete_Student_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Delete_Student_Button.Click
+        If Student_List_DataGridView.SelectedRows.Count = 0 Then
+            MessageBox.Show("Please select a student to delete.", "No Selection", _
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        If Not SetSelectedStudentId() Then Return
+
+        Dim deleteForm As New popUpFormDeleteStudent()
+        deleteForm.ShowDialog()
+        LoadStudentData(Search_Student_TextBox.Text.Trim())
+    End Sub
+
+#End Region
+
+    ' ════════════════════════════════════════════════════════════════════
+#Region "Student Panel - Search"
+    ' ════════════════════════════════════════════════════════════════════
+
+    Private Sub Search_Student_TextBox_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Search_Student_TextBox.TextChanged
+        LoadStudentData(Search_Student_TextBox.Text.Trim())
+    End Sub
+
+#End Region
+
+    ' ════════════════════════════════════════════════════════════════════
+#Region "Student Panel - Set Selected Student ID Helper"
+    ' ════════════════════════════════════════════════════════════════════
+
+    ''' <summary>
+    ''' Reads acc_id and stud_id from the selected student row.
+    ''' Stores them in shared state for popup forms to consume.
+    ''' Returns False if IDs cannot be read.
+    ''' </summary>
+    Private Function SetSelectedStudentId() As Boolean
+        Try
+            Dim selectedRow As DataGridViewRow = Student_List_DataGridView.SelectedRows(0)
+            Dim rawAccId As Object = selectedRow.Cells("AccountID").Value
+            Dim rawStudId As Object = selectedRow.Cells("StudentID").Value
+
+            If rawAccId Is Nothing OrElse IsDBNull(rawAccId) Then
+                MessageBox.Show("Could not retrieve account ID. Please re-select the student.", _
+                                "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return False
+            End If
+
+            If rawStudId Is Nothing OrElse IsDBNull(rawStudId) Then
+                MessageBox.Show("Could not retrieve student ID. Please re-select the student.", _
+                                "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return False
+            End If
+
+            SelectedStudentAccId = Convert.ToInt32(rawAccId)
+            SelectedStudentStudId = Convert.ToInt32(rawStudId)
+            Return True
+
+        Catch ex As Exception
+            MessageBox.Show("Error reading selected student: " & ex.Message, _
+                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        End Try
+    End Function
+
+#End Region
+
+    ' ════════════════════════════════════════════════════════════════════
+#Region "Student Panel - DataGridView Events"
+    ' ════════════════════════════════════════════════════════════════════
+
+    Private Sub Student_List_DataGridView_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles Student_List_DataGridView.CellContentClick
+        ' Reserved for future use
+    End Sub
+
+#End Region
+
+    ' ════════════════════════════════════════════════════════════════════
+#Region "Teacher Panel - DataGridView Initialization"
+    ' ════════════════════════════════════════════════════════════════════
+
+    Private Sub InitializeTeacherDataGridView()
+        Try
+            Teacher_List_DataGridView.ReadOnly = True
+            Teacher_List_DataGridView.AllowUserToAddRows = False
+            Teacher_List_DataGridView.AllowUserToDeleteRows = False
+            Teacher_List_DataGridView.EditMode = DataGridViewEditMode.EditProgrammatically
+            Teacher_List_DataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+            Teacher_List_DataGridView.MultiSelect = False
+            Teacher_List_DataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+            Teacher_List_DataGridView.AlternatingRowsDefaultCellStyle.BackColor = System.Drawing.Color.LightGray
+        Catch ex As Exception
+            MessageBox.Show("Error initializing Teacher DataGridView: " & ex.Message, _
+                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+#End Region
+
+    ' ════════════════════════════════════════════════════════════════════
+#Region "Teacher Panel - Data Loading (List View - Default)"
+    ' ════════════════════════════════════════════════════════════════════
+
+    ''' <summary>
+    ''' Default view: shows Full Name and Gender only.
+    ''' AccountID and ProfID are hidden but available for button actions.
+    ''' Filters by role = 'teacher' in the account table.
+    ''' </summary>
+    Public Sub LoadTeacherData(ByVal searchText As String)
+        Try
+            Connect_me()
+
+            Dim query As String = _
+                "SELECT " & _
+                "  a.acc_id   AS AccountID, " & _
+                "  p.prof_id  AS ProfID, " & _
+                "  CONCAT(p.lastname, ', ', p.firstname, " & _
+                "         IF(p.middlename IS NULL OR TRIM(p.middlename) = '', " & _
+                "            '', CONCAT(' ', p.middlename))) AS FullName, " & _
+                "  IFNULL(a.gender, 'N/A') AS Gender " & _
+                "FROM prof p " & _
+                "INNER JOIN account a ON p.acc_id = a.acc_id " & _
+                "WHERE LOWER(a.role) = 'teacher' " & _
+                "  AND CONCAT( " & _
+                "        IFNULL(p.firstname,  ''), ' ', " & _
+                "        IFNULL(p.middlename, ''), ' ', " & _
+                "        IFNULL(p.lastname,   '')) LIKE ? " & _
+                "ORDER BY p.lastname, p.firstname"
+
+            Dim cmd As New OdbcCommand(query, con)
+            cmd.Parameters.AddWithValue("@search", "%" & searchText & "%")
+
+            Dim adapter As New OdbcDataAdapter(cmd)
+            Dim dt As New DataTable()
+            adapter.Fill(dt)
+
+            Teacher_List_DataGridView.DataSource = dt
+
+            ' ── Hide internal ID columns ──
+            If Teacher_List_DataGridView.Columns.Contains("AccountID") Then
+                Teacher_List_DataGridView.Columns("AccountID").Visible = False
+            End If
+            If Teacher_List_DataGridView.Columns.Contains("ProfID") Then
+                Teacher_List_DataGridView.Columns("ProfID").Visible = False
+            End If
+
+            ' ── Friendly column headers ──
+            If Teacher_List_DataGridView.Columns.Contains("FullName") Then
+                Teacher_List_DataGridView.Columns("FullName").HeaderText = "Full Name"
+            End If
+            If Teacher_List_DataGridView.Columns.Contains("Gender") Then
+                Teacher_List_DataGridView.Columns("Gender").HeaderText = "Gender"
+            End If
+
+            _teacherViewMode = "LIST"
+            Back_Button.Visible = False   ' Back button hidden in list view
+
+        Catch ex As Exception
+            MessageBox.Show("Error loading teacher data: " & ex.Message, _
+                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            If con.State = ConnectionState.Open Then con.Close()
+        End Try
+    End Sub
+
+#End Region
+
+    ' ════════════════════════════════════════════════════════════════════
+#Region "Teacher Panel - Data Loading (Subject Drill-Down View)"
+    ' ════════════════════════════════════════════════════════════════════
+
+    ''' <summary>
+    ''' Drill-down view: shows all subjects assigned to the clicked teacher,
+    ''' along with the section they teach each subject in.
+    ''' Back_Button becomes visible so user can return to list view.
+    ''' </summary>
+    Public Sub LoadTeacherSubjects(ByVal profId As Integer, ByVal teacherFullName As String)
+        Try
+            Connect_me()
+
+            Dim query As String = _
+                "SELECT " & _
+                "  sub.sub_code   AS SubjectCode, " & _
+                "  sub.sub_name   AS SubjectName, " & _
+                "  sec.section    AS Section " & _
+                "FROM profsectionsubject pss " & _
+                "INNER JOIN subject  sub ON pss.sub_id     = sub.sub_id " & _
+                "INNER JOIN section  sec ON pss.section_id = sec.section_id " & _
+                "WHERE pss.prof_id = ? " & _
+                "ORDER BY sec.section, sub.sub_code"
+
+            Dim cmd As New OdbcCommand(query, con)
+            cmd.Parameters.AddWithValue("@profId", profId)
+
+            Dim adapter As New OdbcDataAdapter(cmd)
+            Dim dt As New DataTable()
+            adapter.Fill(dt)
+
+            Teacher_List_DataGridView.DataSource = dt
+
+            ' ── Friendly column headers ──
+            If Teacher_List_DataGridView.Columns.Contains("SubjectCode") Then
+                Teacher_List_DataGridView.Columns("SubjectCode").HeaderText = "Subject Code"
+            End If
+            If Teacher_List_DataGridView.Columns.Contains("SubjectName") Then
+                Teacher_List_DataGridView.Columns("SubjectName").HeaderText = "Subject Name"
+            End If
+            If Teacher_List_DataGridView.Columns.Contains("Section") Then
+                Teacher_List_DataGridView.Columns("Section").HeaderText = "Section"
+            End If
+
+            _teacherViewMode = "SUBJECTS"
+            Back_Button.Visible = True   ' Show Back button in drill-down view
+
+        Catch ex As Exception
+            MessageBox.Show("Error loading teacher subjects: " & ex.Message, _
+                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            If con.State = ConnectionState.Open Then con.Close()
+        End Try
+    End Sub
+
+#End Region
+
+    ' ════════════════════════════════════════════════════════════════════
+#Region "Teacher Panel - Button Click Events"
+    ' ════════════════════════════════════════════════════════════════════
+
+    Private Sub Add_Teacher_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Add_Teacher_Button.Click
+        Dim addForm As New popUpFormAddTeacher()
+        addForm.ShowDialog()
+        LoadTeacherData(Search_Teacher_TextBox.Text.Trim())
+    End Sub
+
+    Private Sub Modify_Teacher_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Modify_Teacher_Button.Click
+        If Teacher_List_DataGridView.SelectedRows.Count = 0 Then
+            MessageBox.Show("Please select a teacher to modify.", "No Selection", _
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        If _teacherViewMode = "SUBJECTS" Then
+            MessageBox.Show("Please press Back to return to the teacher list before modifying.", _
+                            "Wrong View", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Return
+        End If
+
+        If Not SetSelectedTeacherId() Then Return
+
+        Dim modifyForm As New popUpFormModifyTeacher()
+        modifyForm.ShowDialog()
+        LoadTeacherData(Search_Teacher_TextBox.Text.Trim())
+    End Sub
+
+    Private Sub Delete_Teacher_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Delete_Teacher_Button.Click
+        If Teacher_List_DataGridView.SelectedRows.Count = 0 Then
+            MessageBox.Show("Please select a teacher to delete.", "No Selection", _
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        If _teacherViewMode = "SUBJECTS" Then
+            MessageBox.Show("Please press Back to return to the teacher list before deleting.", _
+                            "Wrong View", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Return
+        End If
+
+        If Not SetSelectedTeacherId() Then Return
+
+        Dim deleteForm As New popUpFormDeleteTeacher()
+        deleteForm.ShowDialog()
+        LoadTeacherData(Search_Teacher_TextBox.Text.Trim())
+    End Sub
+
+    Private Sub Assign_Class_To_Teacher_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Assign_Class_To_Teacher_Button.Click
+        Dim assignForm As New popUpFormAssignSubjectToTeacher()
+        assignForm.ShowDialog()
+    End Sub
+
+    ''' <summary>
+    ''' Returns from the subject drill-down back to the default teacher list view.
+    ''' </summary>
+    Private Sub Back_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Back_Button.Click
+        LoadTeacherData(Search_Teacher_TextBox.Text.Trim())
+    End Sub
+
+#End Region
+
+    ' ════════════════════════════════════════════════════════════════════
+#Region "Teacher Panel - Search"
+    ' ════════════════════════════════════════════════════════════════════
+
+    Private Sub Search_Teacher_TextBox_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Search_Teacher_TextBox.TextChanged
+        ' Only search in list mode — searching in subject view would be confusing
+        If _teacherViewMode = "LIST" Then
+            LoadTeacherData(Search_Teacher_TextBox.Text.Trim())
+        End If
+    End Sub
+
+#End Region
+
+    ' ════════════════════════════════════════════════════════════════════
+#Region "Teacher Panel - DataGridView Click (Drill-Down to Subjects)"
+    ' ════════════════════════════════════════════════════════════════════
+
+    ''' <summary>
+    ''' Single-click on a teacher row in LIST mode loads that teacher's assigned subjects.
+    ''' Clicking rows in SUBJECTS mode does nothing extra.
+    ''' Uses the Teacher_List_DataGridView which is aliased as DataGridView1 in your form.
+    ''' </summary>
+    Private Sub DataGridView1_CellClick(ByVal sender As System.Object, _
+                                        ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) _
+        Handles Teacher_List_DataGridView.CellClick
+
+        ' Ignore header row clicks and clicks while already in subject view
+        If e.RowIndex < 0 Then Return
+        If _teacherViewMode = "SUBJECTS" Then Return
+
+        Try
+            Dim selectedRow As DataGridViewRow = Teacher_List_DataGridView.Rows(e.RowIndex)
+
+            Dim rawProfId As Object = selectedRow.Cells("ProfID").Value
+            Dim rawAccId As Object = selectedRow.Cells("AccountID").Value
+            Dim rawName As Object = selectedRow.Cells("FullName").Value
+
+            If rawProfId Is Nothing OrElse IsDBNull(rawProfId) Then Return
+            If rawAccId Is Nothing OrElse IsDBNull(rawAccId) Then Return
+
+            SelectedTeacherProfId = Convert.ToInt32(rawProfId)
+            SelectedTeacherAccId = Convert.ToInt32(rawAccId)
+
+            Dim fullName As String = "Unknown Teacher"
+            If rawName IsNot Nothing AndAlso Not IsDBNull(rawName) Then
+                fullName = rawName.ToString()
+            End If
+
+            LoadTeacherSubjects(SelectedTeacherProfId, fullName)
+
+        Catch ex As Exception
+            MessageBox.Show("Error reading selected teacher: " & ex.Message, _
+                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+#End Region
+
+    ' ════════════════════════════════════════════════════════════════════
+#Region "Teacher Panel - Set Selected Teacher ID Helper"
+    ' ════════════════════════════════════════════════════════════════════
+
+    ''' <summary>
+    ''' Reads ProfID and AccountID from the selected teacher row.
+    ''' Stores them in shared state for popup forms to consume.
+    ''' Returns False if IDs cannot be read.
+    ''' </summary>
+    Private Function SetSelectedTeacherId() As Boolean
+        Try
+            Dim selectedRow As DataGridViewRow = Teacher_List_DataGridView.SelectedRows(0)
+            Dim rawAccId As Object = selectedRow.Cells("AccountID").Value
+            Dim rawProfId As Object = selectedRow.Cells("ProfID").Value
+
+            If rawAccId Is Nothing OrElse IsDBNull(rawAccId) Then
+                MessageBox.Show("Could not retrieve account ID. Please re-select the teacher.", _
+                                "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return False
+            End If
+
+            If rawProfId Is Nothing OrElse IsDBNull(rawProfId) Then
+                MessageBox.Show("Could not retrieve professor ID. Please re-select the teacher.", _
+                                "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return False
+            End If
+
+            SelectedTeacherAccId = Convert.ToInt32(rawAccId)
+            SelectedTeacherProfId = Convert.ToInt32(rawProfId)
+            Return True
+
+        Catch ex As Exception
+            MessageBox.Show("Error reading selected teacher: " & ex.Message, _
+                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        End Try
+    End Function
+
 #End Region
 
 End Class
