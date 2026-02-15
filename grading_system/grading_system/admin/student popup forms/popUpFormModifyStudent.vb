@@ -7,14 +7,13 @@ Public Class popUpFormModifyStudent
     Private _selectedAccId As Integer = -1
     Private _selectedStudId As Integer = -1
 
-    ' Stores the ORIGINAL course and yr_lvl loaded from DB so we can detect a course change
+    ' Stores the ORIGINAL course, yr_lvl, and section_id loaded from DB
     Private _originalCourse As String = String.Empty
     Private _originalYrLvl As Integer = 0
-    Private _originalSection As String = String.Empty
+    Private _originalSectionId As Integer = 0
+    Private _originalSectionName As String = String.Empty
 
     ' Flag: TRUE while we are programmatically populating fields.
-    ' Prevents CourseComboBox_SelectedIndexChanged from firing section-reassignment logic
-    ' when we are just loading data into the form.
     Private _isLoading As Boolean = False
 #End Region
 
@@ -25,10 +24,6 @@ Public Class popUpFormModifyStudent
         LoadAllStudents()
     End Sub
 
-    ''' <summary>
-    ''' Populates all three ComboBoxes with their fixed option lists.
-    ''' DropDownStyle = DropDownList so users cannot type free text.
-    ''' </summary>
     Private Sub InitializeComboBoxes()
         ' --- Gender ---
         Modify_Student_Gender_ComboBox.Items.Clear()
@@ -54,17 +49,8 @@ Public Class popUpFormModifyStudent
         Modify_Student_Course_ComboBox.Items.Add("BSHRM")
         Modify_Student_Course_ComboBox.Items.Add("BSTM")
         Modify_Student_Course_ComboBox.DropDownStyle = ComboBoxStyle.DropDownList
-
-        ' --- Year Level (display only; not editable per requirements) ---
-        ' We still need the label/textbox to show it; no combo needed.
-        ' If a Modify_Student_YrLvl_Label or similar control exists, it will be
-        ' populated in LoadStudentDataIntoFields().
     End Sub
 
-    ''' <summary>
-    ''' Configures the DataGridView: read-only, two visible columns (FullName, Section),
-    ''' full-row selection, no auto-generated headers beyond what we define.
-    ''' </summary>
     Private Sub SetupDataGridView()
         With Modify_Student_DataGridView
             .ReadOnly = True
@@ -75,10 +61,9 @@ Public Class popUpFormModifyStudent
             .MultiSelect = False
             .AutoGenerateColumns = False
 
-            ' Clear any columns already set at design time
             .Columns.Clear()
 
-            ' Hidden column: acc_id — used internally to load correct student data
+            ' Hidden column: acc_id
             Dim colAccId As New DataGridViewTextBoxColumn()
             colAccId.Name = "colAccId"
             colAccId.HeaderText = "acc_id"
@@ -107,7 +92,7 @@ Public Class popUpFormModifyStudent
             Dim colSection As New DataGridViewTextBoxColumn()
             colSection.Name = "colSection"
             colSection.HeaderText = "Section"
-            colSection.DataPropertyName = "section"
+            colSection.DataPropertyName = "section_name"
             colSection.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
             colSection.FillWeight = 40
             .Columns.Add(colSection)
@@ -116,18 +101,12 @@ Public Class popUpFormModifyStudent
 #End Region
 
 #Region "DataGridView — Load and Search"
-    ''' <summary>
-    ''' Loads ALL students (fullname + section) when the search box is empty.
-    ''' Query targets the `student` table joined to `account` so we always have
-    ''' both stud_id and acc_id available for the update step.
-    ''' </summary>
     Private Sub LoadAllStudents()
         LoadStudents(String.Empty)
     End Sub
 
     ''' <summary>
-    ''' Core data-load routine.  When <paramref name="searchName"/> is empty it
-    ''' returns every student; otherwise it filters by first/last/middle name LIKE.
+    ''' Loads students with proper JOIN to get section_name from section table
     ''' </summary>
     Private Sub LoadStudents(ByVal searchName As String)
         Try
@@ -137,20 +116,20 @@ Public Class popUpFormModifyStudent
             Dim cmd As OdbcCommand
 
             If String.IsNullOrEmpty(searchName.Trim()) Then
-                ' No filter — return all students
                 query = "SELECT s.stud_id, s.acc_id, " & _
-                        "CONCAT(TRIM(s.firstname), ' ', TRIM(s.middlename), ' ', TRIM(s.lastname)) AS fullname, " & _
-                        "s.section " & _
+                        "CONCAT(TRIM(s.firstname), ' ', TRIM(IFNULL(s.middlename,'')), ' ', TRIM(s.lastname)) AS fullname, " & _
+                        "sec.section AS section_name " & _
                         "FROM student s " & _
+                        "LEFT JOIN section sec ON s.section_id = sec.section_id " & _
                         "WHERE s.role = 'student' " & _
                         "ORDER BY s.lastname, s.firstname"
                 cmd = New OdbcCommand(query, con)
             Else
-                ' Filter by any part of the name
                 query = "SELECT s.stud_id, s.acc_id, " & _
-                        "CONCAT(TRIM(s.firstname), ' ', TRIM(s.middlename), ' ', TRIM(s.lastname)) AS fullname, " & _
-                        "s.section " & _
+                        "CONCAT(TRIM(s.firstname), ' ', TRIM(IFNULL(s.middlename,'')), ' ', TRIM(s.lastname)) AS fullname, " & _
+                        "sec.section AS section_name " & _
                         "FROM student s " & _
+                        "LEFT JOIN section sec ON s.section_id = sec.section_id " & _
                         "WHERE s.role = 'student' " & _
                         "AND (s.firstname LIKE ? OR s.lastname LIKE ? OR s.middlename LIKE ?) " & _
                         "ORDER BY s.lastname, s.firstname"
@@ -175,26 +154,17 @@ Public Class popUpFormModifyStudent
         End Try
     End Sub
 
-    ''' <summary>
-    ''' Live search: fires on every keystroke in the search textbox.
-    ''' </summary>
     Private Sub Modify_Student_Search_Name_Textbox_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Modify_Student_Search_Name_Textbox.TextChanged
         LoadStudents(Modify_Student_Search_Name_Textbox.Text)
     End Sub
 #End Region
 
 #Region "DataGridView — Row Click"
-    ''' <summary>
-    ''' Fires when any cell in the DataGridView is clicked.
-    ''' Shows a confirmation pop-up, then loads the student's data into the form fields.
-    ''' </summary>
     Private Sub Modify_Student_DataGridView_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles Modify_Student_DataGridView.CellContentClick
-        ' Guard: ignore header row clicks
         If e.RowIndex < 0 Then Return
 
         Dim row As DataGridViewRow = Modify_Student_DataGridView.Rows(e.RowIndex)
 
-        ' Read the hidden IDs
         Dim accIdVal As Object = row.Cells("colAccId").Value
         Dim studIdVal As Object = row.Cells("colStudId").Value
         Dim fullNameVal As Object = row.Cells("colFullName").Value
@@ -207,7 +177,6 @@ Public Class popUpFormModifyStudent
 
         Dim fullName As String = If(fullNameVal IsNot Nothing, fullNameVal.ToString().Trim(), "this student")
 
-        ' Confirmation pop-up as required
         Dim confirm As DialogResult = MessageBox.Show( _
             "You are about to modify the record of:" & vbCrLf & vbCrLf & _
             fullName & vbCrLf & vbCrLf & _
@@ -218,27 +187,28 @@ Public Class popUpFormModifyStudent
 
         If confirm <> DialogResult.Yes Then Return
 
-        ' Store IDs
         _selectedAccId = Convert.ToInt32(accIdVal)
         _selectedStudId = If(studIdVal IsNot Nothing AndAlso Not IsDBNull(studIdVal), Convert.ToInt32(studIdVal), -1)
 
-        ' Populate fields from database
         LoadStudentDataIntoFields(_selectedAccId)
     End Sub
 #End Region
 
 #Region "Load Student Data Into Fields"
     ''' <summary>
-    ''' Fetches one student's full record from the `account` table (source of truth
-    ''' because of the trigger architecture) and populates all form controls.
-    ''' ComboBoxes are set programmatically — no manual selection needed.
+    ''' Loads student data from account table and gets section info from student table
     ''' </summary>
     Private Sub LoadStudentDataIntoFields(ByVal accId As Integer)
         Try
             Connect_me()
 
-            Dim query As String = "SELECT firstname, middlename, lastname, email, gender, course, yr_lvl, section " & _
-                                  "FROM account WHERE acc_id = ?"
+            ' Get data from account table and section_id from student table
+            Dim query As String = "SELECT a.firstname, a.middlename, a.lastname, a.email, " & _
+                                  "a.gender, a.course, a.yr_lvl, s.section_id, sec.section " & _
+                                  "FROM account a " & _
+                                  "LEFT JOIN student s ON a.acc_id = s.acc_id " & _
+                                  "LEFT JOIN section sec ON s.section_id = sec.section_id " & _
+                                  "WHERE a.acc_id = ?"
             Dim cmd As New OdbcCommand(query, con)
             cmd.Parameters.AddWithValue("@acc_id", accId)
 
@@ -254,7 +224,6 @@ Public Class popUpFormModifyStudent
 
             Dim row As DataRow = dt.Rows(0)
 
-            ' --- SET LOADING FLAG to suppress section-reassignment side-effect ---
             _isLoading = True
 
             ' Populate TextBoxes
@@ -263,12 +232,12 @@ Public Class popUpFormModifyStudent
             Modify_Student_Lastname_TextBox.Text = If(IsDBNull(row("lastname")), "", row("lastname").ToString().Trim())
             Modify_Student_Email_TextBox.Text = If(IsDBNull(row("email")), "", row("email").ToString().Trim())
 
-            ' Populate Gender ComboBox automatically
+            ' Populate Gender ComboBox
             Dim gender As String = If(IsDBNull(row("gender")), "", row("gender").ToString().ToLower().Trim())
             Dim genderIdx As Integer = Modify_Student_Gender_ComboBox.FindStringExact(gender)
             Modify_Student_Gender_ComboBox.SelectedIndex = If(genderIdx >= 0, genderIdx, -1)
 
-            ' Populate Course ComboBox automatically
+            ' Populate Course ComboBox
             Dim course As String = If(IsDBNull(row("course")), "", row("course").ToString().Trim())
             Dim courseIdx As Integer = Modify_Student_Course_ComboBox.FindStringExact(course)
             Modify_Student_Course_ComboBox.SelectedIndex = If(courseIdx >= 0, courseIdx, -1)
@@ -276,9 +245,9 @@ Public Class popUpFormModifyStudent
             ' Capture originals for change-detection
             _originalCourse = course
             _originalYrLvl = If(IsDBNull(row("yr_lvl")), 0, Convert.ToInt32(row("yr_lvl")))
-            _originalSection = If(IsDBNull(row("section")), "", row("section").ToString().Trim())
+            _originalSectionId = If(IsDBNull(row("section_id")), 0, Convert.ToInt32(row("section_id")))
+            _originalSectionName = If(IsDBNull(row("section")), "", row("section").ToString().Trim())
 
-            ' --- RELEASE LOADING FLAG ---
             _isLoading = False
 
         Catch ex As Exception
@@ -292,33 +261,18 @@ Public Class popUpFormModifyStudent
 #End Region
 
 #Region "Course ComboBox Change — Section Reassignment"
-    ''' <summary>
-    ''' Fires when the user changes the Course ComboBox AFTER data has been loaded.
-    ''' Skipped entirely during the programmatic load phase (_isLoading = True).
-    ''' When the course actually changes from the original, the student will be
-    ''' removed from their old section and assigned to an available slot in the
-    ''' new course's sections when Modify_Button is clicked.
-    ''' (We only preview the new section name here — actual DB write happens in ModifyStudent.)
-    ''' </summary>
     Private Sub Modify_Student_Course_ComboBox_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Modify_Student_Course_ComboBox.SelectedIndexChanged
-        ' Skip if we are in the middle of loading data programmatically
         If _isLoading Then Return
-
-        ' Also skip if no student has been selected yet
         If _selectedAccId = -1 Then Return
-
-        ' Skip if combo has no valid selection
         If Modify_Student_Course_ComboBox.SelectedIndex = -1 Then Return
 
         Dim newCourse As String = Modify_Student_Course_ComboBox.SelectedItem.ToString()
 
-        ' If course hasn't actually changed, nothing to preview
         If newCourse = _originalCourse Then Return
 
-        ' Inform the user what will happen on save
         MessageBox.Show("Course changed from '" & _originalCourse & "' to '" & newCourse & "'." & vbCrLf & vbCrLf & _
                         "When you click Modify, the student will be:" & vbCrLf & _
-                        "  • Removed from section: " & _originalSection & vbCrLf & _
+                        "  • Removed from section: " & _originalSectionName & vbCrLf & _
                         "  • Assigned to an available section in: " & newCourse, _
                         "Course Change Notice", MessageBoxButtons.OK, MessageBoxIcon.Information)
     End Sub
@@ -337,10 +291,6 @@ Public Class popUpFormModifyStudent
         ModifyStudent()
     End Sub
 
-    ''' <summary>
-    ''' Validates all editable fields before saving.
-    ''' Year level is NOT modified per requirements so it is not checked here.
-    ''' </summary>
     Private Function ValidateModifyFields() As Boolean
         If String.IsNullOrEmpty(Modify_Student_Lastname_TextBox.Text.Trim()) Then
             MessageBox.Show("Please enter student's last name.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -391,13 +341,7 @@ Public Class popUpFormModifyStudent
     End Function
 
     ''' <summary>
-    ''' Main update flow:
-    ''' 1. Determine if course changed.
-    ''' 2. If course changed → find/create a new section slot.
-    ''' 3. Update `account` table (the trigger only fires on INSERT, not UPDATE,
-    '''    so we must also update `student` directly).
-    ''' 4. Update `student` table.
-    ''' 5. Check for duplicate email (excluding this student's own record).
+    ''' Main update flow using section_id instead of section name
     ''' </summary>
     Private Sub ModifyStudent()
         Try
@@ -410,27 +354,29 @@ Public Class popUpFormModifyStudent
             Dim newEmail As String = Modify_Student_Email_TextBox.Text.Trim()
             Dim newGender As String = Modify_Student_Gender_ComboBox.SelectedItem.ToString()
 
-            ' Check for duplicate email (must exclude the current student's own record)
+            ' Check for duplicate email
             If EmailExistsForOther(newEmail, _selectedAccId) Then
                 MessageBox.Show("This email address is already registered to another account.", _
                                 "Duplicate Email", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Return
             End If
 
-            ' Determine the section to assign
-            Dim finalSection As String = _originalSection
+            ' Determine the section_id to assign
+            Dim finalSectionId As Integer = _originalSectionId
+            Dim finalSectionName As String = _originalSectionName
 
             If newCourse <> _originalCourse Then
                 ' Course has changed → find/create section in the new course
-                Dim newSection As String = GetOrCreateSection(newCourse, _originalYrLvl)
+                Dim newSectionId As Integer = GetOrCreateSectionId(newCourse, _originalYrLvl)
 
-                If String.IsNullOrEmpty(newSection) Then
+                If newSectionId = 0 Then
                     MessageBox.Show("Failed to assign a section for the new course.", _
                                     "Section Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     Return
                 End If
 
-                finalSection = newSection
+                finalSectionId = newSectionId
+                finalSectionName = GetSectionNameById(newSectionId)
             End If
 
             ' --- UPDATE account table ---
@@ -447,7 +393,7 @@ Public Class popUpFormModifyStudent
             accountCmd.Parameters.AddWithValue("@email", newEmail)
             accountCmd.Parameters.AddWithValue("@gender", newGender)
             accountCmd.Parameters.AddWithValue("@course", newCourse)
-            accountCmd.Parameters.AddWithValue("@section", finalSection)
+            accountCmd.Parameters.AddWithValue("@section", finalSectionName)
             accountCmd.Parameters.AddWithValue("@acc_id", _selectedAccId)
 
             Dim accountRows As Integer = accountCmd.ExecuteNonQuery()
@@ -458,12 +404,11 @@ Public Class popUpFormModifyStudent
                 Return
             End If
 
-            ' --- UPDATE student table (trigger does NOT fire on UPDATE) ---
-            ' Use acc_id as the link because stud_id may be -1 for legacy rows
+            ' --- UPDATE student table with section_id ---
             Dim updateStudentQuery As String = _
                 "UPDATE student SET " & _
                 "firstname = ?, middlename = ?, lastname = ?, " & _
-                "email = ?, gender = ?, course = ?, section = ? " & _
+                "email = ?, gender = ?, course = ?, section_id = ? " & _
                 "WHERE acc_id = ?"
 
             Dim studentCmd As New OdbcCommand(updateStudentQuery, con)
@@ -473,7 +418,7 @@ Public Class popUpFormModifyStudent
             studentCmd.Parameters.AddWithValue("@email", newEmail)
             studentCmd.Parameters.AddWithValue("@gender", newGender)
             studentCmd.Parameters.AddWithValue("@course", newCourse)
-            studentCmd.Parameters.AddWithValue("@section", finalSection)
+            studentCmd.Parameters.AddWithValue("@section_id", finalSectionId)
             studentCmd.Parameters.AddWithValue("@acc_id", _selectedAccId)
 
             studentCmd.ExecuteNonQuery()
@@ -483,24 +428,24 @@ Public Class popUpFormModifyStudent
                                        "Name: " & newFirstname & " " & newLastname & vbCrLf & _
                                        "Email: " & newEmail & vbCrLf & _
                                        "Course: " & newCourse & vbCrLf & _
-                                       "Section: " & finalSection
+                                       "Section: " & finalSectionName
 
             If newCourse <> _originalCourse Then
                 successMsg &= vbCrLf & vbCrLf & _
-                              "(Moved from section: " & _originalSection & ")"
+                              "(Moved from section: " & _originalSectionName & ")"
             End If
 
             MessageBox.Show(successMsg, "Update Successful", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-            ' Refresh the DataGridView and reset the form fields
+            ' Refresh and reset
             ClearFields()
             LoadStudents(Modify_Student_Search_Name_Textbox.Text)
 
-            ' Reset selection tracking
             _selectedAccId = -1
             _selectedStudId = -1
             _originalCourse = String.Empty
-            _originalSection = String.Empty
+            _originalSectionName = String.Empty
+            _originalSectionId = 0
             _originalYrLvl = 0
 
         Catch ex As Exception
@@ -513,11 +458,6 @@ Public Class popUpFormModifyStudent
 #End Region
 
 #Region "Helper — Email Duplicate Check"
-    ''' <summary>
-    ''' Returns TRUE if <paramref name="email"/> already exists in `account`
-    ''' for a record OTHER than <paramref name="currentAccId"/>.
-    ''' This prevents false positives when a student keeps the same email.
-    ''' </summary>
     Private Function EmailExistsForOther(ByVal email As String, ByVal currentAccId As Integer) As Boolean
         Try
             Dim query As String = "SELECT COUNT(*) FROM account WHERE email = ? AND acc_id <> ?"
@@ -535,12 +475,9 @@ Public Class popUpFormModifyStudent
 
 #Region "Helper — Section Assignment"
     ''' <summary>
-    ''' Identical logic to popUpFormAddStudent.GetOrCreateSection().
-    ''' Finds a section for <paramref name="course"/> + <paramref name="yearLevel"/>
-    ''' with fewer than 45 students, or creates a new one.
-    ''' Returns the section name string, or String.Empty on failure.
+    ''' Returns section_id instead of section name
     ''' </summary>
-    Private Function GetOrCreateSection(ByVal course As String, ByVal yearLevel As Integer) As String
+    Private Function GetOrCreateSectionId(ByVal course As String, ByVal yearLevel As Integer) As Integer
         Try
             Dim sectionNumber As Integer = 1
             Dim maxStudentsPerSection As Integer = 45
@@ -548,7 +485,7 @@ Public Class popUpFormModifyStudent
             Do While sectionNumber <= 100
                 Dim sectionName As String = course & " " & yearLevel.ToString() & "-" & sectionNumber.ToString()
 
-                ' Does this section already exist?
+                ' Check if section exists
                 Dim checkQuery As String = "SELECT section_id FROM section WHERE section = ? AND year_lvl = ?"
                 Dim checkCmd As New OdbcCommand(checkQuery, con)
                 checkCmd.Parameters.AddWithValue("@section", sectionName)
@@ -556,35 +493,72 @@ Public Class popUpFormModifyStudent
 
                 Dim result As Object = checkCmd.ExecuteScalar()
 
+                Dim currentSectionId As Integer = 0
+
                 If result Is Nothing OrElse IsDBNull(result) Then
-                    ' Section does not exist — create it and return its name
+                    ' Section doesn't exist, create it
                     Dim createQuery As String = "INSERT INTO section (year_lvl, section) VALUES (?, ?)"
                     Dim createCmd As New OdbcCommand(createQuery, con)
                     createCmd.Parameters.AddWithValue("@year_lvl", yearLevel)
                     createCmd.Parameters.AddWithValue("@section", sectionName)
                     createCmd.ExecuteNonQuery()
-                    Return sectionName
-                End If
 
-                ' Section exists — check student count
-                Dim countQuery As String = "SELECT COUNT(*) FROM student WHERE section = ?"
-                Dim countCmd As New OdbcCommand(countQuery, con)
-                countCmd.Parameters.AddWithValue("@section", sectionName)
-                Dim studentCount As Integer = Convert.ToInt32(countCmd.ExecuteScalar())
+                    ' Get the newly created section_id
+                    Dim getIdQuery As String = "SELECT section_id FROM section WHERE section = ? AND year_lvl = ?"
+                    Dim getIdCmd As New OdbcCommand(getIdQuery, con)
+                    getIdCmd.Parameters.AddWithValue("@section", sectionName)
+                    getIdCmd.Parameters.AddWithValue("@year_lvl", yearLevel)
+                    Dim newResult As Object = getIdCmd.ExecuteScalar()
 
-                If studentCount < maxStudentsPerSection Then
-                    Return sectionName
+                    If newResult IsNot Nothing AndAlso Not IsDBNull(newResult) Then
+                        Return Convert.ToInt32(newResult)
+                    End If
+                Else
+                    currentSectionId = Convert.ToInt32(result)
+
+                    ' Check student count using section_id
+                    Dim countQuery As String = "SELECT COUNT(*) FROM student WHERE section_id = ?"
+                    Dim countCmd As New OdbcCommand(countQuery, con)
+                    countCmd.Parameters.AddWithValue("@section_id", currentSectionId)
+
+                    Dim studentCount As Integer = Convert.ToInt32(countCmd.ExecuteScalar())
+
+                    If studentCount < maxStudentsPerSection Then
+                        Return currentSectionId
+                    End If
                 End If
 
                 sectionNumber += 1
             Loop
 
-            Return String.Empty
+            Return 0
 
         Catch ex As Exception
             MessageBox.Show("Error managing section: " & ex.Message, "Error", _
                             MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Return String.Empty
+            Return 0
+        End Try
+    End Function
+
+    ''' <summary>
+    ''' Gets section name by section_id
+    ''' </summary>
+    Private Function GetSectionNameById(ByVal sectionId As Integer) As String
+        Try
+            Dim query As String = "SELECT section FROM section WHERE section_id = ?"
+            Dim cmd As New OdbcCommand(query, con)
+            cmd.Parameters.AddWithValue("@section_id", sectionId)
+
+            Dim result As Object = cmd.ExecuteScalar()
+
+            If result IsNot Nothing AndAlso Not IsDBNull(result) Then
+                Return result.ToString()
+            End If
+
+            Return ""
+
+        Catch ex As Exception
+            Return ""
         End Try
     End Function
 #End Region
@@ -596,9 +570,6 @@ Public Class popUpFormModifyStudent
 #End Region
 
 #Region "Clear Fields"
-    ''' <summary>
-    ''' Resets all input controls to their default/empty state.
-    ''' </summary>
     Private Sub ClearFields()
         Modify_Student_Lastname_TextBox.Clear()
         Modify_Student_Firstname_TextBox.Clear()
@@ -609,7 +580,7 @@ Public Class popUpFormModifyStudent
     End Sub
 #End Region
 
-#Region "Unused Event Stubs (required by form designer)"
+#Region "Unused Event Stubs"
     Private Sub Modify_Student_Email_TextBox_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Modify_Student_Email_TextBox.TextChanged
     End Sub
 

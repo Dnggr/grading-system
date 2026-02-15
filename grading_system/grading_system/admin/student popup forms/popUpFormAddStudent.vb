@@ -117,55 +117,78 @@ Public Class popUpFormAddStudent
 #End Region
 
 #Region "Student Registration"
-    ''' <summary>
-    ''' Main registration flow. Opens ONE connection for all sub-operations.
-    ''' The DB trigger trg_student_to_account auto-populates the student table on account INSERT.
-    ''' </summary>
+    '''
+    ''' REGISTRATION FLOW:
+    '''   STEP 1 — Lookup or create a section in the `section` table based on
+    '''            course + year_level. Returns section_id AND section name.
+    '''   STEP 2 — Insert into `account` (includes section name as plain text).
+    '''            The DB trigger `insert_student_if_role_student` fires automatically
+    '''            and inserts a matching row into `student` (without section_id).
+    '''   STEP 3 — Update `student.section_id` using the acc_id returned in Step 2.
+    '''            This links the student row to the correct section row.
+    '''
     Private Sub RegisterStudent()
         Try
             Connect_me()
 
+            If con.State <> ConnectionState.Open Then
+                MessageBox.Show("Database connection failed. Please try again.", _
+                                "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End If
+
+            ' Guard: duplicate email check
             If EmailExists(Student_Email_TextBox.Text.Trim()) Then
                 MessageBox.Show("This email address is already registered in the system.", _
                                 "Duplicate Email", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Return
             End If
 
-            Dim sectionName As String = GetOrCreateSection()
+            ' ── STEP 1: section table → get or create section, return section_id ──
+            Dim sectionId As Integer = 0
+            Dim sectionName As String = ""
 
-            If String.IsNullOrEmpty(sectionName) Then
-                MessageBox.Show("Failed to assign section to student.", _
-                                "Registration Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            If Not GetOrCreateSection(sectionId, sectionName) Then
+                MessageBox.Show("Failed to assign a section to the student.", _
+                                "Section Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Return
             End If
 
+            ' ── Hash the default password "12345" ──
             Dim hashedPassword As String = HashPassword("12345")
-
             If String.IsNullOrEmpty(hashedPassword) Then
                 MessageBox.Show("Failed to generate secure password.", _
                                 "Registration Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Return
             End If
 
-            Dim accountInserted As Boolean = InsertAccountWithTrigger(hashedPassword, sectionName)
+            ' ── STEP 2: Insert into account; trigger auto-inserts into student ──
+            '    The account.section column stores the human-readable section name.
+            Dim newAccId As Integer = InsertAccountWithTrigger(hashedPassword, sectionName)
+            If newAccId = 0 Then
+                MessageBox.Show("Failed to register student account.", _
+                                "Registration Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End If
 
-            If accountInserted Then
-                ' ✅ FIXED: Removed the "Note: Password is securely hashed" line
+            ' ── STEP 3: Update student.section_id (trigger could not do this) ──
+            If UpdateStudentSectionId(newAccId, sectionId) Then
                 MessageBox.Show("Student registered successfully!" & vbCrLf & vbCrLf & _
-                                "Email/Username: " & Student_Email_TextBox.Text.Trim() & vbCrLf & _
-                                "Default Password: 12345" & vbCrLf & _
-                                "Section: " & sectionName, _
+                                "Email / Username : " & Student_Email_TextBox.Text.Trim() & vbCrLf & _
+                                "Default Password : 12345" & vbCrLf & _
+                                "Section          : " & sectionName, _
                                 "Registration Successful", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 ClearFields()
                 Me.Close()
             Else
-                MessageBox.Show("Failed to register student.", "Registration Error", _
-                                MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBox.Show("Student account was created but the section assignment failed." & vbCrLf & _
+                                "Please update the student's section manually.", _
+                                "Partial Success", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             End If
 
         Catch ex As Exception
-            MessageBox.Show("Error during registration: " & ex.Message, "Error", _
-                            MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Unexpected error during registration:" & vbCrLf & ex.Message, _
+                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
             If con.State = ConnectionState.Open Then
                 con.Close()
@@ -173,13 +196,14 @@ Public Class popUpFormAddStudent
         End Try
     End Sub
 
+    ' -----------------------------------------------------------------------
+    ' Checks whether an email is already in use in the account table.
+    ' -----------------------------------------------------------------------
     Private Function EmailExists(ByVal email As String) As Boolean
         Try
-            Dim query As String = "SELECT COUNT(*) FROM account WHERE email = ?"
-            Dim cmd As New OdbcCommand(query, con)
+            Dim cmd As New OdbcCommand("SELECT COUNT(*) FROM account WHERE email = ?", con)
             cmd.Parameters.AddWithValue("@email", email)
-            Dim count As Integer = Convert.ToInt32(cmd.ExecuteScalar())
-            Return count > 0
+            Return Convert.ToInt32(cmd.ExecuteScalar()) > 0
         Catch ex As Exception
             MessageBox.Show("Error checking email: " & ex.Message, "Error", _
                             MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -187,79 +211,167 @@ Public Class popUpFormAddStudent
         End Try
     End Function
 
-    Private Function InsertAccountWithTrigger(ByVal hashedPassword As String, ByVal sectionName As String) As Boolean
+    ' -----------------------------------------------------------------------
+    ' STEP 2 — Inserts one row into `account`.
+    ' The database trigger `insert_student_if_role_student` fires AFTER this
+    ' INSERT and creates a matching row in `student` (section_id is NULL at
+    ' that point — it gets filled in Step 3).
+    ' Returns the new acc_id, or 0 on failure.
+    ' -----------------------------------------------------------------------
+    Private Function InsertAccountWithTrigger(ByVal hashedPassword As String, _
+                                              ByVal sectionName As String) As Integer
         Try
-            Dim query As String = "INSERT INTO account " & _
-                                  "(email, pword, role, firstname, middlename, lastname, section, gender, course, yr_lvl) " & _
-                                  "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+            Dim insertSql As String = _
+                "INSERT INTO account " & _
+                "  (email, pword, role, firstname, middlename, lastname, section, gender, course, yr_lvl) " & _
+                "VALUES (?, ?, 'student', ?, ?, ?, ?, ?, ?, ?)"
 
-            Dim cmd As New OdbcCommand(query, con)
+            Dim cmd As New OdbcCommand(insertSql, con)
             cmd.Parameters.AddWithValue("@email", Student_Email_TextBox.Text.Trim())
             cmd.Parameters.AddWithValue("@pword", hashedPassword)
-            cmd.Parameters.AddWithValue("@role", "student")
             cmd.Parameters.AddWithValue("@firstname", Student_Firstname_TextBox.Text.Trim())
             cmd.Parameters.AddWithValue("@middlename", Student_Middlename_TextBox.Text.Trim())
             cmd.Parameters.AddWithValue("@lastname", Student_Lastname_TextBox.Text.Trim())
-            cmd.Parameters.AddWithValue("@section", sectionName)
+            cmd.Parameters.AddWithValue("@section", sectionName)   ' human-readable, e.g. "BSIT 1-1"
             cmd.Parameters.AddWithValue("@gender", Student_Gender_ComboBox.SelectedItem.ToString())
             cmd.Parameters.AddWithValue("@course", Student_Course_ComboBox.SelectedItem.ToString())
             cmd.Parameters.AddWithValue("@yr_lvl", Convert.ToInt32(Student_YrLvl_ComboBox.SelectedItem.ToString()))
 
-            Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
-            Return rowsAffected > 0
+            If cmd.ExecuteNonQuery() > 0 Then
+                ' Use LAST_INSERT_ID() — safest way to get the auto-increment value
+                Dim idCmd As New OdbcCommand("SELECT LAST_INSERT_ID()", con)
+                Dim result As Object = idCmd.ExecuteScalar()
+                If result IsNot Nothing AndAlso Not IsDBNull(result) Then
+                    Return Convert.ToInt32(result)
+                End If
+            End If
+
+            Return 0
 
         Catch ex As Exception
             MessageBox.Show("Error inserting account record: " & ex.Message, "Error", _
+                            MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return 0
+        End Try
+    End Function
+
+    ' -----------------------------------------------------------------------
+    ' STEP 3 — Sets student.section_id for the row the trigger just created.
+    ' Matched by acc_id because the trigger copied it from account.
+    ' -----------------------------------------------------------------------
+    Private Function UpdateStudentSectionId(ByVal accId As Integer, _
+                                            ByVal sectionId As Integer) As Boolean
+        Try
+            Dim cmd As New OdbcCommand("UPDATE student SET section_id = ? WHERE acc_id = ?", con)
+            cmd.Parameters.AddWithValue("@section_id", sectionId)
+            cmd.Parameters.AddWithValue("@acc_id", accId)
+            Return cmd.ExecuteNonQuery() > 0
+        Catch ex As Exception
+            MessageBox.Show("Error updating student section: " & ex.Message, "Error", _
                             MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return False
         End Try
     End Function
 
-    Private Function GetOrCreateSection() As String
+    ' -----------------------------------------------------------------------
+    ' STEP 1 — Finds or creates a section row in the `section` table.
+    '
+    ' Logic:
+    '   • Build the section name from course + year_level + section number
+    '     (e.g. "BSIT 1-1", "BSIT 1-2", …).
+    '   • If a matching section already exists AND has fewer than
+    '     maxStudentsPerSection students, reuse it.
+    '   • Otherwise try the next section number.
+    '   • If the section does not exist at all, create it and return it.
+    '
+    ' Uses ByRef parameters so both section_id AND section name are returned
+    ' in one call (VB 2008 does not have tuples).
+    ' -----------------------------------------------------------------------
+    Private Function GetOrCreateSection(ByRef outSectionId As Integer, _
+                                        ByRef outSectionName As String) As Boolean
+        Const maxStudentsPerSection As Integer = 45
+
         Try
             Dim course As String = Student_Course_ComboBox.SelectedItem.ToString()
             Dim yearLevel As Integer = Convert.ToInt32(Student_YrLvl_ComboBox.SelectedItem.ToString())
+
             Dim sectionNumber As Integer = 1
-            Dim maxStudentsPerSection As Integer = 45
 
             Do While sectionNumber <= 100
+
                 Dim sectionName As String = course & " " & yearLevel.ToString() & "-" & sectionNumber.ToString()
 
-                Dim checkQuery As String = "SELECT section_id FROM section WHERE section = ? AND year_lvl = ?"
-                Dim checkCmd As New OdbcCommand(checkQuery, con)
+                ' ── Does this section already exist in the section table? ──
+                Dim checkCmd As New OdbcCommand( _
+                    "SELECT section_id FROM section WHERE section = ? AND year_lvl = ?", con)
                 checkCmd.Parameters.AddWithValue("@section", sectionName)
                 checkCmd.Parameters.AddWithValue("@year_lvl", yearLevel)
 
-                Dim result As Object = checkCmd.ExecuteScalar()
+                Dim checkResult As Object = checkCmd.ExecuteScalar()
 
-                If result Is Nothing OrElse IsDBNull(result) Then
-                    Dim createQuery As String = "INSERT INTO section (year_lvl, section) VALUES (?, ?)"
-                    Dim createCmd As New OdbcCommand(createQuery, con)
+                If checkResult Is Nothing OrElse IsDBNull(checkResult) Then
+                    ' Section does not exist — create it now.
+                    Dim createCmd As New OdbcCommand( _
+                        "INSERT INTO section (year_lvl, section) VALUES (?, ?)", con)
                     createCmd.Parameters.AddWithValue("@year_lvl", yearLevel)
                     createCmd.Parameters.AddWithValue("@section", sectionName)
                     createCmd.ExecuteNonQuery()
-                    Return sectionName
-                End If
 
-                Dim countQuery As String = "SELECT COUNT(*) FROM student WHERE section = ?"
-                Dim countCmd As New OdbcCommand(countQuery, con)
-                countCmd.Parameters.AddWithValue("@section", sectionName)
+                    ' Retrieve the new section_id via LAST_INSERT_ID() — avoids race conditions.
+                    Dim newIdCmd As New OdbcCommand("SELECT LAST_INSERT_ID()", con)
+                    Dim newIdResult As Object = newIdCmd.ExecuteScalar()
 
-                Dim studentCount As Integer = Convert.ToInt32(countCmd.ExecuteScalar())
+                    If newIdResult IsNot Nothing AndAlso Not IsDBNull(newIdResult) Then
+                        outSectionId = Convert.ToInt32(newIdResult)
+                        outSectionName = sectionName
+                        Return True
+                    End If
 
-                If studentCount < maxStudentsPerSection Then
-                    Return sectionName
+                    ' Fallback: re-query by name if LAST_INSERT_ID returned nothing
+                    Dim fallbackCmd As New OdbcCommand( _
+                        "SELECT section_id FROM section WHERE section = ? AND year_lvl = ?", con)
+                    fallbackCmd.Parameters.AddWithValue("@section", sectionName)
+                    fallbackCmd.Parameters.AddWithValue("@year_lvl", yearLevel)
+                    Dim fallbackResult As Object = fallbackCmd.ExecuteScalar()
+
+                    If fallbackResult IsNot Nothing AndAlso Not IsDBNull(fallbackResult) Then
+                        outSectionId = Convert.ToInt32(fallbackResult)
+                        outSectionName = sectionName
+                        Return True
+                    End If
+
+                Else
+                    ' Section exists — check how many students are already in it.
+                    Dim existingSectionId As Integer = Convert.ToInt32(checkResult)
+
+                    Dim countCmd As New OdbcCommand( _
+                        "SELECT COUNT(*) FROM student WHERE section_id = ?", con)
+                    countCmd.Parameters.AddWithValue("@section_id", existingSectionId)
+                    Dim studentCount As Integer = Convert.ToInt32(countCmd.ExecuteScalar())
+
+                    If studentCount < maxStudentsPerSection Then
+                        ' Section has room — use it.
+                        outSectionId = existingSectionId
+                        outSectionName = sectionName
+                        Return True
+                    End If
+                    ' Section is full — loop to try next section number.
                 End If
 
                 sectionNumber += 1
             Loop
 
-            Return ""
+            ' All 100 section numbers exhausted (extremely unlikely).
+            outSectionId = 0
+            outSectionName = ""
+            Return False
 
         Catch ex As Exception
             MessageBox.Show("Error managing section: " & ex.Message, "Error", _
                             MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Return ""
+            outSectionId = 0
+            outSectionName = ""
+            Return False
         End Try
     End Function
 
@@ -272,6 +384,25 @@ Public Class popUpFormAddStudent
         Student_Course_ComboBox.SelectedIndex = -1
         Student_YrLvl_ComboBox.SelectedIndex = -1
     End Sub
+#End Region
+
+#Region "Password Hashing"
+    Private Function HashPassword(ByVal password As String) As String
+        Try
+            Dim md5 As System.Security.Cryptography.MD5 = System.Security.Cryptography.MD5.Create()
+            Dim data As Byte() = md5.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password))
+            Dim sb As New System.Text.StringBuilder()
+            Dim i As Integer
+            For i = 0 To data.Length - 1
+                sb.Append(data(i).ToString("x2"))
+            Next i
+            Return sb.ToString()
+        Catch ex As Exception
+            MessageBox.Show("Error hashing password: " & ex.Message, "Error", _
+                            MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return ""
+        End Try
+    End Function
 #End Region
 
 #Region "TextBox and ComboBox Change Events"

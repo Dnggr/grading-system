@@ -4,10 +4,11 @@ Public Class Admin_Form
 
 #Region "Shared State - Selected Student ID for Modify/Delete popups"
     ''' <summary>
-    ''' Stores the currently selected student's stud_id.
-    ''' popUpFormModifyStudent and popUpFormDeleteStudent should read this value.
+    ''' Stores the currently selected student's acc_id and stud_id.
+    ''' popUpFormModifyStudent and popUpFormDeleteStudent should read these values.
     ''' </summary>
-    Public Shared SelectedStudentId As Integer = 0
+    Public Shared SelectedStudentAccId As Integer = 0
+    Public Shared SelectedStudentStudId As Integer = 0
 #End Region
 
 #Region "Form Load"
@@ -111,7 +112,6 @@ Public Class Admin_Form
             Return
         End If
 
-        ' Pass selected student ID to shared state so popup can read it
         If Not SetSelectedStudentId() Then
             Return
         End If
@@ -128,7 +128,6 @@ Public Class Admin_Form
             Return
         End If
 
-        ' Pass selected student ID to shared state so popup can read it
         If Not SetSelectedStudentId() Then
             Return
         End If
@@ -139,22 +138,30 @@ Public Class Admin_Form
     End Sub
 
     ''' <summary>
-    ''' Reads stud_id from the hidden StudentID column of the selected DataGridView row
-    ''' and stores it in Admin_Form.SelectedStudentId for popup forms to consume.
-    ''' Returns False if the ID cannot be read.
+    ''' Reads both acc_id and stud_id from the hidden columns of the selected DataGridView row
+    ''' and stores them in shared state for popup forms to consume.
+    ''' Returns False if the IDs cannot be read.
     ''' </summary>
     Private Function SetSelectedStudentId() As Boolean
         Try
             Dim selectedRow As DataGridViewRow = Student_List_DataGridView.SelectedRows(0)
-            Dim rawId As Object = selectedRow.Cells("StudentID").Value
+            Dim rawAccId As Object = selectedRow.Cells("AccountID").Value
+            Dim rawStudId As Object = selectedRow.Cells("StudentID").Value
 
-            If rawId Is Nothing OrElse IsDBNull(rawId) Then
+            If rawAccId Is Nothing OrElse IsDBNull(rawAccId) Then
+                MessageBox.Show("Could not retrieve account ID. Please re-select the student.", _
+                                "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return False
+            End If
+
+            If rawStudId Is Nothing OrElse IsDBNull(rawStudId) Then
                 MessageBox.Show("Could not retrieve student ID. Please re-select the student.", _
                                 "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Return False
             End If
 
-            SelectedStudentId = Convert.ToInt32(rawId)
+            SelectedStudentAccId = Convert.ToInt32(rawAccId)
+            SelectedStudentStudId = Convert.ToInt32(rawStudId)
             Return True
 
         Catch ex As Exception
@@ -192,64 +199,75 @@ Public Class Admin_Form
 #Region "Student Panel - Data Loading"
     ''' <summary>
     ''' Loads student records into the DataGridView.
-    ''' Columns from student table: stud_id, firstname, middlename, lastname, section, gender, course, yr_lvl
-    ''' FIX 1: LIKE uses wildcard on both sides so partial name search works.
-    ''' FIX 2: IFNULL on middlename in WHERE clause prevents NULL rows from being excluded.
-    ''' FIX 3: Column alias uses no spaces so ODBC DataTable column lookup is reliable.
-    ''' FIX 4: StudentID column is hidden but still accessible for Modify/Delete operations.
+    '''
+    ''' Flow: student LEFT JOIN section (via section_id FK) → resolves section name.
+    '''
+    ''' FIX: Removed the AND s.email LIKE '%@google.com' filter — it was silently
+    ''' hiding every record because no student in the database has a @google.com email.
+    ''' The only role filter kept is WHERE LOWER(s.role) = 'student', which correctly
+    ''' excludes teachers, admins, and NULL-role seed rows.
+    '''
+    ''' IFNULL wrappers on every nullable column prevent NULL from breaking CONCAT
+    ''' in the search filter or showing blank cells in the grid.
     ''' </summary>
     Public Sub LoadStudentData(ByVal searchText As String)
         Try
             Connect_me()
 
-            ' Build full name safely — IFNULL handles NULL middlename in both SELECT and WHERE
             Dim query As String = _
                 "SELECT " & _
-                "  s.stud_id AS StudentID, " & _
+                "  s.acc_id     AS AccountID, " & _
+                "  s.stud_id    AS StudentID, " & _
                 "  CONCAT(s.lastname, ', ', s.firstname, " & _
-                "         IF(s.middlename IS NULL OR s.middlename = '', '', CONCAT(' ', s.middlename))) AS FullName, " & _
-                "  s.gender   AS Gender, " & _
-                "  s.course   AS Course, " & _
-                "  s.yr_lvl   AS YearLevel, " & _
-                "  s.section  AS Section " & _
+                "         IF(s.middlename IS NULL OR TRIM(s.middlename) = '', " & _
+                "            '', CONCAT(' ', s.middlename))) AS FullName, " & _
+                "  IFNULL(s.gender,  'N/A')          AS Gender, " & _
+                "  IFNULL(s.course,  'N/A')          AS Course, " & _
+                "  IFNULL(s.yr_lvl,  0)              AS YearLevel, " & _
+                "  IFNULL(sec.section, 'No Section') AS Section, " & _
+                "  IFNULL(s.email, '')               AS Email " & _
                 "FROM student s " & _
-                "WHERE s.role = 'student' " & _
-                "  AND CONCAT(s.firstname, ' ', IFNULL(s.middlename, ''), ' ', s.lastname) LIKE ? " & _
+                "LEFT JOIN section sec ON s.section_id = sec.section_id " & _
+                "WHERE LOWER(s.role) = 'student' " & _
+                "  AND CONCAT( " & _
+                "        IFNULL(s.firstname,  ''), ' ', " & _
+                "        IFNULL(s.middlename, ''), ' ', " & _
+                "        IFNULL(s.lastname,   '')) LIKE ? " & _
                 "ORDER BY s.lastname, s.firstname"
 
             Dim cmd As New OdbcCommand(query, con)
-            ' FIX: Wildcard on BOTH sides so typing any part of the name finds the student
             cmd.Parameters.AddWithValue("@search", "%" & searchText & "%")
 
             Dim adapter As New OdbcDataAdapter(cmd)
             Dim dt As New DataTable()
             adapter.Fill(dt)
 
-            ' Bind DataTable to grid
             Student_List_DataGridView.DataSource = dt
 
-            ' Hide the StudentID column — it's used by Modify/Delete but not shown
+            ' ── Hide internal ID columns (needed by Modify/Delete, not for display) ──
+            If Student_List_DataGridView.Columns.Contains("AccountID") Then
+                Student_List_DataGridView.Columns("AccountID").Visible = False
+            End If
             If Student_List_DataGridView.Columns.Contains("StudentID") Then
                 Student_List_DataGridView.Columns("StudentID").Visible = False
             End If
+            If Student_List_DataGridView.Columns.Contains("Email") Then
+                Student_List_DataGridView.Columns("Email").Visible = False
+            End If
 
-            ' Rename visible column headers to friendly labels
+            ' ── Friendly column headers ──
             If Student_List_DataGridView.Columns.Contains("FullName") Then
                 Student_List_DataGridView.Columns("FullName").HeaderText = "Full Name"
             End If
-
             If Student_List_DataGridView.Columns.Contains("Gender") Then
                 Student_List_DataGridView.Columns("Gender").HeaderText = "Gender"
             End If
-
             If Student_List_DataGridView.Columns.Contains("Course") Then
                 Student_List_DataGridView.Columns("Course").HeaderText = "Course"
             End If
-
             If Student_List_DataGridView.Columns.Contains("YearLevel") Then
                 Student_List_DataGridView.Columns("YearLevel").HeaderText = "Year Level"
             End If
-
             If Student_List_DataGridView.Columns.Contains("Section") Then
                 Student_List_DataGridView.Columns("Section").HeaderText = "Section"
             End If
