@@ -295,29 +295,41 @@ Public Class popUpFormAddStudent
             Dim course As String = Student_Course_ComboBox.SelectedItem.ToString()
             Dim yearLevel As Integer = Convert.ToInt32(Student_YrLvl_ComboBox.SelectedItem.ToString())
 
+            ' ── Resolve course_id from the course table ──
+            Dim courseId As Integer = GetCourseId(course)
+            If courseId = 0 Then
+                MessageBox.Show("Course '" & course & "' was not found in the course table.", _
+                                "Section Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                outSectionId = 0
+                outSectionName = ""
+                Return False
+            End If
+
             Dim sectionNumber As Integer = 1
 
             Do While sectionNumber <= 100
 
                 Dim sectionName As String = course & " " & yearLevel.ToString() & "-" & sectionNumber.ToString()
 
-                ' ── Does this section already exist in the section table? ──
+                ' ── Match by section name, year_lvl AND course_id ──
                 Dim checkCmd As New OdbcCommand( _
-                    "SELECT section_id FROM section WHERE section = ? AND year_lvl = ?", con)
+                    "SELECT section_id FROM section " & _
+                    "WHERE section = ? AND year_lvl = ? AND course_id = ?", con)
                 checkCmd.Parameters.AddWithValue("@section", sectionName)
                 checkCmd.Parameters.AddWithValue("@year_lvl", yearLevel)
+                checkCmd.Parameters.AddWithValue("@course_id", courseId)
 
                 Dim checkResult As Object = checkCmd.ExecuteScalar()
 
                 If checkResult Is Nothing OrElse IsDBNull(checkResult) Then
-                    ' Section does not exist — create it now.
+                    ' Section does not exist — create it, including course_id
                     Dim createCmd As New OdbcCommand( _
-                        "INSERT INTO section (year_lvl, section) VALUES (?, ?)", con)
+                        "INSERT INTO section (year_lvl, section, course_id) VALUES (?, ?, ?)", con)
                     createCmd.Parameters.AddWithValue("@year_lvl", yearLevel)
                     createCmd.Parameters.AddWithValue("@section", sectionName)
+                    createCmd.Parameters.AddWithValue("@course_id", courseId)
                     createCmd.ExecuteNonQuery()
 
-                    ' Retrieve the new section_id via LAST_INSERT_ID() — avoids race conditions.
                     Dim newIdCmd As New OdbcCommand("SELECT LAST_INSERT_ID()", con)
                     Dim newIdResult As Object = newIdCmd.ExecuteScalar()
 
@@ -327,11 +339,13 @@ Public Class popUpFormAddStudent
                         Return True
                     End If
 
-                    ' Fallback: re-query by name if LAST_INSERT_ID returned nothing
+                    ' Fallback re-query
                     Dim fallbackCmd As New OdbcCommand( _
-                        "SELECT section_id FROM section WHERE section = ? AND year_lvl = ?", con)
+                        "SELECT section_id FROM section " & _
+                        "WHERE section = ? AND year_lvl = ? AND course_id = ?", con)
                     fallbackCmd.Parameters.AddWithValue("@section", sectionName)
                     fallbackCmd.Parameters.AddWithValue("@year_lvl", yearLevel)
+                    fallbackCmd.Parameters.AddWithValue("@course_id", courseId)
                     Dim fallbackResult As Object = fallbackCmd.ExecuteScalar()
 
                     If fallbackResult IsNot Nothing AndAlso Not IsDBNull(fallbackResult) Then
@@ -341,7 +355,7 @@ Public Class popUpFormAddStudent
                     End If
 
                 Else
-                    ' Section exists — check how many students are already in it.
+                    ' Section exists — check how many students are in it
                     Dim existingSectionId As Integer = Convert.ToInt32(checkResult)
 
                     Dim countCmd As New OdbcCommand( _
@@ -350,18 +364,16 @@ Public Class popUpFormAddStudent
                     Dim studentCount As Integer = Convert.ToInt32(countCmd.ExecuteScalar())
 
                     If studentCount < maxStudentsPerSection Then
-                        ' Section has room — use it.
                         outSectionId = existingSectionId
                         outSectionName = sectionName
                         Return True
                     End If
-                    ' Section is full — loop to try next section number.
+                    ' Full — try next section number
                 End If
 
                 sectionNumber += 1
             Loop
 
-            ' All 100 section numbers exhausted (extremely unlikely).
             outSectionId = 0
             outSectionName = ""
             Return False
@@ -372,6 +384,23 @@ Public Class popUpFormAddStudent
             outSectionId = 0
             outSectionName = ""
             Return False
+        End Try
+    End Function
+    ' -----------------------------------------------------------------------
+    ' Helper: Looks up course_id from the course table by course_code
+    ' -----------------------------------------------------------------------
+    Private Function GetCourseId(ByVal courseCode As String) As Integer
+        Try
+            Dim cmd As New OdbcCommand( _
+                "SELECT course_id FROM course WHERE course_code = ?", con)
+            cmd.Parameters.AddWithValue("@course_code", courseCode)
+            Dim result As Object = cmd.ExecuteScalar()
+            If result IsNot Nothing AndAlso Not IsDBNull(result) Then
+                Return Convert.ToInt32(result)
+            End If
+            Return 0
+        Catch ex As Exception
+            Return 0
         End Try
     End Function
 

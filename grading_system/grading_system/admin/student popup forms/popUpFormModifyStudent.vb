@@ -479,48 +479,60 @@ Public Class popUpFormModifyStudent
     ''' </summary>
     Private Function GetOrCreateSectionId(ByVal course As String, ByVal yearLevel As Integer) As Integer
         Try
+            ' ── Resolve course_id ──
+            Dim courseId As Integer = GetCourseId(course)
+            If courseId = 0 Then
+                MessageBox.Show("Course '" & course & "' was not found in the course table.", _
+                                "Section Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return 0
+            End If
+
             Dim sectionNumber As Integer = 1
             Dim maxStudentsPerSection As Integer = 45
 
             Do While sectionNumber <= 100
                 Dim sectionName As String = course & " " & yearLevel.ToString() & "-" & sectionNumber.ToString()
 
-                ' Check if section exists
-                Dim checkQuery As String = "SELECT section_id FROM section WHERE section = ? AND year_lvl = ?"
+                ' ── Match by section, year_lvl AND course_id ──
+                Dim checkQuery As String = _
+                    "SELECT section_id FROM section " & _
+                    "WHERE section = ? AND year_lvl = ? AND course_id = ?"
                 Dim checkCmd As New OdbcCommand(checkQuery, con)
                 checkCmd.Parameters.AddWithValue("@section", sectionName)
                 checkCmd.Parameters.AddWithValue("@year_lvl", yearLevel)
+                checkCmd.Parameters.AddWithValue("@course_id", courseId)
 
                 Dim result As Object = checkCmd.ExecuteScalar()
 
-                Dim currentSectionId As Integer = 0
-
                 If result Is Nothing OrElse IsDBNull(result) Then
-                    ' Section doesn't exist, create it
-                    Dim createQuery As String = "INSERT INTO section (year_lvl, section) VALUES (?, ?)"
+                    ' Create it — include course_id
+                    Dim createQuery As String = _
+                        "INSERT INTO section (year_lvl, section, course_id) VALUES (?, ?, ?)"
                     Dim createCmd As New OdbcCommand(createQuery, con)
                     createCmd.Parameters.AddWithValue("@year_lvl", yearLevel)
                     createCmd.Parameters.AddWithValue("@section", sectionName)
+                    createCmd.Parameters.AddWithValue("@course_id", courseId)
                     createCmd.ExecuteNonQuery()
 
-                    ' Get the newly created section_id
-                    Dim getIdQuery As String = "SELECT section_id FROM section WHERE section = ? AND year_lvl = ?"
+                    Dim getIdQuery As String = _
+                        "SELECT section_id FROM section " & _
+                        "WHERE section = ? AND year_lvl = ? AND course_id = ?"
                     Dim getIdCmd As New OdbcCommand(getIdQuery, con)
                     getIdCmd.Parameters.AddWithValue("@section", sectionName)
                     getIdCmd.Parameters.AddWithValue("@year_lvl", yearLevel)
+                    getIdCmd.Parameters.AddWithValue("@course_id", courseId)
                     Dim newResult As Object = getIdCmd.ExecuteScalar()
 
                     If newResult IsNot Nothing AndAlso Not IsDBNull(newResult) Then
                         Return Convert.ToInt32(newResult)
                     End If
-                Else
-                    currentSectionId = Convert.ToInt32(result)
 
-                    ' Check student count using section_id
+                Else
+                    Dim currentSectionId As Integer = Convert.ToInt32(result)
+
                     Dim countQuery As String = "SELECT COUNT(*) FROM student WHERE section_id = ?"
                     Dim countCmd As New OdbcCommand(countQuery, con)
                     countCmd.Parameters.AddWithValue("@section_id", currentSectionId)
-
                     Dim studentCount As Integer = Convert.ToInt32(countCmd.ExecuteScalar())
 
                     If studentCount < maxStudentsPerSection Then
@@ -536,6 +548,25 @@ Public Class popUpFormModifyStudent
         Catch ex As Exception
             MessageBox.Show("Error managing section: " & ex.Message, "Error", _
                             MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return 0
+        End Try
+    End Function
+
+    ' -----------------------------------------------------------------------
+    ' Helper: Looks up course_id from the course table by course_code
+    ' (Add this alongside GetSectionNameById in the same region)
+    ' -----------------------------------------------------------------------
+    Private Function GetCourseId(ByVal courseCode As String) As Integer
+        Try
+            Dim cmd As New OdbcCommand( _
+                "SELECT course_id FROM course WHERE course_code = ?", con)
+            cmd.Parameters.AddWithValue("@course_code", courseCode)
+            Dim result As Object = cmd.ExecuteScalar()
+            If result IsNot Nothing AndAlso Not IsDBNull(result) Then
+                Return Convert.ToInt32(result)
+            End If
+            Return 0
+        Catch ex As Exception
             Return 0
         End Try
     End Function
