@@ -52,8 +52,10 @@ Public Class Admin_Form
         LoadTeacherData(Search_Teacher_TextBox.Text.Trim())
     End Sub
 
+    ' ── MODIFIED: Opens frm_SemControl as a dialog instead of showing the old panel ──
     Private Sub School_Year_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles School_Year_Button.Click
-        ShowSchoolYearPanel()
+        Dim semForm As New frm_SemControl()
+        semForm.ShowDialog()
     End Sub
 
     Private Sub Logout_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Logout_Button.Click
@@ -85,10 +87,10 @@ Public Class Admin_Form
     ' ════════════════════════════════════════════════════════════════════
 
     Private Sub HideAllPanels()
+        ' ── MODIFIED: School_Year_Panel removed — it is no longer used ──
         Dashboard_Panel.Visible = False
         Student_Panel.Visible = False
         Teacher_Panel.Visible = False
-        School_Year_Panel.Visible = False
     End Sub
 
     Private Sub ShowDashboard()
@@ -107,12 +109,6 @@ Public Class Admin_Form
         HideAllPanels()
         Teacher_Panel.Visible = True
         Teacher_Panel.BringToFront()
-    End Sub
-
-    Private Sub ShowSchoolYearPanel()
-        HideAllPanels()
-        School_Year_Panel.Visible = True
-        School_Year_Panel.BringToFront()
     End Sub
 
 #End Region
