@@ -31,11 +31,6 @@ Partial Class Admin_Form
         Me.Student_Button = New System.Windows.Forms.Button
         Me.Dashboard_Button = New System.Windows.Forms.Button
         Me.Dashboard_Panel = New System.Windows.Forms.Panel
-        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton
-        Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton
-        Me.ToolStripButton3 = New System.Windows.Forms.ToolStripButton
-        Me.ToolStripButton4 = New System.Windows.Forms.ToolStripButton
-        Me.ToolStripButton5 = New System.Windows.Forms.ToolStripButton
         Me.Student_Panel = New System.Windows.Forms.Panel
         Me.Search_Student_TextBox = New System.Windows.Forms.TextBox
         Me.Search_Student_Label = New System.Windows.Forms.Label
@@ -54,7 +49,11 @@ Partial Class Admin_Form
         Me.Teacher_List_DataGridView = New System.Windows.Forms.DataGridView
         Me.Add_Teacher_Button = New System.Windows.Forms.Button
         Me.Label1 = New System.Windows.Forms.Label
-        Me.School_Year_Panel = New System.Windows.Forms.Panel
+        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton
+        Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton
+        Me.ToolStripButton3 = New System.Windows.Forms.ToolStripButton
+        Me.ToolStripButton4 = New System.Windows.Forms.ToolStripButton
+        Me.ToolStripButton5 = New System.Windows.Forms.ToolStripButton
         Me.Navigation_Panel.SuspendLayout()
         Me.Student_Panel.SuspendLayout()
         CType(Me.Student_List_DataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -139,46 +138,6 @@ Partial Class Admin_Form
         Me.Dashboard_Panel.Name = "Dashboard_Panel"
         Me.Dashboard_Panel.Size = New System.Drawing.Size(1153, 700)
         Me.Dashboard_Panel.TabIndex = 0
-        '
-        'ToolStripButton1
-        '
-        Me.ToolStripButton1.Image = CType(resources.GetObject("ToolStripButton1.Image"), System.Drawing.Image)
-        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton1.Name = "ToolStripButton1"
-        Me.ToolStripButton1.Size = New System.Drawing.Size(51, 22)
-        Me.ToolStripButton1.Text = "New"
-        '
-        'ToolStripButton2
-        '
-        Me.ToolStripButton2.Image = CType(resources.GetObject("ToolStripButton2.Image"), System.Drawing.Image)
-        Me.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton2.Name = "ToolStripButton2"
-        Me.ToolStripButton2.Size = New System.Drawing.Size(65, 22)
-        Me.ToolStripButton2.Text = "Update"
-        '
-        'ToolStripButton3
-        '
-        Me.ToolStripButton3.Image = CType(resources.GetObject("ToolStripButton3.Image"), System.Drawing.Image)
-        Me.ToolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton3.Name = "ToolStripButton3"
-        Me.ToolStripButton3.Size = New System.Drawing.Size(62, 22)
-        Me.ToolStripButton3.Text = "Search"
-        '
-        'ToolStripButton4
-        '
-        Me.ToolStripButton4.Image = CType(resources.GetObject("ToolStripButton4.Image"), System.Drawing.Image)
-        Me.ToolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton4.Name = "ToolStripButton4"
-        Me.ToolStripButton4.Size = New System.Drawing.Size(60, 22)
-        Me.ToolStripButton4.Text = "Delete"
-        '
-        'ToolStripButton5
-        '
-        Me.ToolStripButton5.Image = CType(resources.GetObject("ToolStripButton5.Image"), System.Drawing.Image)
-        Me.ToolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton5.Name = "ToolStripButton5"
-        Me.ToolStripButton5.Size = New System.Drawing.Size(56, 22)
-        Me.ToolStripButton5.Text = "Close"
         '
         'Student_Panel
         '
@@ -349,12 +308,45 @@ Partial Class Admin_Form
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "teacher panel"
         '
-        'School_Year_Panel
+        'ToolStripButton1
         '
-        Me.School_Year_Panel.Location = New System.Drawing.Point(195, 0)
-        Me.School_Year_Panel.Name = "School_Year_Panel"
-        Me.School_Year_Panel.Size = New System.Drawing.Size(1153, 700)
-        Me.School_Year_Panel.TabIndex = 2
+        Me.ToolStripButton1.Image = CType(resources.GetObject("ToolStripButton1.Image"), System.Drawing.Image)
+        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton1.Name = "ToolStripButton1"
+        Me.ToolStripButton1.Size = New System.Drawing.Size(51, 22)
+        Me.ToolStripButton1.Text = "New"
+        '
+        'ToolStripButton2
+        '
+        Me.ToolStripButton2.Image = CType(resources.GetObject("ToolStripButton2.Image"), System.Drawing.Image)
+        Me.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton2.Name = "ToolStripButton2"
+        Me.ToolStripButton2.Size = New System.Drawing.Size(65, 22)
+        Me.ToolStripButton2.Text = "Update"
+        '
+        'ToolStripButton3
+        '
+        Me.ToolStripButton3.Image = CType(resources.GetObject("ToolStripButton3.Image"), System.Drawing.Image)
+        Me.ToolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton3.Name = "ToolStripButton3"
+        Me.ToolStripButton3.Size = New System.Drawing.Size(62, 22)
+        Me.ToolStripButton3.Text = "Search"
+        '
+        'ToolStripButton4
+        '
+        Me.ToolStripButton4.Image = CType(resources.GetObject("ToolStripButton4.Image"), System.Drawing.Image)
+        Me.ToolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton4.Name = "ToolStripButton4"
+        Me.ToolStripButton4.Size = New System.Drawing.Size(60, 22)
+        Me.ToolStripButton4.Text = "Delete"
+        '
+        'ToolStripButton5
+        '
+        Me.ToolStripButton5.Image = CType(resources.GetObject("ToolStripButton5.Image"), System.Drawing.Image)
+        Me.ToolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton5.Name = "ToolStripButton5"
+        Me.ToolStripButton5.Size = New System.Drawing.Size(56, 22)
+        Me.ToolStripButton5.Text = "Close"
         '
         'Admin_Form
         '
@@ -365,7 +357,6 @@ Partial Class Admin_Form
         Me.Controls.Add(Me.Teacher_Panel)
         Me.Controls.Add(Me.Student_Panel)
         Me.Controls.Add(Me.Dashboard_Panel)
-        Me.Controls.Add(Me.School_Year_Panel)
         Me.Name = "Admin_Form"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Admin_Form"
@@ -388,7 +379,6 @@ Partial Class Admin_Form
     Friend WithEvents ToolStripButton5 As System.Windows.Forms.ToolStripButton
     Friend WithEvents Student_Panel As System.Windows.Forms.Panel
     Friend WithEvents Teacher_Panel As System.Windows.Forms.Panel
-    Friend WithEvents School_Year_Panel As System.Windows.Forms.Panel
     Friend WithEvents School_Year_Button As System.Windows.Forms.Button
     Friend WithEvents Teacher_Button As System.Windows.Forms.Button
     Friend WithEvents Exit_Button As System.Windows.Forms.Button
