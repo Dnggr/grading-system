@@ -15,12 +15,12 @@ Public Class schedule
         Try
             Connect_me()
             Dim cmd As New OdbcCommand("SELECT concat(prof.firstname, '-' , prof.lastname) As Profname, " & _
-                        "concat(subject.sub_code ,' ',subject.sub_name) As Subjects, " & _
-                        "section.section As Section " & _
-                        "From profsectionsubject " & _
-                        "Left Join prof On profsectionsubject.prof_id = prof.prof_id " & _
-                        "Left Join subject On profsectionsubject.sub_id = subject.sub_id " & _
-                        "Left Join section On profsectionsubject.section_id = section.section_id ", con)
+                         "concat(subject.sub_code ,' ',subject.sub_name) As Subjects, " & _
+                         "section.section As Section " & _
+                         "From profsectionsubject " & _
+                         "Left Join prof On profsectionsubject.prof_id = prof.prof_id " & _
+                         "Left Join subject On profsectionsubject.sub_id = subject.sub_id " & _
+                         "Left Join section On profsectionsubject.section_id = section.section_id ", con)
             Dim da As New OdbcDataAdapter(cmd)
             Dim dt As New DataTable
 
@@ -30,16 +30,31 @@ Public Class schedule
             DataGridView1.Columns("Profname").HeaderText = "Professor"
             DataGridView1.Columns("Subjects").HeaderText = "Subject"
             DataGridView1.Columns("Section").HeaderText = "Section"
-            DataGridView1.Height = DataGridView1.RowTemplate.Height + DataGridView1.Rows.Count + DataGridView1.ColumnHeadersHeight
 
+            'to control the dgv
             DataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
             DataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
             DataGridView1.AllowUserToAddRows = False
             DataGridView1.AllowUserToDeleteRows = False
             DataGridView1.AllowUserToResizeColumns = False
+            DataGridView1.AllowUserToResizeRows = False
             DataGridView1.RowHeadersVisible = False
             DataGridView1.ReadOnly = True
 
+            'to fill the gray space in dgv
+            If DataGridView1.Rows.Count > 0 Then
+
+                Dim totalHeight As Integer = DataGridView1.ClientSize.Height - DataGridView1.ColumnHeadersHeight
+                Dim rowHeight As Integer = totalHeight \ DataGridView1.Rows.Count
+
+                For Each row As DataGridViewRow In DataGridView1.Rows
+                    row.Height = rowHeight
+                Next
+
+            End If
+
+          
+            'para mabago yung font ng dgv
             DataGridView1.DefaultCellStyle.Font = New Font("segoe ui", 8, FontStyle.Bold)
 
             DataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect

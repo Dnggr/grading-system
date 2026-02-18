@@ -289,7 +289,7 @@
     <Compile Include="professor panel\AddGrade_Form.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Student panel\schedule.Designer.vb">
+    <Compile Include="Student panel\schedule.designer.vb">
       <DependentUpon>schedule.vb</DependentUpon>
     </Compile>
     <Compile Include="Student panel\schedule.vb">
@@ -368,16 +368,16 @@
       <DependentUpon>Teacher_Form.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Student panel\schedule.resx">
+      <DependentUpon>schedule.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Student panel\profile.resx">
       <DependentUpon>profile.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="admin\teacher popup forms\popUpFormAddTeacher.resx">
       <DependentUpon>popUpFormAddTeacher.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Student panel\schedule.resx">
-      <DependentUpon>schedule.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Student panel\Student_Form.resx">

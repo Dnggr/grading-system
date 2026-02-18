@@ -44,7 +44,7 @@ Partial Class Student_Form
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(24, 642)
+        Me.Button2.Location = New System.Drawing.Point(24, 620)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(147, 60)
         Me.Button2.TabIndex = 2
@@ -107,11 +107,11 @@ Partial Class Student_Form
         '
         'Button4
         '
-        Me.Button4.Location = New System.Drawing.Point(24, 525)
+        Me.Button4.Location = New System.Drawing.Point(24, 509)
         Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(147, 60)
+        Me.Button4.Size = New System.Drawing.Size(147, 61)
         Me.Button4.TabIndex = 5
-        Me.Button4.Text = "subject"
+        Me.Button4.Text = "schedule"
         Me.Button4.UseVisualStyleBackColor = True
         '
         'Student_Form
