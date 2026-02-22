@@ -42,7 +42,13 @@ Public Class Login_Form
 
         Try
             ' FIX: Column is `pword` in the `account` table, NOT `password`
-            Dim query As String = "SELECT acc_id, role, firstname, lastname FROM account WHERE email = ? AND pword = ?"
+            Dim query As String = _
+         "SELECT a.acc_id, a.role, a.firstname, a.lastname, " & _
+         "s.section_id, sec.course_id, sec.year_lvl " & _
+         "FROM account a " & _
+         "LEFT JOIN student s ON a.acc_id = s.acc_id " & _
+         "LEFT JOIN section sec ON s.section_id = sec.section_id " & _
+         "WHERE a.email = ? AND a.pword = ?"
             Dim cmd As New OdbcCommand(query, con)
             cmd.Parameters.AddWithValue("email", username)
             cmd.Parameters.AddWithValue("pword", hashedPassword)
@@ -53,6 +59,19 @@ Public Class Login_Form
                 ' --- Login successful ---
                 Dim userId As String = reader("acc_id").ToString().Trim()
                 Dim userRole As String = reader("role").ToString().Trim().ToLower()
+
+                If Not IsDBNull(reader("section_id")) Then
+                    login_logic.sectionid = Convert.ToInt32(reader("section_id"))
+                End If
+
+                If Not IsDBNull(reader("course_id")) Then
+                    login_logic.Courseid = Convert.ToInt32(reader("course_id"))
+                End If
+
+                If Not IsDBNull(reader("year_lvl")) Then
+                    login_logic.yearlvl = Convert.ToInt32(reader("year_lvl"))
+                End If
+
 
                 ' firstname and lastname may be NULL for admin/default accounts — guard with DBNull check
                 Dim fname As String = ""

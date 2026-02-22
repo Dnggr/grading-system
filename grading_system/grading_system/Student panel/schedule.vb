@@ -15,12 +15,16 @@ Public Class schedule
         Try
             Connect_me()
             Dim cmd As New OdbcCommand("SELECT concat(prof.firstname, '-' , prof.lastname) As Profname, " & _
-                         "concat(subject.sub_code ,' ',subject.sub_name) As Subjects, " & _
-                         "section.section As Section " & _
-                         "From profsectionsubject " & _
-                         "Left Join prof On profsectionsubject.prof_id = prof.prof_id " & _
-                         "Left Join subject On profsectionsubject.sub_id = subject.sub_id " & _
-                         "Left Join section On profsectionsubject.section_id = section.section_id ", con)
+            "concat(subject.sub_code ,' ',subject.sub_name) As Subjects, " & _
+            "section.section As Section " & _
+            "FROM profsectionsubject " & _
+            "LEFT JOIN prof ON profsectionsubject.prof_id = prof.prof_id " & _
+            "LEFT JOIN subject ON profsectionsubject.sub_id = subject.sub_id " & _
+            "LEFT JOIN section ON profsectionsubject.section_id = section.section_id " & _
+            "WHERE section.section_id = ? AND subject.course_id = ? ", con)
+
+            cmd.Parameters.AddWithValue("@section_id", login_logic.sectionid)
+            cmd.Parameters.AddWithValue("@course_id", login_logic.Courseid)
             Dim da As New OdbcDataAdapter(cmd)
             Dim dt As New DataTable
 
@@ -53,7 +57,7 @@ Public Class schedule
 
             End If
 
-          
+
             'para mabago yung font ng dgv
             DataGridView1.DefaultCellStyle.Font = New Font("segoe ui", 8, FontStyle.Bold)
 
