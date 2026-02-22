@@ -232,10 +232,10 @@ Public Class popUpFormAddStudent
             cmd.Parameters.AddWithValue("@firstname", Student_Firstname_TextBox.Text.Trim())
             cmd.Parameters.AddWithValue("@middlename", Student_Middlename_TextBox.Text.Trim())
             cmd.Parameters.AddWithValue("@lastname", Student_Lastname_TextBox.Text.Trim())
-            cmd.Parameters.AddWithValue("@section", sectionName)   ' human-readable, e.g. "BSIT 1-1"
+            cmd.Parameters.AddWithValue("@section", sectionName(login_logic.sectionid))   ' human-readable, e.g. "BSIT 1-1"
             cmd.Parameters.AddWithValue("@gender", Student_Gender_ComboBox.SelectedItem.ToString())
-            cmd.Parameters.AddWithValue("@course", Student_Course_ComboBox.SelectedItem.ToString())
-            cmd.Parameters.AddWithValue("@yr_lvl", Convert.ToInt32(Student_YrLvl_ComboBox.SelectedItem.ToString()))
+            cmd.Parameters.AddWithValue("@course", Student_Course_ComboBox.SelectedItem.ToString(login_logic.Courseid))
+            cmd.Parameters.AddWithValue("@yr_lvl", Convert.ToInt32(Student_YrLvl_ComboBox.SelectedItem.ToString(login_logic.yearlvl)))
 
             If cmd.ExecuteNonQuery() > 0 Then
                 ' Use LAST_INSERT_ID() — safest way to get the auto-increment value
@@ -315,7 +315,7 @@ Public Class popUpFormAddStudent
                 Dim checkCmd As New OdbcCommand( _
                     "SELECT section_id FROM section " & _
                     "WHERE section = ? AND year_lvl = ? AND course_id = ?", con)
-                checkCmd.Parameters.AddWithValue("@section", sectionName)
+                checkCmd.Parameters.AddWithValue("@section", sectionName(login_logic.sectionid))
                 checkCmd.Parameters.AddWithValue("@year_lvl", yearLevel)
                 checkCmd.Parameters.AddWithValue("@course_id", courseId)
 
@@ -326,7 +326,7 @@ Public Class popUpFormAddStudent
                     Dim createCmd As New OdbcCommand( _
                         "INSERT INTO section (year_lvl, section, course_id) VALUES (?, ?, ?)", con)
                     createCmd.Parameters.AddWithValue("@year_lvl", yearLevel)
-                    createCmd.Parameters.AddWithValue("@section", sectionName)
+                    createCmd.Parameters.AddWithValue("@section", sectionName(login_logic.sectionid))
                     createCmd.Parameters.AddWithValue("@course_id", courseId)
                     createCmd.ExecuteNonQuery()
 
