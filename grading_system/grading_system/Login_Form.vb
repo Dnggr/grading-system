@@ -11,6 +11,12 @@ Public Class Login_Form
         loginemailTextBox.Focus()
     End Sub
 
+    Private Sub form_keydown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles Me.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            loginButton.PerformClick()
+        End If
+    End Sub
+
     Private Sub loginButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles loginButton.Click
         Dim username As String = loginemailTextBox.Text.Trim()
         Dim password As String = loginpasswordTextBox.Text.Trim()
@@ -59,9 +65,9 @@ Public Class Login_Form
                 ' --- Login successful ---
                 Dim userId As String = reader("acc_id").ToString().Trim()
                 Dim userRole As String = reader("role").ToString().Trim().ToLower()
-
+                'for the student log in logic wag tanggalin 
                 If Not IsDBNull(reader("section_id")) Then
-                    login_logic.sectionid = Convert.ToInt32(reader("section_id"))
+                    login_logic.secid = Convert.ToInt32(reader("section_id"))
                 End If
 
                 If Not IsDBNull(reader("course_id")) Then
@@ -142,6 +148,7 @@ Public Class Login_Form
     End Sub
 
     Private Sub Login_Form_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Me.KeyPreview = True
         loginpasswordTextBox.PasswordChar = ChrW(&H25CF)
     End Sub
 

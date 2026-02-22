@@ -6,7 +6,7 @@
     Public userrole As String = ""
 
     'for schedule
-    Public sectionid As Integer = 0
+    Public secid As Integer = 0
     Public Courseid As Integer = 0
     Public yearlvl As Integer = 0
 

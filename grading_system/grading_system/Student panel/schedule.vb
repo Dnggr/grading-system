@@ -23,8 +23,8 @@ Public Class schedule
             "LEFT JOIN section ON profsectionsubject.section_id = section.section_id " & _
             "WHERE section.section_id = ? AND subject.course_id = ? ", con)
 
-            cmd.Parameters.AddWithValue("@section_id", login_logic.sectionid)
-            cmd.Parameters.AddWithValue("@course_id", login_logic.Courseid)
+            cmd.Parameters.AddWithValue("?", login_logic.secid)
+            cmd.Parameters.AddWithValue("?", login_logic.Courseid)
             Dim da As New OdbcDataAdapter(cmd)
             Dim dt As New DataTable
 
