@@ -22,19 +22,18 @@ Partial Class AddGrade_Form
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
         Me.Panel1 = New System.Windows.Forms.Panel
         Me.GroupBox4 = New System.Windows.Forms.GroupBox
         Me.Label54 = New System.Windows.Forms.Label
         Me.Label53 = New System.Windows.Forms.Label
-        Me.txtNumericalGrade = New System.Windows.Forms.TextBox
+        Me.txtAverageGrade = New System.Windows.Forms.TextBox
         Me.Label52 = New System.Windows.Forms.Label
         Me.btnCancel = New System.Windows.Forms.Button
         Me.btnSave = New System.Windows.Forms.Button
         Me.cboRemark = New System.Windows.Forms.ComboBox
-        Me.txtWeightedGrade = New System.Windows.Forms.TextBox
+        Me.txtNumericalGrade = New System.Windows.Forms.TextBox
         Me.GroupBox3 = New System.Windows.Forms.GroupBox
-        Me.Label55 = New System.Windows.Forms.Label
+        Me.Button1 = New System.Windows.Forms.Button
         Me.cboSubject = New System.Windows.Forms.ComboBox
         Me.Label51 = New System.Windows.Forms.Label
         Me.Label50 = New System.Windows.Forms.Label
@@ -123,7 +122,6 @@ Partial Class AddGrade_Form
         Me.Label11 = New System.Windows.Forms.Label
         Me.Label13 = New System.Windows.Forms.Label
         Me.Label12 = New System.Windows.Forms.Label
-        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Panel1.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -141,22 +139,22 @@ Partial Class AddGrade_Form
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(845, 515)
+        Me.Panel1.Size = New System.Drawing.Size(891, 515)
         Me.Panel1.TabIndex = 0
         '
         'GroupBox4
         '
         Me.GroupBox4.Controls.Add(Me.Label54)
         Me.GroupBox4.Controls.Add(Me.Label53)
-        Me.GroupBox4.Controls.Add(Me.txtNumericalGrade)
+        Me.GroupBox4.Controls.Add(Me.txtAverageGrade)
         Me.GroupBox4.Controls.Add(Me.Label52)
         Me.GroupBox4.Controls.Add(Me.btnCancel)
         Me.GroupBox4.Controls.Add(Me.btnSave)
         Me.GroupBox4.Controls.Add(Me.cboRemark)
-        Me.GroupBox4.Controls.Add(Me.txtWeightedGrade)
+        Me.GroupBox4.Controls.Add(Me.txtNumericalGrade)
         Me.GroupBox4.Location = New System.Drawing.Point(644, 12)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(189, 494)
+        Me.GroupBox4.Size = New System.Drawing.Size(235, 494)
         Me.GroupBox4.TabIndex = 43
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Total Grade"
@@ -165,7 +163,7 @@ Partial Class AddGrade_Form
         '
         Me.Label54.AutoSize = True
         Me.Label54.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label54.Location = New System.Drawing.Point(35, 307)
+        Me.Label54.Location = New System.Drawing.Point(68, 302)
         Me.Label54.Name = "Label54"
         Me.Label54.Size = New System.Drawing.Size(125, 16)
         Me.Label54.TabIndex = 10
@@ -175,25 +173,25 @@ Partial Class AddGrade_Form
         '
         Me.Label53.AutoSize = True
         Me.Label53.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label53.Location = New System.Drawing.Point(35, 349)
+        Me.Label53.Location = New System.Drawing.Point(53, 260)
         Me.Label53.Name = "Label53"
-        Me.Label53.Size = New System.Drawing.Size(121, 16)
+        Me.Label53.Size = New System.Drawing.Size(152, 16)
         Me.Label53.TabIndex = 9
-        Me.Label53.Text = "Weighted Grade"
+        Me.Label53.Text = "Average Final Grade"
         '
-        'txtNumericalGrade
+        'txtAverageGrade
         '
-        Me.txtNumericalGrade.Location = New System.Drawing.Point(29, 326)
-        Me.txtNumericalGrade.Name = "txtNumericalGrade"
-        Me.txtNumericalGrade.Size = New System.Drawing.Size(127, 20)
-        Me.txtNumericalGrade.TabIndex = 8
-        Me.txtNumericalGrade.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtAverageGrade.Location = New System.Drawing.Point(66, 279)
+        Me.txtAverageGrade.Name = "txtAverageGrade"
+        Me.txtAverageGrade.Size = New System.Drawing.Size(127, 20)
+        Me.txtAverageGrade.TabIndex = 55
+        Me.txtAverageGrade.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label52
         '
         Me.Label52.AutoSize = True
         Me.Label52.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label52.Location = New System.Drawing.Point(61, 391)
+        Me.Label52.Location = New System.Drawing.Point(98, 344)
         Me.Label52.Name = "Label52"
         Me.Label52.Size = New System.Drawing.Size(66, 16)
         Me.Label52.TabIndex = 7
@@ -201,41 +199,41 @@ Partial Class AddGrade_Form
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(94, 454)
+        Me.btnCancel.Location = New System.Drawing.Point(139, 407)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(62, 23)
+        Me.btnCancel.Size = New System.Drawing.Size(90, 70)
         Me.btnCancel.TabIndex = 3
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(29, 454)
+        Me.btnSave.Location = New System.Drawing.Point(21, 406)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(62, 23)
+        Me.btnSave.Size = New System.Drawing.Size(95, 71)
         Me.btnSave.TabIndex = 2
-        Me.btnSave.Text = "Save"
+        Me.btnSave.Text = "Insert"
         Me.btnSave.UseVisualStyleBackColor = True
         '
         'cboRemark
         '
         Me.cboRemark.FormattingEnabled = True
-        Me.cboRemark.Location = New System.Drawing.Point(29, 409)
+        Me.cboRemark.Location = New System.Drawing.Point(66, 362)
         Me.cboRemark.Name = "cboRemark"
         Me.cboRemark.Size = New System.Drawing.Size(127, 21)
-        Me.cboRemark.TabIndex = 1
+        Me.cboRemark.TabIndex = 57
         '
-        'txtWeightedGrade
+        'txtNumericalGrade
         '
-        Me.txtWeightedGrade.Location = New System.Drawing.Point(29, 368)
-        Me.txtWeightedGrade.Name = "txtWeightedGrade"
-        Me.txtWeightedGrade.Size = New System.Drawing.Size(127, 20)
-        Me.txtWeightedGrade.TabIndex = 0
-        Me.txtWeightedGrade.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtNumericalGrade.Location = New System.Drawing.Point(66, 321)
+        Me.txtNumericalGrade.Name = "txtNumericalGrade"
+        Me.txtNumericalGrade.Size = New System.Drawing.Size(127, 20)
+        Me.txtNumericalGrade.TabIndex = 56
+        Me.txtNumericalGrade.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'GroupBox3
         '
-        Me.GroupBox3.Controls.Add(Me.Label55)
+        Me.GroupBox3.Controls.Add(Me.Button1)
         Me.GroupBox3.Controls.Add(Me.cboSubject)
         Me.GroupBox3.Controls.Add(Me.Label51)
         Me.GroupBox3.Controls.Add(Me.Label50)
@@ -249,21 +247,21 @@ Partial Class AddGrade_Form
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Student Info And Subject"
         '
-        'Label55
+        'Button1
         '
-        Me.Label55.AutoSize = True
-        Me.Label55.Location = New System.Drawing.Point(434, 80)
-        Me.Label55.Name = "Label55"
-        Me.Label55.Size = New System.Drawing.Size(45, 13)
-        Me.Label55.TabIndex = 7
-        Me.Label55.Text = "Label55"
+        Me.Button1.Location = New System.Drawing.Point(545, 28)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 48)
+        Me.Button1.TabIndex = 7
+        Me.Button1.Text = "Select" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Student"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'cboSubject
         '
         Me.cboSubject.FormattingEnabled = True
         Me.cboSubject.Location = New System.Drawing.Point(133, 82)
         Me.cboSubject.Name = "cboSubject"
-        Me.cboSubject.Size = New System.Drawing.Size(273, 21)
+        Me.cboSubject.Size = New System.Drawing.Size(403, 21)
         Me.cboSubject.TabIndex = 6
         '
         'Label51
@@ -290,7 +288,7 @@ Partial Class AddGrade_Form
         '
         Me.txtSection.Location = New System.Drawing.Point(133, 56)
         Me.txtSection.Name = "txtSection"
-        Me.txtSection.Size = New System.Drawing.Size(273, 20)
+        Me.txtSection.Size = New System.Drawing.Size(403, 20)
         Me.txtSection.TabIndex = 2
         '
         'Label49
@@ -404,7 +402,7 @@ Partial Class AddGrade_Form
         Me.txtTotalPrelim.Location = New System.Drawing.Point(495, 53)
         Me.txtTotalPrelim.Name = "txtTotalPrelim"
         Me.txtTotalPrelim.Size = New System.Drawing.Size(57, 20)
-        Me.txtTotalPrelim.TabIndex = 0
+        Me.txtTotalPrelim.TabIndex = 51
         '
         'Label44
         '
@@ -441,7 +439,7 @@ Partial Class AddGrade_Form
         Me.txtWeightPrelim.Location = New System.Drawing.Point(353, 54)
         Me.txtWeightPrelim.Name = "txtWeightPrelim"
         Me.txtWeightPrelim.Size = New System.Drawing.Size(57, 20)
-        Me.txtWeightPrelim.TabIndex = 1
+        Me.txtWeightPrelim.TabIndex = 43
         '
         'Label28
         '
@@ -468,14 +466,14 @@ Partial Class AddGrade_Form
         Me.txtTotalMidterm.Location = New System.Drawing.Point(495, 79)
         Me.txtTotalMidterm.Name = "txtTotalMidterm"
         Me.txtTotalMidterm.Size = New System.Drawing.Size(57, 20)
-        Me.txtTotalMidterm.TabIndex = 2
+        Me.txtTotalMidterm.TabIndex = 52
         '
         'txtWeightMidterm
         '
         Me.txtWeightMidterm.Location = New System.Drawing.Point(353, 80)
         Me.txtWeightMidterm.Name = "txtWeightMidterm"
         Me.txtWeightMidterm.Size = New System.Drawing.Size(57, 20)
-        Me.txtWeightMidterm.TabIndex = 3
+        Me.txtWeightMidterm.TabIndex = 44
         '
         'Label30
         '
@@ -492,56 +490,56 @@ Partial Class AddGrade_Form
         Me.txtTotalFinals.Location = New System.Drawing.Point(495, 131)
         Me.txtTotalFinals.Name = "txtTotalFinals"
         Me.txtTotalFinals.Size = New System.Drawing.Size(57, 20)
-        Me.txtTotalFinals.TabIndex = 5
+        Me.txtTotalFinals.TabIndex = 54
         '
         'txtMaxFinals
         '
         Me.txtMaxFinals.Location = New System.Drawing.Point(238, 131)
         Me.txtMaxFinals.Name = "txtMaxFinals"
         Me.txtMaxFinals.Size = New System.Drawing.Size(57, 20)
-        Me.txtMaxFinals.TabIndex = 34
+        Me.txtMaxFinals.TabIndex = 38
         '
         'txtTotalSemis
         '
         Me.txtTotalSemis.Location = New System.Drawing.Point(495, 105)
         Me.txtTotalSemis.Name = "txtTotalSemis"
         Me.txtTotalSemis.Size = New System.Drawing.Size(57, 20)
-        Me.txtTotalSemis.TabIndex = 4
+        Me.txtTotalSemis.TabIndex = 53
         '
         'txtMaxSemis
         '
         Me.txtMaxSemis.Location = New System.Drawing.Point(238, 105)
         Me.txtMaxSemis.Name = "txtMaxSemis"
         Me.txtMaxSemis.Size = New System.Drawing.Size(57, 20)
-        Me.txtMaxSemis.TabIndex = 33
+        Me.txtMaxSemis.TabIndex = 37
         '
         'txtWeightSemis
         '
         Me.txtWeightSemis.Location = New System.Drawing.Point(353, 106)
         Me.txtWeightSemis.Name = "txtWeightSemis"
         Me.txtWeightSemis.Size = New System.Drawing.Size(57, 20)
-        Me.txtWeightSemis.TabIndex = 6
+        Me.txtWeightSemis.TabIndex = 45
         '
         'txtMaxMidterm
         '
         Me.txtMaxMidterm.Location = New System.Drawing.Point(238, 79)
         Me.txtMaxMidterm.Name = "txtMaxMidterm"
         Me.txtMaxMidterm.Size = New System.Drawing.Size(57, 20)
-        Me.txtMaxMidterm.TabIndex = 32
+        Me.txtMaxMidterm.TabIndex = 36
         '
         'txtWeightFinals
         '
         Me.txtWeightFinals.Location = New System.Drawing.Point(353, 132)
         Me.txtWeightFinals.Name = "txtWeightFinals"
         Me.txtWeightFinals.Size = New System.Drawing.Size(57, 20)
-        Me.txtWeightFinals.TabIndex = 7
+        Me.txtWeightFinals.TabIndex = 46
         '
         'txtMaxPrelim
         '
         Me.txtMaxPrelim.Location = New System.Drawing.Point(238, 53)
         Me.txtMaxPrelim.Name = "txtMaxPrelim"
         Me.txtMaxPrelim.Size = New System.Drawing.Size(57, 20)
-        Me.txtMaxPrelim.TabIndex = 31
+        Me.txtMaxPrelim.TabIndex = 35
         '
         'Label31
         '
@@ -648,28 +646,28 @@ Partial Class AddGrade_Form
         Me.txtRawFinals.Location = New System.Drawing.Point(108, 131)
         Me.txtRawFinals.Name = "txtRawFinals"
         Me.txtRawFinals.Size = New System.Drawing.Size(57, 20)
-        Me.txtRawFinals.TabIndex = 25
+        Me.txtRawFinals.TabIndex = 7
         '
         'txtRawSemis
         '
         Me.txtRawSemis.Location = New System.Drawing.Point(108, 105)
         Me.txtRawSemis.Name = "txtRawSemis"
         Me.txtRawSemis.Size = New System.Drawing.Size(57, 20)
-        Me.txtRawSemis.TabIndex = 24
+        Me.txtRawSemis.TabIndex = 6
         '
         'txtRawMidterm
         '
         Me.txtRawMidterm.Location = New System.Drawing.Point(108, 79)
         Me.txtRawMidterm.Name = "txtRawMidterm"
         Me.txtRawMidterm.Size = New System.Drawing.Size(57, 20)
-        Me.txtRawMidterm.TabIndex = 23
+        Me.txtRawMidterm.TabIndex = 5
         '
         'txtRawPrelim
         '
         Me.txtRawPrelim.Location = New System.Drawing.Point(108, 53)
         Me.txtRawPrelim.Name = "txtRawPrelim"
         Me.txtRawPrelim.Size = New System.Drawing.Size(57, 20)
-        Me.txtRawPrelim.TabIndex = 22
+        Me.txtRawPrelim.TabIndex = 4
         '
         'Label45
         '
@@ -825,7 +823,7 @@ Partial Class AddGrade_Form
         Me.txtTotalAttendance.Location = New System.Drawing.Point(495, 53)
         Me.txtTotalAttendance.Name = "txtTotalAttendance"
         Me.txtTotalAttendance.Size = New System.Drawing.Size(57, 20)
-        Me.txtTotalAttendance.TabIndex = 0
+        Me.txtTotalAttendance.TabIndex = 47
         '
         'Label23
         '
@@ -842,7 +840,7 @@ Partial Class AddGrade_Form
         Me.txtWAttendance.Location = New System.Drawing.Point(353, 54)
         Me.txtWAttendance.Name = "txtWAttendance"
         Me.txtWAttendance.Size = New System.Drawing.Size(57, 20)
-        Me.txtWAttendance.TabIndex = 1
+        Me.txtWAttendance.TabIndex = 39
         '
         'Label22
         '
@@ -879,21 +877,21 @@ Partial Class AddGrade_Form
         Me.txtTotalQuiz.Location = New System.Drawing.Point(495, 79)
         Me.txtTotalQuiz.Name = "txtTotalQuiz"
         Me.txtTotalQuiz.Size = New System.Drawing.Size(57, 20)
-        Me.txtTotalQuiz.TabIndex = 2
+        Me.txtTotalQuiz.TabIndex = 48
         '
         'txtWQuiz
         '
         Me.txtWQuiz.Location = New System.Drawing.Point(353, 80)
         Me.txtWQuiz.Name = "txtWQuiz"
         Me.txtWQuiz.Size = New System.Drawing.Size(57, 20)
-        Me.txtWQuiz.TabIndex = 3
+        Me.txtWQuiz.TabIndex = 40
         '
         'txtTotalProject
         '
         Me.txtTotalProject.Location = New System.Drawing.Point(495, 131)
         Me.txtTotalProject.Name = "txtTotalProject"
         Me.txtTotalProject.Size = New System.Drawing.Size(57, 20)
-        Me.txtTotalProject.TabIndex = 5
+        Me.txtTotalProject.TabIndex = 50
         '
         'txtMaxProject
         '
@@ -907,7 +905,7 @@ Partial Class AddGrade_Form
         Me.txtTotalRecitation.Location = New System.Drawing.Point(495, 105)
         Me.txtTotalRecitation.Name = "txtTotalRecitation"
         Me.txtTotalRecitation.Size = New System.Drawing.Size(57, 20)
-        Me.txtTotalRecitation.TabIndex = 4
+        Me.txtTotalRecitation.TabIndex = 49
         '
         'txtMaxRecitation
         '
@@ -921,7 +919,7 @@ Partial Class AddGrade_Form
         Me.txtWRecitation.Location = New System.Drawing.Point(353, 106)
         Me.txtWRecitation.Name = "txtWRecitation"
         Me.txtWRecitation.Size = New System.Drawing.Size(57, 20)
-        Me.txtWRecitation.TabIndex = 6
+        Me.txtWRecitation.TabIndex = 41
         '
         'txtMaxQuiz
         '
@@ -935,7 +933,7 @@ Partial Class AddGrade_Form
         Me.txtWProject.Location = New System.Drawing.Point(353, 132)
         Me.txtWProject.Name = "txtWProject"
         Me.txtWProject.Size = New System.Drawing.Size(57, 20)
-        Me.txtWProject.TabIndex = 7
+        Me.txtWProject.TabIndex = 42
         '
         'txtMaxAttendance
         '
@@ -1049,28 +1047,28 @@ Partial Class AddGrade_Form
         Me.txtRawProject.Location = New System.Drawing.Point(108, 131)
         Me.txtRawProject.Name = "txtRawProject"
         Me.txtRawProject.Size = New System.Drawing.Size(57, 20)
-        Me.txtRawProject.TabIndex = 25
+        Me.txtRawProject.TabIndex = 3
         '
         'txtRawRecitation
         '
         Me.txtRawRecitation.Location = New System.Drawing.Point(108, 105)
         Me.txtRawRecitation.Name = "txtRawRecitation"
         Me.txtRawRecitation.Size = New System.Drawing.Size(57, 20)
-        Me.txtRawRecitation.TabIndex = 24
+        Me.txtRawRecitation.TabIndex = 2
         '
         'txtRawQuiz
         '
         Me.txtRawQuiz.Location = New System.Drawing.Point(108, 79)
         Me.txtRawQuiz.Name = "txtRawQuiz"
         Me.txtRawQuiz.Size = New System.Drawing.Size(57, 20)
-        Me.txtRawQuiz.TabIndex = 23
+        Me.txtRawQuiz.TabIndex = 1
         '
         'txtRawAttendance
         '
         Me.txtRawAttendance.Location = New System.Drawing.Point(108, 53)
         Me.txtRawAttendance.Name = "txtRawAttendance"
         Me.txtRawAttendance.Size = New System.Drawing.Size(57, 20)
-        Me.txtRawAttendance.TabIndex = 22
+        Me.txtRawAttendance.TabIndex = 0
         '
         'Label14
         '
@@ -1112,15 +1110,11 @@ Partial Class AddGrade_Form
         Me.Label12.TabIndex = 19
         Me.Label12.Text = "/"
         '
-        'Timer1
-        '
-        Me.Timer1.Interval = 1000
-        '
         'AddGrade_Form
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(845, 515)
+        Me.ClientSize = New System.Drawing.Size(891, 515)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "AddGrade_Form"
         Me.Text = "AddGrade_Form"
@@ -1218,7 +1212,7 @@ Partial Class AddGrade_Form
     Friend WithEvents Label49 As System.Windows.Forms.Label
     Friend WithEvents txtName As System.Windows.Forms.TextBox
     Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
-    Friend WithEvents txtWeightedGrade As System.Windows.Forms.TextBox
+    Friend WithEvents txtNumericalGrade As System.Windows.Forms.TextBox
     Friend WithEvents cboSubject As System.Windows.Forms.ComboBox
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents btnSave As System.Windows.Forms.Button
@@ -1232,9 +1226,8 @@ Partial Class AddGrade_Form
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents Label9 As System.Windows.Forms.Label
     Friend WithEvents Label10 As System.Windows.Forms.Label
-    Friend WithEvents txtNumericalGrade As System.Windows.Forms.TextBox
-    Friend WithEvents Label53 As System.Windows.Forms.Label
+    Friend WithEvents txtAverageGrade As System.Windows.Forms.TextBox
     Friend WithEvents Label54 As System.Windows.Forms.Label
-    Friend WithEvents Timer1 As System.Windows.Forms.Timer
-    Friend WithEvents Label55 As System.Windows.Forms.Label
+    Friend WithEvents Label53 As System.Windows.Forms.Label
+    Friend WithEvents Button1 As System.Windows.Forms.Button
 End Class
