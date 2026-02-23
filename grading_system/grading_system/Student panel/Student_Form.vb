@@ -5,7 +5,12 @@ Imports System.Data.Odbc
 Public Class Student_Form
 
     Dim p As New profile()
+    Dim sched As New schedule()
     Private Sub Student_Form_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+        sched.Dock = DockStyle.Fill
+        mainpanel.Controls.Add(sched)
+        sched.Visible = False
 
         p.Dock = DockStyle.Fill
         mainpanel.Controls.Add(p)
@@ -47,6 +52,11 @@ Public Class Student_Form
         s.BringToFront()
         p.Visible = False
         s.Visible = True
+    End Sub
+
+    Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button4.Click
+        sched.BringToFront()
+        sched.Visible = True
     End Sub
 #End Region
 
@@ -106,6 +116,4 @@ Public Class Student_Form
     End Function
 
 #End Region
-
-    
 End Class
