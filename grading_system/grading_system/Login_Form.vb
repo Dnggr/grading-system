@@ -50,10 +50,11 @@ Public Class Login_Form
             ' FIX: Column is `pword` in the `account` table, NOT `password`
             Dim query As String = _
          "SELECT a.acc_id, a.role, a.firstname, a.lastname, " & _
-         "s.section_id, sec.course_id, sec.year_lvl " & _
+         "s.section_id, sec.course_id, sec.year_lvl, sem.semester " & _
          "FROM account a " & _
          "LEFT JOIN student s ON a.acc_id = s.acc_id " & _
          "LEFT JOIN section sec ON s.section_id = sec.section_id " & _
+         "LEFT JOIN sem_control sem ON sem.semester = sem.semester " & _
          "WHERE a.email = ? AND a.pword = ?"
             Dim cmd As New OdbcCommand(query, con)
             cmd.Parameters.AddWithValue("email", username)
@@ -76,6 +77,10 @@ Public Class Login_Form
 
                 If Not IsDBNull(reader("year_lvl")) Then
                     login_logic.yearlvl = Convert.ToInt32(reader("year_lvl"))
+                End If
+
+                If Not IsDBNull(reader("semester")) Then
+                    login_logic.currentsem = Convert.ToInt32(reader("semester"))
                 End If
 
 

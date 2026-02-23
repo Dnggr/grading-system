@@ -25,11 +25,11 @@ Partial Class Student_Form
         Me.Button1 = New System.Windows.Forms.Button
         Me.Button2 = New System.Windows.Forms.Button
         Me.Panel1 = New System.Windows.Forms.Panel
+        Me.Button4 = New System.Windows.Forms.Button
         Me.Label1 = New System.Windows.Forms.Label
         Me.Button3 = New System.Windows.Forms.Button
         Me.s = New CrystalDecisions.Windows.Forms.CrystalReportViewer
         Me.mainpanel = New System.Windows.Forms.Panel
-        Me.Button4 = New System.Windows.Forms.Button
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -64,6 +64,15 @@ Partial Class Student_Form
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(194, 729)
         Me.Panel1.TabIndex = 46
+        '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(24, 509)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(147, 61)
+        Me.Button4.TabIndex = 5
+        Me.Button4.Text = "schedule"
+        Me.Button4.UseVisualStyleBackColor = True
         '
         'Label1
         '
@@ -104,15 +113,6 @@ Partial Class Student_Form
         Me.mainpanel.Name = "mainpanel"
         Me.mainpanel.Size = New System.Drawing.Size(1156, 729)
         Me.mainpanel.TabIndex = 48
-        '
-        'Button4
-        '
-        Me.Button4.Location = New System.Drawing.Point(24, 509)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(147, 61)
-        Me.Button4.TabIndex = 5
-        Me.Button4.Text = "schedule"
-        Me.Button4.UseVisualStyleBackColor = True
         '
         'Student_Form
         '
