@@ -116,4 +116,8 @@ Public Class Student_Form
     End Function
 
 #End Region
+
+    Private Sub mainpanel_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles mainpanel.Paint
+
+    End Sub
 End Class

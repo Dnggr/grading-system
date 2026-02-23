@@ -9,6 +9,7 @@
     Public secid As Integer = 0
     Public Courseid As Integer = 0
     Public yearlvl As Integer = 0
+    Public currentsem As Integer = 0
 
     Public Sub ClearLogin()
         loginuser = ""
