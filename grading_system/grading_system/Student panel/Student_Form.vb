@@ -91,12 +91,13 @@ Public Class Student_Form
         dt.Columns.Add("Studentid", GetType(String))
         dt.Columns.Add("Course", GetType(String))
         dt.Columns.Add("Section", GetType(String))
-
+        dt.Columns.Add("Remark", GetType(String))
         Try
             Dim query As String = "SELECT concat(prof.firstname, '-' , prof.lastname) As Profname, " & _
                                   "concat(student.firstname,' ', student.middlename ,' ' , student.lastname) As Studentname," & _
                                   "section.section As Section, student.course As Course, student.stud_id As Studentid," & _
-                                  "grades.grade As Grades, concat(subject.sub_code ,' ',subject.sub_name) As Subjects " & _
+                                  "grades.Numerical As Grades, concat(subject.sub_code ,' ',subject.sub_name) As Subjects, " & _
+                                  "grades.remark As Remark " & _
                                   "From student " & _
                                     " Left Join grades On student.stud_id = grades.stud_id " & _
                                     " Left Join prof On grades.prof_id = prof.prof_id " & _

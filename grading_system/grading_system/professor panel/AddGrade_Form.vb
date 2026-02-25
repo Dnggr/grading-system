@@ -1,31 +1,30 @@
 ﻿Imports System.Data.Odbc
+
 Public Class AddGrade_Form
     Dim response As DialogResult
     Public profID As Integer
-    Public sID, FN, secID As String
+    Public sID As String = ""
+    Public FN As String = ""
+    Public secID As String = ""
     Public updateMode As Boolean = False
-    Public gradeID As String
+    Public gradeID As String = ""
+    'Private isLoadingGrade As Boolean = False  ' ✅ Add flag
 
-    Private Sub AddGrade_Form_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub AddGrade_Form_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         defaultValues()
         cboRemark.Items.Add("Incomplete")
         cboRemark.Items.Add("Passed")
         cboRemark.Items.Add("Failed")
 
         If updateMode Then
-            ' ✅ Load existing grade data
+            ' Load existing grade data
             LoadGradeData(gradeID)
-
-            ' Change button text
             btnSave.Text = "Update Grade"
             Me.Text = "Edit Grade"
         Else
             ' Normal add mode
             Button1.Visible = True
-            'getSubject(secID)
-            'txtName.Text = FN
         End If
-
     End Sub
 
     Private Sub LoadGradeData(ByVal gradeId As String)
@@ -48,6 +47,7 @@ Public Class AddGrade_Form
                                  "grades.semis, " & _
                                  "grades.finals, " & _
                                  "grades.grade, " & _
+                                 "grades.numerical, " & _
                                  "grades.remark, " & _
                                  "CONCAT(student.lastname, ', ', student.firstname, ' ', student.middlename) AS FullName, " & _
                                  "student.section_id, " & _
@@ -64,69 +64,44 @@ Public Class AddGrade_Form
 
                 Using reader As OdbcDataReader = cmd.ExecuteReader()
                     If reader.Read() Then
-                        ' ✅ Store IDs
+                        ' Store IDs
                         sID = reader("stud_id").ToString()
                         profID = Convert.ToInt32(reader("prof_id"))
                         secID = reader("section_id").ToString()
 
-                        ' ✅ Display student info
+                        ' Display student info
                         txtName.Text = reader("FullName").ToString()
-                        txtSection.Text = reader("section").ToString()
+                        txtName.ReadOnly = True
 
+                        txtSection.Text = reader("section").ToString()
+                        txtSection.ReadOnly = True
+
+                        ' Display subject (readonly)
                         cboSubject.Items.Clear()
                         cboSubject.Items.Add(reader("SubjectName").ToString())
                         cboSubject.SelectedIndex = 0
-                        cboSubject.Enabled = False  ' Disable editing
+                        cboSubject.Enabled = False
 
-                        ' ✅ Load grade components
-                        If Not IsDBNull(reader("attendance")) Then
-                            txtTotalAttendance.Text = reader("attendance").ToString()
-                        End If
+                        ' Load grade components
+                        txtTotalAttendance.Text = If(IsDBNull(reader("attendance")), "", reader("attendance").ToString())
+                        txtTotalQuiz.Text = If(IsDBNull(reader("quiz")), "", reader("quiz").ToString())
+                        txtTotalRecitation.Text = If(IsDBNull(reader("recitation")), "", reader("recitation").ToString())
+                        txtTotalProject.Text = If(IsDBNull(reader("project")), "", reader("project").ToString())
+                        txtTotalPrelim.Text = If(IsDBNull(reader("prelim")), "", reader("prelim").ToString())
+                        txtTotalMidterm.Text = If(IsDBNull(reader("midterm")), "", reader("midterm").ToString())
+                        txtTotalSemis.Text = If(IsDBNull(reader("semis")), "", reader("semis").ToString())
+                        txtTotalFinals.Text = If(IsDBNull(reader("finals")), "", reader("finals").ToString())
 
-                        If Not IsDBNull(reader("quiz")) Then
-                            txtTotalQuiz.Text = reader("quiz").ToString()
-                        End If
+                        ' Load grades
+                        txtAverageGrade.Text = If(IsDBNull(reader("grade")), "", reader("grade").ToString())
+                        txtNumericalGrade.Text = If(IsDBNull(reader("numerical")), "", reader("numerical").ToString())
 
-                        If Not IsDBNull(reader("recitation")) Then
-                            txtTotalRecitation.Text = reader("recitation").ToString()
-                        End If
-
-                        If Not IsDBNull(reader("project")) Then
-                            txtTotalProject.Text = reader("project").ToString()
-                        End If
-
-                        If Not IsDBNull(reader("prelim")) Then
-                            txtTotalPrelim.Text = reader("prelim").ToString()
-                        End If
-
-                        If Not IsDBNull(reader("midterm")) Then
-                            txtTotalMidterm.Text = reader("midterm").ToString()
-                        End If
-
-                        If Not IsDBNull(reader("semis")) Then
-                            txtTotalSemis.Text = reader("semis").ToString()
-                        End If
-
-                        If Not IsDBNull(reader("finals")) Then
-                            txtTotalFinals.Text = reader("finals").ToString()
-                        End If
-
-                        ' ✅ Load final grade
-                        If Not IsDBNull(reader("grade")) Then
-                            txtAverageGrade.Text = reader("grade").ToString()
-                        End If
-
-                        ' ✅ Load remark
+                        ' Load remark
                         If Not IsDBNull(reader("remark")) Then
                             cboRemark.SelectedItem = reader("remark").ToString()
                         End If
 
-                        ' Hide select student button
                         Button1.Visible = False
-
-                        ' Make student info readonly
-                        txtName.ReadOnly = True
-                        txtSection.ReadOnly = True
 
                     Else
                         MessageBox.Show("Grade record not found", "Error")
@@ -142,6 +117,7 @@ Public Class AddGrade_Form
         End Try
     End Sub
 
+    ' ✅ FIXED: Added missing comma and fixed parameter order
     Private Sub UpdateGrade()
         Try
             ' Validate inputs
@@ -153,13 +129,14 @@ Public Class AddGrade_Form
                 String.IsNullOrEmpty(txtTotalMidterm.Text) OrElse _
                 String.IsNullOrEmpty(txtTotalSemis.Text) OrElse _
                 String.IsNullOrEmpty(txtTotalFinals.Text) OrElse _
-             cboRemark.SelectedIndex < 0 Then
+                cboRemark.SelectedIndex < 0 Then
                 MessageBox.Show("Please fill in all required fields", "Validation Error")
                 Return
             End If
 
             Connect_me()
 
+            ' ✅ FIXED: Added comma after numerical, fixed order
             Dim query As String = "UPDATE grades SET " & _
                                  "attendance = ?, " & _
                                  "quiz = ?, " & _
@@ -170,6 +147,7 @@ Public Class AddGrade_Form
                                  "semis = ?, " & _
                                  "finals = ?, " & _
                                  "grade = ?, " & _
+                                 "numerical = ?, " & _
                                  "remark = ? " & _
                                  "WHERE grades_id = ?"
 
@@ -183,6 +161,7 @@ Public Class AddGrade_Form
                 cmd.Parameters.AddWithValue("?", txtTotalSemis.Text.Trim())
                 cmd.Parameters.AddWithValue("?", txtTotalFinals.Text.Trim())
                 cmd.Parameters.AddWithValue("?", txtAverageGrade.Text.Trim())
+                cmd.Parameters.AddWithValue("?", txtNumericalGrade.Text.Trim())
                 cmd.Parameters.AddWithValue("?", cboRemark.SelectedItem.ToString())
                 cmd.Parameters.AddWithValue("?", gradeID)
 
@@ -205,6 +184,7 @@ Public Class AddGrade_Form
         End Try
     End Sub
 
+    ' ✅ FIXED: Parameter names (@pid should be ?)
     Private Sub gradeSubmission()
         Try
             Connect_me()
@@ -217,13 +197,18 @@ Public Class AddGrade_Form
                 "  (prof_id, school_year, semester, submitted, submitted_at) " & _
                 "VALUES (?, ?, ?, 1, NOW()) " & _
                 "ON DUPLICATE KEY UPDATE submitted=1, submitted_at=NOW()"
-            Dim cmd As New OdbcCommand(sql, con)
-            cmd.Parameters.AddWithValue("@pid", profID)  ' your session prof_id variable
-            cmd.Parameters.AddWithValue("@sy", sy)
-            cmd.Parameters.AddWithValue("@sem", sm)
-            cmd.ExecuteNonQuery()
-            MessageBox.Show("Grades saved and submitted successfully.", _
-                            "Saved" & sy & sm, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+            Using cmd As New OdbcCommand(sql, con)
+                cmd.Parameters.AddWithValue("?", profID)
+                cmd.Parameters.AddWithValue("?", sy)
+                cmd.Parameters.AddWithValue("?", sm)
+                cmd.ExecuteNonQuery()
+
+                MessageBox.Show("Grades saved and submitted successfully.", _
+                              "Saved - " & sy & " Sem " & sm, _
+                              MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End Using
+
         Catch ex As Exception
             MessageBox.Show("Submit error: " & ex.Message)
         Finally
@@ -234,30 +219,30 @@ Public Class AddGrade_Form
     Private Sub defaultValues()
         For Each ctrl As Control In GroupBox1.Controls
             If TypeOf ctrl Is TextBox AndAlso ctrl.Name.StartsWith("txtW") Then
-                CType(ctrl, TextBox).Text = 10
+                CType(ctrl, TextBox).Text = "10"
             End If
         Next
 
         For Each ctrl As Control In GroupBox1.Controls
             If TypeOf ctrl Is TextBox AndAlso ctrl.Name.StartsWith("txtMax") Then
-                CType(ctrl, TextBox).Text = 100
+                CType(ctrl, TextBox).Text = "100"
             End If
         Next
 
         For Each ctrl As Control In GroupBox2.Controls
             If TypeOf ctrl Is TextBox AndAlso ctrl.Name.StartsWith("txtWeight") Then
-                CType(ctrl, TextBox).Text = 15
+                CType(ctrl, TextBox).Text = "15"
             End If
         Next
 
         For Each ctrl As Control In GroupBox2.Controls
             If TypeOf ctrl Is TextBox AndAlso ctrl.Name.StartsWith("txtMax") Then
-                CType(ctrl, TextBox).Text = 100
+                CType(ctrl, TextBox).Text = "100"
             End If
         Next
     End Sub
-    Private Function checkAllTextboxes() As Boolean
 
+    Private Function checkAllTextboxes() As Boolean
         Dim emptyTextbox As TextBox = Nothing
         Dim groupboxName As String = ""
 
@@ -273,7 +258,7 @@ Public Class AddGrade_Form
             End If
         Next
 
-        ' If found, skip other checks
+        ' Check GroupBox2
         If emptyTextbox Is Nothing Then
             For Each ctrl2 As Control In GroupBox2.Controls
                 If TypeOf ctrl2 Is TextBox Then
@@ -287,6 +272,7 @@ Public Class AddGrade_Form
             Next
         End If
 
+        ' Check GroupBox3
         If emptyTextbox Is Nothing Then
             For Each ctrl3 As Control In GroupBox3.Controls
                 If TypeOf ctrl3 Is TextBox Then
@@ -300,17 +286,25 @@ Public Class AddGrade_Form
             Next
         End If
 
+        ' Check GroupBox4 and ComboBox
         If emptyTextbox Is Nothing Then
             For Each ctrl4 As Control In GroupBox4.Controls
                 If TypeOf ctrl4 Is TextBox Then
                     Dim txt4 As TextBox = CType(ctrl4, TextBox)
-                    If txt4.Text.Trim() = "" Or cboRemark.SelectedItem = "" Then
+                    If txt4.Text.Trim() = "" Then
                         emptyTextbox = txt4
                         groupboxName = "Final Grade"
                         Exit For
                     End If
                 End If
             Next
+
+            ' Check ComboBox separately
+            If emptyTextbox Is Nothing AndAlso cboRemark.SelectedIndex < 0 Then
+                MessageBox.Show("Please select a remark.", "Final Grade", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                cboRemark.Focus()
+                Return False
+            End If
         End If
 
         If emptyTextbox IsNot Nothing Then
@@ -320,30 +314,19 @@ Public Class AddGrade_Form
         End If
 
         Return True
-
     End Function
 
-
-    Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
-
+    Private Sub btnSave_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSave.Click
         If updateMode Then
             UpdateGrade()
-            Exit Sub
         Else
             If checkAllTextboxes() Then
                 insertIt()
             End If
         End If
-
     End Sub
 
-    Private Function calculateGrade(ByVal raw As Decimal, ByVal max As Decimal, ByVal weight As Decimal) As Decimal
-        Dim result As Decimal = (raw / max) * weight
-        Return result
-    End Function
-
-
-    Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
+    Private Sub btnCancel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCancel.Click
         Dim result As DialogResult = MessageBox.Show("Are you sure you want to Exit?", "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
         If result = DialogResult.Yes Then
             Me.Close()
@@ -352,16 +335,47 @@ Public Class AddGrade_Form
 
     Private Sub insertIt()
         Try
+            Connect_me()
+
+            ' ✅ ADDED: Double-check that grade doesn't already exist before inserting
+            Dim checkQuery As String = "SELECT COUNT(*) FROM grades " & _
+                                       "WHERE stud_id = ? " & _
+                                       "AND prof_id = ? " & _
+                                       "AND sub_id = ? " & _
+                                       "AND school_year = ? " & _
+                                       "AND semester = ?"
+
+            Using checkCmd As New OdbcCommand(checkQuery, con)
+                checkCmd.Parameters.AddWithValue("?", CInt(sID.Trim()))
+                checkCmd.Parameters.AddWithValue("?", profID)
+                checkCmd.Parameters.AddWithValue("?", CInt(cboSubject.SelectedValue))
+                checkCmd.Parameters.AddWithValue("?", Teacher_Form.sy.Trim())
+                checkCmd.Parameters.AddWithValue("?", Teacher_Form.sm)
+
+                Dim count As Integer = Convert.ToInt32(checkCmd.ExecuteScalar())
+
+                If count > 0 Then
+                    MessageBox.Show("Cannot save: This student already has a grade for this subject,school year and semester " & _
+                                    ". Check the dashboard.", _
+                                  "Duplicate Grade", _
+                                  MessageBoxButtons.OK, _
+                                  MessageBoxIcon.Error)
+
+                    Return
+                End If
+            End Using
+
             Dim query As String = "INSERT INTO grades " & _
                       "(school_year, semester, stud_id, prof_id, sub_id, attendance, quiz, recitation, project, " & _
-                      "prelim, midterm, semis, finals, grade, remark) " & _
-                      "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)"
+                      "prelim, midterm, semis, finals, grade, numerical, remark) " & _
+                      "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+
             Using cmd As New OdbcCommand(query, con)
-                cmd.Parameters.AddWithValue("?", Teacher_Form.sy.ToString().Trim())
-                cmd.Parameters.AddWithValue("?", CInt(Teacher_Form.sm.ToString.Trim))
-                cmd.Parameters.AddWithValue("?", CInt(sID.Trim))
+                cmd.Parameters.AddWithValue("?", Teacher_Form.sy.Trim())
+                cmd.Parameters.AddWithValue("?", Teacher_Form.sm)
+                cmd.Parameters.AddWithValue("?", CInt(sID.Trim()))
                 cmd.Parameters.AddWithValue("?", profID)
-                cmd.Parameters.AddWithValue("?", CInt(cboSubject.SelectedValue.ToString()))
+                cmd.Parameters.AddWithValue("?", CInt(cboSubject.SelectedValue))
                 cmd.Parameters.AddWithValue("?", txtTotalAttendance.Text.Trim())
                 cmd.Parameters.AddWithValue("?", txtTotalQuiz.Text.Trim())
                 cmd.Parameters.AddWithValue("?", txtTotalRecitation.Text.Trim())
@@ -371,15 +385,20 @@ Public Class AddGrade_Form
                 cmd.Parameters.AddWithValue("?", txtTotalSemis.Text.Trim())
                 cmd.Parameters.AddWithValue("?", txtTotalFinals.Text.Trim())
                 cmd.Parameters.AddWithValue("?", CDec(txtAverageGrade.Text.Trim()))
+                cmd.Parameters.AddWithValue("?", txtNumericalGrade.Text.Trim())
                 cmd.Parameters.AddWithValue("?", cboRemark.SelectedItem.ToString())
-                Connect_me()
+
                 Dim result As Integer = cmd.ExecuteNonQuery()
+
                 If result > 0 Then
                     gradeSubmission()
+                    Me.DialogResult = DialogResult.OK
+                    Me.Close()
                 End If
             End Using
+
         Catch ex As Exception
-            MessageBox.Show("error" & ex.ToString)
+            MessageBox.Show("Error: " & ex.Message, "Insert Error")
         Finally
             If con.State = ConnectionState.Open Then con.Close()
         End Try
@@ -387,33 +406,219 @@ Public Class AddGrade_Form
 
     Private Sub getSubject(ByVal secID As String)
         Try
-            Dim query As String = "SELECT distinct profsectionsubject.id As ID," & _
-                           "concat(subject.sub_code,'-',subject.sub_name) As Subject, " & _
-                           "section.section As Section, prof.prof_id As ProfId " & _
-                           "From profsectionsubject " & _
-                           "Left Join prof On profsectionsubject.prof_id = prof.prof_id " & _
-                           "Left Join subject On profsectionsubject.sub_id = subject.sub_id " & _
-                           "Left Join section On profsectionsubject.section_id = section.section_id " & _
-                           "Where prof.acc_id = ? AND profsectionsubject.section_id =?"
+            Connect_me()
+
+            Dim query As String = "SELECT DISTINCT " & _
+                                 "subject.sub_id AS SubjectID, " & _
+                                 "CONCAT(subject.sub_code, '-', subject.sub_name) AS Subject, " & _
+                                 "section.section AS Section, " & _
+                                 "prof.prof_id AS ProfId " & _
+                                 "FROM profsectionsubject " & _
+                                 "LEFT JOIN prof ON profsectionsubject.prof_id = prof.prof_id " & _
+                                 "LEFT JOIN subject ON profsectionsubject.sub_id = subject.sub_id " & _
+                                 "LEFT JOIN section ON profsectionsubject.section_id = section.section_id " & _
+                                 "WHERE prof.acc_id = ? " & _
+                                 "AND profsectionsubject.section_id = ? " & _
+                                 "ORDER BY subject.sub_code"
+
             Using adapter As New OdbcDataAdapter(query, con)
                 adapter.SelectCommand.Parameters.AddWithValue("?", Teacher_Form.acc_id)
                 adapter.SelectCommand.Parameters.AddWithValue("?", secID)
-                Dim ds As New DataSet
-                adapter.Fill(ds, "profsub")
-                If ds.Tables("profsub").Rows.Count > 0 Then
-                    cboSubject.DataSource = ds.Tables("profsub")
+
+                Dim dt As New DataTable()
+                adapter.Fill(dt)
+
+                If dt.Rows.Count > 0 Then
+                    ' ✅ Store section and prof info before adding placeholder
+                    txtSection.Text = dt.Rows(0)("Section").ToString()
+                    profID = CInt(dt.Rows(0)("ProfId"))
+
+                    ' ✅ Add placeholder row at the beginning
+                    Dim placeholderRow As DataRow = dt.NewRow()
+                    placeholderRow("SubjectID") = 0
+                    placeholderRow("Subject") = "-- Select a subject --"
+                    placeholderRow("Section") = txtSection.Text
+                    placeholderRow("ProfId") = profID
+                    dt.Rows.InsertAt(placeholderRow, 0)
+
+                    ' Bind to ComboBox
+                    cboSubject.DataSource = dt
                     cboSubject.DisplayMember = "Subject"
-                    cboSubject.ValueMember = "ID"
-                    txtSection.Text = ds.Tables("profsub").Rows(0)("Section").ToString
-                    profID = CInt(ds.Tables("profsub").Rows(0)("ProfId"))
+                    cboSubject.ValueMember = "SubjectID"
+                    cboSubject.SelectedIndex = 0
+                Else
+                    MessageBox.Show("No subjects found for this section", "Info")
                 End If
             End Using
+
         Catch ex As Exception
-            MessageBox.Show("error:" & ex.ToString)
+            MessageBox.Show("Error: " & ex.Message, "Get Subject")
         Finally
             If con.State = ConnectionState.Open Then con.Close()
         End Try
     End Sub
+
+    Private Sub cboSubject_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cboSubject.SelectedIndexChanged
+        ' ✅ FIXED: Don't check if already loading or in update mode
+        'If isLoadingGrade Then Return
+        'If updateMode Then Return ' Don't check again if already in update mode
+
+        If cboSubject.SelectedIndex = 0 Then
+            ' User selected "-- Select a subject --", clear fields
+            ClearGradeFields()
+            Return
+        End If
+
+        If cboSubject.SelectedIndex >= 0 AndAlso _
+           Not String.IsNullOrEmpty(sID) AndAlso _
+           profID > 0 AndAlso _
+           Not String.IsNullOrEmpty(Teacher_Form.sy) AndAlso _
+           Teacher_Form.sm > 0 Then
+            'GroupBox4.Text = Convert.ToInt32(cboSubject.SelectedValue)
+            CheckAndLoadExistingGrade()
+        End If
+    End Sub
+
+    Private Sub CheckAndLoadExistingGrade()
+        Try
+            ' Validate all inputs
+            If cboSubject.SelectedIndex < 0 Then Return
+            If String.IsNullOrEmpty(sID.Trim()) Then Return
+            If profID = 0 Then Return
+            If String.IsNullOrEmpty(Teacher_Form.sy) OrElse Teacher_Form.sm = 0 Then Return
+
+            'isLoadingGrade = True  ' ✅ Set flag
+            Connect_me()
+
+            ' Get subject ID
+            Dim subjectId As Integer = 0
+
+            If IsNumeric(cboSubject.SelectedValue) Then
+                subjectId = Convert.ToInt32(cboSubject.SelectedValue)
+            ElseIf TypeOf cboSubject.SelectedValue Is DataRowView Then
+                Dim row As DataRowView = CType(cboSubject.SelectedValue, DataRowView)
+                If Not Integer.TryParse(row("SubjectID").ToString(), subjectId) Then
+                    Return
+                End If
+            Else
+                Return
+            End If
+
+            If subjectId = 0 Then Return
+
+            ' Convert sID to integer safely
+            Dim studentId As Integer = 0
+            If Not Integer.TryParse(sID, studentId) Then
+                MessageBox.Show("Invalid student ID", "Error")
+                Return
+            End If
+
+            Dim query As String = "SELECT * FROM grades " & _
+                                 "WHERE stud_id = ? " & _
+                                 "AND prof_id = ? " & _
+                                 "AND sub_id = ? " & _
+                                 "AND school_year = ? " & _
+                                 "AND semester = ?"
+
+            Using cmd As New OdbcCommand(query, con)
+                cmd.Parameters.AddWithValue("?", studentId)
+                cmd.Parameters.AddWithValue("?", profID)
+                cmd.Parameters.AddWithValue("?", subjectId)
+                cmd.Parameters.AddWithValue("?", Teacher_Form.sy)
+                cmd.Parameters.AddWithValue("?", Teacher_Form.sm)
+
+                Using reader As OdbcDataReader = cmd.ExecuteReader()
+                    If reader.Read() Then
+                        Dim result As DialogResult = MessageBox.Show( _
+                            "This student already has a grade for this subject." & vbCrLf & vbCrLf & _
+                            "Load existing grade for editing?", _
+                            "Existing Grade Found", _
+                            MessageBoxButtons.YesNo, _
+                            MessageBoxIcon.Question)
+
+                        If result = DialogResult.Yes Then
+                            ' ✅ Switch to update mode
+                            gradeID = reader("grades_id").ToString()
+                            updateMode = True
+                            LoadGradeFields(reader)
+                            btnSave.Text = "Update Grade"
+                            Me.Text = "Edit Grade"
+                        Else
+                            ' ✅ User said No - clear and stay in add mode
+                            ClearGradeFields()
+                            gradeID = ""
+                            updateMode = False
+                            btnSave.Text = "Save Grade"
+                        End If
+                    Else
+                        ' ✅ No existing grade - new entry mode
+                        ClearGradeFields()
+                        gradeID = ""
+                        updateMode = False
+                        btnSave.Text = "Save Grade"
+                    End If
+                End Using
+            End Using
+
+        Catch ex As Exception
+            MessageBox.Show("Error: " & ex.ToString & vbCrLf & vbCrLf & _
+                           "Debug Info:" & vbCrLf & _
+                           "Student ID: '" & sID & "'" & vbCrLf & _
+                           "Prof ID: " & profID & vbCrLf & _
+                           "School Year: '" & Teacher_Form.sy & "'" & vbCrLf & _
+                           "Semester: " & Teacher_Form.sm, _
+                           "Check Existing Grade Error")
+        Finally
+            'isLoadingGrade = False  ' ✅ Reset flag
+            If con.State = ConnectionState.Open Then con.Close()
+        End Try
+    End Sub
+
+    Private Sub LoadGradeFields(ByVal reader As OdbcDataReader)
+        txtTotalAttendance.Text = If(IsDBNull(reader("attendance")), "", reader("attendance").ToString())
+        txtTotalQuiz.Text = If(IsDBNull(reader("quiz")), "", reader("quiz").ToString())
+        txtTotalRecitation.Text = If(IsDBNull(reader("recitation")), "", reader("recitation").ToString())
+        txtTotalProject.Text = If(IsDBNull(reader("project")), "", reader("project").ToString())
+        txtTotalPrelim.Text = If(IsDBNull(reader("prelim")), "", reader("prelim").ToString())
+        txtTotalMidterm.Text = If(IsDBNull(reader("midterm")), "", reader("midterm").ToString())
+        txtTotalSemis.Text = If(IsDBNull(reader("semis")), "", reader("semis").ToString())
+        txtTotalFinals.Text = If(IsDBNull(reader("finals")), "", reader("finals").ToString())
+        txtAverageGrade.Text = If(IsDBNull(reader("grade")), "", reader("grade").ToString())
+        txtNumericalGrade.Text = If(IsDBNull(reader("numerical")), "", reader("numerical").ToString())
+
+        If Not IsDBNull(reader("remark")) Then
+            cboRemark.SelectedItem = reader("remark").ToString()
+        End If
+    End Sub
+
+    Private Sub ClearGradeFields()
+        txtTotalAttendance.Clear()
+        txtTotalQuiz.Clear()
+        txtTotalRecitation.Clear()
+        txtTotalProject.Clear()
+        txtTotalPrelim.Clear()
+        txtTotalMidterm.Clear()
+        txtTotalSemis.Clear()
+        txtTotalFinals.Clear()
+        txtNumericalGrade.Clear()
+        txtAverageGrade.Clear()
+        cboRemark.SelectedIndex = -1
+    End Sub
+
+    Private Sub Button1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button1.Click
+        Dim selectForm As New SelectStudent_Form()
+        selectForm.ParentForm = Me
+        selectForm.ShowDialog()
+    End Sub
+
+    Private Sub txtName_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles txtName.TextChanged
+        If Not updateMode AndAlso Not String.IsNullOrEmpty(secID) Then
+            getSubject(secID)
+        End If
+    End Sub
+
+
+
 #Region "Other Grades Computation"
     Private Sub txtWAttendance_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtRawAttendance.TextChanged
         Dim raw, max, weight, result As Decimal
@@ -821,6 +1026,7 @@ Public Class AddGrade_Form
 #Region "calculate overall numerical and Weight "
 
     Private Sub txtNumericalGrade_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtAverageGrade.TextChanged
+        If String.IsNullOrEmpty(txtAverageGrade.Text) Then Return
         Select Case CInt(txtAverageGrade.Text)
             Case Is >= 97
                 txtNumericalGrade.Text = "1.0"
@@ -901,15 +1107,4 @@ Public Class AddGrade_Form
 #End Region
 
 
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
-        Dim selectForm As New SelectStudent_Form
-        selectForm.ParentForm = Me  ' Pass reference
-        selectForm.ShowDialog()
-    End Sub
-
-    Private Sub txtName_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtName.TextChanged
-        If updateMode <> True Then
-            getSubject(secID)
-        End If
-    End Sub
 End Class
