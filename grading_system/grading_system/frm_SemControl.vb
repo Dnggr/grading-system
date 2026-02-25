@@ -48,7 +48,7 @@ Public Class frm_SemControl
 
                 btnIncrement.Enabled = Not lkd
 
-                ' ── FIX: Update ToolStripStatusLabel2 (right panel - S.Y. + Sem) ──
+                ' ── Right status bar panel: S.Y. + Sem ──
                 ToolStripStatusLabel2.Text = "S.Y. " & sy & "  |  Sem " & sem.ToString()
             End If
 
@@ -123,10 +123,7 @@ Public Class frm_SemControl
                 End If
             Next
 
-            ' ══════════════════════════════════════════════════════════
-            ' FIX: Count totals directly from the DataTable just loaded.
-            ' No second DB query needed — numbers always match the grid.
-            ' ══════════════════════════════════════════════════════════
+            ' ── Count totals from the DataTable already in memory ──
             Dim totalTeachers As Integer = dt.Rows.Count
             Dim submittedCount As Integer = 0
 
@@ -138,10 +135,10 @@ Public Class frm_SemControl
 
             Dim pendingCount As Integer = totalTeachers - submittedCount
 
-            ' ── FIX: lblTotalTeachers ──
+            ' ── lblTotalTeachers ──
             lblTotalTeachers.Text = totalTeachers.ToString() & " teachers"
 
-            ' ── FIX: lblSubmitted  (e.g. "3 / 5") ──
+            ' ── lblSubmitted (e.g. "3 / 5") ──
             lblSubmitted.Text = submittedCount.ToString() & " / " & totalTeachers.ToString()
 
             If submittedCount = totalTeachers AndAlso totalTeachers > 0 Then
@@ -150,7 +147,7 @@ Public Class frm_SemControl
                 lblSubmitted.ForeColor = System.Drawing.Color.Red
             End If
 
-            ' ── FIX: ToolStripStatusLabel1 (left status bar message) ──
+            ' ── ToolStripStatusLabel1 (left status bar message) ──
             If totalTeachers = 0 Then
                 ToolStripStatusLabel1.Text = "No teachers found for this semester."
             ElseIf pendingCount = 0 Then
@@ -162,8 +159,7 @@ Public Class frm_SemControl
                     " still pending. Advance button will be blocked until all submit."
             End If
 
-            ' ── Secondary guard on Increment button based on pending count ──
-            '    (Primary guard is is_locked in LoadSemStatus — this is the grade check)
+            ' ── Enable / disable Increment button based on pending count ──
             If totalTeachers > 0 AndAlso pendingCount = 0 Then
                 btnIncrement.Enabled = True
             ElseIf pendingCount > 0 Then
@@ -197,20 +193,33 @@ Public Class frm_SemControl
         End If
 
         ' ── Step 2: Confirm with user ──
+        '    Tell the admin clearly that teacher assignments will be cleared.
         Dim confirm As DialogResult = MessageBox.Show( _
-            "Are you sure you want to advance to the next semester?", _
-            "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+            "Are you sure you want to advance to the next semester?" & vbCrLf & vbCrLf & _
+            "This will also CLEAR all teacher subject/section assignments." & vbCrLf & _
+            "The admin will need to re-assign teachers after advancing.", _
+            "Confirm Semester Advance", _
+            MessageBoxButtons.YesNo, _
+            MessageBoxIcon.Warning)
 
         If confirm <> DialogResult.Yes Then Return
 
-        ' ── Step 3: Perform increment inside a transaction ──
+        ' ── Step 3: Perform ALL changes inside one transaction ──
+        '    Order of operations:
+        '      A) Read current sem values
+        '      B) Calculate new sem / school year
+        '      C) DELETE profsectionsubject  ← NEW: unassign all teachers
+        '      D) UPDATE sem_control
+        '      E) DELETE old grade_submission rows for the new period
+        '      F) INSERT fresh grade_submission rows for all teachers
+        '      G) Commit
         Try
             Connect_me()
 
             Dim tx As OdbcTransaction = con.BeginTransaction()
 
             Try
-                ' Read current values
+                ' ── A) Read current values ──────────────────────────────────
                 Dim cmdRead As New OdbcCommand( _
                     "SELECT school_year, semester FROM sem_control LIMIT 1", con, tx)
                 Dim dr As OdbcDataReader = cmdRead.ExecuteReader()
@@ -224,13 +233,15 @@ Public Class frm_SemControl
                 End If
                 dr.Close()
 
-                ' Calculate new semester / school year
+                ' ── B) Calculate new semester / school year ─────────────────
                 Dim newYear As String = curYear
                 Dim newSem As Integer = curSem
 
                 If curSem = 1 Then
+                    ' 1st sem → 2nd sem, same school year
                     newSem = 2
                 Else
+                    ' 2nd sem → 1st sem of NEXT school year
                     newSem = 1
                     Dim parts() As String = curYear.Split("-"c)
                     Dim y1 As Integer = Convert.ToInt32(parts(0)) + 1
@@ -238,39 +249,52 @@ Public Class frm_SemControl
                     newYear = y1.ToString() & "-" & y2.ToString()
                 End If
 
-                ' Update sem_control
+                ' ── C) CLEAR profsectionsubject ─────────────────────────────
+                '    This unassigns ALL teachers from ALL subjects and sections.
+                '    The admin must re-assign via popUpFormAssignTeacherSubject
+                '    at the start of the new semester.
+                Dim cmdClearAssign As New OdbcCommand( _
+                    "DELETE FROM profsectionsubject", con, tx)
+                cmdClearAssign.ExecuteNonQuery()
+
+                ' ── D) Update sem_control ────────────────────────────────────
                 Dim cmdUpd As New OdbcCommand( _
-                    "UPDATE sem_control SET school_year = ?, semester = ?, is_locked = 0", _
+                    "UPDATE sem_control " & _
+                    "SET school_year = ?, semester = ?, is_locked = 0", _
                     con, tx)
                 cmdUpd.Parameters.AddWithValue("@sy", newYear)
                 cmdUpd.Parameters.AddWithValue("@sem", newSem)
                 cmdUpd.ExecuteNonQuery()
 
-                ' Remove old submission rows for the new period (clean slate)
-                Dim cmdDel As New OdbcCommand( _
-                    "DELETE FROM grade_submission WHERE school_year = ? AND semester = ?", _
+                ' ── E) Remove any leftover grade_submission rows for new period
+                Dim cmdDelSub As New OdbcCommand( _
+                    "DELETE FROM grade_submission " & _
+                    "WHERE school_year = ? AND semester = ?", _
                     con, tx)
-                cmdDel.Parameters.AddWithValue("@sy", newYear)
-                cmdDel.Parameters.AddWithValue("@sem", newSem)
-                cmdDel.ExecuteNonQuery()
+                cmdDelSub.Parameters.AddWithValue("@sy", newYear)
+                cmdDelSub.Parameters.AddWithValue("@sem", newSem)
+                cmdDelSub.ExecuteNonQuery()
 
-                ' Re-seed submission rows for all current teachers
+                ' ── F) Re-seed grade_submission for all current teachers ─────
                 Dim cmdIns As New OdbcCommand( _
                     "INSERT IGNORE INTO grade_submission " & _
                     "  (prof_id, school_year, semester, submitted) " & _
                     "SELECT prof_id, ?, ?, 0 " & _
-                    "FROM prof " & _
-                    "WHERE LOWER(role) = 'teacher'", _
+                    "FROM   prof " & _
+                    "WHERE  LOWER(role) = 'teacher'", _
                     con, tx)
                 cmdIns.Parameters.AddWithValue("@sy", newYear)
                 cmdIns.Parameters.AddWithValue("@sem", newSem)
                 cmdIns.ExecuteNonQuery()
 
+                ' ── G) Commit everything atomically ─────────────────────────
                 tx.Commit()
 
                 MessageBox.Show( _
                     "Semester advanced to S.Y. " & newYear & " - " & _
-                    If(newSem = 1, "1st", "2nd") & " Semester.", _
+                    If(newSem = 1, "1st", "2nd") & " Semester." & vbCrLf & vbCrLf & _
+                    "All teacher subject/section assignments have been cleared." & vbCrLf & _
+                    "Please re-assign teachers before the new semester begins.", _
                     "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
                 ' Refresh all labels, grid, counts, and status bar
