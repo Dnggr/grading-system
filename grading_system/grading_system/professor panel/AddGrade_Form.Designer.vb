@@ -212,7 +212,7 @@ Partial Class AddGrade_Form
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(95, 71)
         Me.btnSave.TabIndex = 2
-        Me.btnSave.Text = "Insert"
+        Me.btnSave.Text = "Save Grade"
         Me.btnSave.UseVisualStyleBackColor = True
         '
         'cboRemark

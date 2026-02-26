@@ -280,6 +280,8 @@ Partial Public Class GradeFields
         
         Private columnSection As Global.System.Data.DataColumn
         
+        Private columnRemark As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Sub New()
             MyBase.New
@@ -361,6 +363,13 @@ Partial Public Class GradeFields
             End Get
         End Property
         
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property RemarkColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnRemark
+            End Get
+        End Property
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -390,9 +399,9 @@ Partial Public Class GradeFields
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Overloads Function AddGradeInfoRow(ByVal Profname As String, ByVal Subjects As String, ByVal Grades As String, ByVal Studentname As String, ByVal Studentid As String, ByVal Course As String, ByVal Section As String) As GradeInfoRow
+        Public Overloads Function AddGradeInfoRow(ByVal Profname As String, ByVal Subjects As String, ByVal Grades As String, ByVal Studentname As String, ByVal Studentid As String, ByVal Course As String, ByVal Section As String, ByVal Remark As String) As GradeInfoRow
             Dim rowGradeInfoRow As GradeInfoRow = CType(Me.NewRow,GradeInfoRow)
-            Dim columnValuesArray() As Object = New Object() {Profname, Subjects, Grades, Studentname, Studentid, Course, Section}
+            Dim columnValuesArray() As Object = New Object() {Profname, Subjects, Grades, Studentname, Studentid, Course, Section, Remark}
             rowGradeInfoRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowGradeInfoRow)
             Return rowGradeInfoRow
@@ -419,6 +428,7 @@ Partial Public Class GradeFields
             Me.columnStudentid = MyBase.Columns("Studentid")
             Me.columnCourse = MyBase.Columns("Course")
             Me.columnSection = MyBase.Columns("Section")
+            Me.columnRemark = MyBase.Columns("Remark")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
@@ -437,6 +447,8 @@ Partial Public Class GradeFields
             MyBase.Columns.Add(Me.columnCourse)
             Me.columnSection = New Global.System.Data.DataColumn("Section", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnSection)
+            Me.columnRemark = New Global.System.Data.DataColumn("Remark", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnRemark)
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
@@ -671,6 +683,20 @@ Partial Public Class GradeFields
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property Remark() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableGradeInfo.RemarkColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Remark' in table 'GradeInfo' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableGradeInfo.RemarkColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Function IsProfnameNull() As Boolean
             Return Me.IsNull(Me.tableGradeInfo.ProfnameColumn)
         End Function
@@ -738,6 +764,16 @@ Partial Public Class GradeFields
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Sub SetSectionNull()
             Me(Me.tableGradeInfo.SectionColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsRemarkNull() As Boolean
+            Return Me.IsNull(Me.tableGradeInfo.RemarkColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetRemarkNull()
+            Me(Me.tableGradeInfo.RemarkColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
