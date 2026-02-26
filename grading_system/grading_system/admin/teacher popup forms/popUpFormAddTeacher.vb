@@ -5,19 +5,16 @@ Public Class popUpFormAddTeacher
 #Region "Form Load"
 
     Private Sub popUpFormAddTeacher_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        ' Pre-populate Gender ComboBox
         Teacher_Gender_ComboBox.Items.Clear()
         Teacher_Gender_ComboBox.Items.Add("Male")
         Teacher_Gender_ComboBox.Items.Add("Female")
         Teacher_Gender_ComboBox.SelectedIndex = -1
-
-        ' Make Gender ComboBox non-editable (only dropdown selection)
         Teacher_Gender_ComboBox.DropDownStyle = ComboBoxStyle.DropDownList
     End Sub
 
 #End Region
 
-#Region "Real-Time Validation - TextChanged / SelectedIndexChanged Events"
+#Region "Real-Time Validation"
 
     Private Sub Teacher_Lastname_TextBox_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Teacher_Lastname_TextBox.TextChanged
         If Teacher_Lastname_TextBox.Text.Trim() = "" Then
@@ -36,13 +33,11 @@ Public Class popUpFormAddTeacher
     End Sub
 
     Private Sub Teacher_Middlename_TextBox_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Teacher_Middlename_TextBox.TextChanged
-        ' Middle name is optional — no error highlight needed
         Teacher_Middlename_TextBox.BackColor = System.Drawing.Color.White
     End Sub
 
     Private Sub Teacher_Email_TextBox_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Teacher_Email_TextBox.TextChanged
         Dim email As String = Teacher_Email_TextBox.Text.Trim()
-
         If email = "" OrElse Not IsValidEmail(email) Then
             Teacher_Email_TextBox.BackColor = System.Drawing.Color.MistyRose
         Else
@@ -62,54 +57,34 @@ Public Class popUpFormAddTeacher
 
 #Region "Validation Helpers"
 
-    ''' <summary>
-    ''' Validates that an email ends with @gmail.com and has a non-empty local part.
-    ''' </summary>
     Private Function IsValidEmail(ByVal email As String) As Boolean
         If email Is Nothing OrElse email.Trim() = "" Then Return False
-
         email = email.Trim().ToLower()
-
-        ' Must end with @gmail.com
         If Not email.EndsWith("@gmail.com") Then Return False
-
-        ' Must have something before the @ (at least 1 character)
         Dim atIndex As Integer = email.IndexOf("@")
         If atIndex <= 0 Then Return False
-
         Return True
     End Function
 
-    ''' <summary>
-    ''' Runs all field validations.
-    ''' Highlights invalid fields and returns False if any fail.
-    ''' </summary>
     Private Function ValidateAllFields() As Boolean
         Dim isValid As Boolean = True
 
-        ' Last Name
         If Teacher_Lastname_TextBox.Text.Trim() = "" Then
             Teacher_Lastname_TextBox.BackColor = System.Drawing.Color.MistyRose
             isValid = False
         End If
 
-        ' First Name
         If Teacher_Firstname_TextBox.Text.Trim() = "" Then
             Teacher_Firstname_TextBox.BackColor = System.Drawing.Color.MistyRose
             isValid = False
         End If
 
-        ' Email
         Dim emailText As String = Teacher_Email_TextBox.Text.Trim()
-        If emailText = "" Then
-            Teacher_Email_TextBox.BackColor = System.Drawing.Color.MistyRose
-            isValid = False
-        ElseIf Not IsValidEmail(emailText) Then
+        If emailText = "" OrElse Not IsValidEmail(emailText) Then
             Teacher_Email_TextBox.BackColor = System.Drawing.Color.MistyRose
             isValid = False
         End If
 
-        ' Gender
         If Teacher_Gender_ComboBox.SelectedIndex = -1 Then
             Teacher_Gender_ComboBox.BackColor = System.Drawing.Color.MistyRose
             isValid = False
@@ -126,10 +101,6 @@ Public Class popUpFormAddTeacher
         Return isValid
     End Function
 
-    ''' <summary>
-    ''' Checks if the email is already taken in the account table.
-    ''' Returns True if a duplicate is found.
-    ''' </summary>
     Private Function IsEmailDuplicate(ByVal email As String) As Boolean
         Try
             Connect_me()
@@ -140,7 +111,7 @@ Public Class popUpFormAddTeacher
             Return count > 0
         Catch ex As Exception
             MessageBox.Show("Error checking email: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Return True  ' Treat error as duplicate to prevent a bad insert
+            Return True
         Finally
             If con.State = ConnectionState.Open Then con.Close()
         End Try
@@ -162,7 +133,7 @@ Public Class popUpFormAddTeacher
         Dim email As String = Teacher_Email_TextBox.Text.Trim()
         Dim gender As String = Teacher_Gender_ComboBox.SelectedItem.ToString().ToLower()
 
-        ' ── Step 3: Check for duplicate email ──
+        ' ── Step 3: Duplicate email check ──
         If IsEmailDuplicate(email) Then
             Teacher_Email_TextBox.BackColor = System.Drawing.Color.MistyRose
             MessageBox.Show("This email address is already registered." & vbCrLf & _
@@ -171,19 +142,15 @@ Public Class popUpFormAddTeacher
             Return
         End If
 
-        ' ── Step 4: Hash the default password (12345) using Module_PasswordHelper ──
+        ' ── Step 4: Hash default password ──
         Dim hashedPassword As String = HashPassword("12345")
-
-        ' Verify the hash was created successfully
         If hashedPassword = "" Then
             MessageBox.Show("Error creating password hash. Please try again.", _
                             "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return
         End If
 
-        ' ── Step 5: Insert into account table ──
-        ' FIXED: Removed 'section' column - teachers don't have sections in account table
-        ' The trigger (insert_prof_if_role_prof) will automatically create the prof record
+        ' ── Step 5: Insert into account (trigger will create the prof row) ──
         Try
             Connect_me()
 
@@ -204,10 +171,24 @@ Public Class popUpFormAddTeacher
             Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
 
             If rowsAffected > 0 Then
+
+                ' ── Step 6: Set the new prof row to ACTIVE ──
+                ' The trigger already created the prof row linked by acc_id.
+                ' We now look it up by email (via account) and set status = 'active'.
+                Dim updateStatusQuery As String = _
+                    "UPDATE prof SET status = 'active' " & _
+                    "WHERE acc_id = (SELECT acc_id FROM account WHERE LOWER(email) = LOWER(?))"
+
+                Dim cmdStatus As New OdbcCommand(updateStatusQuery, con)
+                cmdStatus.Parameters.AddWithValue("@email", email)
+                cmdStatus.ExecuteNonQuery()
+                ' Non-critical: if this fails the teacher is just null-status, not a fatal error.
+
                 MessageBox.Show("Teacher registered successfully!" & vbCrLf & vbCrLf & _
                                 "Email: " & email & vbCrLf & _
                                 "Default Password: 12345" & vbCrLf & vbCrLf & _
-                                "The teacher can now log in and should change their password.", _
+                                "The teacher is set to ACTIVE and can now log in." & vbCrLf & _
+                                "They should change their password on first login.", _
                                 "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Me.Close()
             Else

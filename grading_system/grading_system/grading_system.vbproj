@@ -339,6 +339,14 @@
       <DependentUpon>popUpFormAssignSubjectToTeacher.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="admin\teacher popup forms\popUpFormDeleteTeacher.resx">
+      <DependentUpon>popUpFormDeleteTeacher.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="admin\teacher popup forms\popUpFormModifyTeacher.resx">
+      <DependentUpon>popUpFormModifyTeacher.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="crystalreport\GradesStructure.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>GradesStructure.vb</LastGenOutput>

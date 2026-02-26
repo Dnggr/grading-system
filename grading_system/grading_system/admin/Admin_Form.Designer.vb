@@ -54,6 +54,8 @@ Partial Class Admin_Form
         Me.ToolStripButton3 = New System.Windows.Forms.ToolStripButton
         Me.ToolStripButton4 = New System.Windows.Forms.ToolStripButton
         Me.ToolStripButton5 = New System.Windows.Forms.ToolStripButton
+        Me.Refresh_teacher_Button = New System.Windows.Forms.Button
+        Me.Refresh_student_Button = New System.Windows.Forms.Button
         Me.Navigation_Panel.SuspendLayout()
         Me.Student_Panel.SuspendLayout()
         CType(Me.Student_List_DataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -142,6 +144,7 @@ Partial Class Admin_Form
         'Student_Panel
         '
         Me.Student_Panel.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Student_Panel.Controls.Add(Me.Refresh_student_Button)
         Me.Student_Panel.Controls.Add(Me.Search_Student_TextBox)
         Me.Student_Panel.Controls.Add(Me.Search_Student_Label)
         Me.Student_Panel.Controls.Add(Me.Student_Label)
@@ -216,6 +219,7 @@ Partial Class Admin_Form
         '
         'Teacher_Panel
         '
+        Me.Teacher_Panel.Controls.Add(Me.Refresh_teacher_Button)
         Me.Teacher_Panel.Controls.Add(Me.Back_Button)
         Me.Teacher_Panel.Controls.Add(Me.Delete_Teacher_Button)
         Me.Teacher_Panel.Controls.Add(Me.Assign_Class_To_Teacher_Button)
@@ -348,6 +352,24 @@ Partial Class Admin_Form
         Me.ToolStripButton5.Size = New System.Drawing.Size(56, 22)
         Me.ToolStripButton5.Text = "Close"
         '
+        'Refresh_teacher_Button
+        '
+        Me.Refresh_teacher_Button.Location = New System.Drawing.Point(840, 145)
+        Me.Refresh_teacher_Button.Name = "Refresh_teacher_Button"
+        Me.Refresh_teacher_Button.Size = New System.Drawing.Size(75, 23)
+        Me.Refresh_teacher_Button.TabIndex = 9
+        Me.Refresh_teacher_Button.Text = "refresh"
+        Me.Refresh_teacher_Button.UseVisualStyleBackColor = True
+        '
+        'Refresh_student_Button
+        '
+        Me.Refresh_student_Button.Location = New System.Drawing.Point(977, 98)
+        Me.Refresh_student_Button.Name = "Refresh_student_Button"
+        Me.Refresh_student_Button.Size = New System.Drawing.Size(138, 23)
+        Me.Refresh_student_Button.TabIndex = 7
+        Me.Refresh_student_Button.Text = "refresh"
+        Me.Refresh_student_Button.UseVisualStyleBackColor = True
+        '
         'Admin_Form
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -401,4 +423,6 @@ Partial Class Admin_Form
     Friend WithEvents Assign_Class_To_Teacher_Button As System.Windows.Forms.Button
     Friend WithEvents Modify_Teacher_Button As System.Windows.Forms.Button
     Friend WithEvents Back_Button As System.Windows.Forms.Button
+    Friend WithEvents Refresh_teacher_Button As System.Windows.Forms.Button
+    Friend WithEvents Refresh_student_Button As System.Windows.Forms.Button
 End Class
