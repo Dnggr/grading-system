@@ -2,27 +2,23 @@
 
 Public Class popUpFormAssignSubjectToTeacher
 
-    ' Store selected teacher and subject info
     Private selectedTeacherId As Integer = 0
     Private selectedTeacherName As String = ""
     Private selectedSubjectId As Integer = 0
     Private selectedSubjectName As String = ""
     Private selectedCourseId As Integer = 0
 
-    ' DataTables for filtering
     Private allTeachersTable As DataTable
     Private allSubjectsTable As DataTable
 
 #Region "Form Load"
 
     Private Sub popUpFormAssignSubjectToTeacher_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        ' Initialize the form
         LoadAllTeachers()
         LoadCourseFilter()
         LoadAllSubjects()
         LoadCurrentAssignments()
 
-        ' Set initial label
         Selected_Teacher_Label.Text = "No teacher selected"
         Selected_Subject_Label.Text = "No subject selected"
     End Sub
@@ -34,7 +30,13 @@ Public Class popUpFormAssignSubjectToTeacher
     Private Sub LoadAllTeachers()
         Try
             Connect_me()
-            Dim query As String = "SELECT prof_id, CONCAT(lastname, ', ', firstname, ' ', COALESCE(middlename, '')) AS fullname FROM prof ORDER BY lastname"
+            ' Only load ACTIVE teachers
+            Dim query As String = _
+                "SELECT prof_id, CONCAT(lastname, ', ', firstname, ' ', COALESCE(middlename, '')) AS fullname " & _
+                "FROM prof " & _
+                "WHERE status = 'active' " & _
+                "ORDER BY lastname"
+
             Dim cmd As New OdbcCommand(query, con)
             Dim da As New OdbcDataAdapter(cmd)
             allTeachersTable = New DataTable()
@@ -42,12 +44,10 @@ Public Class popUpFormAssignSubjectToTeacher
 
             Search_Teacher_DataGridView.DataSource = allTeachersTable
 
-            ' Hide prof_id column
             If Search_Teacher_DataGridView.Columns.Contains("prof_id") Then
                 Search_Teacher_DataGridView.Columns("prof_id").Visible = False
             End If
 
-            ' Format fullname column
             If Search_Teacher_DataGridView.Columns.Contains("fullname") Then
                 Search_Teacher_DataGridView.Columns("fullname").HeaderText = "Teacher Name"
                 Search_Teacher_DataGridView.Columns("fullname").AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
@@ -69,7 +69,6 @@ Public Class popUpFormAssignSubjectToTeacher
             Dim da As New OdbcDataAdapter(cmd)
             da.Fill(dt)
 
-            ' Add "All Courses" option at the top
             Dim allRow As DataRow = dt.NewRow()
             allRow("course_id") = 0
             allRow("course_code") = "ALL"
@@ -107,15 +106,12 @@ Public Class popUpFormAssignSubjectToTeacher
 
             SubjectsDataGridView.DataSource = allSubjectsTable
 
-            ' Hide ID columns
             If SubjectsDataGridView.Columns.Contains("sub_id") Then
                 SubjectsDataGridView.Columns("sub_id").Visible = False
             End If
             If SubjectsDataGridView.Columns.Contains("course_id") Then
                 SubjectsDataGridView.Columns("course_id").Visible = False
             End If
-
-            ' Format visible columns
             If SubjectsDataGridView.Columns.Contains("course_code") Then
                 SubjectsDataGridView.Columns("course_code").HeaderText = "Course"
                 SubjectsDataGridView.Columns("course_code").Width = 80
@@ -158,35 +154,28 @@ Public Class popUpFormAssignSubjectToTeacher
             Dim da As New OdbcDataAdapter(cmd)
             da.Fill(dt)
 
-            ' Clear existing columns
             ClassDataGridView.DataSource = Nothing
             ClassDataGridView.Columns.Clear()
 
-            ' Add checkbox column
             Dim chkCol As New DataGridViewCheckBoxColumn()
             chkCol.Name = "chkAssign"
             chkCol.HeaderText = "Assign"
             chkCol.Width = 60
             ClassDataGridView.Columns.Add(chkCol)
 
-            ' Bind data
             ClassDataGridView.DataSource = dt
 
-            ' Hide ID columns
             If ClassDataGridView.Columns.Contains("section_id") Then
                 ClassDataGridView.Columns("section_id").Visible = False
             End If
             If ClassDataGridView.Columns.Contains("is_assigned") Then
                 ClassDataGridView.Columns("is_assigned").Visible = False
             End If
-
-            ' Format section_display column
             If ClassDataGridView.Columns.Contains("section_display") Then
                 ClassDataGridView.Columns("section_display").HeaderText = "Section"
                 ClassDataGridView.Columns("section_display").AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
             End If
 
-            ' Pre-check assigned sections
             For Each row As DataGridViewRow In ClassDataGridView.Rows
                 If Not row.IsNewRow Then
                     Dim isAssigned As Integer = Convert.ToInt32(row.Cells("is_assigned").Value)
@@ -204,6 +193,7 @@ Public Class popUpFormAssignSubjectToTeacher
     Private Sub LoadCurrentAssignments()
         Try
             Connect_me()
+            ' Only show assignments for ACTIVE teachers
             Dim query As String = _
                 "SELECT pss.id, " & _
                 "CONCAT(p.lastname, ', ', p.firstname) AS Teacher, " & _
@@ -215,6 +205,7 @@ Public Class popUpFormAssignSubjectToTeacher
                 "INNER JOIN subject sub ON pss.sub_id = sub.sub_id " & _
                 "LEFT JOIN course c ON sub.course_id = c.course_id " & _
                 "INNER JOIN section sec ON pss.section_id = sec.section_id " & _
+                "WHERE p.status = 'active' " & _
                 "ORDER BY p.lastname, c.course_code, sub.sub_code, sec.section"
 
             Dim cmd As New OdbcCommand(query, con)
@@ -222,14 +213,11 @@ Public Class popUpFormAssignSubjectToTeacher
             Dim da As New OdbcDataAdapter(cmd)
             da.Fill(dt)
 
-            ' Clear existing columns
             AssignmentsDataGridView.DataSource = Nothing
             AssignmentsDataGridView.Columns.Clear()
 
-            ' Bind data
             AssignmentsDataGridView.DataSource = dt
 
-            ' Add Delete button column
             Dim btnDelete As New DataGridViewButtonColumn()
             btnDelete.Name = "btnDelete"
             btnDelete.HeaderText = "Action"
@@ -238,12 +226,9 @@ Public Class popUpFormAssignSubjectToTeacher
             btnDelete.Width = 80
             AssignmentsDataGridView.Columns.Add(btnDelete)
 
-            ' Hide ID column
             If AssignmentsDataGridView.Columns.Contains("id") Then
                 AssignmentsDataGridView.Columns("id").Visible = False
             End If
-
-            ' Format columns
             If AssignmentsDataGridView.Columns.Contains("Teacher") Then
                 AssignmentsDataGridView.Columns("Teacher").Width = 150
             End If
@@ -274,15 +259,12 @@ Public Class popUpFormAssignSubjectToTeacher
         Dim searchText As String = Search_Teacher_TextBox.Text.Trim().ToLower()
 
         If searchText = "" Then
-            ' Show all teachers
             Search_Teacher_DataGridView.DataSource = allTeachersTable
         Else
-            ' Filter teachers
             Dim filteredView As DataView = allTeachersTable.DefaultView
             filteredView.RowFilter = String.Format( _
                 "fullname LIKE '%{0}%'", _
                 searchText.Replace("'", "''"))
-
             Search_Teacher_DataGridView.DataSource = filteredView
         End If
     End Sub
@@ -292,13 +274,12 @@ Public Class popUpFormAssignSubjectToTeacher
     End Sub
 
     Private Sub Search_Teacher_DataGridView_CellClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles Search_Teacher_DataGridView.CellClick
-        If e.RowIndex < 0 Then Return ' Ignore header clicks
+        If e.RowIndex < 0 Then Return
 
         Try
             Dim profId As Integer = Convert.ToInt32(Search_Teacher_DataGridView.Rows(e.RowIndex).Cells("prof_id").Value)
             Dim fullName As String = Search_Teacher_DataGridView.Rows(e.RowIndex).Cells("fullname").Value.ToString()
 
-            ' Show confirmation
             Dim result As DialogResult = MessageBox.Show( _
                 "Assign subjects to " & fullName & "?", _
                 "Confirm Teacher Selection", _
@@ -310,7 +291,6 @@ Public Class popUpFormAssignSubjectToTeacher
                 selectedTeacherName = fullName
                 Selected_Teacher_Label.Text = "Selected: " & fullName
 
-                ' Clear sections (must select subject again)
                 ClassDataGridView.DataSource = Nothing
                 ClassDataGridView.Columns.Clear()
                 Selected_Subject_Label.Text = "No subject selected"
@@ -330,7 +310,6 @@ Public Class popUpFormAssignSubjectToTeacher
     Private Sub CourseFilter_ComboBox_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CourseFilter_ComboBox.SelectedIndexChanged
         FilterSubjects()
 
-        ' Clear sections when filter changes
         ClassDataGridView.DataSource = Nothing
         ClassDataGridView.Columns.Clear()
         Selected_Subject_Label.Text = "No subject selected"
@@ -355,19 +334,16 @@ Public Class popUpFormAssignSubjectToTeacher
         Dim filteredView As DataView = allSubjectsTable.DefaultView
         Dim filterParts As New List(Of String)
 
-        ' Course filter
         If selectedCourseId > 0 Then
             filterParts.Add(String.Format("course_id = {0}", selectedCourseId))
         End If
 
-        ' Search text filter
         If searchText <> "" Then
             filterParts.Add(String.Format( _
                 "(sub_code LIKE '%{0}%' OR sub_name LIKE '%{0}%' OR course_code LIKE '%{0}%')", _
                 searchText.Replace("'", "''")))
         End If
 
-        ' Combine filters
         If filterParts.Count > 0 Then
             filteredView.RowFilter = String.Join(" AND ", filterParts.ToArray())
         Else
@@ -382,16 +358,14 @@ Public Class popUpFormAssignSubjectToTeacher
     End Sub
 
     Private Sub SubjectsDataGridView_CellClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles SubjectsDataGridView.CellClick
-        If e.RowIndex < 0 Then Return ' Ignore header clicks
+        If e.RowIndex < 0 Then Return
 
-        ' Validate teacher is selected
         If selectedTeacherId <= 0 Then
             MessageBox.Show("Please select a teacher first!", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
 
         Try
-            ' Get selected subject info
             selectedSubjectId = Convert.ToInt32(SubjectsDataGridView.Rows(e.RowIndex).Cells("sub_id").Value)
             Dim subCode As String = SubjectsDataGridView.Rows(e.RowIndex).Cells("sub_code").Value.ToString()
             Dim subName As String = SubjectsDataGridView.Rows(e.RowIndex).Cells("sub_name").Value.ToString()
@@ -399,11 +373,8 @@ Public Class popUpFormAssignSubjectToTeacher
             selectedCourseId = Convert.ToInt32(SubjectsDataGridView.Rows(e.RowIndex).Cells("course_id").Value)
 
             selectedSubjectName = courseCode & " - " & subCode & " - " & subName
-
-            ' Update label
             Selected_Subject_Label.Text = "Sections for: " & selectedSubjectName
 
-            ' Load sections for this subject's course
             LoadSectionsForSubject(selectedCourseId, selectedSubjectId, selectedTeacherId)
 
         Catch ex As Exception
@@ -416,12 +387,9 @@ Public Class popUpFormAssignSubjectToTeacher
 #Region "Class/Section Filter"
 
     Private Sub ClassFilter_ComboBox_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ClassFilter_ComboBox.SelectedIndexChanged
-        ' This event can be used if you want to add additional filtering for sections
-        ' Currently not needed as sections are already filtered by course
     End Sub
 
     Private Sub ClassDataGridView_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles ClassDataGridView.CellContentClick
-        ' Handle checkbox clicks if needed
     End Sub
 
 #End Region
@@ -429,19 +397,16 @@ Public Class popUpFormAssignSubjectToTeacher
 #Region "Assign Button"
 
     Private Sub Assign_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Assign_Button.Click
-        ' Validate teacher is selected
         If selectedTeacherId <= 0 Then
             MessageBox.Show("Please select a teacher first!", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
 
-        ' Validate subject is selected
         If selectedSubjectId <= 0 Then
             MessageBox.Show("Please select a subject first!", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
 
-        ' Validate sections are loaded
         If ClassDataGridView.Rows.Count = 0 Then
             MessageBox.Show("No sections available to assign!", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
@@ -453,7 +418,6 @@ Public Class popUpFormAssignSubjectToTeacher
             Dim assignedCount As Integer = 0
             Dim removedCount As Integer = 0
 
-            ' Loop through all rows in SectionsDataGridView
             For Each row As DataGridViewRow In ClassDataGridView.Rows
                 If row.IsNewRow Then Continue For
 
@@ -465,7 +429,6 @@ Public Class popUpFormAssignSubjectToTeacher
                 Dim wasAssigned As Boolean = Convert.ToBoolean(row.Cells("is_assigned").Value)
                 Dim sectionId As Integer = Convert.ToInt32(row.Cells("section_id").Value)
 
-                ' Add new assignment
                 If isChecked AndAlso Not wasAssigned Then
                     Dim insertQuery As String = "INSERT INTO profsectionsubject (prof_id, sub_id, section_id) VALUES (?, ?, ?)"
                     Dim cmd As New OdbcCommand(insertQuery, con)
@@ -476,7 +439,6 @@ Public Class popUpFormAssignSubjectToTeacher
                     assignedCount += 1
                 End If
 
-                ' Remove assignment
                 If Not isChecked AndAlso wasAssigned Then
                     Dim deleteQuery As String = "DELETE FROM profsectionsubject WHERE prof_id = ? AND sub_id = ? AND section_id = ?"
                     Dim cmd As New OdbcCommand(deleteQuery, con)
@@ -488,7 +450,6 @@ Public Class popUpFormAssignSubjectToTeacher
                 End If
             Next
 
-            ' Show success message
             Dim message As String = "Assignments updated successfully!" & vbCrLf & vbCrLf
             If assignedCount > 0 Then
                 message &= "Added: " & assignedCount.ToString() & " section(s)" & vbCrLf
@@ -499,10 +460,7 @@ Public Class popUpFormAssignSubjectToTeacher
 
             MessageBox.Show(message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-            ' Refresh assignments grid
             LoadCurrentAssignments()
-
-            ' Refresh sections to show updated checkboxes
             LoadSectionsForSubject(selectedCourseId, selectedSubjectId, selectedTeacherId)
 
         Catch ex As Exception
@@ -517,7 +475,6 @@ Public Class popUpFormAssignSubjectToTeacher
 #Region "Delete Assignment"
 
     Private Sub AssignmentsDataGridView_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles AssignmentsDataGridView.CellContentClick
-        ' Check if Delete button was clicked
         If e.ColumnIndex = AssignmentsDataGridView.Columns("btnDelete").Index AndAlso e.RowIndex >= 0 Then
 
             Dim assignmentId As Integer = Convert.ToInt32(AssignmentsDataGridView.Rows(e.RowIndex).Cells("id").Value)
@@ -525,7 +482,6 @@ Public Class popUpFormAssignSubjectToTeacher
             Dim subject As String = AssignmentsDataGridView.Rows(e.RowIndex).Cells("Subject").Value.ToString()
             Dim section As String = AssignmentsDataGridView.Rows(e.RowIndex).Cells("Section").Value.ToString()
 
-            ' Show confirmation
             Dim result As DialogResult = MessageBox.Show( _
                 "Delete this assignment?" & vbCrLf & vbCrLf & _
                 "Teacher: " & teacher & vbCrLf & _
@@ -552,11 +508,8 @@ Public Class popUpFormAssignSubjectToTeacher
 
             If rowsAffected > 0 Then
                 MessageBox.Show("Assignment deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-                ' Refresh assignments grid
                 LoadCurrentAssignments()
 
-                ' If same teacher+subject is selected, refresh sections
                 If selectedTeacherId > 0 AndAlso selectedSubjectId > 0 Then
                     LoadSectionsForSubject(selectedCourseId, selectedSubjectId, selectedTeacherId)
                 End If

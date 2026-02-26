@@ -4,20 +4,20 @@ Public Class popUpFormModifyTeacher
 
     Private selectedAccId As Integer = -1
 
-    '--- Load form: populate gender combo ---
+    '--- Form Load ---
     Private Sub popUpFormModifyTeacher_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Modify_Teacher_Gender_ComboBox.Items.Clear()
         Modify_Teacher_Gender_ComboBox.Items.Add("male")
         Modify_Teacher_Gender_ComboBox.Items.Add("female")
         Modify_Teacher_Gender_ComboBox.Items.Add("other")
 
-        ' Setup DataGridView columns
         Modify_Teacher_DataGridView.AutoGenerateColumns = True
         LoadTeacherGrid("")
     End Sub
 
     '--- Search as you type ---
     Private Sub Modify_Teacher_Search_Name_Textbox_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Modify_Teacher_Search_Name_Textbox.TextChanged
+        selectedAccId = -1
         LoadTeacherGrid(Modify_Teacher_Search_Name_Textbox.Text.Trim())
     End Sub
 
@@ -25,7 +25,10 @@ Public Class popUpFormModifyTeacher
     Private Sub LoadTeacherGrid(ByVal searchName As String)
         Try
             Connect_me()
-            Dim sql As String = "SELECT acc_id, firstname, middlename, lastname, gender, email " & _
+
+            Dim sql As String = "SELECT acc_id, " & _
+                                "CONCAT(firstname, ' ', COALESCE(middlename, ''), ' ', lastname) AS fullname, " & _
+                                "firstname, middlename, lastname, gender, email " & _
                                 "FROM account " & _
                                 "WHERE role = 'teacher' AND " & _
                                 "(firstname LIKE ? OR lastname LIKE ? OR middlename LIKE ?) " & _
@@ -40,18 +43,40 @@ Public Class popUpFormModifyTeacher
             Dim dt As New DataTable()
             da.Fill(dt)
 
+            If dt.Columns.Contains("fullname") Then
+                dt.Columns("fullname").ColumnName = "Full Name"
+            End If
+
             Modify_Teacher_DataGridView.DataSource = dt
 
-            ' Hide acc_id column from user but keep it in datasource
-            If Modify_Teacher_DataGridView.Columns.Contains("acc_id") Then
-                Modify_Teacher_DataGridView.Columns("acc_id").Visible = False
+            Dim hiddenCols() As String = {"acc_id", "firstname", "middlename", "lastname"}
+            For Each colName As String In hiddenCols
+                If Modify_Teacher_DataGridView.Columns.Contains(colName) Then
+                    Modify_Teacher_DataGridView.Columns(colName).Visible = False
+                End If
+            Next
+
+            If Modify_Teacher_DataGridView.Columns.Contains("Full Name") Then
+                Modify_Teacher_DataGridView.Columns("Full Name").DisplayIndex = 0
+                Modify_Teacher_DataGridView.Columns("Full Name").Width = 220
             End If
+            If Modify_Teacher_DataGridView.Columns.Contains("gender") Then
+                Modify_Teacher_DataGridView.Columns("gender").Width = 80
+            End If
+            If Modify_Teacher_DataGridView.Columns.Contains("email") Then
+                Modify_Teacher_DataGridView.Columns("email").Width = 200
+            End If
+
+            Modify_Teacher_DataGridView.ClearSelection()
+
         Catch ex As Exception
             MessageBox.Show("Error loading teachers: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            If con.State = ConnectionState.Open Then con.Close()
         End Try
     End Sub
 
-    '--- Row click: populate fields ---
+    '--- Row click: populate edit fields ---
     Private Sub Modify_Teacher_DataGridView_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles Modify_Teacher_DataGridView.CellContentClick
         PopulateFieldsFromGrid(e.RowIndex)
     End Sub
@@ -62,26 +87,33 @@ Public Class popUpFormModifyTeacher
 
     Private Sub PopulateFieldsFromGrid(ByVal rowIndex As Integer)
         If rowIndex < 0 Then Exit Sub
+
         Try
             Dim row As DataGridViewRow = Modify_Teacher_DataGridView.Rows(rowIndex)
 
-            selectedAccId = Convert.ToInt32(row.Cells("acc_id").Value)
-            Modify_Teacher_Firstname_TextBox.Text = row.Cells("firstname").Value.ToString()
-            Modify_Teacher_Middlename_TextBox.Text = row.Cells("middlename").Value.ToString()
-            Modify_Teacher_Lastname_TextBox.Text = row.Cells("lastname").Value.ToString()
-            Modify_Teacher_Email_TextBox.Text = row.Cells("email").Value.ToString()
+            If row.Cells("acc_id").Value Is Nothing Then Exit Sub
 
-            Dim gender As String = row.Cells("gender").Value.ToString().ToLower()
+            selectedAccId = Convert.ToInt32(row.Cells("acc_id").Value)
+
+            Modify_Teacher_Firstname_TextBox.Text = If(row.Cells("firstname").Value Is Nothing, "", row.Cells("firstname").Value.ToString().Trim())
+            Modify_Teacher_Middlename_TextBox.Text = If(row.Cells("middlename").Value Is Nothing, "", row.Cells("middlename").Value.ToString().Trim())
+            Modify_Teacher_Lastname_TextBox.Text = If(row.Cells("lastname").Value Is Nothing, "", row.Cells("lastname").Value.ToString().Trim())
+            Modify_Teacher_Email_TextBox.Text = If(row.Cells("email").Value Is Nothing, "", row.Cells("email").Value.ToString().Trim())
+
+            Dim gender As String = If(row.Cells("gender").Value Is Nothing, "", row.Cells("gender").Value.ToString().ToLower().Trim())
             Dim idx As Integer = Modify_Teacher_Gender_ComboBox.Items.IndexOf(gender)
             If idx >= 0 Then
                 Modify_Teacher_Gender_ComboBox.SelectedIndex = idx
+            Else
+                Modify_Teacher_Gender_ComboBox.SelectedIndex = -1
             End If
+
         Catch ex As Exception
             MessageBox.Show("Error selecting row: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
-    '--- TextChanged stubs (kept for handle binding, no logic needed) ---
+    '--- TextChanged stubs ---
     Private Sub Modify_Teacher_Lastname_TextBox_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Modify_Teacher_Lastname_TextBox.TextChanged
     End Sub
 
@@ -99,7 +131,12 @@ Public Class popUpFormModifyTeacher
 
     '--- Validation ---
     Private Function ValidateInputs() As Boolean
-        ' Check empty fields
+
+        If selectedAccId = -1 Then
+            MessageBox.Show("Please select a teacher from the list first.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+        End If
+
         If String.IsNullOrEmpty(Modify_Teacher_Firstname_TextBox.Text.Trim()) Then
             MessageBox.Show("First name cannot be empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Modify_Teacher_Firstname_TextBox.Focus()
@@ -112,8 +149,8 @@ Public Class popUpFormModifyTeacher
             Return False
         End If
 
-        ' Name: letters and spaces only
         Dim namePattern As New System.Text.RegularExpressions.Regex("^[a-zA-Z\s]+$")
+
         If Not namePattern.IsMatch(Modify_Teacher_Firstname_TextBox.Text.Trim()) Then
             MessageBox.Show("First name must contain letters only.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Modify_Teacher_Firstname_TextBox.Focus()
@@ -134,14 +171,12 @@ Public Class popUpFormModifyTeacher
             End If
         End If
 
-        ' Gender
         If Modify_Teacher_Gender_ComboBox.SelectedIndex < 0 Then
             MessageBox.Show("Please select a gender.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Modify_Teacher_Gender_ComboBox.Focus()
             Return False
         End If
 
-        ' Email: must end with @gmail.com
         Dim email As String = Modify_Teacher_Email_TextBox.Text.Trim()
         If String.IsNullOrEmpty(email) Then
             MessageBox.Show("Email cannot be empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -155,7 +190,6 @@ Public Class popUpFormModifyTeacher
             Return False
         End If
 
-        ' Basic email format check
         Dim emailPattern As New System.Text.RegularExpressions.Regex("^[a-zA-Z0-9._%+\-]+@gmail\.com$")
         If Not emailPattern.IsMatch(email) Then
             MessageBox.Show("Invalid Gmail format. Use only valid characters before @gmail.com.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -163,22 +197,20 @@ Public Class popUpFormModifyTeacher
             Return False
         End If
 
-        ' Check no teacher selected
-        If selectedAccId = -1 Then
-            MessageBox.Show("Please select a teacher from the list first.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return False
-        End If
-
         Return True
     End Function
 
     '--- Modify Button ---
+    '   ROOT CAUSE FIX: The database only has AFTER INSERT triggers on `account`.
+    '   There is NO AFTER UPDATE trigger, so updating `account` alone never syncs `prof`.
+    '   Solution: Explicitly update BOTH tables in the same operation.
     Private Sub Modify_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Modify_Button.Click
         If Not ValidateInputs() Then Exit Sub
 
         Try
-            ' Check if email is already used by another account
             Connect_me()
+
+            ' --- Step 1: Check for duplicate email ---
             Dim checkSql As String = "SELECT COUNT(*) FROM account WHERE email = ? AND acc_id <> ? AND role = 'teacher'"
             Dim checkCmd As New OdbcCommand(checkSql, con)
             checkCmd.Parameters.AddWithValue("@email", Modify_Teacher_Email_TextBox.Text.Trim())
@@ -191,29 +223,54 @@ Public Class popUpFormModifyTeacher
                 Exit Sub
             End If
 
-            ' Confirm update
-            Dim confirm As DialogResult = MessageBox.Show("Are you sure you want to update this teacher's information?", _
-                                                           "Confirm Modify", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+            ' --- Step 2: Confirm with user ---
+            Dim previewFullName As String = (Modify_Teacher_Firstname_TextBox.Text.Trim() & " " & _
+                                             Modify_Teacher_Middlename_TextBox.Text.Trim() & " " & _
+                                             Modify_Teacher_Lastname_TextBox.Text.Trim()).Trim()
+
+            Dim confirm As DialogResult = MessageBox.Show( _
+                "You are about to update the following teacher:" & Environment.NewLine & _
+                "Full Name : " & previewFullName & Environment.NewLine & _
+                "Email     : " & Modify_Teacher_Email_TextBox.Text.Trim() & Environment.NewLine & _
+                "Gender    : " & Modify_Teacher_Gender_ComboBox.SelectedItem.ToString() & Environment.NewLine & Environment.NewLine & _
+                "Proceed with update?", _
+                "Confirm Modify", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
             If confirm = DialogResult.No Then Exit Sub
 
-            ' Perform UPDATE on account table
-            ' (Trigger will handle syncing to prof table if applicable)
-            Connect_me()
-            Dim sql As String = "UPDATE account SET firstname = ?, middlename = ?, lastname = ?, gender = ?, email = ? " & _
-                                "WHERE acc_id = ? AND role = 'teacher'"
+            ' --- Step 3: Update account table ---
+            Dim sqlAccount As String = "UPDATE account SET firstname = ?, middlename = ?, lastname = ?, gender = ?, email = ? " & _
+                                       "WHERE acc_id = ? AND role = 'teacher'"
 
-            Dim cmd As New OdbcCommand(sql, con)
-            cmd.Parameters.AddWithValue("@fn", Modify_Teacher_Firstname_TextBox.Text.Trim())
-            cmd.Parameters.AddWithValue("@mn", Modify_Teacher_Middlename_TextBox.Text.Trim())
-            cmd.Parameters.AddWithValue("@ln", Modify_Teacher_Lastname_TextBox.Text.Trim())
-            cmd.Parameters.AddWithValue("@gn", Modify_Teacher_Gender_ComboBox.SelectedItem.ToString())
-            cmd.Parameters.AddWithValue("@em", Modify_Teacher_Email_TextBox.Text.Trim())
-            cmd.Parameters.AddWithValue("@id", selectedAccId)
+            Dim cmdAccount As New OdbcCommand(sqlAccount, con)
+            cmdAccount.Parameters.AddWithValue("@fn", Modify_Teacher_Firstname_TextBox.Text.Trim())
+            cmdAccount.Parameters.AddWithValue("@mn", Modify_Teacher_Middlename_TextBox.Text.Trim())
+            cmdAccount.Parameters.AddWithValue("@ln", Modify_Teacher_Lastname_TextBox.Text.Trim())
+            cmdAccount.Parameters.AddWithValue("@gn", Modify_Teacher_Gender_ComboBox.SelectedItem.ToString())
+            cmdAccount.Parameters.AddWithValue("@em", Modify_Teacher_Email_TextBox.Text.Trim())
+            cmdAccount.Parameters.AddWithValue("@id", selectedAccId)
 
-            Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+            Dim rowsAffected As Integer = cmdAccount.ExecuteNonQuery()
 
+            ' --- Step 4: ALSO update prof table (no AFTER UPDATE trigger exists) ---
+            '   prof is linked to account via acc_id (FK: fk_prof_id)
+            Dim sqlProf As String = "UPDATE prof SET firstname = ?, middlename = ?, lastname = ?, gender = ?, email = ? " & _
+                                    "WHERE acc_id = ?"
+
+            Dim cmdProf As New OdbcCommand(sqlProf, con)
+            cmdProf.Parameters.AddWithValue("@fn", Modify_Teacher_Firstname_TextBox.Text.Trim())
+            cmdProf.Parameters.AddWithValue("@mn", Modify_Teacher_Middlename_TextBox.Text.Trim())
+            cmdProf.Parameters.AddWithValue("@ln", Modify_Teacher_Lastname_TextBox.Text.Trim())
+            cmdProf.Parameters.AddWithValue("@gn", Modify_Teacher_Gender_ComboBox.SelectedItem.ToString())
+            cmdProf.Parameters.AddWithValue("@em", Modify_Teacher_Email_TextBox.Text.Trim())
+            cmdProf.Parameters.AddWithValue("@id", selectedAccId)
+
+            cmdProf.ExecuteNonQuery()
+
+            ' --- Step 5: Feedback and refresh ---
             If rowsAffected > 0 Then
-                MessageBox.Show("Teacher information updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                MessageBox.Show("Teacher """ & previewFullName & """ updated successfully!", _
+                                "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 ClearFields()
                 LoadTeacherGrid(Modify_Teacher_Search_Name_Textbox.Text.Trim())
             Else
@@ -222,6 +279,8 @@ Public Class popUpFormModifyTeacher
 
         Catch ex As Exception
             MessageBox.Show("Error updating teacher: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            If con.State = ConnectionState.Open Then con.Close()
         End Try
     End Sub
 
@@ -231,7 +290,28 @@ Public Class popUpFormModifyTeacher
         Me.Close()
     End Sub
 
-    '--- Helper: Clear all fields ---
+    '--- Refresh Button ---
+    Private Sub Refresh_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Refresh_Button.Click
+        Try
+            ClearFields()
+
+            RemoveHandler Modify_Teacher_Search_Name_Textbox.TextChanged, _
+                          AddressOf Modify_Teacher_Search_Name_Textbox_TextChanged
+            Modify_Teacher_Search_Name_Textbox.Text = ""
+            AddHandler Modify_Teacher_Search_Name_Textbox.TextChanged, _
+                       AddressOf Modify_Teacher_Search_Name_Textbox_TextChanged
+
+            LoadTeacherGrid("")
+
+            MessageBox.Show("Teacher list has been refreshed.", _
+                            "Refreshed", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+        Catch ex As Exception
+            MessageBox.Show("Error refreshing list: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    '--- Helper: Clear all fields and reset selection ---
     Private Sub ClearFields()
         selectedAccId = -1
         Modify_Teacher_Firstname_TextBox.Text = ""

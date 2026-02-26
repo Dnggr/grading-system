@@ -52,7 +52,6 @@ Public Class Admin_Form
         LoadTeacherData(Search_Teacher_TextBox.Text.Trim())
     End Sub
 
-    ' ── MODIFIED: Opens frm_SemControl as a dialog instead of showing the old panel ──
     Private Sub School_Year_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles School_Year_Button.Click
         Dim semForm As New frm_SemControl()
         semForm.ShowDialog()
@@ -87,7 +86,6 @@ Public Class Admin_Form
     ' ════════════════════════════════════════════════════════════════════
 
     Private Sub HideAllPanels()
-        ' ── MODIFIED: School_Year_Panel removed — it is no longer used ──
         Dashboard_Panel.Visible = False
         Student_Panel.Visible = False
         Teacher_Panel.Visible = False
@@ -139,11 +137,6 @@ Public Class Admin_Form
 #Region "Student Panel - Data Loading"
     ' ════════════════════════════════════════════════════════════════════
 
-    ''' <summary>
-    ''' Loads student records into Student_List_DataGridView.
-    ''' Joins student to section for the section name.
-    ''' Hides AccountID, StudentID, and Email columns (used internally only).
-    ''' </summary>
     Public Sub LoadStudentData(ByVal searchText As String)
         Try
             Connect_me()
@@ -254,6 +247,18 @@ Public Class Admin_Form
         LoadStudentData(Search_Student_TextBox.Text.Trim())
     End Sub
 
+    ' ════════════════════════════════════════════════════════════════════
+    ' ── Refresh Student Button: reloads Student_List_DataGridView ──
+    ' ════════════════════════════════════════════════════════════════════
+    Private Sub Refresh_student_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Refresh_student_Button.Click
+        Try
+            LoadStudentData(Search_Student_TextBox.Text.Trim())
+        Catch ex As Exception
+            MessageBox.Show("Error refreshing student list: " & ex.Message, _
+                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
 #End Region
 
     ' ════════════════════════════════════════════════════════════════════
@@ -270,11 +275,6 @@ Public Class Admin_Form
 #Region "Student Panel - Set Selected Student ID Helper"
     ' ════════════════════════════════════════════════════════════════════
 
-    ''' <summary>
-    ''' Reads acc_id and stud_id from the selected student row.
-    ''' Stores them in shared state for popup forms to consume.
-    ''' Returns False if IDs cannot be read.
-    ''' </summary>
     Private Function SetSelectedStudentId() As Boolean
         Try
             Dim selectedRow As DataGridViewRow = Student_List_DataGridView.SelectedRows(0)
@@ -343,9 +343,10 @@ Public Class Admin_Form
     ' ════════════════════════════════════════════════════════════════════
 
     ''' <summary>
-    ''' Default view: shows Full Name and Gender only.
+    ''' Default view: shows Full Name, Gender, and Status (Active/Inactive).
     ''' AccountID and ProfID are hidden but available for button actions.
     ''' Filters by role = 'teacher' in the account table.
+    ''' Rows with is_active = 0 are highlighted in a different color.
     ''' </summary>
     Public Sub LoadTeacherData(ByVal searchText As String)
         Try
@@ -358,7 +359,8 @@ Public Class Admin_Form
                 "  CONCAT(p.lastname, ', ', p.firstname, " & _
                 "         IF(p.middlename IS NULL OR TRIM(p.middlename) = '', " & _
                 "            '', CONCAT(' ', p.middlename))) AS FullName, " & _
-                "  IFNULL(a.gender, 'N/A') AS Gender " & _
+                "  IFNULL(a.gender, 'N/A') AS Gender, " & _
+                "  p.status AS Status " & _
                 "FROM prof p " & _
                 "INNER JOIN account a ON p.acc_id = a.acc_id " & _
                 "WHERE LOWER(a.role) = 'teacher' " & _
@@ -392,9 +394,25 @@ Public Class Admin_Form
             If Teacher_List_DataGridView.Columns.Contains("Gender") Then
                 Teacher_List_DataGridView.Columns("Gender").HeaderText = "Gender"
             End If
+            If Teacher_List_DataGridView.Columns.Contains("Status") Then
+                Teacher_List_DataGridView.Columns("Status").HeaderText = "Status"
+            End If
+
+            ' ── Color-code Active / Inactive rows ──
+            For Each row As DataGridViewRow In Teacher_List_DataGridView.Rows
+                If row.Cells("Status").Value IsNot Nothing Then
+                    If row.Cells("Status").Value.ToString().ToLower() = "inactive" Then
+                        row.DefaultCellStyle.ForeColor = System.Drawing.Color.Gray
+                        row.DefaultCellStyle.BackColor = System.Drawing.Color.MistyRose
+                    Else
+                        row.DefaultCellStyle.ForeColor = System.Drawing.Color.Black
+                        row.DefaultCellStyle.BackColor = System.Drawing.Color.White
+                    End If
+                End If
+            Next
 
             _teacherViewMode = "LIST"
-            Back_Button.Visible = False   ' Back button hidden in list view
+            Back_Button.Visible = False
 
         Catch ex As Exception
             MessageBox.Show("Error loading teacher data: " & ex.Message, _
@@ -403,18 +421,12 @@ Public Class Admin_Form
             If con.State = ConnectionState.Open Then con.Close()
         End Try
     End Sub
-
 #End Region
 
     ' ════════════════════════════════════════════════════════════════════
 #Region "Teacher Panel - Data Loading (Subject Drill-Down View)"
     ' ════════════════════════════════════════════════════════════════════
 
-    ''' <summary>
-    ''' Drill-down view: shows all subjects assigned to the clicked teacher,
-    ''' along with the section they teach each subject in.
-    ''' Back_Button becomes visible so user can return to list view.
-    ''' </summary>
     Public Sub LoadTeacherSubjects(ByVal profId As Integer, ByVal teacherFullName As String)
         Try
             Connect_me()
@@ -518,11 +530,32 @@ Public Class Admin_Form
         assignForm.ShowDialog()
     End Sub
 
-    ''' <summary>
-    ''' Returns from the subject drill-down back to the default teacher list view.
-    ''' </summary>
     Private Sub Back_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Back_Button.Click
         LoadTeacherData(Search_Teacher_TextBox.Text.Trim())
+    End Sub
+
+    ' ════════════════════════════════════════════════════════════════════
+    ' ── Refresh Teacher Button: reloads Teacher_List_DataGridView ──
+    ' ── If currently in SUBJECTS drill-down, reloads that teacher's  ──
+    ' ── subjects; otherwise reloads the full teacher list.           ──
+    ' ════════════════════════════════════════════════════════════════════
+    Private Sub Refresh_teacher_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Refresh_teacher_Button.Click
+        Try
+            If _teacherViewMode = "SUBJECTS" Then
+                ' Re-load the current teacher's subjects if a teacher was previously selected
+                If SelectedTeacherProfId > 0 Then
+                    LoadTeacherSubjects(SelectedTeacherProfId, "")
+                Else
+                    ' Fallback: no teacher selected, return to list
+                    LoadTeacherData(Search_Teacher_TextBox.Text.Trim())
+                End If
+            Else
+                LoadTeacherData(Search_Teacher_TextBox.Text.Trim())
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error refreshing teacher list: " & ex.Message, _
+                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
 #End Region
@@ -532,7 +565,6 @@ Public Class Admin_Form
     ' ════════════════════════════════════════════════════════════════════
 
     Private Sub Search_Teacher_TextBox_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Search_Teacher_TextBox.TextChanged
-        ' Only search in list mode — searching in subject view would be confusing
         If _teacherViewMode = "LIST" Then
             LoadTeacherData(Search_Teacher_TextBox.Text.Trim())
         End If
@@ -544,16 +576,10 @@ Public Class Admin_Form
 #Region "Teacher Panel - DataGridView Click (Drill-Down to Subjects)"
     ' ════════════════════════════════════════════════════════════════════
 
-    ''' <summary>
-    ''' Single-click on a teacher row in LIST mode loads that teacher's assigned subjects.
-    ''' Clicking rows in SUBJECTS mode does nothing extra.
-    ''' Uses the Teacher_List_DataGridView which is aliased as DataGridView1 in your form.
-    ''' </summary>
     Private Sub DataGridView1_CellClick(ByVal sender As System.Object, _
                                         ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) _
         Handles Teacher_List_DataGridView.CellClick
 
-        ' Ignore header row clicks and clicks while already in subject view
         If e.RowIndex < 0 Then Return
         If _teacherViewMode = "SUBJECTS" Then Return
 
@@ -589,11 +615,6 @@ Public Class Admin_Form
 #Region "Teacher Panel - Set Selected Teacher ID Helper"
     ' ════════════════════════════════════════════════════════════════════
 
-    ''' <summary>
-    ''' Reads ProfID and AccountID from the selected teacher row.
-    ''' Stores them in shared state for popup forms to consume.
-    ''' Returns False if IDs cannot be read.
-    ''' </summary>
     Private Function SetSelectedTeacherId() As Boolean
         Try
             Dim selectedRow As DataGridViewRow = Teacher_List_DataGridView.SelectedRows(0)

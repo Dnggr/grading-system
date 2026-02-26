@@ -37,6 +37,7 @@ Partial Class popUpFormModifyTeacher
         Me.Modify_Teacher_Firstname_TextBox = New System.Windows.Forms.TextBox
         Me.Modify_Label4 = New System.Windows.Forms.Label
         Me.Modify_Teacher_Gender_ComboBox = New System.Windows.Forms.ComboBox
+        Me.Refresh_Button = New System.Windows.Forms.Button
         CType(Me.Modify_Teacher_DataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -163,11 +164,21 @@ Partial Class popUpFormModifyTeacher
         Me.Modify_Teacher_Gender_ComboBox.Size = New System.Drawing.Size(253, 21)
         Me.Modify_Teacher_Gender_ComboBox.TabIndex = 42
         '
+        'Refresh_Button
+        '
+        Me.Refresh_Button.Location = New System.Drawing.Point(397, 25)
+        Me.Refresh_Button.Name = "Refresh_Button"
+        Me.Refresh_Button.Size = New System.Drawing.Size(75, 23)
+        Me.Refresh_Button.TabIndex = 53
+        Me.Refresh_Button.Text = "refresh"
+        Me.Refresh_Button.UseVisualStyleBackColor = True
+        '
         'popUpFormModifyTeacher
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(480, 392)
+        Me.Controls.Add(Me.Refresh_Button)
         Me.Controls.Add(Me.Modify_Cancel_Button)
         Me.Controls.Add(Me.Modify_Button)
         Me.Controls.Add(Me.Modify_Teacher_DataGridView)
@@ -205,4 +216,5 @@ Partial Class popUpFormModifyTeacher
     Friend WithEvents Modify_Teacher_Firstname_TextBox As System.Windows.Forms.TextBox
     Friend WithEvents Modify_Label4 As System.Windows.Forms.Label
     Friend WithEvents Modify_Teacher_Gender_ComboBox As System.Windows.Forms.ComboBox
+    Friend WithEvents Refresh_Button As System.Windows.Forms.Button
 End Class
