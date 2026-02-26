@@ -22,8 +22,76 @@ Partial Class popUpFormDeleteTeacher
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        components = New System.ComponentModel.Container
+        Me.Cancel_Button = New System.Windows.Forms.Button
+        Me.Delete_Teacher_Search_TextBox = New System.Windows.Forms.TextBox
+        Me.Delete_Teacher_DataGridView = New System.Windows.Forms.DataGridView
+        Me.Delete_Button = New System.Windows.Forms.Button
+        Me.Label1 = New System.Windows.Forms.Label
+        CType(Me.Delete_Teacher_DataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SuspendLayout()
+        '
+        'Cancel_Button
+        '
+        Me.Cancel_Button.Location = New System.Drawing.Point(306, 263)
+        Me.Cancel_Button.Name = "Cancel_Button"
+        Me.Cancel_Button.Size = New System.Drawing.Size(75, 23)
+        Me.Cancel_Button.TabIndex = 9
+        Me.Cancel_Button.Text = "Cancel"
+        Me.Cancel_Button.UseVisualStyleBackColor = True
+        '
+        'Delete_Teacher_Search_TextBox
+        '
+        Me.Delete_Teacher_Search_TextBox.Location = New System.Drawing.Point(96, 47)
+        Me.Delete_Teacher_Search_TextBox.Name = "Delete_Teacher_Search_TextBox"
+        Me.Delete_Teacher_Search_TextBox.Size = New System.Drawing.Size(285, 20)
+        Me.Delete_Teacher_Search_TextBox.TabIndex = 8
+        '
+        'Delete_Teacher_DataGridView
+        '
+        Me.Delete_Teacher_DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.Delete_Teacher_DataGridView.Location = New System.Drawing.Point(10, 86)
+        Me.Delete_Teacher_DataGridView.Name = "Delete_Teacher_DataGridView"
+        Me.Delete_Teacher_DataGridView.Size = New System.Drawing.Size(402, 151)
+        Me.Delete_Teacher_DataGridView.TabIndex = 7
+        '
+        'Delete_Button
+        '
+        Me.Delete_Button.Location = New System.Drawing.Point(211, 263)
+        Me.Delete_Button.Name = "Delete_Button"
+        Me.Delete_Button.Size = New System.Drawing.Size(75, 23)
+        Me.Delete_Button.TabIndex = 6
+        Me.Delete_Button.Text = "Delete"
+        Me.Delete_Button.UseVisualStyleBackColor = True
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(24, 50)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(39, 13)
+        Me.Label1.TabIndex = 5
+        Me.Label1.Text = "search"
+        '
+        'popUpFormDeleteTeacher
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(426, 337)
+        Me.Controls.Add(Me.Cancel_Button)
+        Me.Controls.Add(Me.Delete_Teacher_Search_TextBox)
+        Me.Controls.Add(Me.Delete_Teacher_DataGridView)
+        Me.Controls.Add(Me.Delete_Button)
+        Me.Controls.Add(Me.Label1)
+        Me.Name = "popUpFormDeleteTeacher"
         Me.Text = "popUpFormDeleteTeacher"
+        CType(Me.Delete_Teacher_DataGridView, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ResumeLayout(False)
+        Me.PerformLayout()
+
     End Sub
+    Friend WithEvents Cancel_Button As System.Windows.Forms.Button
+    Friend WithEvents Delete_Teacher_Search_TextBox As System.Windows.Forms.TextBox
+    Friend WithEvents Delete_Teacher_DataGridView As System.Windows.Forms.DataGridView
+    Friend WithEvents Delete_Button As System.Windows.Forms.Button
+    Friend WithEvents Label1 As System.Windows.Forms.Label
 End Class
