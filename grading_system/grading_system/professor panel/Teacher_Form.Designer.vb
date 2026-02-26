@@ -23,6 +23,8 @@ Partial Class Teacher_Form
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel
+        Me.Button4 = New System.Windows.Forms.Button
+        Me.Label8 = New System.Windows.Forms.Label
         Me.TextBox1 = New System.Windows.Forms.TextBox
         Me.Label7 = New System.Windows.Forms.Label
         Me.ComboBox4 = New System.Windows.Forms.ComboBox
@@ -43,8 +45,7 @@ Partial Class Teacher_Form
         Me.DataGridView1 = New System.Windows.Forms.DataGridView
         Me.DataGridView2 = New System.Windows.Forms.DataGridView
         Me.DataGridView3 = New System.Windows.Forms.DataGridView
-        Me.Label8 = New System.Windows.Forms.Label
-        Me.Button4 = New System.Windows.Forms.Button
+        Me.Button5 = New System.Windows.Forms.Button
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -55,6 +56,7 @@ Partial Class Teacher_Form
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Panel1.Controls.Add(Me.Button5)
         Me.Panel1.Controls.Add(Me.Button4)
         Me.Panel1.Controls.Add(Me.Label8)
         Me.Panel1.Controls.Add(Me.TextBox1)
@@ -76,6 +78,24 @@ Partial Class Teacher_Form
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(1350, 130)
         Me.Panel1.TabIndex = 0
+        '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(979, 55)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(75, 47)
+        Me.Button4.TabIndex = 16
+        Me.Button4.Text = "Reset Filters"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(313, 85)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(75, 13)
+        Me.Label8.TabIndex = 15
+        Me.Label8.Text = "Student Name"
         '
         'TextBox1
         '
@@ -173,7 +193,7 @@ Partial Class Teacher_Form
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(427, 42)
+        Me.Button2.Location = New System.Drawing.Point(394, 12)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(75, 23)
         Me.Button2.TabIndex = 1
@@ -262,23 +282,14 @@ Partial Class Teacher_Form
         Me.DataGridView3.Size = New System.Drawing.Size(114, 599)
         Me.DataGridView3.TabIndex = 3
         '
-        'Label8
+        'Button5
         '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(313, 85)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(75, 13)
-        Me.Label8.TabIndex = 15
-        Me.Label8.Text = "Student Name"
-        '
-        'Button4
-        '
-        Me.Button4.Location = New System.Drawing.Point(979, 55)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(75, 47)
-        Me.Button4.TabIndex = 16
-        Me.Button4.Text = "Reset Filters"
-        Me.Button4.UseVisualStyleBackColor = True
+        Me.Button5.Location = New System.Drawing.Point(394, 41)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(75, 23)
+        Me.Button5.TabIndex = 17
+        Me.Button5.Text = "Refresh"
+        Me.Button5.UseVisualStyleBackColor = True
         '
         'Teacher_Form
         '
@@ -324,4 +335,5 @@ Partial Class Teacher_Form
     Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents Button4 As System.Windows.Forms.Button
+    Friend WithEvents Button5 As System.Windows.Forms.Button
 End Class
