@@ -30,7 +30,9 @@ Partial Class Student_Form
         Me.Button3 = New System.Windows.Forms.Button
         Me.s = New CrystalDecisions.Windows.Forms.CrystalReportViewer
         Me.mainpanel = New System.Windows.Forms.Panel
+        Me.PictureBoxstudent = New System.Windows.Forms.PictureBox
         Me.Panel1.SuspendLayout()
+        CType(Me.PictureBoxstudent, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Button1
@@ -54,6 +56,7 @@ Partial Class Student_Form
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Panel1.Controls.Add(Me.PictureBoxstudent)
         Me.Panel1.Controls.Add(Me.Button4)
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Controls.Add(Me.Button3)
@@ -78,7 +81,7 @@ Partial Class Student_Form
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(12, 128)
+        Me.Label1.Location = New System.Drawing.Point(57, 199)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(66, 24)
         Me.Label1.TabIndex = 4
@@ -114,6 +117,14 @@ Partial Class Student_Form
         Me.mainpanel.Size = New System.Drawing.Size(1156, 729)
         Me.mainpanel.TabIndex = 48
         '
+        'PictureBoxstudent
+        '
+        Me.PictureBoxstudent.Location = New System.Drawing.Point(24, 51)
+        Me.PictureBoxstudent.Name = "PictureBoxstudent"
+        Me.PictureBoxstudent.Size = New System.Drawing.Size(136, 119)
+        Me.PictureBoxstudent.TabIndex = 6
+        Me.PictureBoxstudent.TabStop = False
+        '
         'Student_Form
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -128,6 +139,7 @@ Partial Class Student_Form
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        CType(Me.PictureBoxstudent, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -139,4 +151,5 @@ Partial Class Student_Form
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents mainpanel As System.Windows.Forms.Panel
     Friend WithEvents Button4 As System.Windows.Forms.Button
+    Friend WithEvents PictureBoxstudent As System.Windows.Forms.PictureBox
 End Class
