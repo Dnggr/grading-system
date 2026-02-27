@@ -282,6 +282,10 @@ Partial Public Class GradeFields
         
         Private columnRemark As Global.System.Data.DataColumn
         
+        Private columnSchoolYear As Global.System.Data.DataColumn
+        
+        Private columnSemester As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Sub New()
             MyBase.New
@@ -370,6 +374,20 @@ Partial Public Class GradeFields
             End Get
         End Property
         
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property SchoolYearColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnSchoolYear
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property SemesterColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnSemester
+            End Get
+        End Property
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -399,9 +417,9 @@ Partial Public Class GradeFields
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Overloads Function AddGradeInfoRow(ByVal Profname As String, ByVal Subjects As String, ByVal Grades As String, ByVal Studentname As String, ByVal Studentid As String, ByVal Course As String, ByVal Section As String, ByVal Remark As String) As GradeInfoRow
+        Public Overloads Function AddGradeInfoRow(ByVal Profname As String, ByVal Subjects As String, ByVal Grades As String, ByVal Studentname As String, ByVal Studentid As String, ByVal Course As String, ByVal Section As String, ByVal Remark As String, ByVal SchoolYear As String, ByVal Semester As String) As GradeInfoRow
             Dim rowGradeInfoRow As GradeInfoRow = CType(Me.NewRow,GradeInfoRow)
-            Dim columnValuesArray() As Object = New Object() {Profname, Subjects, Grades, Studentname, Studentid, Course, Section, Remark}
+            Dim columnValuesArray() As Object = New Object() {Profname, Subjects, Grades, Studentname, Studentid, Course, Section, Remark, SchoolYear, Semester}
             rowGradeInfoRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowGradeInfoRow)
             Return rowGradeInfoRow
@@ -429,6 +447,8 @@ Partial Public Class GradeFields
             Me.columnCourse = MyBase.Columns("Course")
             Me.columnSection = MyBase.Columns("Section")
             Me.columnRemark = MyBase.Columns("Remark")
+            Me.columnSchoolYear = MyBase.Columns("SchoolYear")
+            Me.columnSemester = MyBase.Columns("Semester")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
@@ -449,6 +469,10 @@ Partial Public Class GradeFields
             MyBase.Columns.Add(Me.columnSection)
             Me.columnRemark = New Global.System.Data.DataColumn("Remark", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnRemark)
+            Me.columnSchoolYear = New Global.System.Data.DataColumn("SchoolYear", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnSchoolYear)
+            Me.columnSemester = New Global.System.Data.DataColumn("Semester", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnSemester)
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
@@ -697,6 +721,34 @@ Partial Public Class GradeFields
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property SchoolYear() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableGradeInfo.SchoolYearColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'SchoolYear' in table 'GradeInfo' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableGradeInfo.SchoolYearColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property Semester() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableGradeInfo.SemesterColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Semester' in table 'GradeInfo' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableGradeInfo.SemesterColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Function IsProfnameNull() As Boolean
             Return Me.IsNull(Me.tableGradeInfo.ProfnameColumn)
         End Function
@@ -774,6 +826,26 @@ Partial Public Class GradeFields
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Sub SetRemarkNull()
             Me(Me.tableGradeInfo.RemarkColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsSchoolYearNull() As Boolean
+            Return Me.IsNull(Me.tableGradeInfo.SchoolYearColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetSchoolYearNull()
+            Me(Me.tableGradeInfo.SchoolYearColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsSemesterNull() As Boolean
+            Return Me.IsNull(Me.tableGradeInfo.SemesterColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetSemesterNull()
+            Me(Me.tableGradeInfo.SemesterColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
