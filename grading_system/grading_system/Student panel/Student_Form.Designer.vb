@@ -25,14 +25,22 @@ Partial Class Student_Form
         Me.Button1 = New System.Windows.Forms.Button
         Me.Button2 = New System.Windows.Forms.Button
         Me.Panel1 = New System.Windows.Forms.Panel
+        Me.PictureBoxstudent = New System.Windows.Forms.PictureBox
         Me.Button4 = New System.Windows.Forms.Button
         Me.Label1 = New System.Windows.Forms.Label
         Me.Button3 = New System.Windows.Forms.Button
         Me.s = New CrystalDecisions.Windows.Forms.CrystalReportViewer
         Me.mainpanel = New System.Windows.Forms.Panel
-        Me.PictureBoxstudent = New System.Windows.Forms.PictureBox
+        Me.Panel2 = New System.Windows.Forms.Panel
+        Me.ComboBox2 = New System.Windows.Forms.ComboBox
+        Me.Label3 = New System.Windows.Forms.Label
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox
+        Me.Label2 = New System.Windows.Forms.Label
+        Me.Button5 = New System.Windows.Forms.Button
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBoxstudent, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.mainpanel.SuspendLayout()
+        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'Button1
@@ -67,6 +75,14 @@ Partial Class Student_Form
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(194, 729)
         Me.Panel1.TabIndex = 46
+        '
+        'PictureBoxstudent
+        '
+        Me.PictureBoxstudent.Location = New System.Drawing.Point(24, 51)
+        Me.PictureBoxstudent.Name = "PictureBoxstudent"
+        Me.PictureBoxstudent.Size = New System.Drawing.Size(136, 119)
+        Me.PictureBoxstudent.TabIndex = 6
+        Me.PictureBoxstudent.TabStop = False
         '
         'Button4
         '
@@ -111,19 +127,69 @@ Partial Class Student_Form
         '
         'mainpanel
         '
+        Me.mainpanel.Controls.Add(Me.Panel2)
         Me.mainpanel.Dock = System.Windows.Forms.DockStyle.Fill
         Me.mainpanel.Location = New System.Drawing.Point(194, 0)
         Me.mainpanel.Name = "mainpanel"
         Me.mainpanel.Size = New System.Drawing.Size(1156, 729)
         Me.mainpanel.TabIndex = 48
         '
-        'PictureBoxstudent
+        'Panel2
         '
-        Me.PictureBoxstudent.Location = New System.Drawing.Point(24, 51)
-        Me.PictureBoxstudent.Name = "PictureBoxstudent"
-        Me.PictureBoxstudent.Size = New System.Drawing.Size(136, 119)
-        Me.PictureBoxstudent.TabIndex = 6
-        Me.PictureBoxstudent.TabStop = False
+        Me.Panel2.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Panel2.Controls.Add(Me.ComboBox2)
+        Me.Panel2.Controls.Add(Me.Label3)
+        Me.Panel2.Controls.Add(Me.ComboBox1)
+        Me.Panel2.Controls.Add(Me.Label2)
+        Me.Panel2.Controls.Add(Me.Button5)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel2.Location = New System.Drawing.Point(0, 0)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(1156, 56)
+        Me.Panel2.TabIndex = 0
+        '
+        'ComboBox2
+        '
+        Me.ComboBox2.FormattingEnabled = True
+        Me.ComboBox2.Location = New System.Drawing.Point(483, 14)
+        Me.ComboBox2.Name = "ComboBox2"
+        Me.ComboBox2.Size = New System.Drawing.Size(121, 21)
+        Me.ComboBox2.TabIndex = 4
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(426, 17)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(51, 13)
+        Me.Label3.TabIndex = 3
+        Me.Label3.Text = "Semester"
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Location = New System.Drawing.Point(255, 14)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(121, 21)
+        Me.ComboBox1.TabIndex = 2
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(184, 17)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(65, 13)
+        Me.Label2.TabIndex = 1
+        Me.Label2.Text = "School Year"
+        '
+        'Button5
+        '
+        Me.Button5.Location = New System.Drawing.Point(48, 12)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(75, 23)
+        Me.Button5.TabIndex = 0
+        Me.Button5.Text = "Load Report"
+        Me.Button5.UseVisualStyleBackColor = True
         '
         'Student_Form
         '
@@ -140,6 +206,9 @@ Partial Class Student_Form
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         CType(Me.PictureBoxstudent, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.mainpanel.ResumeLayout(False)
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -152,4 +221,10 @@ Partial Class Student_Form
     Friend WithEvents mainpanel As System.Windows.Forms.Panel
     Friend WithEvents Button4 As System.Windows.Forms.Button
     Friend WithEvents PictureBoxstudent As System.Windows.Forms.PictureBox
+    Friend WithEvents Panel2 As System.Windows.Forms.Panel
+    Friend WithEvents ComboBox2 As System.Windows.Forms.ComboBox
+    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
+    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents Button5 As System.Windows.Forms.Button
 End Class
