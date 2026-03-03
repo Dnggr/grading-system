@@ -8,6 +8,7 @@ Public Class Student_Form
 
     Dim p As New profile()
     Dim sched As New schedule()
+    Dim acccenter As New accountcenter()
 
     'Dim CSY As String = ""
     'Dim CSem As Integer = 0
@@ -29,11 +30,18 @@ Public Class Student_Form
         LoadStudentImage()
         LoadSchoolYears()
         LoadSemesters()
+
         Panel2.Visible = False
+
+        'AccountCenter Viewer Logic
+        acccenter.Visible = False
+
+        '----Schedule Viewer Logic
         sched.Dock = DockStyle.Fill
         mainpanel.Controls.Add(sched)
         sched.Visible = False
 
+        '--Profile Viewer Logic
         p.Dock = DockStyle.Fill
         mainpanel.Controls.Add(p)
         p.Visible = False
@@ -100,6 +108,11 @@ Public Class Student_Form
 
     Private Sub Button5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button5.Click
         ReloadReport()
+    End Sub
+
+    Private Sub resetpass_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles resetpass.Click
+        acccenter.BringToFront()
+        acccenter.Visible = True
     End Sub
 
 #End Region
@@ -378,6 +391,4 @@ Public Class Student_Form
     End Sub
 #End Region
 
-   
-    
 End Class

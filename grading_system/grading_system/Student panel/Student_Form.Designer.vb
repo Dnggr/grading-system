@@ -37,6 +37,7 @@ Partial Class Student_Form
         Me.ComboBox1 = New System.Windows.Forms.ComboBox
         Me.Label2 = New System.Windows.Forms.Label
         Me.Button5 = New System.Windows.Forms.Button
+        Me.resetpass = New System.Windows.Forms.Button
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBoxstudent, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mainpanel.SuspendLayout()
@@ -64,6 +65,7 @@ Partial Class Student_Form
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Panel1.Controls.Add(Me.resetpass)
         Me.Panel1.Controls.Add(Me.PictureBoxstudent)
         Me.Panel1.Controls.Add(Me.Button4)
         Me.Panel1.Controls.Add(Me.Label1)
@@ -86,7 +88,7 @@ Partial Class Student_Form
         '
         'Button4
         '
-        Me.Button4.Location = New System.Drawing.Point(24, 509)
+        Me.Button4.Location = New System.Drawing.Point(24, 520)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(147, 61)
         Me.Button4.TabIndex = 5
@@ -105,7 +107,7 @@ Partial Class Student_Form
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(24, 403)
+        Me.Button3.Location = New System.Drawing.Point(24, 427)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(147, 61)
         Me.Button3.TabIndex = 3
@@ -191,6 +193,15 @@ Partial Class Student_Form
         Me.Button5.Text = "Load Report"
         Me.Button5.UseVisualStyleBackColor = True
         '
+        'resetpass
+        '
+        Me.resetpass.Location = New System.Drawing.Point(24, 336)
+        Me.resetpass.Name = "resetpass"
+        Me.resetpass.Size = New System.Drawing.Size(147, 61)
+        Me.resetpass.TabIndex = 7
+        Me.resetpass.Text = "Account Center"
+        Me.resetpass.UseVisualStyleBackColor = True
+        '
         'Student_Form
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -227,4 +238,5 @@ Partial Class Student_Form
     Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Button5 As System.Windows.Forms.Button
+    Friend WithEvents resetpass As System.Windows.Forms.Button
 End Class
