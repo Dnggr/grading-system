@@ -9,21 +9,17 @@ Public Class Teacher_Form
     Private filteredView As DataView
 
     Private Sub Teacher_Form_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        'ComboBox1.Items.Add("1")
-        'ComboBox1.Items.Add("2")
-        'ComboBox1.Items.Add("3")
-        'ComboBox1.Items.Add("4")
+        
         sy = ""
         sm = 0
         GetCurrentSem(sy, sm)   ' from Module_SemControl
-        lblCurrentSem.Text = "Current: S.Y. " & sy & _
-                             " - " & If(sm = 1, "1st", "2nd") & " Semester"
+        lblCurrentSem.Text = "Current: S.Y. " & sy & " - " & If(sm = 1, "1st", "2nd") & " Semester"
+        ConfigureDataGridView()
+        ShowEditButtons()
+        ShowDeleteButtons()
         getSchoolYear()
         LoadSemesters()
-        'Dim syear As String = ComboBox4.SelectedValue.ToString()
-        'Dim semes As String = ComboBox1.SelectedValue.ToString()
-        'Label3.Text = syear
-        'Label4.Text = semes
+       
         If ComboBox4.SelectedIndex >= 0 Then
             LoadAllGrades(ComboBox4.SelectedValue.ToString())
         End If
@@ -41,10 +37,6 @@ Public Class Teacher_Form
             Dim adapter As New OdbcDataAdapter(query, con)
             Dim dt As New DataTable()
             adapter.Fill(dt)
-
-            ' Debug: Show what we got
-            'MessageBox.Show("Rows from database: " & dt.Rows.Count & vbCrLf & _
-            '"Current SY: " & sy, "DEBUG")
 
             ' Build complete list
             Dim allYears As New List(Of String)()
@@ -70,9 +62,6 @@ Public Class Teacher_Form
 
                 ' Select current school year (which is first in the list)
                 ComboBox4.SelectedIndex = 0
-
-                'MessageBox.Show("ComboBox loaded with " & allYears.Count & " years" & vbCrLf & _
-                '"Selected: " & ComboBox4.SelectedValue.ToString(), "DEBUG")
             Else
                 MessageBox.Show("No school years available", "Info")
             End If
@@ -82,14 +71,6 @@ Public Class Teacher_Form
         Finally
             If con.State = ConnectionState.Open Then con.Close()
         End Try
-    End Sub
-
-    Private Sub LoadSemesters()
-        ComboBox1.Items.Clear()
-        ComboBox1.Items.Add("All Semesters")
-        ComboBox1.Items.Add("1")
-        ComboBox1.Items.Add("2")
-        ComboBox1.SelectedIndex = 0  ' Default to "All"
     End Sub
 
     Private Sub LoadAllGrades(ByVal schoolYear As String)
@@ -142,9 +123,11 @@ Public Class Teacher_Form
 
                     ' Apply initial filter (show all)
                     ApplyFilters()
+                    
                 Else
+                    
                     DataGridView2.DataSource = Nothing
-                    'MessageBox.Show("No grades found for school year: " & schoolYear, "Info")
+
                 End If
             End Using
 
@@ -160,29 +143,52 @@ Public Class Teacher_Form
 #Region "Load Filter Options"
 
     Private Sub LoadFilterOptions()
-        If allGradesData.Tables("grades").Rows.Count = 0 Then Return
-
         Try
-            ' ===== Sections with "All" option =====
+            ' ✅ Always start fresh
+            ComboBox2.DataSource = Nothing
+            ComboBox3.DataSource = Nothing
+
+            ' Create lists with placeholders
             Dim sectionsData As New List(Of String)()
             sectionsData.Add("All Sections")
 
-            Dim sections As DataTable = allGradesData.Tables("grades").DefaultView.ToTable(True, "Section")
-            For Each row As DataRow In sections.Rows
-                sectionsData.Add(row("Section").ToString())
-            Next
-
-            ComboBox2.DataSource = sectionsData
-            ComboBox2.SelectedIndex = 0
-
-            ' ===== Subjects with "All" option =====
             Dim subjectsData As New List(Of String)()
             subjectsData.Add("All Subjects")
 
-            Dim subjects As DataTable = allGradesData.Tables("grades").DefaultView.ToTable(True, "Subject")
-            For Each row As DataRow In subjects.Rows
-                subjectsData.Add(row("Subject").ToString())
-            Next
+            ' ✅ Only add data if table exists and has rows
+            If allGradesData.Tables.Contains("grades") AndAlso _
+               allGradesData.Tables("grades").Rows.Count > 0 Then
+
+                ' Load sections
+                Dim sections As DataTable = allGradesData.Tables("grades").DefaultView.ToTable(True, "Section")
+                For Each row As DataRow In sections.Rows
+                    If Not IsDBNull(row("Section")) AndAlso _
+                       Not String.IsNullOrEmpty(row("Section").ToString()) Then
+
+                        Dim sectionName As String = row("Section").ToString()
+                        If Not sectionsData.Contains(sectionName) Then
+                            sectionsData.Add(sectionName)
+                        End If
+                    End If
+                Next
+
+                ' Load subjects
+                Dim subjects As DataTable = allGradesData.Tables("grades").DefaultView.ToTable(True, "Subject")
+                For Each row As DataRow In subjects.Rows
+                    If Not IsDBNull(row("Subject")) AndAlso _
+                       Not String.IsNullOrEmpty(row("Subject").ToString()) Then
+
+                        Dim subjectName As String = row("Subject").ToString()
+                        If Not subjectsData.Contains(subjectName) Then
+                            subjectsData.Add(subjectName)
+                        End If
+                    End If
+                Next
+            End If
+
+            ' ✅ Always bind (even if only placeholders)
+            ComboBox2.DataSource = sectionsData
+            ComboBox2.SelectedIndex = 0
 
             ComboBox3.DataSource = subjectsData
             ComboBox3.SelectedIndex = 0
@@ -198,19 +204,18 @@ Public Class Teacher_Form
 
     Private Sub ApplyFilters()
         Try
-            If allGradesData.Tables("grades").Rows.Count = 0 Then
+            ' Check if data exists
+            If Not allGradesData.Tables.Contains("grades") OrElse _
+               allGradesData.Tables("grades").Rows.Count = 0 Then
                 DataGridView2.DataSource = Nothing
                 Return
             End If
 
-            ' Create DataView for filtering
             filteredView = New DataView(allGradesData.Tables("grades"))
-
-            ' Build filter string
             Dim filterParts As New List(Of String)()
 
-            ' Filter by Semester
-            If ComboBox1.SelectedIndex > 0 Then  ' Not "All Semesters"
+            ' Semester filter
+            If ComboBox1.SelectedIndex > 0 Then
                 filterParts.Add("Semester = " & ComboBox1.SelectedItem.ToString())
             End If
 
@@ -224,33 +229,27 @@ Public Class Teacher_Form
                 filterParts.Add("Subject = '" & ComboBox3.SelectedItem.ToString().Replace("'", "''") & "'")
             End If
 
-            ' Filter by Name (TextBox)
+            ' Name filter
             If Not String.IsNullOrEmpty(TextBox1.Text.Trim()) Then
-                filterParts.Add("FullName LIKE '%" & TextBox1.Text.Trim() & "%'")
+                filterParts.Add("FullName LIKE '%" & TextBox1.Text.Trim().Replace("'", "''") & "%'")
             End If
 
-            ' Apply filter
+            ' ✅ FIXED: Convert List to Array
             If filterParts.Count > 0 Then
-                filteredView.RowFilter = String.Join(" AND ", filterParts.ToArray)
+                filteredView.RowFilter = String.Join(" AND ", filterParts.ToArray())
             Else
                 filteredView.RowFilter = ""
             End If
 
-            ' Bind to DataGridView
             DataGridView2.DataSource = filteredView
-
-            ' Configure columns
             ConfigureDataGridView()
 
-            ' Update count label
-            'lblRecordCount.Text = "Records: " & filteredView.Count & " / " & allGradesData.Tables("grades").Rows.Count
-
         Catch ex As Exception
-            MessageBox.Show("Error applying filters: " & ex.Message)
+            MessageBox.Show("Error: " & ex.Message)
         End Try
     End Sub
 
-    Private Sub ConfigureDataGridView()
+    Private Sub HideIDColumns()
         If DataGridView2.Columns.Count = 0 Then Return
 
         ' Hide columns
@@ -270,6 +269,14 @@ Public Class Teacher_Form
 #End Region
 
 #Region "ComboBox logic"
+    Private Sub LoadSemesters()
+        ComboBox1.Items.Clear()
+        ComboBox1.Items.Add("All Semesters")
+        ComboBox1.Items.Add("1")
+        ComboBox1.Items.Add("2")
+        ComboBox1.SelectedIndex = 0  ' Default to "All"
+    End Sub
+
 
     Private Sub ComboBox4_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles ComboBox4.SelectedIndexChanged
         If ComboBox4.SelectedIndex >= 0 Then
@@ -321,51 +328,192 @@ Public Class Teacher_Form
     End Sub
 
     Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button4.Click
-        ComboBox1.SelectedIndex = 0  ' All Semesters
-        ComboBox2.SelectedIndex = 0  ' All Sections
-        ComboBox3.SelectedIndex = 0  ' All Subjects
-        TextBox1.Clear()
-        ApplyFilters()
+        Try
+            ' Reset all filters to placeholders
+            If ComboBox1 IsNot Nothing AndAlso ComboBox1.Items.Count > 0 Then
+                ComboBox1.SelectedIndex = 0  ' "All Semesters"
+            End If
+
+            If ComboBox2 IsNot Nothing AndAlso ComboBox2.Items.Count > 0 Then
+                ComboBox2.SelectedIndex = 0  ' "All Sections"
+            End If
+
+            If ComboBox3 IsNot Nothing AndAlso ComboBox3.Items.Count > 0 Then
+                ComboBox3.SelectedIndex = 0  ' "All Subjects"
+            End If
+
+            If TextBox1 IsNot Nothing Then
+                TextBox1.Clear()
+            End If
+
+            ' Reapply filters (which will show all data)
+            ApplyFilters()
+
+        Catch ex As Exception
+            MessageBox.Show("Error clearing filters: " & ex.Message)
+        End Try
     End Sub
 
+    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+        RefreshGradeData()
+    End Sub
 
 #End Region
 
-    ' ✅ FIXED: Added refresh after closing
-    Private Sub DataGridView2_CellClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView2.CellClick
+#Region "DataGrid Row Clicked"
+    'Private Sub DataGridView2_CellClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView2.CellClick
+    '   If e.RowIndex < 0 Then Return
+
+    'Dim selectedRow As DataGridViewRow = DataGridView2.Rows(e.RowIndex)
+
+    '    Dim gID As String = ""
+    '       If selectedRow.Cells("gID").Value IsNot Nothing Then
+    '          gID = selectedRow.Cells("gID").Value.ToString()
+    '     End If
+
+    '    Label3.Text = gID
+
+    '    Dim addGrade As New AddGrade_Form()
+
+    '       addGrade.gradeID = gID
+    '      addGrade.updateMode = True
+
+    '     addGrade.ShowDialog()
+
+    ' End Sub
+#End Region
+
+#Region "DataCell delete button clicked"
+    Private Sub DataGridView2_CellContentClick(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles DataGridView2.CellContentClick
         If e.RowIndex < 0 Then Return
 
-        Dim selectedRow As DataGridViewRow = DataGridView2.Rows(e.RowIndex)
-
-        'Dim studId As String = ""
-        'Dim studName As String = ""
-        'Dim secId As String = ""
-        Dim gID As String = ""
-        If selectedRow.Cells("gID").Value IsNot Nothing Then
-            gID = selectedRow.Cells("gID").Value.ToString()
+        If DataGridView2.Columns.Contains("DeleteButton") AndAlso _
+           e.ColumnIndex = DataGridView2.Columns("DeleteButton").Index Then
+            DeleteGrade(e.RowIndex)
         End If
 
-        'If selectedRow.Cells("FullName").Value IsNot Nothing Then
-        'studName = selectedRow.Cells("FullName").Value.ToString()
-        'End If
+        If DataGridView2.Columns.Contains("EditButton") AndAlso _
+      e.ColumnIndex = DataGridView2.Columns("EditButton").Index Then
+            Dim selectedRow As DataGridViewRow = DataGridView2.Rows(e.RowIndex)
 
-        'If selectedRow.Cells("sectionID").Value IsNot Nothing Then
-        'secId = selectedRow.Cells("sectionID").Value.ToString()
-        'End If
+            Dim gID As String = ""
+            If selectedRow.Cells("gID").Value IsNot Nothing Then
+                gID = selectedRow.Cells("gID").Value.ToString()
+            End If
 
-        Label3.Text = gID
-        'Label4.Text = studId
-        'Label5.Text = secId
+            Label3.Text = gID
 
-        Dim addGrade As New AddGrade_Form()
-        'addGrade.sID = studId
-        'addGrade.FN = studName
-        'addGrade.secID = secId
-        addGrade.gradeID = gID
-        addGrade.updateMode = True
+            Dim addGrade As New AddGrade_Form()
 
-        addGrade.ShowDialog()
-        
+            addGrade.gradeID = gID
+            addGrade.updateMode = True
+
+            addGrade.ShowDialog()
+        End If
     End Sub
+#End Region
+
+#Region "Update Operation"
+    Private Sub ShowEditButtons()
+        If Not DataGridView2.Columns.Contains("EditButton") Then
+            Dim editBtn As New DataGridViewButtonColumn()
+            editBtn.Name = "EditButton"
+            editBtn.HeaderText = "Edit"
+            editBtn.Text = "Edit"
+            editBtn.UseColumnTextForButtonValue = True
+            editBtn.Width = 60
+            editBtn.DefaultCellStyle.BackColor = Color.LightBlue
+            DataGridView2.Columns.Add(editBtn)
+        Else
+            DataGridView2.Columns("EditButton").Visible = True
+        End If
+    End Sub
+#End Region
+
+#Region "Delete Operation"
+    Private Sub ShowDeleteButtons()
+        If Not DataGridView2.Columns.Contains("DeleteButton") Then
+            Dim deleteBtn As New DataGridViewButtonColumn()
+            deleteBtn.Name = "DeleteButton"
+            deleteBtn.HeaderText = ""
+            deleteBtn.Text = "Delete"
+            deleteBtn.UseColumnTextForButtonValue = True
+            deleteBtn.Width = 80
+            deleteBtn.DefaultCellStyle.BackColor = Color.LightCoral
+            deleteBtn.DefaultCellStyle.ForeColor = Color.DarkRed
+            deleteBtn.DefaultCellStyle.Font = New Font(DataGridView2.Font, FontStyle.Bold)
+            DataGridView2.Columns.Add(deleteBtn)
+        Else
+            DataGridView2.Columns("DeleteButton").Visible = True
+        End If
+    End Sub
+
+    
+    Private Sub DeleteGrade(ByVal rowIndex As Integer)
+        ' ... your delete code ...
+        Try
+            Dim row As DataGridViewRow = DataGridView2.Rows(rowIndex)
+
+            Dim gradeId As String = row.Cells("gID").Value.ToString()
+            Dim studentName As String = row.Cells("FullName").Value.ToString()
+            Dim subject As String = row.Cells("Subject").Value.ToString()
+
+            Dim result As DialogResult = MessageBox.Show( _
+                "Delete this grade?" & vbCrLf & vbCrLf & _
+                "Student: " & studentName & vbCrLf & _
+                "Subject: " & subject & vbCrLf & vbCrLf & _
+                "This cannot be undone!", _
+                "Confirm Delete", _
+                MessageBoxButtons.YesNo, _
+                MessageBoxIcon.Warning)
+
+            If result = DialogResult.Yes Then
+                Connect_me()
+
+                Dim query As String = "DELETE FROM grades WHERE grades_id = ?"
+
+                Using cmd As New OdbcCommand(query, con)
+                    cmd.Parameters.AddWithValue("?", gradeId)
+
+                    Dim affected As Integer = cmd.ExecuteNonQuery()
+
+                    If affected > 0 Then
+                        MessageBox.Show("Grade deleted!", "Success")
+                        RefreshGradeData()
+                    End If
+                End Using
+            End If
+
+        Catch ex As Exception
+            MessageBox.Show("Error: " & ex.Message)
+        Finally
+            If con.State = ConnectionState.Open Then con.Close()
+        End Try
+    End Sub
+#End Region
+
+    Private Sub RefreshGradeData()
+        If ComboBox4.SelectedIndex >= 0 Then
+            LoadAllGrades(ComboBox4.SelectedValue.ToString())
+        End If
+    End Sub
+
+    Private Sub ConfigureDataGridView()
+        If DataGridView2.Columns.Count = 0 Then Return
+
+        ' Hide ID columns
+        If DataGridView2.Columns.Contains("gID") Then DataGridView2.Columns("gID").Visible = False
+        If DataGridView2.Columns.Contains("ID") Then DataGridView2.Columns("ID").Visible = False
+        If DataGridView2.Columns.Contains("SectionID") Then DataGridView2.Columns("SectionID").Visible = False
+        If DataGridView2.Columns.Contains("SubjectID") Then DataGridView2.Columns("SubjectID").Visible = False
+
+        ' Format grade
+        If DataGridView2.Columns.Contains("FinalGrade") Then
+            DataGridView2.Columns("FinalGrade").DefaultCellStyle.Format = "0.00"
+        End If
+
+        DataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
+    End Sub
+
 
 End Class
