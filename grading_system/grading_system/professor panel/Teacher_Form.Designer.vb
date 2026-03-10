@@ -23,6 +23,8 @@ Partial Class Teacher_Form
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel
+        Me.Button4 = New System.Windows.Forms.Button
+        Me.Label8 = New System.Windows.Forms.Label
         Me.TextBox1 = New System.Windows.Forms.TextBox
         Me.Label7 = New System.Windows.Forms.Label
         Me.ComboBox4 = New System.Windows.Forms.ComboBox
@@ -43,8 +45,6 @@ Partial Class Teacher_Form
         Me.DataGridView1 = New System.Windows.Forms.DataGridView
         Me.DataGridView2 = New System.Windows.Forms.DataGridView
         Me.DataGridView3 = New System.Windows.Forms.DataGridView
-        Me.Label8 = New System.Windows.Forms.Label
-        Me.Button4 = New System.Windows.Forms.Button
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -76,6 +76,24 @@ Partial Class Teacher_Form
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(1350, 130)
         Me.Panel1.TabIndex = 0
+        '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(979, 55)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(75, 47)
+        Me.Button4.TabIndex = 16
+        Me.Button4.Text = "Reset Filters"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(313, 85)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(75, 13)
+        Me.Label8.TabIndex = 15
+        Me.Label8.Text = "Student Name"
         '
         'TextBox1
         '
@@ -148,9 +166,9 @@ Partial Class Teacher_Form
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(313, 11)
+        Me.Button3.Location = New System.Drawing.Point(1222, 55)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(75, 23)
+        Me.Button3.Size = New System.Drawing.Size(75, 48)
         Me.Button3.TabIndex = 5
         Me.Button3.Text = "Exit"
         Me.Button3.UseVisualStyleBackColor = True
@@ -173,18 +191,18 @@ Partial Class Teacher_Form
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(427, 42)
+        Me.Button2.Location = New System.Drawing.Point(1060, 55)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 23)
+        Me.Button2.Size = New System.Drawing.Size(75, 48)
         Me.Button2.TabIndex = 1
-        Me.Button2.Text = "Button2"
+        Me.Button2.Text = "Refresh"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(313, 42)
+        Me.Button1.Location = New System.Drawing.Point(1141, 55)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.Size = New System.Drawing.Size(75, 48)
         Me.Button1.TabIndex = 0
         Me.Button1.Text = "Add Grades"
         Me.Button1.UseVisualStyleBackColor = True
@@ -261,24 +279,6 @@ Partial Class Teacher_Form
         Me.DataGridView3.ReadOnly = True
         Me.DataGridView3.Size = New System.Drawing.Size(114, 599)
         Me.DataGridView3.TabIndex = 3
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(313, 85)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(75, 13)
-        Me.Label8.TabIndex = 15
-        Me.Label8.Text = "Student Name"
-        '
-        'Button4
-        '
-        Me.Button4.Location = New System.Drawing.Point(979, 55)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(75, 47)
-        Me.Button4.TabIndex = 16
-        Me.Button4.Text = "Reset Filters"
-        Me.Button4.UseVisualStyleBackColor = True
         '
         'Teacher_Form
         '
