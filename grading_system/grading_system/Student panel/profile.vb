@@ -341,4 +341,7 @@ Public Class profile
 
 #End Region
 
+    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+        accountcenter.Show()
+    End Sub
 End Class

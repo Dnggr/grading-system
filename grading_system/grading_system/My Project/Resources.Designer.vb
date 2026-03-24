@@ -60,6 +60,13 @@ Namespace My.Resources
             End Set
         End Property
         
+        Friend ReadOnly Property daniel_leone_g30P1zcOzXo_unsplash() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("daniel-leone-g30P1zcOzXo-unsplash", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
         Friend ReadOnly Property depressedwojak() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("depressedwojak", resourceCulture)
@@ -70,6 +77,20 @@ Namespace My.Resources
         Friend ReadOnly Property femalewojak() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("femalewojak", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property padlock() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("padlock", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property user() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("user", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

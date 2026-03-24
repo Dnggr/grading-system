@@ -25,6 +25,7 @@ Partial Class Student_Form
         Me.Button1 = New System.Windows.Forms.Button
         Me.Button2 = New System.Windows.Forms.Button
         Me.Panel1 = New System.Windows.Forms.Panel
+        Me.resetpass = New System.Windows.Forms.Button
         Me.PictureBoxstudent = New System.Windows.Forms.PictureBox
         Me.Button4 = New System.Windows.Forms.Button
         Me.Label1 = New System.Windows.Forms.Label
@@ -37,7 +38,6 @@ Partial Class Student_Form
         Me.ComboBox1 = New System.Windows.Forms.ComboBox
         Me.Label2 = New System.Windows.Forms.Label
         Me.Button5 = New System.Windows.Forms.Button
-        Me.resetpass = New System.Windows.Forms.Button
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBoxstudent, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mainpanel.SuspendLayout()
@@ -46,11 +46,11 @@ Partial Class Student_Form
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(24, 251)
+        Me.Button1.Location = New System.Drawing.Point(24, 331)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(147, 62)
         Me.Button1.TabIndex = 0
-        Me.Button1.Text = "Info"
+        Me.Button1.Text = "Account"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Button2
@@ -77,6 +77,15 @@ Partial Class Student_Form
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(194, 729)
         Me.Panel1.TabIndex = 46
+        '
+        'resetpass
+        '
+        Me.resetpass.Location = New System.Drawing.Point(24, 246)
+        Me.resetpass.Name = "resetpass"
+        Me.resetpass.Size = New System.Drawing.Size(147, 61)
+        Me.resetpass.TabIndex = 7
+        Me.resetpass.Text = "Dashboard"
+        Me.resetpass.UseVisualStyleBackColor = True
         '
         'PictureBoxstudent
         '
@@ -192,15 +201,6 @@ Partial Class Student_Form
         Me.Button5.TabIndex = 0
         Me.Button5.Text = "Load Report"
         Me.Button5.UseVisualStyleBackColor = True
-        '
-        'resetpass
-        '
-        Me.resetpass.Location = New System.Drawing.Point(24, 336)
-        Me.resetpass.Name = "resetpass"
-        Me.resetpass.Size = New System.Drawing.Size(147, 61)
-        Me.resetpass.TabIndex = 7
-        Me.resetpass.Text = "Account Center"
-        Me.resetpass.UseVisualStyleBackColor = True
         '
         'Student_Form
         '

@@ -33,9 +33,6 @@ Public Class Student_Form
 
         Panel2.Visible = False
 
-        'AccountCenter Viewer Logic
-        acccenter.Visible = False
-
         '----Schedule Viewer Logic
         sched.Dock = DockStyle.Fill
         mainpanel.Controls.Add(sched)
@@ -109,12 +106,6 @@ Public Class Student_Form
     Private Sub Button5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button5.Click
         ReloadReport()
     End Sub
-
-    Private Sub resetpass_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles resetpass.Click
-        acccenter.BringToFront()
-        acccenter.Visible = True
-    End Sub
-
 #End Region
 
 #Region "ComboBox Loaders"
