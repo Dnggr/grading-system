@@ -25,6 +25,7 @@ Partial Class Student_Form
         Me.Button1 = New System.Windows.Forms.Button
         Me.Button2 = New System.Windows.Forms.Button
         Me.Panel1 = New System.Windows.Forms.Panel
+        Me.resetpass = New System.Windows.Forms.Button
         Me.PictureBoxstudent = New System.Windows.Forms.PictureBox
         Me.Button4 = New System.Windows.Forms.Button
         Me.Label1 = New System.Windows.Forms.Label
@@ -45,11 +46,11 @@ Partial Class Student_Form
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(24, 251)
+        Me.Button1.Location = New System.Drawing.Point(24, 331)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(147, 62)
         Me.Button1.TabIndex = 0
-        Me.Button1.Text = "Info"
+        Me.Button1.Text = "Account"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Button2
@@ -64,6 +65,7 @@ Partial Class Student_Form
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Panel1.Controls.Add(Me.resetpass)
         Me.Panel1.Controls.Add(Me.PictureBoxstudent)
         Me.Panel1.Controls.Add(Me.Button4)
         Me.Panel1.Controls.Add(Me.Label1)
@@ -76,6 +78,15 @@ Partial Class Student_Form
         Me.Panel1.Size = New System.Drawing.Size(194, 729)
         Me.Panel1.TabIndex = 46
         '
+        'resetpass
+        '
+        Me.resetpass.Location = New System.Drawing.Point(24, 246)
+        Me.resetpass.Name = "resetpass"
+        Me.resetpass.Size = New System.Drawing.Size(147, 61)
+        Me.resetpass.TabIndex = 7
+        Me.resetpass.Text = "Dashboard"
+        Me.resetpass.UseVisualStyleBackColor = True
+        '
         'PictureBoxstudent
         '
         Me.PictureBoxstudent.Location = New System.Drawing.Point(24, 51)
@@ -86,7 +97,7 @@ Partial Class Student_Form
         '
         'Button4
         '
-        Me.Button4.Location = New System.Drawing.Point(24, 509)
+        Me.Button4.Location = New System.Drawing.Point(24, 520)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(147, 61)
         Me.Button4.TabIndex = 5
@@ -105,7 +116,7 @@ Partial Class Student_Form
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(24, 403)
+        Me.Button3.Location = New System.Drawing.Point(24, 427)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(147, 61)
         Me.Button3.TabIndex = 3
@@ -227,4 +238,5 @@ Partial Class Student_Form
     Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Button5 As System.Windows.Forms.Button
+    Friend WithEvents resetpass As System.Windows.Forms.Button
 End Class

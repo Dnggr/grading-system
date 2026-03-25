@@ -8,6 +8,7 @@ Public Class Student_Form
 
     Dim p As New profile()
     Dim sched As New schedule()
+    Dim acccenter As New accountcenter()
 
     'Dim CSY As String = ""
     'Dim CSem As Integer = 0
@@ -29,11 +30,15 @@ Public Class Student_Form
         LoadStudentImage()
         LoadSchoolYears()
         LoadSemesters()
+
         Panel2.Visible = False
+
+        '----Schedule Viewer Logic
         sched.Dock = DockStyle.Fill
         mainpanel.Controls.Add(sched)
         sched.Visible = False
 
+        '--Profile Viewer Logic
         p.Dock = DockStyle.Fill
         mainpanel.Controls.Add(p)
         p.Visible = False
@@ -101,7 +106,6 @@ Public Class Student_Form
     Private Sub Button5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button5.Click
         ReloadReport()
     End Sub
-
 #End Region
 
 #Region "ComboBox Loaders"
@@ -378,6 +382,4 @@ Public Class Student_Form
     End Sub
 #End Region
 
-   
-    
 End Class

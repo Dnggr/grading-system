@@ -169,4 +169,19 @@ Public Class Login_Form
         End If
     End Sub
 
+    Private Sub passwordLabel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+
+    End Sub
+
+    Private Sub loginemailTextBox_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles loginemailTextBox.TextChanged
+
+    End Sub
+
+    Private Sub CheckBox1_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBox1.CheckedChanged
+        If CheckBox1.Checked Then
+            loginpasswordTextBox.PasswordChar = ChrW(0)
+        Else
+            loginpasswordTextBox.PasswordChar = ChrW(&H25CF)
+        End If
+    End Sub
 End Class
