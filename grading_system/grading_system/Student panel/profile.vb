@@ -4,6 +4,8 @@ Public Class profile
     Dim response As DialogResult
     Private Sub profile_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         LoadImage()
+
+        MakeRoundedPanel(Panel1, 30)
     End Sub
 #Region "Load StudentInfo"
 
@@ -344,4 +346,33 @@ Public Class profile
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
         accountcenter.Show()
     End Sub
+
+    Private Sub Label1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label1.Click
+
+    End Sub
+
+    Private Sub course_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles course.Click
+
+    End Sub
+
+    Private Sub Label8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label8.Click
+
+    End Sub
+
+    Private Sub Panel1_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles Panel1.Paint
+
+    End Sub
+    Private Sub MakeRoundedPanel(ByVal pnl As Panel, ByVal radius As Integer)
+        Dim path As New Drawing.Drawing2D.GraphicsPath()
+
+        path.StartFigure()
+        path.AddArc(0, 0, radius, radius, 180, 90)
+        path.AddArc(pnl.Width - radius, 0, radius, radius, 270, 90)
+        path.AddArc(pnl.Width - radius, pnl.Height - radius, radius, radius, 0, 90)
+        path.AddArc(0, pnl.Height - radius, radius, radius, 90, 90)
+        path.CloseFigure()
+        pnl.Region = New Region(path)
+    End Sub
+    
+
 End Class

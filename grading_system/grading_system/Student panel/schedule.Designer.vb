@@ -31,6 +31,7 @@ Partial Class schedule
         '
         'DataGridView1
         '
+        Me.DataGridView1.BackgroundColor = System.Drawing.Color.Azure
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Location = New System.Drawing.Point(213, 147)
         Me.DataGridView1.Name = "DataGridView1"
@@ -39,37 +40,44 @@ Partial Class schedule
         '
         'first_year
         '
+        Me.first_year.BackColor = System.Drawing.Color.Azure
+        Me.first_year.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.first_year.Location = New System.Drawing.Point(65, 29)
         Me.first_year.Name = "first_year"
         Me.first_year.Size = New System.Drawing.Size(140, 51)
         Me.first_year.TabIndex = 1
-        Me.first_year.Text = "first year"
-        Me.first_year.UseVisualStyleBackColor = True
+        Me.first_year.Text = "First Year"
+        Me.first_year.UseVisualStyleBackColor = False
         '
         'LinkLabel1
         '
         Me.LinkLabel1.AutoSize = True
-        Me.LinkLabel1.Location = New System.Drawing.Point(65, 102)
+        Me.LinkLabel1.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LinkLabel1.LinkColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LinkLabel1.Location = New System.Drawing.Point(56, 99)
         Me.LinkLabel1.Name = "LinkLabel1"
-        Me.LinkLabel1.Size = New System.Drawing.Size(45, 13)
+        Me.LinkLabel1.Size = New System.Drawing.Size(84, 17)
         Me.LinkLabel1.TabIndex = 2
         Me.LinkLabel1.TabStop = True
-        Me.LinkLabel1.Text = "first sem"
+        Me.LinkLabel1.Text = "1st Semester"
         '
         'LinkLabel2
         '
         Me.LinkLabel2.AutoSize = True
-        Me.LinkLabel2.Location = New System.Drawing.Point(146, 102)
+        Me.LinkLabel2.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LinkLabel2.LinkColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LinkLabel2.Location = New System.Drawing.Point(146, 99)
         Me.LinkLabel2.Name = "LinkLabel2"
-        Me.LinkLabel2.Size = New System.Drawing.Size(64, 13)
+        Me.LinkLabel2.Size = New System.Drawing.Size(91, 17)
         Me.LinkLabel2.TabIndex = 3
         Me.LinkLabel2.TabStop = True
-        Me.LinkLabel2.Text = "second sem"
+        Me.LinkLabel2.Text = "2nd Semester"
         '
         'schedule
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.CadetBlue
         Me.Controls.Add(Me.LinkLabel2)
         Me.Controls.Add(Me.LinkLabel1)
         Me.Controls.Add(Me.first_year)
