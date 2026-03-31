@@ -373,6 +373,5 @@ Public Class profile
         path.CloseFigure()
         pnl.Region = New Region(path)
     End Sub
-    
 
 End Class
