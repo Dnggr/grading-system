@@ -15,6 +15,7 @@ Public Class Dashboard
     End Function
 
     Private Sub Dashboard_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        finalavg()
         MakeRoundedPanel(Panel1, 30)
         MakeRoundedPanel(Panel2, 30)
         MakeRoundedPanel(Panel3, 30)
@@ -51,25 +52,29 @@ Public Class Dashboard
         path.CloseFigure()
         pnl.Region = New Region(path)
     End Sub
-    Private Sub LoadGPA()
+
+    Private Sub finalavg()
         Try
-            Connect_me()
+            con.Open()
 
-            Dim query As String = "Select AVG(grade) FROM grades WHERE acc_id=?"
+            Dim query As String = "SELECT AVG(CAST(g.numerical AS DECIMAL(5,2))) " & _
+                                  "FROM grades g " & _
+                                  "INNER JOIN student s ON g.stud_id = s.stud_id " & _
+                                  "WHERE s.acc_id = ? "
             Dim cmd As New OdbcCommand(query, con)
-            cmd.Parameters.AddWithValue("acc_id", login_logic.userid)
-            Dim result = cmd.ExecuteScalar()
+            cmd.Parameters.AddWithValue("?", OdbcType.Int).Value = login_logic.userid
+            Dim result As Object = cmd.ExecuteScalar()
 
-            If Not IsDBNull(result) Then
-                Label8.Text = FormatNumber(result, 2)
+            If result IsNot Nothing AndAlso Not IsDBNull(result) Then
+                Label8.Text = FormatNumber(Convert.ToDouble(result), 2)
             Else
                 Label8.Text = "0.00"
             End If
-            con.Close()
 
         Catch ex As Exception
-            MessageBox.Show("Error loading GPA:" & ex.Message)
+            MessageBox.Show("Error: " & ex.Message)
+        Finally
+            If con.State = ConnectionState.Open Then con.Close()
         End Try
     End Sub
-
 End Class

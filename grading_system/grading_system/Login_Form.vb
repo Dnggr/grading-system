@@ -153,6 +153,9 @@ Public Class Login_Form
     End Sub
 
     Private Sub Login_Form_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        MakeRoundedButton(loginButton, 25)
+        makeroundedtextbox(loginemailTextBox, 25)
+        makeroundedtextbox(loginpasswordTextBox, 25)
         Me.KeyPreview = True
         loginpasswordTextBox.PasswordChar = ChrW(&H25CF)
     End Sub
@@ -184,4 +187,31 @@ Public Class Login_Form
             loginpasswordTextBox.PasswordChar = ChrW(&H25CF)
         End If
     End Sub
+#Region "roundedbuttons"
+    Private Sub MakeRoundedButton(ByVal btn As Button, ByVal radius As Integer)
+        Dim path As New Drawing.Drawing2D.GraphicsPath()
+
+        path.StartFigure()
+        path.AddArc(0, 0, radius, radius, 180, 90)
+        path.AddArc(btn.Width - radius, 0, radius, radius, 270, 90)
+        path.AddArc(btn.Width - radius, btn.Height - radius, radius, radius, 0, 90)
+        path.AddArc(0, btn.Height - radius, radius, radius, 90, 90)
+        path.CloseFigure()
+        btn.Region = New Region(path)
+    End Sub
+#End Region
+
+#Region "rounded textbox"
+    Private Sub makeroundedtextbox(ByVal txtbox As TextBox, ByVal radius As Integer)
+        Dim path As New Drawing.Drawing2D.GraphicsPath()
+
+        path.StartFigure()
+        path.AddArc(0, 0, radius, radius, 180, 90)
+        path.AddArc(txtbox.Width - radius, 0, radius, radius, 270, 90)
+        path.AddArc(txtbox.Width - radius, txtbox.Height - radius, radius, radius, 0, 90)
+        path.AddArc(0, txtbox.Height - radius, radius, radius, 90, 90)
+        path.CloseFigure()
+        txtbox.Region = New Region(path)
+    End Sub
+#End Region
 End Class

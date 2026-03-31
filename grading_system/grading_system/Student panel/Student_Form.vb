@@ -10,7 +10,7 @@ Public Class Student_Form
     Dim sched As New schedule()
     Dim acccenter As New accountcenter()
     Dim Dashboard As New Dashboard()
-
+#Region "roundedbutton"
     Private Sub MakeRoundedButton(ByVal btn As Button, ByVal radius As Integer)
         Dim path As New Drawing.Drawing2D.GraphicsPath()
 
@@ -22,6 +22,7 @@ Public Class Student_Form
         path.CloseFigure()
         btn.Region = New Region(path)
     End Sub
+#End Region
     Private CurrentActiveButton = Nothing
 
     'Dim CSY As String = ""
@@ -227,7 +228,7 @@ Public Class Student_Form
             MessageBox.Show("Error loading report: " & ex.ToString, "Error")
         Finally
             If con.State = ConnectionState.Open Then con.Close()
-           
+
         End Try
     End Sub
 
@@ -315,7 +316,7 @@ Public Class Student_Form
             adapter.Fill(dt)
 
             If dt.Rows.Count = 0 Then
-    MessageBox.Show("You have no grades yet.", "No Grades",MessageBoxButtons.OK, MessageBoxIcon.Information)
+                MessageBox.Show("You have no grades yet.", "No Grades", MessageBoxButtons.OK, MessageBoxIcon.Information)
             ElseIf IsDBNull(dt.Rows(0)("SchoolYear")) And IsDBNull(dt.Rows(0)("Semester")) Then
                 MessageBox.Show("You have no grades yet for this Semester.", "No Grades", MessageBoxButtons.OK, MessageBoxIcon.Information)
             End If
@@ -419,6 +420,7 @@ Public Class Student_Form
     End Sub
 #End Region
 
+#Region "highlightbuttons"
     Private Sub HighlightButton(ByVal clickedButton As Button)
         If CurrentActiveButton IsNot Nothing Then
             CurrentActiveButton.BackColor = Color.Transparent
@@ -427,6 +429,8 @@ Public Class Student_Form
         CurrentActiveButton = clickedButton
 
     End Sub
+#End Region
+
     Private Sub resetpass_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles resetpass.Click
         Panel2.Visible = False
         Dashboard.BringToFront()
