@@ -54,194 +54,194 @@ Partial Class profile
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Font = New System.Drawing.Font("Segoe UI Semibold", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label1.Location = New System.Drawing.Point(17, 17)
+        Me.Label1.Location = New System.Drawing.Point(12, 25)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(77, 17)
+        Me.Label1.Size = New System.Drawing.Size(167, 40)
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "First Name:"
         '
         'firstname
         '
         Me.firstname.AutoSize = True
-        Me.firstname.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.firstname.Font = New System.Drawing.Font("Segoe UI Semibold", 22.0!, System.Drawing.FontStyle.Bold)
         Me.firstname.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.firstname.Location = New System.Drawing.Point(100, 17)
+        Me.firstname.Location = New System.Drawing.Point(186, 25)
         Me.firstname.Name = "firstname"
-        Me.firstname.Size = New System.Drawing.Size(65, 17)
+        Me.firstname.Size = New System.Drawing.Size(148, 41)
         Me.firstname.TabIndex = 2
         Me.firstname.Text = "firstname"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Font = New System.Drawing.Font("Segoe UI Semibold", 22.0!, System.Drawing.FontStyle.Bold)
         Me.Label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label2.Location = New System.Drawing.Point(17, 44)
+        Me.Label2.Location = New System.Drawing.Point(12, 72)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(92, 17)
+        Me.Label2.Size = New System.Drawing.Size(211, 41)
         Me.Label2.TabIndex = 3
         Me.Label2.Text = "Middle Name:"
         '
         'middlename
         '
         Me.middlename.AutoSize = True
-        Me.middlename.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.middlename.Font = New System.Drawing.Font("Segoe UI Semibold", 22.0!, System.Drawing.FontStyle.Bold)
         Me.middlename.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.middlename.Location = New System.Drawing.Point(115, 45)
+        Me.middlename.Location = New System.Drawing.Point(229, 72)
         Me.middlename.Name = "middlename"
-        Me.middlename.Size = New System.Drawing.Size(83, 17)
+        Me.middlename.Size = New System.Drawing.Size(190, 41)
         Me.middlename.TabIndex = 4
         Me.middlename.Text = "middlename"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Font = New System.Drawing.Font("Segoe UI Semibold", 22.0!, System.Drawing.FontStyle.Bold)
         Me.Label3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label3.Location = New System.Drawing.Point(17, 72)
+        Me.Label3.Location = New System.Drawing.Point(15, 117)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(75, 17)
+        Me.Label3.Size = New System.Drawing.Size(170, 41)
         Me.Label3.TabIndex = 5
         Me.Label3.Text = "Last Name:"
         '
         'lastname
         '
         Me.lastname.AutoSize = True
-        Me.lastname.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lastname.Font = New System.Drawing.Font("Segoe UI Semibold", 22.0!, System.Drawing.FontStyle.Bold)
         Me.lastname.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.lastname.Location = New System.Drawing.Point(98, 72)
+        Me.lastname.Location = New System.Drawing.Point(191, 117)
         Me.lastname.Name = "lastname"
-        Me.lastname.Size = New System.Drawing.Size(63, 17)
+        Me.lastname.Size = New System.Drawing.Size(143, 41)
         Me.lastname.TabIndex = 6
         Me.lastname.Text = "lastname"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Font = New System.Drawing.Font("Segoe UI Semibold", 22.0!, System.Drawing.FontStyle.Bold)
         Me.Label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label4.Location = New System.Drawing.Point(324, 21)
+        Me.Label4.Location = New System.Drawing.Point(18, 387)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(56, 17)
+        Me.Label4.Size = New System.Drawing.Size(126, 41)
         Me.Label4.TabIndex = 7
         Me.Label4.Text = "Gender:"
         '
         'section
         '
         Me.section.AutoSize = True
-        Me.section.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.section.Location = New System.Drawing.Point(73, 172)
+        Me.section.Font = New System.Drawing.Font("Segoe UI Semibold", 22.0!, System.Drawing.FontStyle.Bold)
+        Me.section.Location = New System.Drawing.Point(142, 312)
         Me.section.Name = "section"
-        Me.section.Size = New System.Drawing.Size(51, 17)
+        Me.section.Size = New System.Drawing.Size(116, 41)
         Me.section.TabIndex = 8
         Me.section.Text = "section"
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Font = New System.Drawing.Font("Segoe UI Semibold", 22.0!, System.Drawing.FontStyle.Bold)
         Me.Label5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label5.Location = New System.Drawing.Point(17, 127)
+        Me.Label5.Location = New System.Drawing.Point(19, 213)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(43, 17)
+        Me.Label5.Size = New System.Drawing.Size(100, 41)
         Me.Label5.TabIndex = 9
         Me.Label5.Text = "Email:"
         '
         'gender
         '
         Me.gender.AutoSize = True
-        Me.gender.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.gender.Font = New System.Drawing.Font("Segoe UI Semibold", 22.0!, System.Drawing.FontStyle.Bold)
         Me.gender.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.gender.Location = New System.Drawing.Point(386, 21)
+        Me.gender.Location = New System.Drawing.Point(142, 387)
         Me.gender.Name = "gender"
-        Me.gender.Size = New System.Drawing.Size(51, 17)
+        Me.gender.Size = New System.Drawing.Size(115, 41)
         Me.gender.TabIndex = 10
         Me.gender.Text = "gender"
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Font = New System.Drawing.Font("Segoe UI Semibold", 22.0!, System.Drawing.FontStyle.Bold)
         Me.Label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label6.Location = New System.Drawing.Point(17, 149)
+        Me.Label6.Location = New System.Drawing.Point(18, 260)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(53, 17)
+        Me.Label6.Size = New System.Drawing.Size(120, 41)
         Me.Label6.TabIndex = 11
         Me.Label6.Text = "Course:"
         '
         'email
         '
         Me.email.AutoSize = True
-        Me.email.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.email.Font = New System.Drawing.Font("Segoe UI Semibold", 22.0!, System.Drawing.FontStyle.Bold)
         Me.email.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.email.Location = New System.Drawing.Point(66, 127)
+        Me.email.Location = New System.Drawing.Point(125, 213)
         Me.email.Name = "email"
-        Me.email.Size = New System.Drawing.Size(40, 17)
+        Me.email.Size = New System.Drawing.Size(93, 41)
         Me.email.TabIndex = 12
         Me.email.Text = "email"
         '
         'course
         '
         Me.course.AutoSize = True
-        Me.course.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.course.Font = New System.Drawing.Font("Segoe UI Semibold", 22.0!, System.Drawing.FontStyle.Bold)
         Me.course.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.course.Location = New System.Drawing.Point(76, 149)
+        Me.course.Location = New System.Drawing.Point(142, 260)
         Me.course.Name = "course"
-        Me.course.Size = New System.Drawing.Size(48, 17)
+        Me.course.Size = New System.Drawing.Size(108, 41)
         Me.course.TabIndex = 13
         Me.course.Text = "course"
         '
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(324, 72)
+        Me.Label7.Font = New System.Drawing.Font("Segoe UI Semibold", 22.0!, System.Drawing.FontStyle.Bold)
+        Me.Label7.Location = New System.Drawing.Point(18, 477)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(38, 17)
+        Me.Label7.Size = New System.Drawing.Size(83, 41)
         Me.Label7.TabIndex = 14
         Me.Label7.Text = "Year:"
         '
         'yr_lvl
         '
         Me.yr_lvl.AutoSize = True
-        Me.yr_lvl.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.yr_lvl.Location = New System.Drawing.Point(368, 72)
+        Me.yr_lvl.Font = New System.Drawing.Font("Segoe UI Semibold", 22.0!, System.Drawing.FontStyle.Bold)
+        Me.yr_lvl.Location = New System.Drawing.Point(98, 477)
         Me.yr_lvl.Name = "yr_lvl"
-        Me.yr_lvl.Size = New System.Drawing.Size(38, 17)
+        Me.yr_lvl.Size = New System.Drawing.Size(87, 41)
         Me.yr_lvl.TabIndex = 15
         Me.yr_lvl.Text = "yr_lvl"
         '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(17, 172)
+        Me.Label8.Font = New System.Drawing.Font("Segoe UI Semibold", 22.0!, System.Drawing.FontStyle.Bold)
+        Me.Label8.Location = New System.Drawing.Point(18, 312)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(55, 17)
+        Me.Label8.Size = New System.Drawing.Size(126, 41)
         Me.Label8.TabIndex = 16
         Me.Label8.Text = "Section:"
         '
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Font = New System.Drawing.Font("Segoe UI Semibold", 22.0!, System.Drawing.FontStyle.Bold)
         Me.Label9.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label9.Location = New System.Drawing.Point(324, 47)
+        Me.Label9.Location = New System.Drawing.Point(18, 432)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(24, 17)
+        Me.Label9.Size = New System.Drawing.Size(56, 41)
         Me.Label9.TabIndex = 17
         Me.Label9.Text = "ID:"
         '
         'id
         '
         Me.id.AutoSize = True
-        Me.id.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.id.Font = New System.Drawing.Font("Segoe UI Semibold", 22.0!, System.Drawing.FontStyle.Bold)
         Me.id.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.id.Location = New System.Drawing.Point(354, 47)
+        Me.id.Location = New System.Drawing.Point(75, 432)
         Me.id.Name = "id"
-        Me.id.Size = New System.Drawing.Size(19, 17)
+        Me.id.Size = New System.Drawing.Size(44, 41)
         Me.id.TabIndex = 18
         Me.id.Text = "id"
         '
@@ -253,7 +253,7 @@ Partial Class profile
         '
         Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(114, 36)
+        Me.PictureBox1.Location = New System.Drawing.Point(25, 36)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(205, 132)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -264,7 +264,7 @@ Partial Class profile
         '
         Me.Button1.BackColor = System.Drawing.Color.Azure
         Me.Button1.Font = New System.Drawing.Font("Segoe UI Semibold", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(339, 48)
+        Me.Button1.Location = New System.Drawing.Point(36, 184)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(92, 38)
         Me.Button1.TabIndex = 19
@@ -275,7 +275,7 @@ Partial Class profile
         '
         Me.Button2.BackColor = System.Drawing.Color.Azure
         Me.Button2.Font = New System.Drawing.Font("Segoe UI Semibold", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.Location = New System.Drawing.Point(339, 92)
+        Me.Button2.Location = New System.Drawing.Point(36, 228)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(92, 23)
         Me.Button2.TabIndex = 20
@@ -286,7 +286,7 @@ Partial Class profile
         '
         Me.Button3.BackColor = System.Drawing.Color.Azure
         Me.Button3.Font = New System.Drawing.Font("Segoe UI Semibold", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button3.Location = New System.Drawing.Point(339, 121)
+        Me.Button3.Location = New System.Drawing.Point(36, 257)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(92, 47)
         Me.Button3.TabIndex = 21
@@ -314,9 +314,9 @@ Partial Class profile
         Me.Panel1.Controls.Add(Me.lastname)
         Me.Panel1.Controls.Add(Me.gender)
         Me.Panel1.Controls.Add(Me.email)
-        Me.Panel1.Location = New System.Drawing.Point(114, 204)
+        Me.Panel1.Location = New System.Drawing.Point(248, 36)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(905, 329)
+        Me.Panel1.Size = New System.Drawing.Size(951, 690)
         Me.Panel1.TabIndex = 22
         '
         'profile
@@ -330,7 +330,7 @@ Partial Class profile
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.PictureBox1)
         Me.Name = "profile"
-        Me.Size = New System.Drawing.Size(1156, 729)
+        Me.Size = New System.Drawing.Size(1202, 729)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()

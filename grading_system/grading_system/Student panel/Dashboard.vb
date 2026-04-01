@@ -77,4 +77,25 @@ Public Class Dashboard
             If con.State = ConnectionState.Open Then con.Close()
         End Try
     End Sub
+   
+    Private Sub Panel_Resize(ByVal sender As Object, ByVal e As EventArgs) Handles Panel1.Resize, Panel2.Resize, Panel3.Resize, Panel4.Resize
+        MakeRoundedPanel(CType(sender, Panel), 20)
+    End Sub
+
+
+    Private Sub Panel1_Paint_1(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles Panel1.Paint
+        Panel1.Margin = New Padding(20)
+    End Sub
+
+    Private Sub Panel2_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles Panel2.Paint
+        Panel2.Margin = New Padding(20)
+    End Sub
+
+    Private Sub Panel3_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles Panel3.Paint
+        Panel3.Margin = New Padding(20)
+    End Sub
+
+    Private Sub Panel4_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles Panel4.Paint
+        Panel4.Margin = New Padding(20)
+    End Sub
 End Class

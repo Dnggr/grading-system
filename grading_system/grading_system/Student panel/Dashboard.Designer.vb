@@ -23,23 +23,61 @@ Partial Class Dashboard
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Dashboard))
+        Me.Label1 = New System.Windows.Forms.Label
+        Me.Panel2 = New System.Windows.Forms.Panel
+        Me.Label4 = New System.Windows.Forms.Label
         Me.Panel1 = New System.Windows.Forms.Panel
         Me.Label8 = New System.Windows.Forms.Label
         Me.Label7 = New System.Windows.Forms.Label
         Me.Label3 = New System.Windows.Forms.Label
-        Me.Panel2 = New System.Windows.Forms.Panel
-        Me.Label4 = New System.Windows.Forms.Label
         Me.Panel3 = New System.Windows.Forms.Panel
         Me.Label5 = New System.Windows.Forms.Label
         Me.Panel4 = New System.Windows.Forms.Panel
         Me.Label6 = New System.Windows.Forms.Label
-        Me.Label1 = New System.Windows.Forms.Label
         Me.Label2 = New System.Windows.Forms.Label
-        Me.Panel1.SuspendLayout()
+        Me.Panel5 = New System.Windows.Forms.Panel
+        Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel
         Me.Panel2.SuspendLayout()
+        Me.Panel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel4.SuspendLayout()
+        Me.Panel5.SuspendLayout()
+        Me.TableLayoutPanel2.SuspendLayout()
+        Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(3, 0)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(162, 30)
+        Me.Label1.TabIndex = 3
+        Me.Label1.Text = "Welcome Back,"
+        '
+        'Panel2
+        '
+        Me.Panel2.BackColor = System.Drawing.Color.Azure
+        Me.Panel2.Controls.Add(Me.Label4)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel2.Location = New System.Drawing.Point(581, 128)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(542, 255)
+        Me.Panel2.TabIndex = 1
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Segoe UI Semibold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Image = CType(resources.GetObject("Label4.Image"), System.Drawing.Image)
+        Me.Label4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Label4.Location = New System.Drawing.Point(26, 18)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(134, 30)
+        Me.Label4.TabIndex = 1
+        Me.Label4.Text = "       Subjects"
         '
         'Panel1
         '
@@ -47,18 +85,19 @@ Partial Class Dashboard
         Me.Panel1.Controls.Add(Me.Label8)
         Me.Panel1.Controls.Add(Me.Label7)
         Me.Panel1.Controls.Add(Me.Label3)
-        Me.Panel1.Location = New System.Drawing.Point(93, 169)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel1.Location = New System.Drawing.Point(33, 128)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(407, 261)
+        Me.Panel1.Size = New System.Drawing.Size(542, 255)
         Me.Panel1.TabIndex = 0
         '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Font = New System.Drawing.Font("Segoe UI Semibold", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(182, 136)
+        Me.Label8.Font = New System.Drawing.Font("Segoe UI Semibold", 36.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(258, 118)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(63, 37)
+        Me.Label8.Size = New System.Drawing.Size(110, 65)
         Me.Label8.TabIndex = 2
         Me.Label8.Text = "gpa"
         '
@@ -84,34 +123,14 @@ Partial Class Dashboard
         Me.Label3.TabIndex = 0
         Me.Label3.Text = "       GPA"
         '
-        'Panel2
-        '
-        Me.Panel2.BackColor = System.Drawing.Color.Azure
-        Me.Panel2.Controls.Add(Me.Label4)
-        Me.Panel2.Location = New System.Drawing.Point(529, 169)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(407, 261)
-        Me.Panel2.TabIndex = 1
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Segoe UI Semibold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Image = CType(resources.GetObject("Label4.Image"), System.Drawing.Image)
-        Me.Label4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Label4.Location = New System.Drawing.Point(26, 18)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(134, 30)
-        Me.Label4.TabIndex = 1
-        Me.Label4.Text = "       Subjects"
-        '
         'Panel3
         '
         Me.Panel3.BackColor = System.Drawing.Color.Azure
         Me.Panel3.Controls.Add(Me.Label5)
-        Me.Panel3.Location = New System.Drawing.Point(93, 447)
+        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel3.Location = New System.Drawing.Point(33, 389)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(407, 261)
+        Me.Panel3.Size = New System.Drawing.Size(542, 307)
         Me.Panel3.TabIndex = 1
         '
         'Label5
@@ -130,9 +149,10 @@ Partial Class Dashboard
         '
         Me.Panel4.BackColor = System.Drawing.Color.Azure
         Me.Panel4.Controls.Add(Me.Label6)
-        Me.Panel4.Location = New System.Drawing.Point(529, 447)
+        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel4.Location = New System.Drawing.Point(581, 389)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(407, 261)
+        Me.Panel4.Size = New System.Drawing.Size(542, 307)
         Me.Panel4.TabIndex = 2
         '
         'Label6
@@ -147,62 +167,98 @@ Partial Class Dashboard
         Me.Label6.TabIndex = 3
         Me.Label6.Text = "       Notifications"
         '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(89, 65)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(162, 30)
-        Me.Label1.TabIndex = 3
-        Me.Label1.Text = "Welcome Back,"
-        '
         'Label2
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Segoe UI Semibold", 16.0!, System.Drawing.FontStyle.Bold)
-        Me.Label2.Location = New System.Drawing.Point(246, 65)
+        Me.Label2.Location = New System.Drawing.Point(171, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(72, 30)
         Me.Label2.TabIndex = 4
         Me.Label2.Text = "Name" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        '
+        'Panel5
+        '
+        Me.Panel5.Controls.Add(Me.TableLayoutPanel2)
+        Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel5.Location = New System.Drawing.Point(0, 0)
+        Me.Panel5.Name = "Panel5"
+        Me.Panel5.Size = New System.Drawing.Size(1156, 729)
+        Me.Panel5.TabIndex = 5
+        '
+        'TableLayoutPanel2
+        '
+        Me.TableLayoutPanel2.ColumnCount = 2
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel2.Controls.Add(Me.TableLayoutPanel1, 0, 1)
+        Me.TableLayoutPanel2.Controls.Add(Me.Panel3, 0, 3)
+        Me.TableLayoutPanel2.Controls.Add(Me.Panel4, 1, 3)
+        Me.TableLayoutPanel2.Controls.Add(Me.Panel1, 0, 2)
+        Me.TableLayoutPanel2.Controls.Add(Me.Panel2, 1, 2)
+        Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
+        Me.TableLayoutPanel2.Padding = New System.Windows.Forms.Padding(30)
+        Me.TableLayoutPanel2.RowCount = 4
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.133059!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.270233!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 39.23182!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 46.63923!))
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(1156, 729)
+        Me.TableLayoutPanel2.TabIndex = 6
+        '
+        'TableLayoutPanel1
+        '
+        Me.TableLayoutPanel1.ColumnCount = 2
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle)
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label1, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label2, 1, 0)
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(33, 80)
+        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+        Me.TableLayoutPanel1.RowCount = 1
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(368, 42)
+        Me.TableLayoutPanel1.TabIndex = 5
         '
         'Dashboard
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.CadetBlue
-        Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.Panel4)
-        Me.Controls.Add(Me.Panel3)
-        Me.Controls.Add(Me.Panel2)
-        Me.Controls.Add(Me.Panel1)
+        Me.Controls.Add(Me.Panel5)
         Me.Name = "Dashboard"
         Me.Size = New System.Drawing.Size(1156, 729)
-        Me.Panel1.ResumeLayout(False)
-        Me.Panel1.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
         Me.Panel4.ResumeLayout(False)
         Me.Panel4.PerformLayout()
+        Me.Panel5.ResumeLayout(False)
+        Me.TableLayoutPanel2.ResumeLayout(False)
+        Me.TableLayoutPanel1.ResumeLayout(False)
+        Me.TableLayoutPanel1.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
-    Friend WithEvents Panel1 As System.Windows.Forms.Panel
-    Friend WithEvents Panel2 As System.Windows.Forms.Panel
-    Friend WithEvents Panel3 As System.Windows.Forms.Panel
-    Friend WithEvents Panel4 As System.Windows.Forms.Panel
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents Panel4 As System.Windows.Forms.Panel
     Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents Panel3 As System.Windows.Forms.Panel
+    Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents Panel2 As System.Windows.Forms.Panel
+    Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents Panel5 As System.Windows.Forms.Panel
+    Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents TableLayoutPanel2 As System.Windows.Forms.TableLayoutPanel
 
 End Class
