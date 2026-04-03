@@ -15,6 +15,7 @@ Public Class Dashboard
     End Function
 
     Private Sub Dashboard_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        subjects()
         finalavg()
         MakeRoundedPanel(Panel1, 30)
         MakeRoundedPanel(Panel2, 30)
@@ -55,7 +56,7 @@ Public Class Dashboard
 
     Private Sub finalavg()
         Try
-            con.Open()
+            Connect_me()
 
             Dim query As String = "SELECT AVG(CAST(g.numerical AS DECIMAL(5,2))) " & _
                                   "FROM grades g " & _
@@ -73,8 +74,6 @@ Public Class Dashboard
 
         Catch ex As Exception
             MessageBox.Show("Error: " & ex.Message)
-        Finally
-            If con.State = ConnectionState.Open Then con.Close()
         End Try
     End Sub
    
@@ -97,5 +96,9 @@ Public Class Dashboard
 
     Private Sub Panel4_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles Panel4.Paint
         Panel4.Margin = New Padding(20)
+    End Sub
+
+    Private Sub subjects()
+      
     End Sub
 End Class

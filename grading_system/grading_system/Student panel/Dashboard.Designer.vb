@@ -38,6 +38,7 @@ Partial Class Dashboard
         Me.Panel5 = New System.Windows.Forms.Panel
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel
+        Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -60,6 +61,7 @@ Partial Class Dashboard
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.Azure
+        Me.Panel2.Controls.Add(Me.TableLayoutPanel3)
         Me.Panel2.Controls.Add(Me.Label4)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(581, 128)
@@ -222,6 +224,19 @@ Partial Class Dashboard
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(368, 42)
         Me.TableLayoutPanel1.TabIndex = 5
         '
+        'TableLayoutPanel3
+        '
+        Me.TableLayoutPanel3.ColumnCount = 2
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel3.Location = New System.Drawing.Point(31, 60)
+        Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
+        Me.TableLayoutPanel3.RowCount = 2
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(484, 171)
+        Me.TableLayoutPanel3.TabIndex = 2
+        '
         'Dashboard
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -260,5 +275,6 @@ Partial Class Dashboard
     Friend WithEvents Panel5 As System.Windows.Forms.Panel
     Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents TableLayoutPanel2 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents TableLayoutPanel3 As System.Windows.Forms.TableLayoutPanel
 
 End Class

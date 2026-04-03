@@ -73,7 +73,7 @@ Public Class Student_Form
         '---Dashboard
         Dashboard.Dock = DockStyle.Fill
         mainpanel.Controls.Add(Dashboard)
-        Dashboard.Visible = False
+        Dashboard.Visible = True
 
 
         Try
