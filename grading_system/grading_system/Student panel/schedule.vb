@@ -14,6 +14,7 @@ Public Class schedule
     Private Sub LinkLabel1_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
         Try
             Connect_me()
+
             Dim cmd As New OdbcCommand("SELECT concat(prof.firstname, '-' , prof.lastname) As Profname," & _
         "concat(subject.sub_code ,' ',subject.sub_name) As Subjects, " & _
         "section.section As Section, " & _
@@ -48,6 +49,7 @@ Public Class schedule
             DataGridView1.AllowUserToResizeRows = False
             DataGridView1.RowHeadersVisible = False
             DataGridView1.ReadOnly = True
+            DataGridView1.Enabled = False
 
             'to fill the gray space in dgv
             If DataGridView1.Rows.Count > 0 Then
@@ -67,9 +69,11 @@ Public Class schedule
 
             DataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect
             DataGridView1.MultiSelect = False
+
         Catch ex As Exception
             MessageBox.Show("error dgv" & ex.Message)
         End Try
+        DataGridView1.ClearSelection()
     End Sub
 
     Private Sub LinkLabel2_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabel2.LinkClicked
@@ -111,7 +115,7 @@ Public Class schedule
             DataGridView1.AllowUserToResizeRows = False
             DataGridView1.RowHeadersVisible = False
             DataGridView1.ReadOnly = True
-
+            DataGridView1.Enabled = False
             'to fill the gray space in dgv
             If DataGridView1.Rows.Count > 0 Then
 
@@ -133,5 +137,10 @@ Public Class schedule
         Catch ex As Exception
             MessageBox.Show("error dgv" & ex.Message)
         End Try
+        DataGridView1.ClearSelection()
+    End Sub
+
+    Private Sub DataGridView1_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+
     End Sub
 End Class
