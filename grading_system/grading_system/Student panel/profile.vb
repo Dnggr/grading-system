@@ -26,14 +26,18 @@ Public Class profile
            
             If reader.Read() Then
 
-                Dim firstname As String = reader("firstname").ToString()
-                Dim lastname As String = reader("lastname").ToString()
-                Dim middlename As String = reader("middlename").ToString()
+                Dim firstname As String = StrConv(reader("firstname").ToString(), VbStrConv.ProperCase)
+                Dim lastname As String = StrConv(reader("lastname").ToString(), VbStrConv.ProperCase)
+                Dim middlename As String = StrConv(reader("middlename").ToString(), VbStrConv.ProperCase)
+                Dim g As String = StrConv(reader("gender").ToString(), VbStrConv.ProperCase)
 
                 id.Text = reader("stud_id").ToString()
-                Label1.Text = lastname & "," & firstname & " " & middlename
-                gender.Text = reader("gender").ToString()
-                email.Text = reader("email").ToString()
+                Label1.Text = firstname & " " & lastname
+                gender.Text = g
+                fname.Text = firstname
+                mname.Text = middlename
+                Label11.Text = lastname
+                Label15.Text = reader("email").ToString()
                 course.Text = reader("course").ToString()
                 yr_lvl.Text = reader("yr_lvl").ToString()
                 section.Text = reader("section").ToString()

@@ -99,6 +99,65 @@ Public Class Dashboard
     End Sub
 
     Private Sub subjects()
-      
+
+        Try
+            Connect_me()
+
+            Dim cmd1 As New OdbcCommand("SELECT concat(subject.sub_code, ' ', subject.sub_name) AS Subjects " & _
+                                         "FROM profsectionsubject " & _
+                                         "LEFT JOIN subject ON profsectionsubject.sub_id = subject.sub_id " & _
+                                         "LEFT JOIN section ON profsectionsubject.section_id = section.section_id " & _
+                                         "LEFT JOIN sem_control sem ON sem.semester = sem.semester " & _
+                                         "WHERE section.section_id = ? " & _
+                                         "AND subject.course_id = ? " & _
+                                         "AND sem.semester = ? ", con)
+            cmd1.Parameters.AddWithValue("?", login_logic.secid)
+            cmd1.Parameters.AddWithValue("?", login_logic.Courseid)
+            cmd1.Parameters.AddWithValue("?", login_logic.currentsem)
+
+            Dim da As New OdbcDataAdapter(cmd1)
+            Dim dt As New DataTable
+
+            da.Fill(dt)
+            DataGridView1.DataSource = dt
+
+            'edit header
+            DataGridView1.Columns("Subjects").HeaderText = "Subject"
+
+            'to control the dgv
+            DataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
+            DataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+            DataGridView1.AllowUserToAddRows = False
+            DataGridView1.AllowUserToDeleteRows = False
+            DataGridView1.AllowUserToResizeColumns = False
+            DataGridView1.AllowUserToResizeRows = False
+            DataGridView1.RowHeadersVisible = False
+            DataGridView1.ReadOnly = True
+
+            'to fill the gray space in dgv
+            If DataGridView1.Rows.Count > 0 Then
+
+                Dim totalHeight As Integer = DataGridView1.ClientSize.Height - DataGridView1.ColumnHeadersHeight
+                Dim rowHeight As Integer = totalHeight \ DataGridView1.Rows.Count
+
+                For Each row As DataGridViewRow In DataGridView1.Rows
+                    row.Height = rowHeight
+                Next
+
+            End If
+
+
+            'para mabago yung font ng dgv
+            DataGridView1.DefaultCellStyle.Font = New Font("segoe ui", 10, FontStyle.Bold)
+
+            DataGridView1.MultiSelect = False
+        Catch ex As Exception
+            MessageBox.Show("error dgv" & ex.Message)
+        End Try
+        DataGridView1.ClearSelection()
+    End Sub
+
+    Private Sub TableLayoutPanel2_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles TableLayoutPanel2.Paint
+
     End Sub
 End Class

@@ -137,7 +137,7 @@ Partial Class Student_Form
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(147, 53)
         Me.Button4.TabIndex = 5
-        Me.Button4.Text = "Schedule"
+        Me.Button4.Text = "Subjects"
         Me.Button4.UseVisualStyleBackColor = False
         '
         'Label1

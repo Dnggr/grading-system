@@ -48,7 +48,7 @@ Partial Class schedule
         Me.first_year.Name = "first_year"
         Me.first_year.Size = New System.Drawing.Size(178, 66)
         Me.first_year.TabIndex = 1
-        Me.first_year.Text = "Schedule"
+        Me.first_year.Text = "Subjects"
         Me.first_year.UseVisualStyleBackColor = False
         '
         'LinkLabel1
