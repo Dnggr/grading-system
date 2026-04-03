@@ -26,9 +26,11 @@ Partial Class Student_Form
         Me.Button1 = New System.Windows.Forms.Button
         Me.Button2 = New System.Windows.Forms.Button
         Me.Panel1 = New System.Windows.Forms.Panel
+        Me.resetpass = New System.Windows.Forms.Button
         Me.PictureBoxstudent = New System.Windows.Forms.PictureBox
         Me.Button4 = New System.Windows.Forms.Button
         Me.Label1 = New System.Windows.Forms.Label
+        Me.Button3 = New System.Windows.Forms.Button
         Me.s = New CrystalDecisions.Windows.Forms.CrystalReportViewer
         Me.mainpanel = New System.Windows.Forms.Panel
         Me.Panel2 = New System.Windows.Forms.Panel
@@ -37,8 +39,6 @@ Partial Class Student_Form
         Me.ComboBox1 = New System.Windows.Forms.ComboBox
         Me.Label2 = New System.Windows.Forms.Label
         Me.Button5 = New System.Windows.Forms.Button
-        Me.resetpass = New System.Windows.Forms.Button
-        Me.Button3 = New System.Windows.Forms.Button
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBoxstudent, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mainpanel.SuspendLayout()
@@ -96,8 +96,6 @@ Partial Class Student_Form
         Me.Panel1.Size = New System.Drawing.Size(194, 729)
         Me.Panel1.TabIndex = 46
         '
-<<<<<<< HEAD
-=======
         'resetpass
         '
         Me.resetpass.BackColor = System.Drawing.Color.Transparent
@@ -117,7 +115,6 @@ Partial Class Student_Form
         Me.resetpass.Text = "Dashboard"
         Me.resetpass.UseVisualStyleBackColor = False
         '
->>>>>>> 50db55cd2a6c35a29110de3020da875f40cd074e
         'PictureBoxstudent
         '
         Me.PictureBoxstudent.Location = New System.Drawing.Point(24, 51)
@@ -153,8 +150,6 @@ Partial Class Student_Form
         Me.Label1.TabIndex = 4
         Me.Label1.Text = "Label1"
         '
-<<<<<<< HEAD
-=======
         'Button3
         '
         Me.Button3.BackColor = System.Drawing.Color.Transparent
@@ -172,7 +167,6 @@ Partial Class Student_Form
         Me.Button3.Text = "Grades"
         Me.Button3.UseVisualStyleBackColor = False
         '
->>>>>>> 50db55cd2a6c35a29110de3020da875f40cd074e
         's
         '
         Me.s.ActiveViewIndex = -1
@@ -255,42 +249,6 @@ Partial Class Student_Form
         Me.Button5.Text = "Load Report"
         Me.Button5.UseVisualStyleBackColor = True
         '
-        'resetpass
-        '
-        Me.resetpass.BackColor = System.Drawing.Color.Transparent
-        Me.resetpass.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.resetpass.FlatAppearance.BorderSize = 0
-        Me.resetpass.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkSlateGray
-        Me.resetpass.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSeaGreen
-        Me.resetpass.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.resetpass.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.resetpass.ForeColor = System.Drawing.Color.Black
-        Me.resetpass.Image = CType(resources.GetObject("resetpass.Image"), System.Drawing.Image)
-        Me.resetpass.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.resetpass.Location = New System.Drawing.Point(24, 246)
-        Me.resetpass.Name = "resetpass"
-        Me.resetpass.Size = New System.Drawing.Size(147, 40)
-        Me.resetpass.TabIndex = 7
-        Me.resetpass.Text = "Dashboard"
-        Me.resetpass.UseVisualStyleBackColor = False
-        '
-        'Button3
-        '
-        Me.Button3.BackColor = System.Drawing.Color.Transparent
-        Me.Button3.FlatAppearance.BorderSize = 0
-        Me.Button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkCyan
-        Me.Button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSeaGreen
-        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button3.Font = New System.Drawing.Font("Segoe UI Semibold", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
-        Me.Button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button3.Location = New System.Drawing.Point(24, 356)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(147, 40)
-        Me.Button3.TabIndex = 3
-        Me.Button3.Text = "Grades"
-        Me.Button3.UseVisualStyleBackColor = False
-        '
         'Student_Form
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -316,6 +274,7 @@ Partial Class Student_Form
     Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents s As CrystalDecisions.Windows.Forms.CrystalReportViewer
+    Friend WithEvents Button3 As System.Windows.Forms.Button
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents mainpanel As System.Windows.Forms.Panel
     Friend WithEvents Button4 As System.Windows.Forms.Button
@@ -327,5 +286,4 @@ Partial Class Student_Form
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Button5 As System.Windows.Forms.Button
     Friend WithEvents resetpass As System.Windows.Forms.Button
-    Friend WithEvents Button3 As System.Windows.Forms.Button
 End Class
