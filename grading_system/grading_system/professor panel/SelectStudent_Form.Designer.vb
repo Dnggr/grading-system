@@ -79,7 +79,7 @@ Partial Class SelectStudent_Form
         '
         Me.Cancel_Button.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Cancel_Button.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.Cancel_Button.Location = New System.Drawing.Point(652, 280)
+        Me.Cancel_Button.Location = New System.Drawing.Point(658, 303)
         Me.Cancel_Button.Name = "Cancel_Button"
         Me.Cancel_Button.Size = New System.Drawing.Size(67, 23)
         Me.Cancel_Button.TabIndex = 1
@@ -90,7 +90,7 @@ Partial Class SelectStudent_Form
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.Cancel_Button
-        Me.ClientSize = New System.Drawing.Size(731, 315)
+        Me.ClientSize = New System.Drawing.Size(742, 361)
         Me.Controls.Add(Me.Cancel_Button)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.Label2)

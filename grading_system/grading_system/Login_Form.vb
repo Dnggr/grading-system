@@ -120,7 +120,7 @@ Public Class Login_Form
                         refreshme()
 
                     Case "teacher", "professor"
-                        Dim teacherForm As New Teacher_Form()
+                        Dim teacherForm As New Prof_panel()
                         teacherForm.Show()
                         refreshme()
 

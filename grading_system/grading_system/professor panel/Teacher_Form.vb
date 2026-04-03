@@ -315,7 +315,8 @@ Public Class Teacher_Form
                                                      MessageBoxButtons.YesNo, _
                                                      MessageBoxIcon.Question)
         If result = DialogResult.Yes Then
-            Application.Exit()
+            Prof_panel.Show()
+            Me.Close()
         End If
 
 
@@ -401,7 +402,6 @@ Public Class Teacher_Form
                 gID = selectedRow.Cells("gID").Value.ToString()
             End If
 
-            Label3.Text = gID
 
             Dim addGrade As New AddGrade_Form()
 
@@ -516,4 +516,11 @@ Public Class Teacher_Form
     End Sub
 
 
+    Private Sub DataGridView3_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs)
+
+    End Sub
+
+    Private Sub DataGridView1_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs)
+
+    End Sub
 End Class
