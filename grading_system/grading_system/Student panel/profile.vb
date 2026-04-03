@@ -6,6 +6,8 @@ Public Class profile
         LoadImage()
 
         MakeRoundedPanel(Panel1, 30)
+        MakeRoundedPanel(Panel2, 30)
+        MakeRoundedPanel(Panel3, 30)
     End Sub
 #Region "Load StudentInfo"
 
@@ -21,12 +23,15 @@ Public Class profile
             cmdProfile.Parameters.AddWithValue("?", login_logic.loginuser)
 
             Dim reader As OdbcDataReader = cmdProfile.ExecuteReader()
-
+           
             If reader.Read() Then
+
+                Dim firstname As String = reader("firstname").ToString()
+                Dim lastname As String = reader("lastname").ToString()
+                Dim middlename As String = reader("middlename").ToString()
+
                 id.Text = reader("stud_id").ToString()
-                firstname.Text = reader("firstname").ToString()
-                lastname.Text = reader("lastname").ToString()
-                middlename.Text = reader("middlename").ToString()
+                Label1.Text = lastname & "," & firstname & " " & middlename
                 gender.Text = reader("gender").ToString()
                 email.Text = reader("email").ToString()
                 course.Text = reader("course").ToString()
@@ -374,4 +379,17 @@ Public Class profile
         pnl.Region = New Region(path)
     End Sub
 
+    Private Sub Label6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label6.Click
+
+    End Sub
+
+    Private Sub TableLayoutPanel3_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles TableLayoutPanel3.Paint
+        Dim panel As TableLayoutPanel = CType(sender, TableLayoutPanel)
+
+        Dim x As Integer = panel.GetColumnWidths()(0)
+
+        Using Pen As New Pen(Color.Gray, 2)
+            e.Graphics.DrawLine(Pen, x, 0, x, panel.Height)
+        End Using
+    End Sub
 End Class
