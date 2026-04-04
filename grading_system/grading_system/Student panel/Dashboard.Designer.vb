@@ -25,12 +25,14 @@ Partial Class Dashboard
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Dashboard))
         Me.Label1 = New System.Windows.Forms.Label
         Me.Panel2 = New System.Windows.Forms.Panel
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView
         Me.Label4 = New System.Windows.Forms.Label
         Me.Panel1 = New System.Windows.Forms.Panel
         Me.Label8 = New System.Windows.Forms.Label
         Me.Label7 = New System.Windows.Forms.Label
         Me.Label3 = New System.Windows.Forms.Label
         Me.Panel3 = New System.Windows.Forms.Panel
+        Me.DataGridView2 = New System.Windows.Forms.DataGridView
         Me.Label5 = New System.Windows.Forms.Label
         Me.Panel4 = New System.Windows.Forms.Panel
         Me.Label6 = New System.Windows.Forms.Label
@@ -38,15 +40,17 @@ Partial Class Dashboard
         Me.Panel5 = New System.Windows.Forms.Panel
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView
+        Me.Label9 = New System.Windows.Forms.Label
+        Me.section = New System.Windows.Forms.Label
         Me.Panel2.SuspendLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
+        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel4.SuspendLayout()
         Me.Panel5.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -69,6 +73,17 @@ Partial Class Dashboard
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(542, 255)
         Me.Panel2.TabIndex = 1
+        '
+        'DataGridView1
+        '
+        Me.DataGridView1.BackgroundColor = System.Drawing.Color.Azure
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Enabled = False
+        Me.DataGridView1.Location = New System.Drawing.Point(22, 74)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.ReadOnly = True
+        Me.DataGridView1.Size = New System.Drawing.Size(492, 150)
+        Me.DataGridView1.TabIndex = 2
         '
         'Label4
         '
@@ -129,12 +144,22 @@ Partial Class Dashboard
         'Panel3
         '
         Me.Panel3.BackColor = System.Drawing.Color.Azure
+        Me.Panel3.Controls.Add(Me.DataGridView2)
         Me.Panel3.Controls.Add(Me.Label5)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(33, 389)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(542, 307)
         Me.Panel3.TabIndex = 1
+        '
+        'DataGridView2
+        '
+        Me.DataGridView2.BackgroundColor = System.Drawing.Color.Azure
+        Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView2.Location = New System.Drawing.Point(33, 74)
+        Me.DataGridView2.Name = "DataGridView2"
+        Me.DataGridView2.Size = New System.Drawing.Size(485, 194)
+        Me.DataGridView2.TabIndex = 3
         '
         'Label5
         '
@@ -144,13 +169,15 @@ Partial Class Dashboard
         Me.Label5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.Label5.Location = New System.Drawing.Point(28, 25)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(140, 30)
+        Me.Label5.Size = New System.Drawing.Size(145, 30)
         Me.Label5.TabIndex = 2
-        Me.Label5.Text = "       Schedule"
+        Me.Label5.Text = "       Professor"
         '
         'Panel4
         '
         Me.Panel4.BackColor = System.Drawing.Color.Azure
+        Me.Panel4.Controls.Add(Me.section)
+        Me.Panel4.Controls.Add(Me.Label9)
         Me.Panel4.Controls.Add(Me.Label6)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel4.Location = New System.Drawing.Point(581, 389)
@@ -166,9 +193,9 @@ Partial Class Dashboard
         Me.Label6.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.Label6.Location = New System.Drawing.Point(26, 25)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(177, 30)
+        Me.Label6.Size = New System.Drawing.Size(131, 30)
         Me.Label6.TabIndex = 3
-        Me.Label6.Text = "       Notifications"
+        Me.Label6.Text = "        Section"
         '
         'Label2
         '
@@ -225,16 +252,25 @@ Partial Class Dashboard
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(368, 42)
         Me.TableLayoutPanel1.TabIndex = 5
         '
-        'DataGridView1
+        'Label9
         '
-        Me.DataGridView1.BackgroundColor = System.Drawing.Color.Azure
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Enabled = False
-        Me.DataGridView1.Location = New System.Drawing.Point(22, 74)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.ReadOnly = True
-        Me.DataGridView1.Size = New System.Drawing.Size(492, 150)
-        Me.DataGridView1.TabIndex = 2
+        Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Location = New System.Drawing.Point(39, 74)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(165, 21)
+        Me.Label9.TabIndex = 4
+        Me.Label9.Text = "Your Current Section:"
+        '
+        'section
+        '
+        Me.section.AutoSize = True
+        Me.section.Font = New System.Drawing.Font("Segoe UI Semibold", 36.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.section.Location = New System.Drawing.Point(219, 144)
+        Me.section.Name = "section"
+        Me.section.Size = New System.Drawing.Size(185, 65)
+        Me.section.TabIndex = 5
+        Me.section.Text = "section"
         '
         'Dashboard
         '
@@ -246,17 +282,18 @@ Partial Class Dashboard
         Me.Size = New System.Drawing.Size(1156, 729)
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
+        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel4.ResumeLayout(False)
         Me.Panel4.PerformLayout()
         Me.Panel5.ResumeLayout(False)
         Me.TableLayoutPanel2.ResumeLayout(False)
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -276,5 +313,8 @@ Partial Class Dashboard
     Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents TableLayoutPanel2 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
+    Friend WithEvents DataGridView2 As System.Windows.Forms.DataGridView
+    Friend WithEvents Label9 As System.Windows.Forms.Label
+    Friend WithEvents section As System.Windows.Forms.Label
 
 End Class

@@ -4,7 +4,9 @@ Public Class profile
     Dim response As DialogResult
     Private Sub profile_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         LoadImage()
-
+        MakeRoundedButton(Button1, 25)
+        MakeRoundedButton(Button2, 25)
+        MakeRoundedButton(Button3, 25)
         MakeRoundedPanel(Panel1, 30)
         MakeRoundedPanel(Panel2, 30)
         MakeRoundedPanel(Panel3, 30)
@@ -371,6 +373,21 @@ Public Class profile
     Private Sub Panel1_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles Panel1.Paint
 
     End Sub
+
+#Region "rounded button"
+    Private Sub MakeRoundedButton(ByVal btn As Button, ByVal radius As Integer)
+        Dim path As New Drawing.Drawing2D.GraphicsPath()
+
+        path.StartFigure()
+        path.AddArc(0, 0, radius, radius, 180, 90)
+        path.AddArc(btn.Width - radius, 0, radius, radius, 270, 90)
+        path.AddArc(btn.Width - radius, btn.Height - radius, radius, radius, 0, 90)
+        path.AddArc(0, btn.Height - radius, radius, radius, 90, 90)
+        path.CloseFigure()
+        btn.Region = New Region(path)
+    End Sub
+#End Region
+
     Private Sub MakeRoundedPanel(ByVal pnl As Panel, ByVal radius As Integer)
         Dim path As New Drawing.Drawing2D.GraphicsPath()
 

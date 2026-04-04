@@ -43,27 +43,27 @@ Partial Class profile
         Me.Label2 = New System.Windows.Forms.Label
         Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel
+        Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel
+        Me.ame = New System.Windows.Forms.Label
+        Me.Label5 = New System.Windows.Forms.Label
+        Me.Label10 = New System.Windows.Forms.Label
+        Me.fname = New System.Windows.Forms.Label
+        Me.mname = New System.Windows.Forms.Label
+        Me.Label11 = New System.Windows.Forms.Label
+        Me.Label4 = New System.Windows.Forms.Label
+        Me.gender = New System.Windows.Forms.Label
+        Me.Label15 = New System.Windows.Forms.Label
+        Me.Label14 = New System.Windows.Forms.Label
         Me.Panel2 = New System.Windows.Forms.Panel
         Me.Label12 = New System.Windows.Forms.Label
         Me.Label13 = New System.Windows.Forms.Label
-        Me.gender = New System.Windows.Forms.Label
-        Me.Label4 = New System.Windows.Forms.Label
-        Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel
-        Me.fname = New System.Windows.Forms.Label
-        Me.ame = New System.Windows.Forms.Label
-        Me.Label5 = New System.Windows.Forms.Label
-        Me.mname = New System.Windows.Forms.Label
-        Me.Label10 = New System.Windows.Forms.Label
-        Me.Label11 = New System.Windows.Forms.Label
-        Me.Label14 = New System.Windows.Forms.Label
-        Me.Label15 = New System.Windows.Forms.Label
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
-        Me.Panel2.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
+        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label1
@@ -189,6 +189,7 @@ Partial Class profile
         '
         Me.Button1.BackColor = System.Drawing.Color.Azure
         Me.Button1.FlatAppearance.BorderSize = 0
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button1.Font = New System.Drawing.Font("Segoe UI Semibold", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button1.Location = New System.Drawing.Point(857, 24)
         Me.Button1.Name = "Button1"
@@ -200,6 +201,8 @@ Partial Class profile
         'Button2
         '
         Me.Button2.BackColor = System.Drawing.Color.Azure
+        Me.Button2.FlatAppearance.BorderSize = 0
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button2.Font = New System.Drawing.Font("Segoe UI Semibold", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button2.Location = New System.Drawing.Point(857, 68)
         Me.Button2.Name = "Button2"
@@ -211,6 +214,8 @@ Partial Class profile
         'Button3
         '
         Me.Button3.BackColor = System.Drawing.Color.Azure
+        Me.Button3.FlatAppearance.BorderSize = 0
+        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button3.Font = New System.Drawing.Font("Segoe UI Semibold", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button3.Location = New System.Drawing.Point(857, 97)
         Me.Button3.Name = "Button3"
@@ -291,6 +296,153 @@ Partial Class profile
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(472, 127)
         Me.TableLayoutPanel1.TabIndex = 19
         '
+        'TableLayoutPanel2
+        '
+        Me.TableLayoutPanel2.ColumnCount = 2
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.61702!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.38298!))
+        Me.TableLayoutPanel2.Controls.Add(Me.ame, 0, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.Label5, 0, 1)
+        Me.TableLayoutPanel2.Controls.Add(Me.Label10, 0, 2)
+        Me.TableLayoutPanel2.Controls.Add(Me.fname, 1, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.mname, 1, 1)
+        Me.TableLayoutPanel2.Controls.Add(Me.Label11, 1, 2)
+        Me.TableLayoutPanel2.Controls.Add(Me.Label4, 0, 3)
+        Me.TableLayoutPanel2.Controls.Add(Me.gender, 1, 3)
+        Me.TableLayoutPanel2.Controls.Add(Me.Label15, 1, 4)
+        Me.TableLayoutPanel2.Controls.Add(Me.Label14, 0, 4)
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 3)
+        Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
+        Me.TableLayoutPanel2.RowCount = 5
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 51.65563!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 48.34437!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 73.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 64.0!))
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(471, 359)
+        Me.TableLayoutPanel2.TabIndex = 20
+        '
+        'ame
+        '
+        Me.ame.AutoSize = True
+        Me.ame.Font = New System.Drawing.Font("Segoe UI Semibold", 19.0!, System.Drawing.FontStyle.Bold)
+        Me.ame.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.ame.Image = CType(resources.GetObject("ame.Image"), System.Drawing.Image)
+        Me.ame.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ame.Location = New System.Drawing.Point(3, 0)
+        Me.ame.Name = "ame"
+        Me.ame.Size = New System.Drawing.Size(127, 36)
+        Me.ame.TabIndex = 9
+        Me.ame.Text = "     Name:"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Segoe UI Semibold", 19.0!, System.Drawing.FontStyle.Bold)
+        Me.Label5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.Label5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Label5.Location = New System.Drawing.Point(3, 78)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(133, 36)
+        Me.Label5.TabIndex = 13
+        Me.Label5.Text = "    Middle:"
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Segoe UI Semibold", 19.0!, System.Drawing.FontStyle.Bold)
+        Me.Label10.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.Label10.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Label10.Location = New System.Drawing.Point(3, 151)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(96, 36)
+        Me.Label10.TabIndex = 15
+        Me.Label10.Text = "    Last:"
+        '
+        'fname
+        '
+        Me.fname.AutoSize = True
+        Me.fname.Font = New System.Drawing.Font("Segoe UI Semibold", 19.0!, System.Drawing.FontStyle.Bold)
+        Me.fname.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.fname.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.fname.Location = New System.Drawing.Point(161, 0)
+        Me.fname.Name = "fname"
+        Me.fname.Size = New System.Drawing.Size(90, 36)
+        Me.fname.TabIndex = 12
+        Me.fname.Text = "fname"
+        '
+        'mname
+        '
+        Me.mname.AutoSize = True
+        Me.mname.Font = New System.Drawing.Font("Segoe UI Semibold", 19.0!, System.Drawing.FontStyle.Bold)
+        Me.mname.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.mname.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.mname.Location = New System.Drawing.Point(161, 78)
+        Me.mname.Name = "mname"
+        Me.mname.Size = New System.Drawing.Size(90, 36)
+        Me.mname.TabIndex = 14
+        Me.mname.Text = "fname"
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Font = New System.Drawing.Font("Segoe UI Semibold", 19.0!, System.Drawing.FontStyle.Bold)
+        Me.Label11.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.Label11.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Label11.Location = New System.Drawing.Point(161, 151)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(90, 36)
+        Me.Label11.TabIndex = 16
+        Me.Label11.Text = "fname"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Segoe UI Semibold", 19.0!, System.Drawing.FontStyle.Bold)
+        Me.Label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.Label4.Image = CType(resources.GetObject("Label4.Image"), System.Drawing.Image)
+        Me.Label4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Label4.Location = New System.Drawing.Point(3, 224)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(144, 36)
+        Me.Label4.TabIndex = 7
+        Me.Label4.Text = "     Gender:"
+        '
+        'gender
+        '
+        Me.gender.AutoSize = True
+        Me.gender.Font = New System.Drawing.Font("Segoe UI Semibold", 19.0!, System.Drawing.FontStyle.Bold)
+        Me.gender.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.gender.Location = New System.Drawing.Point(161, 224)
+        Me.gender.Name = "gender"
+        Me.gender.Size = New System.Drawing.Size(100, 36)
+        Me.gender.TabIndex = 10
+        Me.gender.Text = "gender"
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Font = New System.Drawing.Font("Segoe UI Semibold", 19.0!, System.Drawing.FontStyle.Bold)
+        Me.Label15.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.Label15.Location = New System.Drawing.Point(161, 294)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(80, 36)
+        Me.Label15.TabIndex = 18
+        Me.Label15.Text = "email"
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Font = New System.Drawing.Font("Segoe UI Semibold", 19.0!, System.Drawing.FontStyle.Bold)
+        Me.Label14.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.Label14.Image = CType(resources.GetObject("Label14.Image"), System.Drawing.Image)
+        Me.Label14.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Label14.Location = New System.Drawing.Point(3, 294)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(120, 36)
+        Me.Label14.TabIndex = 17
+        Me.Label14.Text = "     Email:"
+        '
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.LightCyan
@@ -327,153 +479,6 @@ Partial Class profile
         Me.Label13.Size = New System.Drawing.Size(100, 23)
         Me.Label13.TabIndex = 0
         '
-        'gender
-        '
-        Me.gender.AutoSize = True
-        Me.gender.Font = New System.Drawing.Font("Segoe UI Semibold", 19.0!, System.Drawing.FontStyle.Bold)
-        Me.gender.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.gender.Location = New System.Drawing.Point(161, 224)
-        Me.gender.Name = "gender"
-        Me.gender.Size = New System.Drawing.Size(100, 36)
-        Me.gender.TabIndex = 10
-        Me.gender.Text = "gender"
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Segoe UI Semibold", 19.0!, System.Drawing.FontStyle.Bold)
-        Me.Label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label4.Image = CType(resources.GetObject("Label4.Image"), System.Drawing.Image)
-        Me.Label4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Label4.Location = New System.Drawing.Point(3, 224)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(144, 36)
-        Me.Label4.TabIndex = 7
-        Me.Label4.Text = "     Gender:"
-        '
-        'TableLayoutPanel2
-        '
-        Me.TableLayoutPanel2.ColumnCount = 2
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.61702!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.38298!))
-        Me.TableLayoutPanel2.Controls.Add(Me.ame, 0, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.Label5, 0, 1)
-        Me.TableLayoutPanel2.Controls.Add(Me.Label10, 0, 2)
-        Me.TableLayoutPanel2.Controls.Add(Me.fname, 1, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.mname, 1, 1)
-        Me.TableLayoutPanel2.Controls.Add(Me.Label11, 1, 2)
-        Me.TableLayoutPanel2.Controls.Add(Me.Label4, 0, 3)
-        Me.TableLayoutPanel2.Controls.Add(Me.gender, 1, 3)
-        Me.TableLayoutPanel2.Controls.Add(Me.Label15, 1, 4)
-        Me.TableLayoutPanel2.Controls.Add(Me.Label14, 0, 4)
-        Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 3)
-        Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
-        Me.TableLayoutPanel2.RowCount = 5
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 51.65563!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 48.34437!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 73.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 64.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(471, 359)
-        Me.TableLayoutPanel2.TabIndex = 20
-        '
-        'fname
-        '
-        Me.fname.AutoSize = True
-        Me.fname.Font = New System.Drawing.Font("Segoe UI Semibold", 19.0!, System.Drawing.FontStyle.Bold)
-        Me.fname.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.fname.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.fname.Location = New System.Drawing.Point(161, 0)
-        Me.fname.Name = "fname"
-        Me.fname.Size = New System.Drawing.Size(90, 36)
-        Me.fname.TabIndex = 12
-        Me.fname.Text = "fname"
-        '
-        'ame
-        '
-        Me.ame.AutoSize = True
-        Me.ame.Font = New System.Drawing.Font("Segoe UI Semibold", 19.0!, System.Drawing.FontStyle.Bold)
-        Me.ame.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.ame.Image = CType(resources.GetObject("ame.Image"), System.Drawing.Image)
-        Me.ame.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.ame.Location = New System.Drawing.Point(3, 0)
-        Me.ame.Name = "ame"
-        Me.ame.Size = New System.Drawing.Size(127, 36)
-        Me.ame.TabIndex = 9
-        Me.ame.Text = "     Name:"
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Segoe UI Semibold", 19.0!, System.Drawing.FontStyle.Bold)
-        Me.Label5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Label5.Location = New System.Drawing.Point(3, 78)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(133, 36)
-        Me.Label5.TabIndex = 13
-        Me.Label5.Text = "    Middle:"
-        '
-        'mname
-        '
-        Me.mname.AutoSize = True
-        Me.mname.Font = New System.Drawing.Font("Segoe UI Semibold", 19.0!, System.Drawing.FontStyle.Bold)
-        Me.mname.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.mname.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.mname.Location = New System.Drawing.Point(161, 78)
-        Me.mname.Name = "mname"
-        Me.mname.Size = New System.Drawing.Size(90, 36)
-        Me.mname.TabIndex = 14
-        Me.mname.Text = "fname"
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Font = New System.Drawing.Font("Segoe UI Semibold", 19.0!, System.Drawing.FontStyle.Bold)
-        Me.Label10.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label10.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Label10.Location = New System.Drawing.Point(3, 151)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(96, 36)
-        Me.Label10.TabIndex = 15
-        Me.Label10.Text = "    Last:"
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Font = New System.Drawing.Font("Segoe UI Semibold", 19.0!, System.Drawing.FontStyle.Bold)
-        Me.Label11.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label11.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Label11.Location = New System.Drawing.Point(161, 151)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(90, 36)
-        Me.Label11.TabIndex = 16
-        Me.Label11.Text = "fname"
-        '
-        'Label14
-        '
-        Me.Label14.AutoSize = True
-        Me.Label14.Font = New System.Drawing.Font("Segoe UI Semibold", 19.0!, System.Drawing.FontStyle.Bold)
-        Me.Label14.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label14.Image = CType(resources.GetObject("Label14.Image"), System.Drawing.Image)
-        Me.Label14.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Label14.Location = New System.Drawing.Point(3, 294)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(120, 36)
-        Me.Label14.TabIndex = 17
-        Me.Label14.Text = "     Email:"
-        '
-        'Label15
-        '
-        Me.Label15.AutoSize = True
-        Me.Label15.Font = New System.Drawing.Font("Segoe UI Semibold", 19.0!, System.Drawing.FontStyle.Bold)
-        Me.Label15.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label15.Location = New System.Drawing.Point(161, 294)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(80, 36)
-        Me.Label15.TabIndex = 18
-        Me.Label15.Text = "email"
-        '
         'profile
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -489,10 +494,10 @@ Partial Class profile
         Me.TableLayoutPanel3.ResumeLayout(False)
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
-        Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout()
         Me.TableLayoutPanel2.ResumeLayout(False)
         Me.TableLayoutPanel2.PerformLayout()
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
