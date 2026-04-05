@@ -1,6 +1,19 @@
 ﻿Imports System.Data.Odbc
 
 Public Class Admin_Form
+    Private Sub MakeRoundedButton(ByVal btn As Button, ByVal radius As Integer)
+        Dim path As New Drawing.Drawing2D.GraphicsPath()
+
+        path.StartFigure()
+        path.AddArc(0, 0, radius, radius, 180, 90)
+        path.AddArc(btn.Width - radius, 0, radius, radius, 270, 90)
+        path.AddArc(btn.Width - radius, btn.Height - radius, radius, radius, 0, 90)
+        path.AddArc(0, btn.Height - radius, radius, radius, 90, 90)
+        path.CloseFigure()
+        btn.Region = New Region(path)
+    End Sub
+    Private CurrentActiveButton = Nothing
+
 
 #Region "Shared State"
     ' ── Student shared state (read by popUpFormModifyStudent / popUpFormDeleteStudent) ──
@@ -20,6 +33,15 @@ Public Class Admin_Form
     ' ════════════════════════════════════════════════════════════════════
 
     Private Sub Admin_Form_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        MakeRoundedButton(Dashboard_Button, 25)
+        MakeRoundedButton(Student_Button, 25)
+        MakeRoundedButton(Teacher_Button, 25)
+        MakeRoundedButton(School_Year_Button, 25)
+        MakeRoundedButton(Logout_Button, 25)
+        MakeRoundedButton(Exit_Button, 25)
+        Student_Panel.BackColor = Color.CadetBlue
+        Dashboard_Panel.BackColor = Color.CadetBlue
+
         ' Default view on startup
         ShowDashboard()
 
@@ -40,21 +62,25 @@ Public Class Admin_Form
 
     Private Sub Dashboard_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Dashboard_Button.Click
         ShowDashboard()
+        HighlightButton(Dashboard_Button)
     End Sub
 
     Private Sub Student_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Student_Button.Click
         ShowStudentPanel()
         LoadStudentData(Search_Student_TextBox.Text.Trim())
+        HighlightButton(Student_Button)
     End Sub
 
     Private Sub Teacher_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Teacher_Button.Click
         ShowTeacherPanel()
         LoadTeacherData(Search_Teacher_TextBox.Text.Trim())
+        HighlightButton(Teacher_Button)
     End Sub
 
     Private Sub School_Year_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles School_Year_Button.Click
         Dim semForm As New frm_SemControl()
         semForm.ShowDialog()
+        HighlightButton(School_Year_Button)
     End Sub
 
     Private Sub Logout_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Logout_Button.Click
@@ -67,6 +93,7 @@ Public Class Admin_Form
             Dim loginForm As New Login_Form()
             loginForm.Show()
         End If
+        HighlightButton(Logout_Button)
     End Sub
 
     Private Sub Exit_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Exit_Button.Click
@@ -77,6 +104,7 @@ Public Class Admin_Form
         If result = DialogResult.Yes Then
             Application.Exit()
         End If
+        HighlightButton(Exit_Button)
     End Sub
 
 #End Region
@@ -646,4 +674,23 @@ Public Class Admin_Form
 
 #End Region
 
+    Private Sub Navigation_Panel_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles Navigation_Panel.Paint
+
+    End Sub
+    Private Sub HighlightButton(ByVal clickedButton As Button)
+        If CurrentActiveButton IsNot Nothing Then
+            CurrentActiveButton.BackColor = Color.Transparent
+        End If
+        clickedButton.BackColor = Color.Azure
+        CurrentActiveButton = clickedButton
+
+    End Sub
+
+    Private Sub Teacher_Panel_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles Teacher_Panel.Paint
+
+    End Sub
+
+    Private Sub Label2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label2.Click
+
+    End Sub
 End Class
