@@ -337,8 +337,18 @@
     <Compile Include="professor panel\Teacher_Form.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="admin\teacherpanel.Designer.vb">
+      <DependentUpon>teacherpanel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="admin\teacherpanel.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="admin\teacherpanel.resx">
+      <DependentUpon>teacherpanel.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Student panel\accountcenter.resx">
       <DependentUpon>accountcenter.vb</DependentUpon>
       <SubType>Designer</SubType>

@@ -117,6 +117,7 @@ Public Class Admin_Form
         Dashboard_Panel.Visible = False
         Student_Panel.Visible = False
         Teacher_Panel.Visible = False
+
     End Sub
 
     Private Sub ShowDashboard()
@@ -241,13 +242,13 @@ Public Class Admin_Form
 #Region "Student Panel - Button Click Events"
     ' ════════════════════════════════════════════════════════════════════
 
-    Private Sub Add_Student_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Add_Student_Button.Click
+    Private Sub Add_Student_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Dim addForm As New popUpFormAddStudent()
         addForm.ShowDialog()
         LoadStudentData(Search_Student_TextBox.Text.Trim())
     End Sub
 
-    Private Sub Modify_Student_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Modify_Student_Button.Click
+    Private Sub Modify_Student_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         If Student_List_DataGridView.SelectedRows.Count = 0 Then
             MessageBox.Show("Please select a student to modify.", "No Selection", _
                             MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -261,7 +262,7 @@ Public Class Admin_Form
         LoadStudentData(Search_Student_TextBox.Text.Trim())
     End Sub
 
-    Private Sub Delete_Student_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Delete_Student_Button.Click
+    Private Sub Delete_Student_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         If Student_List_DataGridView.SelectedRows.Count = 0 Then
             MessageBox.Show("Please select a student to delete.", "No Selection", _
                             MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -278,7 +279,7 @@ Public Class Admin_Form
     ' ════════════════════════════════════════════════════════════════════
     ' ── Refresh Student Button: reloads Student_List_DataGridView ──
     ' ════════════════════════════════════════════════════════════════════
-    Private Sub Refresh_student_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Refresh_student_Button.Click
+    Private Sub Refresh_student_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Try
             LoadStudentData(Search_Student_TextBox.Text.Trim())
         Catch ex As Exception
@@ -293,7 +294,7 @@ Public Class Admin_Form
 #Region "Student Panel - Search"
     ' ════════════════════════════════════════════════════════════════════
 
-    Private Sub Search_Student_TextBox_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Search_Student_TextBox.TextChanged
+    Private Sub Search_Student_TextBox_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         LoadStudentData(Search_Student_TextBox.Text.Trim())
     End Sub
 
@@ -338,7 +339,7 @@ Public Class Admin_Form
 #Region "Student Panel - DataGridView Events"
     ' ════════════════════════════════════════════════════════════════════
 
-    Private Sub Student_List_DataGridView_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles Student_List_DataGridView.CellContentClick
+    Private Sub Student_List_DataGridView_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs)
         ' Reserved for future use
     End Sub
 
@@ -507,13 +508,13 @@ Public Class Admin_Form
 #Region "Teacher Panel - Button Click Events"
     ' ════════════════════════════════════════════════════════════════════
 
-    Private Sub Add_Teacher_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Add_Teacher_Button.Click
+    Private Sub Add_Teacher_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Dim addForm As New popUpFormAddTeacher()
         addForm.ShowDialog()
         LoadTeacherData(Search_Teacher_TextBox.Text.Trim())
     End Sub
 
-    Private Sub Modify_Teacher_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Modify_Teacher_Button.Click
+    Private Sub Modify_Teacher_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         If Teacher_List_DataGridView.SelectedRows.Count = 0 Then
             MessageBox.Show("Please select a teacher to modify.", "No Selection", _
                             MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -533,7 +534,7 @@ Public Class Admin_Form
         LoadTeacherData(Search_Teacher_TextBox.Text.Trim())
     End Sub
 
-    Private Sub Delete_Teacher_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Delete_Teacher_Button.Click
+    Private Sub Delete_Teacher_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         If Teacher_List_DataGridView.SelectedRows.Count = 0 Then
             MessageBox.Show("Please select a teacher to delete.", "No Selection", _
                             MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -553,12 +554,12 @@ Public Class Admin_Form
         LoadTeacherData(Search_Teacher_TextBox.Text.Trim())
     End Sub
 
-    Private Sub Assign_Class_To_Teacher_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Assign_Class_To_Teacher_Button.Click
+    Private Sub Assign_Class_To_Teacher_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Dim assignForm As New popUpFormAssignSubjectToTeacher()
         assignForm.ShowDialog()
     End Sub
 
-    Private Sub Back_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Back_Button.Click
+    Private Sub Back_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         LoadTeacherData(Search_Teacher_TextBox.Text.Trim())
     End Sub
 
@@ -567,7 +568,7 @@ Public Class Admin_Form
     ' ── If currently in SUBJECTS drill-down, reloads that teacher's  ──
     ' ── subjects; otherwise reloads the full teacher list.           ──
     ' ════════════════════════════════════════════════════════════════════
-    Private Sub Refresh_teacher_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Refresh_teacher_Button.Click
+    Private Sub Refresh_teacher_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Try
             If _teacherViewMode = "SUBJECTS" Then
                 ' Re-load the current teacher's subjects if a teacher was previously selected
@@ -592,7 +593,7 @@ Public Class Admin_Form
 #Region "Teacher Panel - Search"
     ' ════════════════════════════════════════════════════════════════════
 
-    Private Sub Search_Teacher_TextBox_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Search_Teacher_TextBox.TextChanged
+    Private Sub Search_Teacher_TextBox_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         If _teacherViewMode = "LIST" Then
             LoadTeacherData(Search_Teacher_TextBox.Text.Trim())
         End If
@@ -605,8 +606,8 @@ Public Class Admin_Form
     ' ════════════════════════════════════════════════════════════════════
 
     Private Sub DataGridView1_CellClick(ByVal sender As System.Object, _
-                                        ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) _
-        Handles Teacher_List_DataGridView.CellClick
+                                        ByVal e As System.Windows.Forms.DataGridViewCellEventArgs)
+
 
         If e.RowIndex < 0 Then Return
         If _teacherViewMode = "SUBJECTS" Then Return
@@ -686,11 +687,23 @@ Public Class Admin_Form
 
     End Sub
 
-    Private Sub Teacher_Panel_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles Teacher_Panel.Paint
+    Private Sub Teacher_Panel_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs)
 
     End Sub
 
-    Private Sub Label2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label2.Click
+    Private Sub Label2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+
+    End Sub
+
+    Private Sub Label3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+
+    End Sub
+
+    Private Sub Student_Panel_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs)
+
+    End Sub
+
+    Private Sub Teacher_Panel_Paint_1(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles Teacher_Panel.Paint
 
     End Sub
 End Class
