@@ -21,7 +21,6 @@ Public Class Admin_Form
 
     Private Sub Admin_Form_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ' Default view on startup
-        ShowDashboard()
 
         ' ── Student panel setup ──
         InitializeStudentDataGridView()
@@ -645,5 +644,6 @@ Public Class Admin_Form
     End Function
 
 #End Region
+
 
 End Class
