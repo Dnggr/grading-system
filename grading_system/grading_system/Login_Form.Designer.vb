@@ -24,6 +24,7 @@ Partial Class Login_Form
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Login_Form))
         Me.loginPanel = New System.Windows.Forms.Panel
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox
         Me.PictureBox2 = New System.Windows.Forms.PictureBox
         Me.PictureBox1 = New System.Windows.Forms.PictureBox
         Me.showpass = New System.Windows.Forms.CheckBox
@@ -32,7 +33,6 @@ Partial Class Login_Form
         Me.loginButton = New System.Windows.Forms.Button
         Me.loginpasswordTextBox = New System.Windows.Forms.TextBox
         Me.loginemailTextBox = New System.Windows.Forms.TextBox
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox
         Me.loginPanel.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -55,6 +55,17 @@ Partial Class Login_Form
         Me.loginPanel.Size = New System.Drawing.Size(384, 406)
         Me.loginPanel.TabIndex = 0
         '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.CheckBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CheckBox1.Location = New System.Drawing.Point(335, 225)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(15, 14)
+        Me.CheckBox1.TabIndex = 10
+        Me.CheckBox1.UseVisualStyleBackColor = True
+        '
         'PictureBox2
         '
         Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
@@ -67,6 +78,7 @@ Partial Class Login_Form
         '
         'PictureBox1
         '
+        Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
         Me.PictureBox1.Location = New System.Drawing.Point(36, 143)
         Me.PictureBox1.Name = "PictureBox1"
@@ -126,6 +138,7 @@ Partial Class Login_Form
         '
         'loginpasswordTextBox
         '
+        Me.loginpasswordTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.loginpasswordTextBox.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.loginpasswordTextBox.Location = New System.Drawing.Point(79, 213)
         Me.loginpasswordTextBox.Multiline = True
@@ -135,23 +148,13 @@ Partial Class Login_Form
         '
         'loginemailTextBox
         '
+        Me.loginemailTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.loginemailTextBox.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.loginemailTextBox.Location = New System.Drawing.Point(79, 148)
         Me.loginemailTextBox.Multiline = True
         Me.loginemailTextBox.Name = "loginemailTextBox"
         Me.loginemailTextBox.Size = New System.Drawing.Size(250, 35)
         Me.loginemailTextBox.TabIndex = 0
-        '
-        'CheckBox1
-        '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.CheckBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CheckBox1.Location = New System.Drawing.Point(335, 225)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(15, 14)
-        Me.CheckBox1.TabIndex = 10
-        Me.CheckBox1.UseVisualStyleBackColor = True
         '
         'Login_Form
         '

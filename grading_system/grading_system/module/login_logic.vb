@@ -5,12 +5,12 @@
     Public lastname As String = ""
     Public userrole As String = ""
     Public middlename As String = ""
-
     'for schedule
     Public secid As Integer = 0
     Public Courseid As Integer = 0
     Public yearlvl As Integer = 0
     Public currentsem As Integer = 0
+    Public subid As Integer = 0
 
     Public Sub ClearLogin()
         loginuser = ""

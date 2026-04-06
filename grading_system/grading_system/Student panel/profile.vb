@@ -4,6 +4,12 @@ Public Class profile
     Dim response As DialogResult
     Private Sub profile_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         LoadImage()
+        MakeRoundedButton(Button1, 25)
+        MakeRoundedButton(Button2, 25)
+        MakeRoundedButton(Button3, 25)
+        MakeRoundedPanel(Panel1, 30)
+        MakeRoundedPanel(Panel2, 30)
+        MakeRoundedPanel(Panel3, 30)
     End Sub
 #Region "Load StudentInfo"
 
@@ -19,14 +25,21 @@ Public Class profile
             cmdProfile.Parameters.AddWithValue("?", login_logic.loginuser)
 
             Dim reader As OdbcDataReader = cmdProfile.ExecuteReader()
-
+           
             If reader.Read() Then
+
+                Dim firstname As String = StrConv(reader("firstname").ToString(), VbStrConv.ProperCase)
+                Dim lastname As String = StrConv(reader("lastname").ToString(), VbStrConv.ProperCase)
+                Dim middlename As String = StrConv(reader("middlename").ToString(), VbStrConv.ProperCase)
+                Dim g As String = StrConv(reader("gender").ToString(), VbStrConv.ProperCase)
+
                 id.Text = reader("stud_id").ToString()
-                firstname.Text = reader("firstname").ToString()
-                lastname.Text = reader("lastname").ToString()
-                middlename.Text = reader("middlename").ToString()
-                gender.Text = reader("gender").ToString()
-                email.Text = reader("email").ToString()
+                Label1.Text = firstname & " " & lastname
+                gender.Text = g
+                fname.Text = firstname
+                mname.Text = middlename
+                Label11.Text = lastname
+                Label15.Text = reader("email").ToString()
                 course.Text = reader("course").ToString()
                 yr_lvl.Text = reader("yr_lvl").ToString()
                 section.Text = reader("section").ToString()
@@ -343,5 +356,61 @@ Public Class profile
 
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
         accountcenter.Show()
+    End Sub
+
+    Private Sub Label1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label1.Click
+
+    End Sub
+
+    Private Sub course_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles course.Click
+
+    End Sub
+
+    Private Sub Label8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label8.Click
+
+    End Sub
+
+    Private Sub Panel1_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles Panel1.Paint
+
+    End Sub
+
+#Region "rounded button"
+    Private Sub MakeRoundedButton(ByVal btn As Button, ByVal radius As Integer)
+        Dim path As New Drawing.Drawing2D.GraphicsPath()
+
+        path.StartFigure()
+        path.AddArc(0, 0, radius, radius, 180, 90)
+        path.AddArc(btn.Width - radius, 0, radius, radius, 270, 90)
+        path.AddArc(btn.Width - radius, btn.Height - radius, radius, radius, 0, 90)
+        path.AddArc(0, btn.Height - radius, radius, radius, 90, 90)
+        path.CloseFigure()
+        btn.Region = New Region(path)
+    End Sub
+#End Region
+
+    Private Sub MakeRoundedPanel(ByVal pnl As Panel, ByVal radius As Integer)
+        Dim path As New Drawing.Drawing2D.GraphicsPath()
+
+        path.StartFigure()
+        path.AddArc(0, 0, radius, radius, 180, 90)
+        path.AddArc(pnl.Width - radius, 0, radius, radius, 270, 90)
+        path.AddArc(pnl.Width - radius, pnl.Height - radius, radius, radius, 0, 90)
+        path.AddArc(0, pnl.Height - radius, radius, radius, 90, 90)
+        path.CloseFigure()
+        pnl.Region = New Region(path)
+    End Sub
+
+    Private Sub Label6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label6.Click
+
+    End Sub
+
+    Private Sub TableLayoutPanel3_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles TableLayoutPanel3.Paint
+        Dim panel As TableLayoutPanel = CType(sender, TableLayoutPanel)
+
+        Dim x As Integer = panel.GetColumnWidths()(0)
+
+        Using Pen As New Pen(Color.Gray, 2)
+            e.Graphics.DrawLine(Pen, x, 0, x, panel.Height)
+        End Using
     End Sub
 End Class
