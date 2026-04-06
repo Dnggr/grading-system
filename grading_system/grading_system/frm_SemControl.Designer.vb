@@ -35,7 +35,6 @@ Partial Class frm_SemControl
         Me.GroupBox2 = New System.Windows.Forms.GroupBox
         Me.dgvTeachers = New System.Windows.Forms.DataGridView
         Me.btnIncrement = New System.Windows.Forms.Button
-        Me.Button2 = New System.Windows.Forms.Button
         Me.btnClose = New System.Windows.Forms.Button
         Me.StatusStrip = New System.Windows.Forms.StatusStrip
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel
@@ -48,6 +47,7 @@ Partial Class frm_SemControl
         '
         'GroupBox1
         '
+        Me.GroupBox1.BackColor = System.Drawing.Color.PowderBlue
         Me.GroupBox1.Controls.Add(Me.lblSubmitted)
         Me.GroupBox1.Controls.Add(Me.Label7)
         Me.GroupBox1.Controls.Add(Me.lblTotalTeachers)
@@ -57,19 +57,20 @@ Partial Class frm_SemControl
         Me.GroupBox1.Controls.Add(Me.lblCurrentSem)
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Controls.Add(Me.btnRefresh)
+        Me.GroupBox1.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(733, 94)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "GroupBox1"
+        Me.GroupBox1.Text = "Semester Status"
         '
         'lblSubmitted
         '
         Me.lblSubmitted.AutoSize = True
-        Me.lblSubmitted.Location = New System.Drawing.Point(515, 50)
+        Me.lblSubmitted.Location = New System.Drawing.Point(525, 50)
         Me.lblSubmitted.Name = "lblSubmitted"
-        Me.lblSubmitted.Size = New System.Drawing.Size(39, 13)
+        Me.lblSubmitted.Size = New System.Drawing.Size(46, 17)
         Me.lblSubmitted.TabIndex = 13
         Me.lblSubmitted.Text = "Label8"
         '
@@ -78,52 +79,52 @@ Partial Class frm_SemControl
         Me.Label7.AutoSize = True
         Me.Label7.Location = New System.Drawing.Point(515, 28)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(52, 13)
+        Me.Label7.Size = New System.Drawing.Size(71, 17)
         Me.Label7.TabIndex = 12
-        Me.Label7.Text = "submitted"
+        Me.Label7.Text = "Submitted"
         '
         'lblTotalTeachers
         '
         Me.lblTotalTeachers.AutoSize = True
-        Me.lblTotalTeachers.Location = New System.Drawing.Point(411, 50)
+        Me.lblTotalTeachers.Location = New System.Drawing.Point(397, 50)
         Me.lblTotalTeachers.Name = "lblTotalTeachers"
-        Me.lblTotalTeachers.Size = New System.Drawing.Size(39, 13)
+        Me.lblTotalTeachers.Size = New System.Drawing.Size(46, 17)
         Me.lblTotalTeachers.TabIndex = 11
         Me.lblTotalTeachers.Text = "Label6"
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(411, 28)
+        Me.Label5.Location = New System.Drawing.Point(381, 28)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(78, 13)
+        Me.Label5.Size = New System.Drawing.Size(95, 17)
         Me.Label5.TabIndex = 10
         Me.Label5.Text = "Total teachers:"
         '
         'lblLockStatus
         '
         Me.lblLockStatus.AutoSize = True
-        Me.lblLockStatus.Location = New System.Drawing.Point(264, 50)
+        Me.lblLockStatus.Location = New System.Drawing.Point(253, 50)
         Me.lblLockStatus.Name = "lblLockStatus"
-        Me.lblLockStatus.Size = New System.Drawing.Size(39, 13)
+        Me.lblLockStatus.Size = New System.Drawing.Size(46, 17)
         Me.lblLockStatus.TabIndex = 9
         Me.lblLockStatus.Text = "Label4"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(264, 28)
+        Me.Label3.Location = New System.Drawing.Point(253, 28)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(58, 13)
+        Me.Label3.Size = New System.Drawing.Size(80, 17)
         Me.Label3.TabIndex = 8
-        Me.Label3.Text = "lock status"
+        Me.Label3.Text = "Lock Status:"
         '
         'lblCurrentSem
         '
         Me.lblCurrentSem.AutoSize = True
         Me.lblCurrentSem.Location = New System.Drawing.Point(17, 50)
         Me.lblCurrentSem.Name = "lblCurrentSem"
-        Me.lblCurrentSem.Size = New System.Drawing.Size(39, 13)
+        Me.lblCurrentSem.Size = New System.Drawing.Size(46, 17)
         Me.lblCurrentSem.TabIndex = 7
         Me.lblCurrentSem.Text = "Label2"
         '
@@ -132,21 +133,23 @@ Partial Class frm_SemControl
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(17, 28)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(62, 13)
+        Me.Label1.Size = New System.Drawing.Size(84, 17)
         Me.Label1.TabIndex = 6
-        Me.Label1.Text = "current sem"
+        Me.Label1.Text = "Current Sem"
         '
         'btnRefresh
         '
-        Me.btnRefresh.Location = New System.Drawing.Point(652, 40)
+        Me.btnRefresh.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnRefresh.Location = New System.Drawing.Point(643, 44)
         Me.btnRefresh.Name = "btnRefresh"
-        Me.btnRefresh.Size = New System.Drawing.Size(75, 23)
+        Me.btnRefresh.Size = New System.Drawing.Size(84, 23)
         Me.btnRefresh.TabIndex = 5
-        Me.btnRefresh.Text = "refresh"
+        Me.btnRefresh.Text = "Refresh"
         Me.btnRefresh.UseVisualStyleBackColor = True
         '
         'GroupBox2
         '
+        Me.GroupBox2.BackColor = System.Drawing.Color.PowderBlue
         Me.GroupBox2.Controls.Add(Me.dgvTeachers)
         Me.GroupBox2.Location = New System.Drawing.Point(12, 140)
         Me.GroupBox2.Name = "GroupBox2"
@@ -157,6 +160,7 @@ Partial Class frm_SemControl
         '
         'dgvTeachers
         '
+        Me.dgvTeachers.BackgroundColor = System.Drawing.Color.Azure
         Me.dgvTeachers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvTeachers.Location = New System.Drawing.Point(7, 71)
         Me.dgvTeachers.Name = "dgvTeachers"
@@ -165,30 +169,25 @@ Partial Class frm_SemControl
         '
         'btnIncrement
         '
-        Me.btnIncrement.Location = New System.Drawing.Point(12, 408)
+        Me.btnIncrement.BackColor = System.Drawing.Color.Azure
+        Me.btnIncrement.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnIncrement.Location = New System.Drawing.Point(12, 402)
         Me.btnIncrement.Name = "btnIncrement"
-        Me.btnIncrement.Size = New System.Drawing.Size(177, 23)
+        Me.btnIncrement.Size = New System.Drawing.Size(177, 29)
         Me.btnIncrement.TabIndex = 2
-        Me.btnIncrement.Text = "advance to the next sem"
-        Me.btnIncrement.UseVisualStyleBackColor = True
-        '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(195, 408)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 23)
-        Me.Button2.TabIndex = 3
-        Me.Button2.Text = "Button2"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.btnIncrement.Text = "Advance to the Next Sem"
+        Me.btnIncrement.UseVisualStyleBackColor = False
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(670, 408)
+        Me.btnClose.BackColor = System.Drawing.Color.Azure
+        Me.btnClose.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnClose.Location = New System.Drawing.Point(670, 402)
         Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(75, 23)
+        Me.btnClose.Size = New System.Drawing.Size(75, 29)
         Me.btnClose.TabIndex = 4
-        Me.btnClose.Text = "close"
-        Me.btnClose.UseVisualStyleBackColor = True
+        Me.btnClose.Text = "Close"
+        Me.btnClose.UseVisualStyleBackColor = False
         '
         'StatusStrip
         '
@@ -215,13 +214,16 @@ Partial Class frm_SemControl
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.CadetBlue
         Me.ClientSize = New System.Drawing.Size(757, 458)
         Me.Controls.Add(Me.StatusStrip)
         Me.Controls.Add(Me.btnClose)
-        Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.btnIncrement)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "frm_SemControl"
         Me.Text = "frm_SemControl"
         Me.GroupBox1.ResumeLayout(False)
@@ -238,7 +240,6 @@ Partial Class frm_SemControl
     Friend WithEvents btnRefresh As System.Windows.Forms.Button
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents btnIncrement As System.Windows.Forms.Button
-    Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents btnClose As System.Windows.Forms.Button
     Friend WithEvents dgvTeachers As System.Windows.Forms.DataGridView
     Friend WithEvents lblLockStatus As System.Windows.Forms.Label

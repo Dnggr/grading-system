@@ -53,6 +53,7 @@ Partial Class popUpFormAssignSubjectToTeacher
         '
         'Assign_Teacher_Panel
         '
+        Me.Assign_Teacher_Panel.BackColor = System.Drawing.Color.CadetBlue
         Me.Assign_Teacher_Panel.Controls.Add(Me.Assign_Button)
         Me.Assign_Teacher_Panel.Controls.Add(Me.Selected_Teacher_Label)
         Me.Assign_Teacher_Panel.Controls.Add(Me.Close_Button)
@@ -69,6 +70,7 @@ Partial Class popUpFormAssignSubjectToTeacher
         '
         'Assign_Button
         '
+        Me.Assign_Button.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Assign_Button.Location = New System.Drawing.Point(737, 613)
         Me.Assign_Button.Name = "Assign_Button"
         Me.Assign_Button.Size = New System.Drawing.Size(75, 23)
@@ -79,24 +81,27 @@ Partial Class popUpFormAssignSubjectToTeacher
         'Selected_Teacher_Label
         '
         Me.Selected_Teacher_Label.AutoSize = True
-        Me.Selected_Teacher_Label.Location = New System.Drawing.Point(576, 45)
+        Me.Selected_Teacher_Label.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Selected_Teacher_Label.Location = New System.Drawing.Point(576, 40)
         Me.Selected_Teacher_Label.Name = "Selected_Teacher_Label"
-        Me.Selected_Teacher_Label.Size = New System.Drawing.Size(89, 13)
+        Me.Selected_Teacher_Label.Size = New System.Drawing.Size(99, 15)
         Me.Selected_Teacher_Label.TabIndex = 8
-        Me.Selected_Teacher_Label.Text = "selected teacher:"
+        Me.Selected_Teacher_Label.Text = "Selected Teacher:"
         '
         'Close_Button
         '
+        Me.Close_Button.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Close_Button.Location = New System.Drawing.Point(818, 613)
         Me.Close_Button.Name = "Close_Button"
         Me.Close_Button.Size = New System.Drawing.Size(75, 23)
         Me.Close_Button.TabIndex = 6
-        Me.Close_Button.Text = "close"
+        Me.Close_Button.Text = "Close"
         Me.Close_Button.UseVisualStyleBackColor = True
         '
         'GroupBox2
         '
         Me.GroupBox2.Controls.Add(Me.AssignmentsDataGridView)
+        Me.GroupBox2.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox2.Location = New System.Drawing.Point(27, 482)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(880, 125)
@@ -106,6 +111,7 @@ Partial Class popUpFormAssignSubjectToTeacher
         '
         'AssignmentsDataGridView
         '
+        Me.AssignmentsDataGridView.BackgroundColor = System.Drawing.Color.Azure
         Me.AssignmentsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.AssignmentsDataGridView.Location = New System.Drawing.Point(9, 16)
         Me.AssignmentsDataGridView.Name = "AssignmentsDataGridView"
@@ -114,6 +120,7 @@ Partial Class popUpFormAssignSubjectToTeacher
         '
         'Search_Teacher_DataGridView
         '
+        Me.Search_Teacher_DataGridView.BackgroundColor = System.Drawing.Color.Azure
         Me.Search_Teacher_DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.Search_Teacher_DataGridView.Location = New System.Drawing.Point(27, 64)
         Me.Search_Teacher_DataGridView.Name = "Search_Teacher_DataGridView"
@@ -130,9 +137,10 @@ Partial Class popUpFormAssignSubjectToTeacher
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(24, 45)
+        Me.Label2.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(25, 40)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(50, 13)
+        Me.Label2.Size = New System.Drawing.Size(51, 15)
         Me.Label2.TabIndex = 2
         Me.Label2.Text = "Teacher:"
         '
@@ -147,6 +155,7 @@ Partial Class popUpFormAssignSubjectToTeacher
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Controls.Add(Me.CourseFilter_ComboBox)
+        Me.GroupBox1.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1.Location = New System.Drawing.Point(27, 164)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(880, 312)
@@ -157,14 +166,16 @@ Partial Class popUpFormAssignSubjectToTeacher
         'Selected_Subject_Label
         '
         Me.Selected_Subject_Label.AutoSize = True
-        Me.Selected_Subject_Label.Location = New System.Drawing.Point(571, 27)
+        Me.Selected_Subject_Label.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Selected_Subject_Label.Location = New System.Drawing.Point(571, 24)
         Me.Selected_Subject_Label.Name = "Selected_Subject_Label"
-        Me.Selected_Subject_Label.Size = New System.Drawing.Size(87, 13)
+        Me.Selected_Subject_Label.Size = New System.Drawing.Size(98, 15)
         Me.Selected_Subject_Label.TabIndex = 7
-        Me.Selected_Subject_Label.Text = "selected subject:"
+        Me.Selected_Subject_Label.Text = "Selected Subject:"
         '
         'ClassDataGridView
         '
+        Me.ClassDataGridView.BackgroundColor = System.Drawing.Color.Azure
         Me.ClassDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.ClassDataGridView.Location = New System.Drawing.Point(9, 184)
         Me.ClassDataGridView.Name = "ClassDataGridView"
@@ -174,22 +185,24 @@ Partial Class popUpFormAssignSubjectToTeacher
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(6, 165)
+        Me.Label5.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(5, 162)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(56, 13)
+        Me.Label5.Size = New System.Drawing.Size(65, 15)
         Me.Label5.TabIndex = 9
-        Me.Label5.Text = "class filter:"
+        Me.Label5.Text = "Class Filter:"
         '
         'ClassFilter_ComboBox
         '
         Me.ClassFilter_ComboBox.FormattingEnabled = True
-        Me.ClassFilter_ComboBox.Location = New System.Drawing.Point(76, 157)
+        Me.ClassFilter_ComboBox.Location = New System.Drawing.Point(83, 157)
         Me.ClassFilter_ComboBox.Name = "ClassFilter_ComboBox"
-        Me.ClassFilter_ComboBox.Size = New System.Drawing.Size(121, 21)
+        Me.ClassFilter_ComboBox.Size = New System.Drawing.Size(121, 25)
         Me.ClassFilter_ComboBox.TabIndex = 8
         '
         'SubjectsDataGridView
         '
+        Me.SubjectsDataGridView.BackgroundColor = System.Drawing.Color.Azure
         Me.SubjectsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.SubjectsDataGridView.Location = New System.Drawing.Point(9, 46)
         Me.SubjectsDataGridView.Name = "SubjectsDataGridView"
@@ -198,45 +211,48 @@ Partial Class popUpFormAssignSubjectToTeacher
         '
         'SearchSubject_TextBox
         '
-        Me.SearchSubject_TextBox.Location = New System.Drawing.Point(264, 20)
+        Me.SearchSubject_TextBox.Location = New System.Drawing.Point(264, 19)
         Me.SearchSubject_TextBox.Name = "SearchSubject_TextBox"
-        Me.SearchSubject_TextBox.Size = New System.Drawing.Size(285, 20)
+        Me.SearchSubject_TextBox.Size = New System.Drawing.Size(285, 25)
         Me.SearchSubject_TextBox.TabIndex = 6
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(208, 27)
+        Me.Label4.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(212, 24)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(42, 13)
+        Me.Label4.Size = New System.Drawing.Size(46, 15)
         Me.Label4.TabIndex = 5
-        Me.Label4.Text = "search:"
+        Me.Label4.Text = "Search:"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(6, 27)
+        Me.Label3.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(5, 24)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(64, 13)
+        Me.Label3.Size = New System.Drawing.Size(75, 15)
         Me.Label3.TabIndex = 5
-        Me.Label3.Text = "course filter:"
+        Me.Label3.Text = "Course Filter:"
         '
         'CourseFilter_ComboBox
         '
         Me.CourseFilter_ComboBox.FormattingEnabled = True
-        Me.CourseFilter_ComboBox.Location = New System.Drawing.Point(76, 19)
+        Me.CourseFilter_ComboBox.Location = New System.Drawing.Point(83, 18)
         Me.CourseFilter_ComboBox.Name = "CourseFilter_ComboBox"
-        Me.CourseFilter_ComboBox.Size = New System.Drawing.Size(121, 21)
+        Me.CourseFilter_ComboBox.Size = New System.Drawing.Size(121, 25)
         Me.CourseFilter_ComboBox.TabIndex = 0
         '
         'Label1
         '
         Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Segoe UI Semibold", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.Location = New System.Drawing.Point(24, 11)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(174, 13)
+        Me.Label1.Size = New System.Drawing.Size(233, 19)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Assign teacher to subject and class"
+        Me.Label1.Text = "Assign Teacher to Subject and Class"
         '
         'popUpFormAssignSubjectToTeacher
         '
