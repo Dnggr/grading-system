@@ -43,6 +43,7 @@ Public Class Admin_Form
         Dashboard_Panel.BackColor = Color.CadetBlue
 
         ' Default view on startup
+        ShowDashboard()
 
         ' ── Student panel setup ──
         InitializeStudentDataGridView()
@@ -692,5 +693,4 @@ Public Class Admin_Form
     Private Sub Label2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label2.Click
 
     End Sub
->>>>>>> 35284a71c3197261c50a62666099ad49e0572800
 End Class
