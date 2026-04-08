@@ -42,6 +42,7 @@ Public Class Admin_Form
         Student_Panel.BackColor = Color.CadetBlue
         Dashboard_Panel.BackColor = Color.CadetBlue
 
+
         ' Default view on startup
         ShowDashboard()
 
@@ -704,6 +705,10 @@ Public Class Admin_Form
     End Sub
 
     Private Sub Teacher_Panel_Paint_1(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles Teacher_Panel.Paint
+
+    End Sub
+
+    Private Sub Student_Panel_Paint_1(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles Student_Panel.Paint
 
     End Sub
 End Class

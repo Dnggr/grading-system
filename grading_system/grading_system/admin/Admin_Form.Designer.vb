@@ -24,7 +24,13 @@ Partial Class Admin_Form
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Admin_Form))
         Me.Navigation_Panel = New System.Windows.Forms.Panel
+        Me.Logout_Button = New System.Windows.Forms.Button
+        Me.School_Year_Button = New System.Windows.Forms.Button
         Me.Dashboard_Panel = New System.Windows.Forms.Panel
+        Me.Teacher_Button = New System.Windows.Forms.Button
+        Me.Exit_Button = New System.Windows.Forms.Button
+        Me.Student_Button = New System.Windows.Forms.Button
+        Me.Dashboard_Button = New System.Windows.Forms.Button
         Me.Teacher_Panel = New System.Windows.Forms.Panel
         Me.Refresh_teacher_Button = New System.Windows.Forms.Button
         Me.Back_Button = New System.Windows.Forms.Button
@@ -36,12 +42,6 @@ Partial Class Admin_Form
         Me.Teacher_List_DataGridView = New System.Windows.Forms.DataGridView
         Me.Add_Teacher_Button = New System.Windows.Forms.Button
         Me.Label1 = New System.Windows.Forms.Label
-        Me.Logout_Button = New System.Windows.Forms.Button
-        Me.School_Year_Button = New System.Windows.Forms.Button
-        Me.Teacher_Button = New System.Windows.Forms.Button
-        Me.Exit_Button = New System.Windows.Forms.Button
-        Me.Student_Button = New System.Windows.Forms.Button
-        Me.Dashboard_Button = New System.Windows.Forms.Button
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton
         Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton
         Me.ToolStripButton3 = New System.Windows.Forms.ToolStripButton
@@ -72,20 +72,122 @@ Partial Class Admin_Form
         Me.Navigation_Panel.Controls.Add(Me.Exit_Button)
         Me.Navigation_Panel.Controls.Add(Me.Student_Button)
         Me.Navigation_Panel.Controls.Add(Me.Dashboard_Button)
-        Me.Navigation_Panel.Dock = System.Windows.Forms.DockStyle.Left
         Me.Navigation_Panel.Location = New System.Drawing.Point(0, 0)
         Me.Navigation_Panel.Name = "Navigation_Panel"
         Me.Navigation_Panel.Size = New System.Drawing.Size(177, 700)
         Me.Navigation_Panel.TabIndex = 0
         '
+        'Logout_Button
+        '
+        Me.Logout_Button.BackColor = System.Drawing.Color.Transparent
+        Me.Logout_Button.FlatAppearance.BorderSize = 0
+        Me.Logout_Button.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkSlateGray
+        Me.Logout_Button.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSeaGreen
+        Me.Logout_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Logout_Button.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Logout_Button.Image = CType(resources.GetObject("Logout_Button.Image"), System.Drawing.Image)
+        Me.Logout_Button.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Logout_Button.Location = New System.Drawing.Point(24, 595)
+        Me.Logout_Button.Name = "Logout_Button"
+        Me.Logout_Button.Size = New System.Drawing.Size(147, 53)
+        Me.Logout_Button.TabIndex = 5
+        Me.Logout_Button.Text = "Logout"
+        Me.Logout_Button.UseVisualStyleBackColor = False
+        '
+        'School_Year_Button
+        '
+        Me.School_Year_Button.BackColor = System.Drawing.Color.Transparent
+        Me.School_Year_Button.FlatAppearance.BorderSize = 0
+        Me.School_Year_Button.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkSlateGray
+        Me.School_Year_Button.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSeaGreen
+        Me.School_Year_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.School_Year_Button.Font = New System.Drawing.Font("Segoe UI Semibold", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.School_Year_Button.Image = CType(resources.GetObject("School_Year_Button.Image"), System.Drawing.Image)
+        Me.School_Year_Button.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.School_Year_Button.Location = New System.Drawing.Point(23, 362)
+        Me.School_Year_Button.Name = "School_Year_Button"
+        Me.School_Year_Button.Size = New System.Drawing.Size(147, 53)
+        Me.School_Year_Button.TabIndex = 4
+        Me.School_Year_Button.Text = "   S.Y. control"
+        Me.School_Year_Button.UseVisualStyleBackColor = False
+        '
         'Dashboard_Panel
         '
         Me.Dashboard_Panel.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Dashboard_Panel.BackColor = System.Drawing.Color.CadetBlue
-        Me.Dashboard_Panel.Location = New System.Drawing.Point(183, 0)
+        Me.Dashboard_Panel.Location = New System.Drawing.Point(177, 0)
         Me.Dashboard_Panel.Name = "Dashboard_Panel"
-        Me.Dashboard_Panel.Size = New System.Drawing.Size(1153, 700)
+        Me.Dashboard_Panel.Size = New System.Drawing.Size(1168, 700)
         Me.Dashboard_Panel.TabIndex = 0
+        '
+        'Teacher_Button
+        '
+        Me.Teacher_Button.BackColor = System.Drawing.Color.Transparent
+        Me.Teacher_Button.FlatAppearance.BorderSize = 0
+        Me.Teacher_Button.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkSlateGray
+        Me.Teacher_Button.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSeaGreen
+        Me.Teacher_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Teacher_Button.Font = New System.Drawing.Font("Segoe UI Semibold", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Teacher_Button.Image = CType(resources.GetObject("Teacher_Button.Image"), System.Drawing.Image)
+        Me.Teacher_Button.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Teacher_Button.Location = New System.Drawing.Point(23, 281)
+        Me.Teacher_Button.Name = "Teacher_Button"
+        Me.Teacher_Button.Size = New System.Drawing.Size(147, 53)
+        Me.Teacher_Button.TabIndex = 3
+        Me.Teacher_Button.Text = "Teacher"
+        Me.Teacher_Button.UseVisualStyleBackColor = False
+        '
+        'Exit_Button
+        '
+        Me.Exit_Button.BackColor = System.Drawing.Color.Transparent
+        Me.Exit_Button.FlatAppearance.BorderSize = 0
+        Me.Exit_Button.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkSlateGray
+        Me.Exit_Button.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSeaGreen
+        Me.Exit_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Exit_Button.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Exit_Button.Image = CType(resources.GetObject("Exit_Button.Image"), System.Drawing.Image)
+        Me.Exit_Button.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Exit_Button.Location = New System.Drawing.Point(23, 654)
+        Me.Exit_Button.Name = "Exit_Button"
+        Me.Exit_Button.Size = New System.Drawing.Size(146, 34)
+        Me.Exit_Button.TabIndex = 2
+        Me.Exit_Button.Text = "Exit"
+        Me.Exit_Button.UseVisualStyleBackColor = False
+        '
+        'Student_Button
+        '
+        Me.Student_Button.BackColor = System.Drawing.Color.Transparent
+        Me.Student_Button.FlatAppearance.BorderSize = 0
+        Me.Student_Button.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkSlateGray
+        Me.Student_Button.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSeaGreen
+        Me.Student_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Student_Button.Font = New System.Drawing.Font("Segoe UI Semibold", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Student_Button.Image = CType(resources.GetObject("Student_Button.Image"), System.Drawing.Image)
+        Me.Student_Button.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Student_Button.Location = New System.Drawing.Point(23, 205)
+        Me.Student_Button.Name = "Student_Button"
+        Me.Student_Button.Size = New System.Drawing.Size(147, 53)
+        Me.Student_Button.TabIndex = 1
+        Me.Student_Button.Text = "Student"
+        Me.Student_Button.UseVisualStyleBackColor = False
+        '
+        'Dashboard_Button
+        '
+        Me.Dashboard_Button.BackColor = System.Drawing.Color.Transparent
+        Me.Dashboard_Button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.Dashboard_Button.FlatAppearance.BorderSize = 0
+        Me.Dashboard_Button.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkSlateGray
+        Me.Dashboard_Button.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSeaGreen
+        Me.Dashboard_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Dashboard_Button.Font = New System.Drawing.Font("Segoe UI Semibold", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Dashboard_Button.Image = CType(resources.GetObject("Dashboard_Button.Image"), System.Drawing.Image)
+        Me.Dashboard_Button.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Dashboard_Button.Location = New System.Drawing.Point(23, 127)
+        Me.Dashboard_Button.Name = "Dashboard_Button"
+        Me.Dashboard_Button.Size = New System.Drawing.Size(147, 53)
+        Me.Dashboard_Button.TabIndex = 0
+        Me.Dashboard_Button.Text = "    Dashboard"
+        Me.Dashboard_Button.UseVisualStyleBackColor = False
         '
         'Teacher_Panel
         '
@@ -100,9 +202,9 @@ Partial Class Admin_Form
         Me.Teacher_Panel.Controls.Add(Me.Teacher_List_DataGridView)
         Me.Teacher_Panel.Controls.Add(Me.Add_Teacher_Button)
         Me.Teacher_Panel.Controls.Add(Me.Label1)
-        Me.Teacher_Panel.Location = New System.Drawing.Point(179, 0)
+        Me.Teacher_Panel.Location = New System.Drawing.Point(177, 0)
         Me.Teacher_Panel.Name = "Teacher_Panel"
-        Me.Teacher_Panel.Size = New System.Drawing.Size(1153, 700)
+        Me.Teacher_Panel.Size = New System.Drawing.Size(1700, 717)
         Me.Teacher_Panel.TabIndex = 9
         '
         'Refresh_teacher_Button
@@ -205,109 +307,6 @@ Partial Class Admin_Form
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "      Teacher Panel"
         '
-        'Logout_Button
-        '
-        Me.Logout_Button.BackColor = System.Drawing.Color.Transparent
-        Me.Logout_Button.FlatAppearance.BorderSize = 0
-        Me.Logout_Button.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkSlateGray
-        Me.Logout_Button.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSeaGreen
-        Me.Logout_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Logout_Button.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Logout_Button.Image = CType(resources.GetObject("Logout_Button.Image"), System.Drawing.Image)
-        Me.Logout_Button.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Logout_Button.Location = New System.Drawing.Point(24, 595)
-        Me.Logout_Button.Name = "Logout_Button"
-        Me.Logout_Button.Size = New System.Drawing.Size(147, 53)
-        Me.Logout_Button.TabIndex = 5
-        Me.Logout_Button.Text = "Logout"
-        Me.Logout_Button.UseVisualStyleBackColor = False
-        '
-        'School_Year_Button
-        '
-        Me.School_Year_Button.BackColor = System.Drawing.Color.Transparent
-        Me.School_Year_Button.FlatAppearance.BorderSize = 0
-        Me.School_Year_Button.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkSlateGray
-        Me.School_Year_Button.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSeaGreen
-        Me.School_Year_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.School_Year_Button.Font = New System.Drawing.Font("Segoe UI Semibold", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.School_Year_Button.Image = CType(resources.GetObject("School_Year_Button.Image"), System.Drawing.Image)
-        Me.School_Year_Button.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.School_Year_Button.Location = New System.Drawing.Point(23, 362)
-        Me.School_Year_Button.Name = "School_Year_Button"
-        Me.School_Year_Button.Size = New System.Drawing.Size(147, 53)
-        Me.School_Year_Button.TabIndex = 4
-        Me.School_Year_Button.Text = "   S.Y. control"
-        Me.School_Year_Button.UseVisualStyleBackColor = False
-        '
-        'Teacher_Button
-        '
-        Me.Teacher_Button.BackColor = System.Drawing.Color.Transparent
-        Me.Teacher_Button.FlatAppearance.BorderSize = 0
-        Me.Teacher_Button.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkSlateGray
-        Me.Teacher_Button.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSeaGreen
-        Me.Teacher_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Teacher_Button.Font = New System.Drawing.Font("Segoe UI Semibold", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Teacher_Button.Image = CType(resources.GetObject("Teacher_Button.Image"), System.Drawing.Image)
-        Me.Teacher_Button.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Teacher_Button.Location = New System.Drawing.Point(23, 281)
-        Me.Teacher_Button.Name = "Teacher_Button"
-        Me.Teacher_Button.Size = New System.Drawing.Size(147, 53)
-        Me.Teacher_Button.TabIndex = 3
-        Me.Teacher_Button.Text = "Teacher"
-        Me.Teacher_Button.UseVisualStyleBackColor = False
-        '
-        'Exit_Button
-        '
-        Me.Exit_Button.BackColor = System.Drawing.Color.Transparent
-        Me.Exit_Button.FlatAppearance.BorderSize = 0
-        Me.Exit_Button.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkSlateGray
-        Me.Exit_Button.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSeaGreen
-        Me.Exit_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Exit_Button.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Exit_Button.Image = CType(resources.GetObject("Exit_Button.Image"), System.Drawing.Image)
-        Me.Exit_Button.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Exit_Button.Location = New System.Drawing.Point(23, 654)
-        Me.Exit_Button.Name = "Exit_Button"
-        Me.Exit_Button.Size = New System.Drawing.Size(146, 34)
-        Me.Exit_Button.TabIndex = 2
-        Me.Exit_Button.Text = "Exit"
-        Me.Exit_Button.UseVisualStyleBackColor = False
-        '
-        'Student_Button
-        '
-        Me.Student_Button.BackColor = System.Drawing.Color.Transparent
-        Me.Student_Button.FlatAppearance.BorderSize = 0
-        Me.Student_Button.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkSlateGray
-        Me.Student_Button.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSeaGreen
-        Me.Student_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Student_Button.Font = New System.Drawing.Font("Segoe UI Semibold", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Student_Button.Image = CType(resources.GetObject("Student_Button.Image"), System.Drawing.Image)
-        Me.Student_Button.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Student_Button.Location = New System.Drawing.Point(23, 205)
-        Me.Student_Button.Name = "Student_Button"
-        Me.Student_Button.Size = New System.Drawing.Size(147, 53)
-        Me.Student_Button.TabIndex = 1
-        Me.Student_Button.Text = "Student"
-        Me.Student_Button.UseVisualStyleBackColor = False
-        '
-        'Dashboard_Button
-        '
-        Me.Dashboard_Button.BackColor = System.Drawing.Color.Transparent
-        Me.Dashboard_Button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.Dashboard_Button.FlatAppearance.BorderSize = 0
-        Me.Dashboard_Button.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkSlateGray
-        Me.Dashboard_Button.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSeaGreen
-        Me.Dashboard_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Dashboard_Button.Font = New System.Drawing.Font("Segoe UI Semibold", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Dashboard_Button.Image = CType(resources.GetObject("Dashboard_Button.Image"), System.Drawing.Image)
-        Me.Dashboard_Button.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Dashboard_Button.Location = New System.Drawing.Point(23, 127)
-        Me.Dashboard_Button.Name = "Dashboard_Button"
-        Me.Dashboard_Button.Size = New System.Drawing.Size(147, 53)
-        Me.Dashboard_Button.TabIndex = 0
-        Me.Dashboard_Button.Text = "    Dashboard"
-        Me.Dashboard_Button.UseVisualStyleBackColor = False
-        '
         'ToolStripButton1
         '
         Me.ToolStripButton1.Image = CType(resources.GetObject("ToolStripButton1.Image"), System.Drawing.Image)
@@ -359,10 +358,11 @@ Partial Class Admin_Form
         Me.Student_Panel.Controls.Add(Me.Delete_Student_Button)
         Me.Student_Panel.Controls.Add(Me.Modify_Student_Button)
         Me.Student_Panel.Controls.Add(Me.Add_Student_Button)
-        Me.Student_Panel.Location = New System.Drawing.Point(179, 0)
+        Me.Student_Panel.Location = New System.Drawing.Point(177, 0)
         Me.Student_Panel.Name = "Student_Panel"
-        Me.Student_Panel.Size = New System.Drawing.Size(1153, 700)
+        Me.Student_Panel.Size = New System.Drawing.Size(1523, 717)
         Me.Student_Panel.TabIndex = 11
+        Me.Student_Panel.Tag = ""
         '
         'Label3
         '
@@ -447,9 +447,9 @@ Partial Class Admin_Form
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1344, 700)
+        Me.Controls.Add(Me.Dashboard_Panel)
         Me.Controls.Add(Me.Student_Panel)
         Me.Controls.Add(Me.Teacher_Panel)
-        Me.Controls.Add(Me.Dashboard_Panel)
         Me.Controls.Add(Me.Navigation_Panel)
         Me.Name = "Admin_Form"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
