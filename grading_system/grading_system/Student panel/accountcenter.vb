@@ -56,6 +56,10 @@ Public Class accountcenter
     End Sub
 
     Private Sub confirmation_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles confirmation.Click
+        If TextBox1.Text = "" Then
+            MessageBox.Show("PLEASE FILL THE TEXTBOX PO SABI NI CANDO", "FILL UP!!!", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
         Try
             Connect_me()
 
