@@ -26,11 +26,21 @@ Partial Class Admin_Form
         Me.Navigation_Panel = New System.Windows.Forms.Panel
         Me.Logout_Button = New System.Windows.Forms.Button
         Me.School_Year_Button = New System.Windows.Forms.Button
-        Me.Dashboard_Panel = New System.Windows.Forms.Panel
         Me.Teacher_Button = New System.Windows.Forms.Button
         Me.Exit_Button = New System.Windows.Forms.Button
         Me.Student_Button = New System.Windows.Forms.Button
         Me.Dashboard_Button = New System.Windows.Forms.Button
+        Me.Dashboard_Panel = New System.Windows.Forms.Panel
+        Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel
+        Me.Label4 = New System.Windows.Forms.Label
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel
+        Me.Panel1 = New System.Windows.Forms.Panel
+        Me.Label7 = New System.Windows.Forms.Label
+        Me.Label5 = New System.Windows.Forms.Label
+        Me.Panel2 = New System.Windows.Forms.Panel
+        Me.Panel3 = New System.Windows.Forms.Panel
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView
+        Me.Label6 = New System.Windows.Forms.Label
         Me.Teacher_Panel = New System.Windows.Forms.Panel
         Me.Refresh_teacher_Button = New System.Windows.Forms.Button
         Me.Back_Button = New System.Windows.Forms.Button
@@ -56,11 +66,33 @@ Partial Class Admin_Form
         Me.Delete_Student_Button = New System.Windows.Forms.Button
         Me.Modify_Student_Button = New System.Windows.Forms.Button
         Me.Add_Student_Button = New System.Windows.Forms.Button
+        Me.Label8 = New System.Windows.Forms.Label
+        Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel
+        Me.Label9 = New System.Windows.Forms.Label
+        Me.Label10 = New System.Windows.Forms.Label
+        Me.Label11 = New System.Windows.Forms.Label
+        Me.Label12 = New System.Windows.Forms.Label
+        Me.Label13 = New System.Windows.Forms.Label
+        Me.Label14 = New System.Windows.Forms.Label
+        Me.Label15 = New System.Windows.Forms.Label
+        Me.Label16 = New System.Windows.Forms.Label
+        Me.Label17 = New System.Windows.Forms.Label
+        Me.Label18 = New System.Windows.Forms.Label
+        Me.Label19 = New System.Windows.Forms.Label
+        Me.Label20 = New System.Windows.Forms.Label
         Me.Navigation_Panel.SuspendLayout()
+        Me.Dashboard_Panel.SuspendLayout()
+        Me.TableLayoutPanel2.SuspendLayout()
+        Me.TableLayoutPanel1.SuspendLayout()
+        Me.Panel1.SuspendLayout()
+        Me.Panel2.SuspendLayout()
+        Me.Panel3.SuspendLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Teacher_Panel.SuspendLayout()
         CType(Me.Teacher_List_DataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Student_Panel.SuspendLayout()
         CType(Me.Student_List_DataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TableLayoutPanel3.SuspendLayout()
         Me.SuspendLayout()
         '
         'Navigation_Panel
@@ -110,15 +142,6 @@ Partial Class Admin_Form
         Me.School_Year_Button.TabIndex = 4
         Me.School_Year_Button.Text = "   S.Y. control"
         Me.School_Year_Button.UseVisualStyleBackColor = False
-        '
-        'Dashboard_Panel
-        '
-        Me.Dashboard_Panel.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.Dashboard_Panel.BackColor = System.Drawing.Color.CadetBlue
-        Me.Dashboard_Panel.Location = New System.Drawing.Point(177, 0)
-        Me.Dashboard_Panel.Name = "Dashboard_Panel"
-        Me.Dashboard_Panel.Size = New System.Drawing.Size(1168, 700)
-        Me.Dashboard_Panel.TabIndex = 0
         '
         'Teacher_Button
         '
@@ -189,6 +212,138 @@ Partial Class Admin_Form
         Me.Dashboard_Button.Text = "    Dashboard"
         Me.Dashboard_Button.UseVisualStyleBackColor = False
         '
+        'Dashboard_Panel
+        '
+        Me.Dashboard_Panel.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.Dashboard_Panel.BackColor = System.Drawing.Color.CadetBlue
+        Me.Dashboard_Panel.Controls.Add(Me.TableLayoutPanel2)
+        Me.Dashboard_Panel.Location = New System.Drawing.Point(177, 0)
+        Me.Dashboard_Panel.Name = "Dashboard_Panel"
+        Me.Dashboard_Panel.Size = New System.Drawing.Size(1168, 700)
+        Me.Dashboard_Panel.TabIndex = 0
+        '
+        'TableLayoutPanel2
+        '
+        Me.TableLayoutPanel2.ColumnCount = 2
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel2.Controls.Add(Me.Label4, 0, 1)
+        Me.TableLayoutPanel2.Controls.Add(Me.TableLayoutPanel1, 0, 2)
+        Me.TableLayoutPanel2.Controls.Add(Me.Panel3, 1, 2)
+        Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
+        Me.TableLayoutPanel2.Padding = New System.Windows.Forms.Padding(30, 20, 20, 20)
+        Me.TableLayoutPanel2.RowCount = 3
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30.63584!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 69.36416!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 541.0!))
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(1168, 700)
+        Me.TableLayoutPanel2.TabIndex = 2
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Segoe UI Semibold", 14.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Image = CType(resources.GetObject("Label4.Image"), System.Drawing.Image)
+        Me.Label4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Label4.Location = New System.Drawing.Point(33, 56)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(201, 28)
+        Me.Label4.TabIndex = 1
+        Me.Label4.Text = "      Dashboard Panel"
+        '
+        'TableLayoutPanel1
+        '
+        Me.TableLayoutPanel1.ColumnCount = 1
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel1.Controls.Add(Me.Panel1, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.Panel2, 0, 1)
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(33, 141)
+        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+        Me.TableLayoutPanel1.RowCount = 2
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 284.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(553, 493)
+        Me.TableLayoutPanel1.TabIndex = 0
+        '
+        'Panel1
+        '
+        Me.Panel1.BackColor = System.Drawing.Color.Azure
+        Me.Panel1.Controls.Add(Me.Label7)
+        Me.Panel1.Controls.Add(Me.Label5)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel1.Location = New System.Drawing.Point(3, 3)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(547, 203)
+        Me.Panel1.TabIndex = 1
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Segoe UI Semibold", 19.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(157, 101)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(153, 36)
+        Me.Label7.TabIndex = 1
+        Me.Label7.Text = "School year"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Segoe UI Semibold", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Image = CType(resources.GetObject("Label5.Image"), System.Drawing.Image)
+        Me.Label5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Label5.Location = New System.Drawing.Point(16, 12)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(141, 25)
+        Me.Label5.TabIndex = 0
+        Me.Label5.Text = "      Current S.Y."
+        '
+        'Panel2
+        '
+        Me.Panel2.BackColor = System.Drawing.Color.Azure
+        Me.Panel2.Controls.Add(Me.TableLayoutPanel3)
+        Me.Panel2.Controls.Add(Me.Label8)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel2.Location = New System.Drawing.Point(3, 212)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(547, 278)
+        Me.Panel2.TabIndex = 2
+        '
+        'Panel3
+        '
+        Me.Panel3.BackColor = System.Drawing.Color.Azure
+        Me.Panel3.Controls.Add(Me.DataGridView1)
+        Me.Panel3.Controls.Add(Me.Label6)
+        Me.Panel3.Location = New System.Drawing.Point(592, 141)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(435, 476)
+        Me.Panel3.TabIndex = 2
+        '
+        'DataGridView1
+        '
+        Me.DataGridView1.BackgroundColor = System.Drawing.Color.Azure
+        Me.DataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.GridColor = System.Drawing.Color.Azure
+        Me.DataGridView1.Location = New System.Drawing.Point(26, 65)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.Size = New System.Drawing.Size(380, 387)
+        Me.DataGridView1.TabIndex = 1
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Segoe UI Semibold", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Image = CType(resources.GetObject("Label6.Image"), System.Drawing.Image)
+        Me.Label6.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Label6.Location = New System.Drawing.Point(19, 15)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(119, 25)
+        Me.Label6.TabIndex = 0
+        Me.Label6.Text = "        Courses"
+        '
         'Teacher_Panel
         '
         Me.Teacher_Panel.BackColor = System.Drawing.Color.CadetBlue
@@ -243,7 +398,7 @@ Partial Class Admin_Form
         Me.Assign_Class_To_Teacher_Button.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Assign_Class_To_Teacher_Button.Location = New System.Drawing.Point(919, 140)
         Me.Assign_Class_To_Teacher_Button.Name = "Assign_Class_To_Teacher_Button"
-        Me.Assign_Class_To_Teacher_Button.Size = New System.Drawing.Size(125, 28)
+        Me.Assign_Class_To_Teacher_Button.Size = New System.Drawing.Size(190, 28)
         Me.Assign_Class_To_Teacher_Button.TabIndex = 6
         Me.Assign_Class_To_Teacher_Button.Text = "Assign Teacher to a Class"
         Me.Assign_Class_To_Teacher_Button.UseVisualStyleBackColor = True
@@ -360,7 +515,7 @@ Partial Class Admin_Form
         Me.Student_Panel.Controls.Add(Me.Add_Student_Button)
         Me.Student_Panel.Location = New System.Drawing.Point(177, 0)
         Me.Student_Panel.Name = "Student_Panel"
-        Me.Student_Panel.Size = New System.Drawing.Size(1523, 717)
+        Me.Student_Panel.Size = New System.Drawing.Size(1523, 700)
         Me.Student_Panel.TabIndex = 11
         Me.Student_Panel.Tag = ""
         '
@@ -370,7 +525,7 @@ Partial Class Admin_Form
         Me.Label3.Font = New System.Drawing.Font("Segoe UI Semibold", 15.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.Image = CType(resources.GetObject("Label3.Image"), System.Drawing.Image)
         Me.Label3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Label3.Location = New System.Drawing.Point(30, 9)
+        Me.Label3.Location = New System.Drawing.Point(30, 30)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(179, 30)
         Me.Label3.TabIndex = 8
@@ -442,6 +597,180 @@ Partial Class Admin_Form
         Me.Add_Student_Button.Text = "Add Student"
         Me.Add_Student_Button.UseVisualStyleBackColor = True
         '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Segoe UI Semibold", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Image = CType(resources.GetObject("Label8.Image"), System.Drawing.Image)
+        Me.Label8.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Label8.Location = New System.Drawing.Point(16, 20)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(104, 25)
+        Me.Label8.TabIndex = 0
+        Me.Label8.Text = "        Status"
+        '
+        'TableLayoutPanel3
+        '
+        Me.TableLayoutPanel3.ColumnCount = 4
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.62601!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.37399!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 127.0!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 129.0!))
+        Me.TableLayoutPanel3.Controls.Add(Me.Label9, 0, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.Label10, 0, 1)
+        Me.TableLayoutPanel3.Controls.Add(Me.Label11, 0, 2)
+        Me.TableLayoutPanel3.Controls.Add(Me.Label12, 0, 3)
+        Me.TableLayoutPanel3.Controls.Add(Me.Label13, 2, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.Label14, 2, 1)
+        Me.TableLayoutPanel3.Controls.Add(Me.Label15, 2, 2)
+        Me.TableLayoutPanel3.Controls.Add(Me.Label16, 2, 3)
+        Me.TableLayoutPanel3.Controls.Add(Me.Label17, 1, 1)
+        Me.TableLayoutPanel3.Controls.Add(Me.Label18, 3, 1)
+        Me.TableLayoutPanel3.Controls.Add(Me.Label19, 1, 3)
+        Me.TableLayoutPanel3.Controls.Add(Me.Label20, 3, 3)
+        Me.TableLayoutPanel3.Location = New System.Drawing.Point(21, 59)
+        Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
+        Me.TableLayoutPanel3.RowCount = 5
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 48.95833!))
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 51.04167!))
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33.0!))
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38.0!))
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(503, 191)
+        Me.TableLayoutPanel3.TabIndex = 1
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("Segoe UI Semibold", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Image = CType(resources.GetObject("Label9.Image"), System.Drawing.Image)
+        Me.Label9.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Label9.Location = New System.Drawing.Point(3, 0)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(92, 19)
+        Me.Label9.TabIndex = 0
+        Me.Label9.Text = "       Students"
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Location = New System.Drawing.Point(3, 46)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(118, 15)
+        Me.Label10.TabIndex = 1
+        Me.Label10.Text = "Number of Students:"
+        '
+        'Label11
+        '
+        Me.Label11.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Label11.AutoSize = True
+        Me.Label11.BackColor = System.Drawing.Color.Transparent
+        Me.Label11.Font = New System.Drawing.Font("Segoe UI Semibold", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Image = CType(resources.GetObject("Label11.Image"), System.Drawing.Image)
+        Me.Label11.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Label11.Location = New System.Drawing.Point(3, 109)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(82, 19)
+        Me.Label11.TabIndex = 2
+        Me.Label11.Text = "      Courses"
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Label12.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label12.Location = New System.Drawing.Point(3, 151)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(121, 15)
+        Me.Label12.TabIndex = 3
+        Me.Label12.Text = "Number of Courses:"
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Font = New System.Drawing.Font("Segoe UI Semibold", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.Image = CType(resources.GetObject("Label13.Image"), System.Drawing.Image)
+        Me.Label13.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Label13.Location = New System.Drawing.Point(249, 0)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(91, 19)
+        Me.Label13.TabIndex = 4
+        Me.Label13.Text = "       Teachers"
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.Location = New System.Drawing.Point(249, 46)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(117, 15)
+        Me.Label14.TabIndex = 5
+        Me.Label14.Text = "Number of Teachers:"
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.BackColor = System.Drawing.Color.Transparent
+        Me.Label15.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Label15.Font = New System.Drawing.Font("Segoe UI Semibold", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.Image = CType(resources.GetObject("Label15.Image"), System.Drawing.Image)
+        Me.Label15.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Label15.Location = New System.Drawing.Point(249, 109)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(121, 19)
+        Me.Label15.TabIndex = 6
+        Me.Label15.Text = "       S.Y. and Sem"
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Label16.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label16.Location = New System.Drawing.Point(249, 151)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(121, 15)
+        Me.Label16.TabIndex = 7
+        Me.Label16.Text = "Current S.Y. and Sem:"
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Location = New System.Drawing.Point(130, 46)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(45, 13)
+        Me.Label17.TabIndex = 8
+        Me.Label17.Text = "Label17"
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Location = New System.Drawing.Point(376, 46)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(45, 13)
+        Me.Label18.TabIndex = 9
+        Me.Label18.Text = "Label18"
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Label19.Location = New System.Drawing.Point(130, 153)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(113, 13)
+        Me.Label19.TabIndex = 10
+        Me.Label19.Text = "Label19"
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Label20.Location = New System.Drawing.Point(376, 153)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(124, 13)
+        Me.Label20.TabIndex = 11
+        Me.Label20.Text = "Label20"
+        '
         'Admin_Form
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -451,16 +780,32 @@ Partial Class Admin_Form
         Me.Controls.Add(Me.Student_Panel)
         Me.Controls.Add(Me.Teacher_Panel)
         Me.Controls.Add(Me.Navigation_Panel)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "Admin_Form"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Admin_Form"
         Me.Navigation_Panel.ResumeLayout(False)
+        Me.Dashboard_Panel.ResumeLayout(False)
+        Me.TableLayoutPanel2.ResumeLayout(False)
+        Me.TableLayoutPanel2.PerformLayout()
+        Me.TableLayoutPanel1.ResumeLayout(False)
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
+        Me.Panel3.ResumeLayout(False)
+        Me.Panel3.PerformLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Teacher_Panel.ResumeLayout(False)
         Me.Teacher_Panel.PerformLayout()
         CType(Me.Teacher_List_DataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Student_Panel.ResumeLayout(False)
         Me.Student_Panel.PerformLayout()
         CType(Me.Student_List_DataGridView, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TableLayoutPanel3.ResumeLayout(False)
+        Me.TableLayoutPanel3.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -497,4 +842,28 @@ Partial Class Admin_Form
     Friend WithEvents Delete_Student_Button As System.Windows.Forms.Button
     Friend WithEvents Modify_Student_Button As System.Windows.Forms.Button
     Friend WithEvents Add_Student_Button As System.Windows.Forms.Button
+    Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents Panel1 As System.Windows.Forms.Panel
+    Friend WithEvents Panel2 As System.Windows.Forms.Panel
+    Friend WithEvents TableLayoutPanel2 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents Panel3 As System.Windows.Forms.Panel
+    Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
+    Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents Label8 As System.Windows.Forms.Label
+    Friend WithEvents TableLayoutPanel3 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents Label9 As System.Windows.Forms.Label
+    Friend WithEvents Label10 As System.Windows.Forms.Label
+    Friend WithEvents Label11 As System.Windows.Forms.Label
+    Friend WithEvents Label12 As System.Windows.Forms.Label
+    Friend WithEvents Label13 As System.Windows.Forms.Label
+    Friend WithEvents Label14 As System.Windows.Forms.Label
+    Friend WithEvents Label15 As System.Windows.Forms.Label
+    Friend WithEvents Label16 As System.Windows.Forms.Label
+    Friend WithEvents Label17 As System.Windows.Forms.Label
+    Friend WithEvents Label18 As System.Windows.Forms.Label
+    Friend WithEvents Label19 As System.Windows.Forms.Label
+    Friend WithEvents Label20 As System.Windows.Forms.Label
 End Class

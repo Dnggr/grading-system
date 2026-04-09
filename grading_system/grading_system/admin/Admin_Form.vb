@@ -2,6 +2,17 @@
 
 Public Class Admin_Form
 
+    Private Sub MakeRoundedPanel(ByVal pnl As Panel, ByVal radius As Integer)
+        Dim path As New Drawing.Drawing2D.GraphicsPath()
+
+        path.StartFigure()
+        path.AddArc(0, 0, radius, radius, 180, 90)
+        path.AddArc(pnl.Width - radius, 0, radius, radius, 270, 90)
+        path.AddArc(pnl.Width - radius, pnl.Height - radius, radius, radius, 0, 90)
+        path.AddArc(0, pnl.Height - radius, radius, radius, 90, 90)
+        path.CloseFigure()
+        pnl.Region = New Region(path)
+    End Sub
 #Region "Shared State"
     ' ── Student shared state (read by popUpFormModifyStudent / popUpFormDeleteStudent) ──
     Public Shared SelectedStudentAccId As Integer = 0
@@ -22,6 +33,13 @@ Public Class Admin_Form
     Private Sub Admin_Form_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ' Default view on startup
         ShowDashboard()
+        courses()
+        schoolyear()
+        statsy()
+        totalofstudents()
+        totalofprof()
+        totalofcourses()
+
 
         ' ── Student panel setup ──
         InitializeStudentDataGridView()
@@ -646,4 +664,175 @@ Public Class Admin_Form
 
 #End Region
 
+#Region "Dashboard Panel"
+    Private Sub courses()
+        Try
+            Connect_me()
+
+            Dim cmd As New OdbcCommand("SELECT course_code, course_name FROM course", con)
+            Dim adapter As New OdbcDataAdapter(cmd)
+            Dim dt As New DataTable()
+
+            adapter.Fill(dt)
+            DataGridView1.DataSource = dt
+
+            DataGridView1.Columns("course_code").HeaderText = "Code"
+            DataGridView1.Columns("course_name").HeaderText = "Course"
+            DataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+
+            If DataGridView1.Rows.Count > 0 Then
+
+                Dim totalHeight As Integer = DataGridView1.ClientSize.Height - DataGridView1.ColumnHeadersHeight
+                Dim rowHeight As Integer = totalHeight \ DataGridView1.Rows.Count
+
+                For Each row As DataGridViewRow In DataGridView1.Rows
+                    row.Height = rowHeight
+                Next
+
+            End If
+
+
+            'para mabago yung font ng dgv
+            DataGridView1.DefaultCellStyle.Font = New Font("segoe ui", 9, FontStyle.Regular)
+
+            DataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+            DataGridView1.MultiSelect = False
+            DataGridView1.ReadOnly = True
+            DataGridView1.DefaultCellStyle.SelectionBackColor = Color.Transparent
+            DataGridView1.DefaultCellStyle.SelectionForeColor = Color.Transparent
+            DataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None
+            DataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None
+
+            DataGridView1.Columns(0).Width = 100
+            DataGridView1.Columns(1).Width = 250
+            DataGridView1.AllowUserToResizeColumns = False
+            DataGridView1.AllowUserToResizeRows = False
+
+
+        Catch ex As Exception
+            MessageBox.Show("Error loading cpurse:" & ex.Message)
+        End Try
+    End Sub
+    Private Sub schoolyear()
+        Try
+            Connect_me()
+
+            Dim cmd As New OdbcCommand("SELECT school_year FROM sem_control ORDER BY school_year DESC LIMIT 1", con)
+            Dim reader As OdbcDataReader = cmd.ExecuteReader()
+
+            If reader.Read() Then
+                Label7.Text = reader("school_year").ToString() & " " & "S.Y."
+            Else
+                Label7.Text = "School is not Running"
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error loading school year:" & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub Panel1_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles Panel1.Paint
+        Panel1.Margin = New Padding(10)
+    End Sub
+    Private Sub Panel_Resize(ByVal sender As Object, ByVal e As EventArgs) Handles Panel1.Resize, Panel2.Resize, Panel3.Resize
+        MakeRoundedPanel(CType(sender, Panel), 20)
+    End Sub
+
+    Private Sub Panel2_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles Panel2.Paint
+        Panel2.Margin = New Padding(10)
+    End Sub
+
+    Private Sub Panel3_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles Panel3.Paint
+        Panel3.Margin = New Padding(10)
+    End Sub
+    Private Sub statsy()
+        Try
+            Connect_me()
+
+            Dim cmd As New OdbcCommand("SELECT school_year, semester FROM sem_control ORDER BY school_year DESC LIMIT 1", con)
+            Dim reader As OdbcDataReader = cmd.ExecuteReader()
+
+            If reader.Read() Then
+                Label20.Text = reader("school_year").ToString() & " " & "-" & " " & reader("semester").ToString()
+            Else
+                Label20.Text = "notfound"
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error loading school year:" & ex.Message)
+        End Try
+    End Sub
+    Private Sub totalofstudents()
+        Try
+            Connect_me()
+
+            Dim cmd As New OdbcCommand("SELECT COUNT(*) FROM student", con)
+            Dim result As Object = cmd.ExecuteScalar()
+
+            Label17.Text = result.ToString()
+
+        Catch ex As Exception
+            MessageBox.Show("Error loading student count" & ex.Message)
+        End Try
+    End Sub
+    Private Sub totalofprof()
+        Try
+            Connect_me()
+
+            Dim cmd As New OdbcCommand("SELECT COUNT(*) FROM prof", con)
+            Dim result As Object = cmd.ExecuteScalar()
+
+            Label18.Text = result.ToString()
+        Catch ex As Exception
+            MessageBox.Show("Error loading teacher count" & ex.Message)
+        End Try
+    End Sub
+    Private Sub totalofcourses()
+        Try
+            Connect_me()
+
+            Dim cmd As New OdbcCommand("SELECT COUNT(*) FROM course", con)
+            Dim result As Object = cmd.ExecuteScalar()
+
+            Label19.Text = result.ToString()
+
+        Catch ex As Exception
+            MessageBox.Show("Error loading courses count" & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub TableLayoutPanel3_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles TableLayoutPanel3.Paint
+        Dim panel As TableLayoutPanel = CType(sender, TableLayoutPanel)
+
+        Dim colWidths() As Integer = panel.GetColumnWidths()
+        Dim rowHeights() As Integer = panel.GetRowHeights()
+
+        Dim midCol As Integer = colWidths.Length \ 2
+        Dim midRow As Integer = rowHeights.Length \ 2
+
+        Dim x As Integer = 0
+        For i As Integer = 0 To midCol - 1
+            x += colWidths(i)
+        Next
+        Dim y As Integer = 0
+        For i As Integer = 0 To midRow - 1
+            y += rowHeights(i)
+        Next
+
+        Using p As New Pen(Color.Gray, 1)
+            e.Graphics.DrawLine(p, x, 0, x, panel.Height)
+            e.Graphics.DrawLine(p, 0, y, panel.Width, y)
+        End Using
+    End Sub
+#End Region
+
+    Private Sub TableLayoutPanel2_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles TableLayoutPanel2.Paint
+
+    End Sub
+
+    Private Sub DataGridView1_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+
+    End Sub
+
+    Private Sub Label7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label7.Click
+
+    End Sub
 End Class
