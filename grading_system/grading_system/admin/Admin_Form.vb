@@ -665,6 +665,11 @@ Public Class Admin_Form
 #End Region
 
 #Region "Dashboard Panel"
+
+    Private Sub DataGridView1_SelectionChanged(ByVal sender As Object, ByVal e As EventArgs) Handles DataGridView1.SelectionChanged
+        DataGridView1.ClearSelection()
+    End Sub
+
     Private Sub courses()
         Try
             Connect_me()
@@ -679,6 +684,12 @@ Public Class Admin_Form
             DataGridView1.Columns("course_code").HeaderText = "Code"
             DataGridView1.Columns("course_name").HeaderText = "Course"
             DataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+            DataGridView1.AllowUserToAddRows = False
+            DataGridView1.AllowUserToDeleteRows = False
+            DataGridView1.AllowUserToResizeRows = False
+            DataGridView1.AllowUserToResizeColumns = False
+            DataGridView1.RowHeadersVisible = False
+            DataGridView1.Enabled = False
 
             If DataGridView1.Rows.Count > 0 Then
 
@@ -690,24 +701,6 @@ Public Class Admin_Form
                 Next
 
             End If
-
-
-            'para mabago yung font ng dgv
-            DataGridView1.DefaultCellStyle.Font = New Font("segoe ui", 9, FontStyle.Regular)
-
-            DataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-            DataGridView1.MultiSelect = False
-            DataGridView1.ReadOnly = True
-            DataGridView1.DefaultCellStyle.SelectionBackColor = Color.Transparent
-            DataGridView1.DefaultCellStyle.SelectionForeColor = Color.Transparent
-            DataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None
-            DataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None
-
-            DataGridView1.Columns(0).Width = 100
-            DataGridView1.Columns(1).Width = 250
-            DataGridView1.AllowUserToResizeColumns = False
-            DataGridView1.AllowUserToResizeRows = False
-
 
         Catch ex As Exception
             MessageBox.Show("Error loading cpurse:" & ex.Message)
@@ -835,4 +828,8 @@ Public Class Admin_Form
     Private Sub Label7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label7.Click
 
     End Sub
+
+
+
+
 End Class
