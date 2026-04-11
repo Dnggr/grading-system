@@ -17,6 +17,7 @@ Public Class Prof_panel
         btn.Region = New Region(path)
     End Sub
 #End Region
+    Dim p As New profprofile
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
         Teacher_Form.Show()
         Me.Hide()
@@ -129,7 +130,6 @@ Public Class Prof_panel
 
         LoadprofImage()
 
-
         Try
             ' ----- AUTO FORMAT NAME -----
             Dim fname As String = ToProperCase(login_logic.firstname)
@@ -174,5 +174,12 @@ Public Class Prof_panel
 
         Panel2.Controls.Add(dbp)
 
+    End Sub
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        Panel2.Controls.Clear()
+        Panel2.Visible = True
+        p.Dock = DockStyle.Fill
+        Panel2.Controls.Add(p)
     End Sub
 End Class

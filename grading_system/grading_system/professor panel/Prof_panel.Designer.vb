@@ -24,13 +24,13 @@ Partial Class Prof_panel
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Prof_panel))
         Me.Panel1 = New System.Windows.Forms.Panel
+        Me.Label1 = New System.Windows.Forms.Label
+        Me.Panel2 = New System.Windows.Forms.Panel
         Me.resetpass = New System.Windows.Forms.Button
         Me.PictureBoxprof = New System.Windows.Forms.PictureBox
-        Me.Label1 = New System.Windows.Forms.Label
         Me.Button3 = New System.Windows.Forms.Button
         Me.Button1 = New System.Windows.Forms.Button
         Me.Button2 = New System.Windows.Forms.Button
-        Me.Panel2 = New System.Windows.Forms.Panel
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBoxprof, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -49,6 +49,24 @@ Partial Class Prof_panel
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(194, 796)
         Me.Panel1.TabIndex = 47
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(57, 199)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(66, 24)
+        Me.Label1.TabIndex = 4
+        Me.Label1.Text = "Label1"
+        '
+        'Panel2
+        '
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel2.Location = New System.Drawing.Point(194, 0)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(1136, 796)
+        Me.Panel2.TabIndex = 48
         '
         'resetpass
         '
@@ -76,16 +94,6 @@ Partial Class Prof_panel
         Me.PictureBoxprof.Size = New System.Drawing.Size(136, 119)
         Me.PictureBoxprof.TabIndex = 6
         Me.PictureBoxprof.TabStop = False
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(57, 199)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(66, 24)
-        Me.Label1.TabIndex = 4
-        Me.Label1.Text = "Label1"
         '
         'Button3
         '
@@ -139,14 +147,6 @@ Partial Class Prof_panel
         Me.Button2.Text = "Logout"
         Me.Button2.UseVisualStyleBackColor = False
         '
-        'Panel2
-        '
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(194, 0)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(1136, 796)
-        Me.Panel2.TabIndex = 48
-        '
         'Prof_panel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -157,7 +157,9 @@ Partial Class Prof_panel
         Me.Controls.Add(Me.Panel1)
         Me.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
         Me.Name = "Prof_panel"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Prof_panel"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         CType(Me.PictureBoxprof, System.ComponentModel.ISupportInitialize).EndInit()
