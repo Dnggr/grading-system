@@ -4,6 +4,7 @@ Public Class profprofile
     Dim response As DialogResult
     Private Sub profprofile_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         profileinfo()
+        LoadImage()
     End Sub
 
 #Region "account"
@@ -142,10 +143,10 @@ Public Class profprofile
 
                         If String.IsNullOrEmpty(fileName) Then
                             ' No image - show default based on gender
-                            ShowDefaultImage(reader("gender").ToString().Trim())
+                            ShowDefaultImage1(reader("gender").ToString().Trim())
                         Else
                             ' Has image - show it
-                            ShowUploadedImage(fileName)
+                            ShowUploadedImage1(fileName)
                         End If
                     End If
                 End Using
@@ -186,7 +187,7 @@ Public Class profprofile
     End Sub
 
     ' Show default image based on gender
-    Private Sub ShowDefaultImage(ByVal gender As String)
+    Private Sub ShowDefaultImage1(ByVal gender As String)
         Try
             Dim defaultImageName As String
             If gender.ToLower() = "female" Then
@@ -210,7 +211,7 @@ Public Class profprofile
     End Sub
 
     ' Show uploaded image
-    Private Sub ShowUploadedImage(ByVal fileName As String)
+    Private Sub ShowUploadedImage1(ByVal fileName As String)
         Try
             Dim imagePath As String = GetImageDestinationPath(fileName)
 

@@ -153,7 +153,6 @@ Public Class Prof_panel
 
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
         Dim result As DialogResult = MessageBox.Show("Are you sure you want to logout?", "Logout Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-        Panel1.Visible = False
         If result = DialogResult.Yes Then
             login_logic.ClearLogin()
             Me.Close()
