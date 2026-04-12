@@ -62,9 +62,9 @@ Partial Class Prof_panel
         Me.resetpass.ForeColor = System.Drawing.Color.Black
         Me.resetpass.Image = CType(resources.GetObject("resetpass.Image"), System.Drawing.Image)
         Me.resetpass.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.resetpass.Location = New System.Drawing.Point(24, 246)
+        Me.resetpass.Location = New System.Drawing.Point(24, 245)
         Me.resetpass.Name = "resetpass"
-        Me.resetpass.Size = New System.Drawing.Size(147, 40)
+        Me.resetpass.Size = New System.Drawing.Size(147, 61)
         Me.resetpass.TabIndex = 7
         Me.resetpass.Text = "Dashboard"
         Me.resetpass.UseVisualStyleBackColor = False
@@ -79,11 +79,12 @@ Partial Class Prof_panel
         '
         'Label1
         '
+        Me.Label1.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(57, 199)
+        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(20, 188)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(66, 24)
+        Me.Label1.Size = New System.Drawing.Size(70, 25)
         Me.Label1.TabIndex = 4
         Me.Label1.Text = "Label1"
         '
@@ -97,9 +98,9 @@ Partial Class Prof_panel
         Me.Button3.Font = New System.Drawing.Font("Segoe UI Semibold", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
         Me.Button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button3.Location = New System.Drawing.Point(24, 356)
+        Me.Button3.Location = New System.Drawing.Point(24, 401)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(147, 40)
+        Me.Button3.Size = New System.Drawing.Size(147, 50)
         Me.Button3.TabIndex = 3
         Me.Button3.Text = "Grading"
         Me.Button3.UseVisualStyleBackColor = False
@@ -115,9 +116,9 @@ Partial Class Prof_panel
         Me.Button1.ForeColor = System.Drawing.Color.Black
         Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
         Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button1.Location = New System.Drawing.Point(24, 301)
+        Me.Button1.Location = New System.Drawing.Point(25, 321)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(147, 40)
+        Me.Button1.Size = New System.Drawing.Size(135, 53)
         Me.Button1.TabIndex = 0
         Me.Button1.Text = "Account"
         Me.Button1.UseVisualStyleBackColor = False
@@ -132,9 +133,9 @@ Partial Class Prof_panel
         Me.Button2.Font = New System.Drawing.Font("Segoe UI Semibold", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
         Me.Button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button2.Location = New System.Drawing.Point(24, 482)
+        Me.Button2.Location = New System.Drawing.Point(24, 511)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(147, 40)
+        Me.Button2.Size = New System.Drawing.Size(147, 51)
         Me.Button2.TabIndex = 2
         Me.Button2.Text = "Logout"
         Me.Button2.UseVisualStyleBackColor = False

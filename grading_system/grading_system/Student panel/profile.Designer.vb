@@ -46,8 +46,8 @@ Partial Class profile
         Me.fname = New System.Windows.Forms.Label
         Me.Label4 = New System.Windows.Forms.Label
         Me.gender = New System.Windows.Forms.Label
-        Me.Label15 = New System.Windows.Forms.Label
         Me.Label14 = New System.Windows.Forms.Label
+        Me.Label15 = New System.Windows.Forms.Label
         Me.Panel2 = New System.Windows.Forms.Panel
         Me.PictureBox1 = New System.Windows.Forms.PictureBox
         Me.Label8 = New System.Windows.Forms.Label
@@ -177,7 +177,7 @@ Partial Class profile
         Me.Panel1.BackColor = System.Drawing.Color.DarkCyan
         Me.Panel1.Controls.Add(Me.Panel3)
         Me.Panel1.Controls.Add(Me.Panel2)
-        Me.Panel1.Location = New System.Drawing.Point(49, 30)
+        Me.Panel1.Location = New System.Drawing.Point(163, 72)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(1021, 701)
         Me.Panel1.TabIndex = 22
@@ -340,17 +340,6 @@ Partial Class profile
         Me.gender.TabIndex = 10
         Me.gender.Text = "gender"
         '
-        'Label15
-        '
-        Me.Label15.AutoSize = True
-        Me.Label15.Font = New System.Drawing.Font("Segoe UI Semibold", 19.0!, System.Drawing.FontStyle.Bold)
-        Me.Label15.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label15.Location = New System.Drawing.Point(161, 244)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(80, 36)
-        Me.Label15.TabIndex = 18
-        Me.Label15.Text = "email"
-        '
         'Label14
         '
         Me.Label14.AutoSize = True
@@ -363,6 +352,17 @@ Partial Class profile
         Me.Label14.Size = New System.Drawing.Size(120, 36)
         Me.Label14.TabIndex = 17
         Me.Label14.Text = "     Email:"
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Font = New System.Drawing.Font("Segoe UI Semibold", 19.0!, System.Drawing.FontStyle.Bold)
+        Me.Label15.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.Label15.Location = New System.Drawing.Point(161, 244)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(80, 36)
+        Me.Label15.TabIndex = 18
+        Me.Label15.Text = "email"
         '
         'Panel2
         '

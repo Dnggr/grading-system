@@ -34,9 +34,6 @@ Public Class profprofile
                 gender.Text = g
                 fname.Text = firstname & " " & middlename & " " & lastname
                 Label15.Text = reader("email").ToString()
-
-            Else
-                MessageBox.Show("No student record found.")
             End If
 
             reader.Close()
@@ -346,4 +343,8 @@ Public Class profprofile
     End Sub
 
 #End Region
+
+    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+        accountcenterprof.Show()
+    End Sub
 End Class

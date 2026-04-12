@@ -123,6 +123,14 @@ Public Class Prof_panel
 
 
     Private Sub Prof_panel_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+        'logic button 
+        Dim dbp As New dashboardprof
+        Panel2.Controls.Clear()
+        Panel2.Visible = True
+        dbp.Dock = DockStyle.Fill
+        Panel2.Controls.Add(dbp)
+
         MakeRoundedButton(Button1, 25)
         MakeRoundedButton(resetpass, 25)
         MakeRoundedButton(Button2, 25)
@@ -164,14 +172,11 @@ Public Class Prof_panel
 
     End Sub
     Private Sub resetpass_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles resetpass.Click
-
+        Dim db As New dashboardprof
         Panel2.Controls.Clear()
         Panel2.Visible = True
-
-        Dim dbp As New dashboardprof
-        dbp.Dock = DockStyle.Fill
-
-        Panel2.Controls.Add(dbp)
+        db.Dock = DockStyle.Fill
+        Panel2.Controls.Add(db)
 
     End Sub
 

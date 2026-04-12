@@ -402,16 +402,6 @@ Public Class profile
 
     End Sub
 
-    Private Sub TableLayoutPanel3_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles TableLayoutPanel3.Paint
-        Dim panel As TableLayoutPanel = CType(sender, TableLayoutPanel)
-
-        Dim x As Integer = panel.GetColumnWidths()(0)
-
-        Using Pen As New Pen(Color.Gray, 2)
-            e.Graphics.DrawLine(Pen, x, 0, x, panel.Height)
-        End Using
-    End Sub
-
     Private Sub Panel3_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles Panel3.Paint
 
     End Sub

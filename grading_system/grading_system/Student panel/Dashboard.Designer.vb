@@ -35,13 +35,13 @@ Partial Class Dashboard
         Me.DataGridView2 = New System.Windows.Forms.DataGridView
         Me.Label5 = New System.Windows.Forms.Label
         Me.Panel4 = New System.Windows.Forms.Panel
+        Me.section = New System.Windows.Forms.Label
+        Me.Label9 = New System.Windows.Forms.Label
         Me.Label6 = New System.Windows.Forms.Label
         Me.Label2 = New System.Windows.Forms.Label
         Me.Panel5 = New System.Windows.Forms.Panel
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel
-        Me.Label9 = New System.Windows.Forms.Label
-        Me.section = New System.Windows.Forms.Label
         Me.Panel2.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
@@ -59,9 +59,9 @@ Partial Class Dashboard
         Me.Label1.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.Location = New System.Drawing.Point(3, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(162, 30)
+        Me.Label1.Size = New System.Drawing.Size(103, 30)
         Me.Label1.TabIndex = 3
-        Me.Label1.Text = "Welcome Back,"
+        Me.Label1.Text = "Welcome"
         '
         'Panel2
         '
@@ -79,10 +79,10 @@ Partial Class Dashboard
         Me.DataGridView1.BackgroundColor = System.Drawing.Color.Azure
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Enabled = False
-        Me.DataGridView1.Location = New System.Drawing.Point(22, 74)
+        Me.DataGridView1.Location = New System.Drawing.Point(31, 74)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
-        Me.DataGridView1.Size = New System.Drawing.Size(492, 150)
+        Me.DataGridView1.Size = New System.Drawing.Size(541, 145)
         Me.DataGridView1.TabIndex = 2
         '
         'Label4
@@ -185,6 +185,26 @@ Partial Class Dashboard
         Me.Panel4.Size = New System.Drawing.Size(542, 307)
         Me.Panel4.TabIndex = 2
         '
+        'section
+        '
+        Me.section.AutoSize = True
+        Me.section.Font = New System.Drawing.Font("Segoe UI Semibold", 36.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.section.Location = New System.Drawing.Point(219, 144)
+        Me.section.Name = "section"
+        Me.section.Size = New System.Drawing.Size(185, 65)
+        Me.section.TabIndex = 5
+        Me.section.Text = "section"
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Location = New System.Drawing.Point(39, 74)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(165, 21)
+        Me.Label9.TabIndex = 4
+        Me.Label9.Text = "Your Current Section:"
+        '
         'Label6
         '
         Me.Label6.AutoSize = True
@@ -201,7 +221,7 @@ Partial Class Dashboard
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Segoe UI Semibold", 16.0!, System.Drawing.FontStyle.Bold)
-        Me.Label2.Location = New System.Drawing.Point(171, 0)
+        Me.Label2.Location = New System.Drawing.Point(112, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(72, 30)
         Me.Label2.TabIndex = 4
@@ -235,6 +255,7 @@ Partial Class Dashboard
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.270233!))
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 39.23182!))
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 46.63923!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.TableLayoutPanel2.Size = New System.Drawing.Size(1156, 729)
         Me.TableLayoutPanel2.TabIndex = 6
         '
@@ -249,28 +270,9 @@ Partial Class Dashboard
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 1
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(368, 42)
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(542, 42)
         Me.TableLayoutPanel1.TabIndex = 5
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(39, 74)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(165, 21)
-        Me.Label9.TabIndex = 4
-        Me.Label9.Text = "Your Current Section:"
-        '
-        'section
-        '
-        Me.section.AutoSize = True
-        Me.section.Font = New System.Drawing.Font("Segoe UI Semibold", 36.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.section.Location = New System.Drawing.Point(219, 144)
-        Me.section.Name = "section"
-        Me.section.Size = New System.Drawing.Size(185, 65)
-        Me.section.TabIndex = 5
-        Me.section.Text = "section"
         '
         'Dashboard
         '
