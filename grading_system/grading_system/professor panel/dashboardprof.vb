@@ -124,7 +124,7 @@ Public Class dashboardprof
 
 
             'para mabago yung font ng dgv
-            DataGridView3.DefaultCellStyle.Font = New Font("segoe ui", 10, FontStyle.Bold)
+            DataGridView3.DefaultCellStyle.Font = New Font("segoe ui", 12, FontStyle.Regular)
 
             DataGridView3.SelectionMode = DataGridViewSelectionMode.FullRowSelect
             DataGridView3.MultiSelect = False
@@ -186,7 +186,7 @@ Public Class dashboardprof
 
 
             'para mabago yung font ng dgv
-            DataGridView1.DefaultCellStyle.Font = New Font("segoe ui", 15, FontStyle.Bold)
+            DataGridView1.DefaultCellStyle.Font = New Font("segoe ui", 12, FontStyle.Regular)
 
             DataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect
             DataGridView1.MultiSelect = False
@@ -247,7 +247,7 @@ Public Class dashboardprof
 
 
             'para mabago yung font ng dgv
-            DataGridView2.DefaultCellStyle.Font = New Font("segoe ui", 12, FontStyle.Bold)
+            DataGridView2.DefaultCellStyle.Font = New Font("segoe ui", 12, FontStyle.Regular)
 
             DataGridView2.SelectionMode = DataGridViewSelectionMode.FullRowSelect
             DataGridView1.MultiSelect = False
@@ -302,6 +302,10 @@ Public Class dashboardprof
     End Sub
 
     Private Sub DataGridView1_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+
+    End Sub
+
+    Private Sub DataGridView3_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView3.CellContentClick
 
     End Sub
 End Class

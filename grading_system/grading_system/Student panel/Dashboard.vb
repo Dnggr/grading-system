@@ -159,7 +159,7 @@ Public Class Dashboard
 
 
             'para mabago yung font ng dgv
-            DataGridView1.DefaultCellStyle.Font = New Font("segoe ui", 15, FontStyle.Bold)
+            DataGridView1.DefaultCellStyle.Font = New Font("segoe ui", 12, FontStyle.Regular)
 
             DataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect
             DataGridView1.MultiSelect = False
@@ -218,7 +218,7 @@ Public Class Dashboard
 
 
             'para mabago yung font ng dgv
-            DataGridView2.DefaultCellStyle.Font = New Font("segoe ui", 15, FontStyle.Bold)
+            DataGridView2.DefaultCellStyle.Font = New Font("segoe ui", 12, FontStyle.Regular)
 
             DataGridView2.SelectionMode = DataGridViewSelectionMode.FullRowSelect
             DataGridView2.MultiSelect = False

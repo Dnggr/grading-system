@@ -8,6 +8,7 @@ Public Class AddGrade_Form
     Public secID As String = ""
     Public updateMode As Boolean = False
     Public gradeID As String = ""
+    Dim allowclose As Boolean = False
     'Private isLoadingGrade As Boolean = False  ' ✅ Add flag
 
     Private Sub AddGrade_Form_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
@@ -26,6 +27,16 @@ Public Class AddGrade_Form
             Button1.Visible = True
         End If
     End Sub
+
+#Region "disabled x button"
+    Private Sub AddGrade_Form_FormClosing(ByVal sender As Object, ByVal e As FormClosingEventArgs) Handles Me.FormClosing
+        If Not allowclose Then
+            e.Cancel = True
+            MessageBox.Show("Please use the exit button!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
+        End If
+    End Sub
+#End Region
+
 
     Private Sub LoadGradeData(ByVal gradeId As String)
         Try
@@ -329,6 +340,7 @@ Public Class AddGrade_Form
     Private Sub btnCancel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCancel.Click
         Dim result As DialogResult = MessageBox.Show("Are you sure you want to Exit?", "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
         If result = DialogResult.Yes Then
+            allowclose = True
             Me.Close()
         End If
     End Sub
@@ -1107,4 +1119,7 @@ Public Class AddGrade_Form
 #End Region
 
 
+    Private Sub GroupBox3_Enter(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GroupBox3.Enter
+
+    End Sub
 End Class

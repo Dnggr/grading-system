@@ -1116,7 +1116,9 @@ Partial Class AddGrade_Form
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(891, 515)
         Me.Controls.Add(Me.Panel1)
+        Me.MaximizeBox = False
         Me.Name = "AddGrade_Form"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "AddGrade_Form"
         Me.Panel1.ResumeLayout(False)
         Me.GroupBox4.ResumeLayout(False)

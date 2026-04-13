@@ -4,6 +4,15 @@ Imports System.Data.Odbc
 Imports System.Globalization
 Imports System.IO
 Public Class Prof_panel
+    Dim allowclose As Boolean = False
+#Region "disabled x button"
+    Private Sub SelectStudent_Form_FormClosing(ByVal sender As Object, ByVal e As FormClosingEventArgs) Handles Me.FormClosing
+        If Not allowclose Then
+            e.Cancel = True
+            MessageBox.Show("Please use the exit button!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
+        End If
+    End Sub
+#End Region
 #Region "roundedbutton"
     Private Sub MakeRoundedButton(ByVal btn As Button, ByVal radius As Integer)
         Dim path As New Drawing.Drawing2D.GraphicsPath()
@@ -20,8 +29,8 @@ Public Class Prof_panel
     Dim p As New profprofile
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
         Teacher_Form.Show()
+        Teacher_Form.BringToFront()
         Me.Hide()
-
     End Sub
     Private Function ToProperCase(ByVal text As String) As String
         If text Is Nothing Then Return ""
@@ -163,6 +172,7 @@ Public Class Prof_panel
         Dim result As DialogResult = MessageBox.Show("Are you sure you want to logout?", "Logout Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
         If result = DialogResult.Yes Then
             login_logic.ClearLogin()
+            allowclose = True
             Me.Close()
             Login_Form.Show()
         End If

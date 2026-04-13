@@ -69,9 +69,10 @@ Partial Class Teacher_Form
         '
         'Button4
         '
-        Me.Button4.Location = New System.Drawing.Point(811, 56)
+        Me.Button4.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button4.Location = New System.Drawing.Point(1035, 79)
         Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(75, 47)
+        Me.Button4.Size = New System.Drawing.Size(89, 47)
         Me.Button4.TabIndex = 16
         Me.Button4.Text = "Reset Filters"
         Me.Button4.UseVisualStyleBackColor = True
@@ -79,41 +80,45 @@ Partial Class Teacher_Form
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(136, 86)
+        Me.Label8.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(33, 83)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(75, 13)
+        Me.Label8.Size = New System.Drawing.Size(115, 21)
         Me.Label8.TabIndex = 15
         Me.Label8.Text = "Student Name"
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(217, 83)
+        Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox1.Location = New System.Drawing.Point(154, 83)
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(167, 20)
+        Me.TextBox1.Size = New System.Drawing.Size(167, 29)
         Me.TextBox1.TabIndex = 14
         '
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(396, 61)
+        Me.Label7.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(326, 56)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(65, 13)
+        Me.Label7.Size = New System.Drawing.Size(95, 21)
         Me.Label7.TabIndex = 13
         Me.Label7.Text = "School Year"
         '
         'ComboBox4
         '
+        Me.ComboBox4.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ComboBox4.FormattingEnabled = True
-        Me.ComboBox4.Location = New System.Drawing.Point(470, 56)
+        Me.ComboBox4.Location = New System.Drawing.Point(427, 53)
         Me.ComboBox4.Name = "ComboBox4"
-        Me.ComboBox4.Size = New System.Drawing.Size(121, 21)
+        Me.ComboBox4.Size = New System.Drawing.Size(121, 29)
         Me.ComboBox4.TabIndex = 12
         '
         'lblCurrentSem
         '
         Me.lblCurrentSem.AutoSize = True
         Me.lblCurrentSem.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCurrentSem.Location = New System.Drawing.Point(524, 9)
+        Me.lblCurrentSem.Location = New System.Drawing.Point(470, 9)
         Me.lblCurrentSem.Name = "lblCurrentSem"
         Me.lblCurrentSem.Size = New System.Drawing.Size(101, 31)
         Me.lblCurrentSem.TabIndex = 11
@@ -122,77 +127,86 @@ Partial Class Teacher_Form
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(608, 86)
+        Me.Label6.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(586, 94)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(43, 13)
+        Me.Label6.Size = New System.Drawing.Size(65, 21)
         Me.Label6.TabIndex = 10
         Me.Label6.Text = "Subject"
         '
         'ComboBox3
         '
+        Me.ComboBox3.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ComboBox3.FormattingEnabled = True
-        Me.ComboBox3.Location = New System.Drawing.Point(657, 83)
+        Me.ComboBox3.Location = New System.Drawing.Point(657, 94)
         Me.ComboBox3.Name = "ComboBox3"
-        Me.ComboBox3.Size = New System.Drawing.Size(121, 21)
+        Me.ComboBox3.Size = New System.Drawing.Size(121, 29)
         Me.ComboBox3.TabIndex = 9
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(418, 86)
+        Me.Label2.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(356, 91)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(43, 13)
+        Me.Label2.Size = New System.Drawing.Size(65, 21)
         Me.Label2.TabIndex = 7
         Me.Label2.Text = "Section"
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(600, 59)
+        Me.Label1.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(572, 56)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(51, 13)
+        Me.Label1.Size = New System.Drawing.Size(79, 21)
         Me.Label1.TabIndex = 6
         Me.Label1.Text = "Semester"
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(1248, 55)
+        Me.Button3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button3.Location = New System.Drawing.Point(1238, 35)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(75, 48)
+        Me.Button3.Size = New System.Drawing.Size(89, 47)
         Me.Button3.TabIndex = 5
         Me.Button3.Text = "Exit"
         Me.Button3.UseVisualStyleBackColor = True
         '
         'ComboBox2
         '
+        Me.ComboBox2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Location = New System.Drawing.Point(470, 83)
+        Me.ComboBox2.Location = New System.Drawing.Point(427, 88)
         Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(121, 21)
+        Me.ComboBox2.Size = New System.Drawing.Size(121, 29)
         Me.ComboBox2.TabIndex = 3
         '
         'ComboBox1
         '
+        Me.ComboBox1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ComboBox1.FormattingEnabled = True
         Me.ComboBox1.Location = New System.Drawing.Point(657, 56)
         Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(121, 21)
+        Me.ComboBox1.Size = New System.Drawing.Size(121, 29)
         Me.ComboBox1.TabIndex = 2
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(906, 56)
+        Me.Button2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button2.Location = New System.Drawing.Point(940, 80)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 48)
+        Me.Button2.Size = New System.Drawing.Size(89, 47)
         Me.Button2.TabIndex = 1
         Me.Button2.Text = "Refresh"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(1004, 56)
+        Me.Button1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.Location = New System.Drawing.Point(784, 65)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 48)
+        Me.Button1.Size = New System.Drawing.Size(89, 47)
         Me.Button1.TabIndex = 0
         Me.Button1.Text = "Add Grades"
         Me.Button1.UseVisualStyleBackColor = True
@@ -205,7 +219,7 @@ Partial Class Teacher_Form
         Me.DataGridView2.Location = New System.Drawing.Point(0, 130)
         Me.DataGridView2.Name = "DataGridView2"
         Me.DataGridView2.ReadOnly = True
-        Me.DataGridView2.Size = New System.Drawing.Size(1347, 599)
+        Me.DataGridView2.Size = New System.Drawing.Size(1373, 599)
         Me.DataGridView2.TabIndex = 2
         '
         'Teacher_Form
@@ -215,7 +229,10 @@ Partial Class Teacher_Form
         Me.ClientSize = New System.Drawing.Size(1350, 729)
         Me.Controls.Add(Me.DataGridView2)
         Me.Controls.Add(Me.Panel1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.MaximizeBox = False
         Me.Name = "Teacher_Form"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Teacher_Form1"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()

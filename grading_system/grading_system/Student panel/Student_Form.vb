@@ -10,6 +10,17 @@ Public Class Student_Form
     Dim sched As New schedule()
     Dim acccenter As New accountcenter()
     Dim Dashboard As New Dashboard()
+    Dim allowclose As Boolean = False
+
+#Region "disabled x button"
+    Private Sub SelectStudent_Form_FormClosing(ByVal sender As Object, ByVal e As FormClosingEventArgs) Handles Me.FormClosing
+        If Not allowclose Then
+            e.Cancel = True
+            MessageBox.Show("Please use the exit button!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
+        End If
+    End Sub
+#End Region
+
 #Region "roundedbutton"
     Private Sub MakeRoundedButton(ByVal btn As Button, ByVal radius As Integer)
         Dim path As New Drawing.Drawing2D.GraphicsPath()
@@ -114,6 +125,7 @@ Public Class Student_Form
         Panel2.Visible = False
         If result = DialogResult.Yes Then
             login_logic.ClearLogin()
+            allowclose = True
             Me.Close()
             Login_Form.Show()
         End If
