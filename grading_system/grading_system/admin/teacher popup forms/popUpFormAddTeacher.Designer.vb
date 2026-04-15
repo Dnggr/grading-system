@@ -42,6 +42,7 @@ Partial Class popUpFormAddTeacher
         '
         'GroupBox1
         '
+        Me.GroupBox1.BackColor = System.Drawing.Color.Azure
         Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.Teacher_Middlename_TextBox)
         Me.GroupBox1.Controls.Add(Me.Teacher_Email_TextBox)
@@ -52,6 +53,7 @@ Partial Class popUpFormAddTeacher
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Controls.Add(Me.Teacher_Lastname_TextBox)
         Me.GroupBox1.Controls.Add(Me.Teacher_Firstname_TextBox)
+        Me.GroupBox1.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1.Location = New System.Drawing.Point(12, 49)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(405, 185)
@@ -62,9 +64,10 @@ Partial Class popUpFormAddTeacher
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(12, 90)
+        Me.Label5.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(4, 89)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(72, 13)
+        Me.Label5.Size = New System.Drawing.Size(82, 15)
         Me.Label5.TabIndex = 13
         Me.Label5.Text = "Middle Name:"
         '
@@ -72,31 +75,33 @@ Partial Class popUpFormAddTeacher
         '
         Me.Teacher_Middlename_TextBox.Location = New System.Drawing.Point(89, 87)
         Me.Teacher_Middlename_TextBox.Name = "Teacher_Middlename_TextBox"
-        Me.Teacher_Middlename_TextBox.Size = New System.Drawing.Size(253, 20)
+        Me.Teacher_Middlename_TextBox.Size = New System.Drawing.Size(253, 23)
         Me.Teacher_Middlename_TextBox.TabIndex = 12
         '
         'Teacher_Email_TextBox
         '
         Me.Teacher_Email_TextBox.Location = New System.Drawing.Point(89, 140)
         Me.Teacher_Email_TextBox.Name = "Teacher_Email_TextBox"
-        Me.Teacher_Email_TextBox.Size = New System.Drawing.Size(253, 20)
+        Me.Teacher_Email_TextBox.Size = New System.Drawing.Size(253, 23)
         Me.Teacher_Email_TextBox.TabIndex = 11
         '
         'Label3
         '
         Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.Location = New System.Drawing.Point(49, 143)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(34, 13)
+        Me.Label3.Size = New System.Drawing.Size(39, 15)
         Me.Label3.TabIndex = 10
-        Me.Label3.Text = "email:"
+        Me.Label3.Text = "Email:"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(38, 116)
+        Me.Label4.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(35, 115)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(45, 13)
+        Me.Label4.Size = New System.Drawing.Size(48, 15)
         Me.Label4.TabIndex = 9
         Me.Label4.Text = "Gender:"
         '
@@ -105,24 +110,26 @@ Partial Class popUpFormAddTeacher
         Me.Teacher_Gender_ComboBox.FormattingEnabled = True
         Me.Teacher_Gender_ComboBox.Location = New System.Drawing.Point(89, 113)
         Me.Teacher_Gender_ComboBox.Name = "Teacher_Gender_ComboBox"
-        Me.Teacher_Gender_ComboBox.Size = New System.Drawing.Size(253, 21)
+        Me.Teacher_Gender_ComboBox.Size = New System.Drawing.Size(253, 23)
         Me.Teacher_Gender_ComboBox.TabIndex = 8
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(24, 64)
+        Me.Label2.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(19, 63)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(60, 13)
+        Me.Label2.Size = New System.Drawing.Size(67, 15)
         Me.Label2.TabIndex = 6
         Me.Label2.Text = "First Name:"
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(23, 38)
+        Me.Label1.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(22, 37)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(61, 13)
+        Me.Label1.Size = New System.Drawing.Size(66, 15)
         Me.Label1.TabIndex = 5
         Me.Label1.Text = "Last Name:"
         '
@@ -130,14 +137,14 @@ Partial Class popUpFormAddTeacher
         '
         Me.Teacher_Lastname_TextBox.Location = New System.Drawing.Point(89, 35)
         Me.Teacher_Lastname_TextBox.Name = "Teacher_Lastname_TextBox"
-        Me.Teacher_Lastname_TextBox.Size = New System.Drawing.Size(253, 20)
+        Me.Teacher_Lastname_TextBox.Size = New System.Drawing.Size(253, 23)
         Me.Teacher_Lastname_TextBox.TabIndex = 0
         '
         'Teacher_Firstname_TextBox
         '
         Me.Teacher_Firstname_TextBox.Location = New System.Drawing.Point(89, 61)
         Me.Teacher_Firstname_TextBox.Name = "Teacher_Firstname_TextBox"
-        Me.Teacher_Firstname_TextBox.Size = New System.Drawing.Size(253, 20)
+        Me.Teacher_Firstname_TextBox.Size = New System.Drawing.Size(253, 23)
         Me.Teacher_Firstname_TextBox.TabIndex = 1
         '
         'GroupBox2
@@ -152,6 +159,7 @@ Partial Class popUpFormAddTeacher
         '
         'Cancel_Button
         '
+        Me.Cancel_Button.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Cancel_Button.Location = New System.Drawing.Point(315, 19)
         Me.Cancel_Button.Name = "Cancel_Button"
         Me.Cancel_Button.Size = New System.Drawing.Size(80, 28)
@@ -161,6 +169,7 @@ Partial Class popUpFormAddTeacher
         '
         'Register_Teacher_Button
         '
+        Me.Register_Teacher_Button.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Register_Teacher_Button.Location = New System.Drawing.Point(229, 19)
         Me.Register_Teacher_Button.Name = "Register_Teacher_Button"
         Me.Register_Teacher_Button.Size = New System.Drawing.Size(80, 28)
@@ -172,9 +181,14 @@ Partial Class popUpFormAddTeacher
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.CadetBlue
         Me.ClientSize = New System.Drawing.Size(431, 303)
+        Me.ControlBox = False
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "popUpFormAddTeacher"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "popUpFormAddTeacher"

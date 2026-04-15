@@ -2,8 +2,18 @@
 Imports System.Windows.Forms
 
 Public Class SelectStudent_Form
+    Dim allowclose As Boolean = False
     Private studentTable As New DataTable
     Public Shadows ParentForm As AddGrade_Form
+
+#Region "disabled x button"
+    Private Sub SelectStudent_Form_FormClosing(ByVal sender As Object, ByVal e As FormClosingEventArgs) Handles Me.FormClosing
+        If Not allowclose Then
+            e.Cancel = True
+            MessageBox.Show("Please use the exit button!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
+        End If
+    End Sub
+#End Region
 
     Private Sub SelectStudent_Form_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         getAvailableSections()
@@ -19,6 +29,7 @@ Public Class SelectStudent_Form
 
     Private Sub Cancel_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel_Button.Click
         Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        allowclose = True
         Me.Close()
     End Sub
 
@@ -76,6 +87,15 @@ Public Class SelectStudent_Form
                 Else
                     DataGridView1.DataSource = Nothing
                 End If
+                DataGridView1.DefaultCellStyle.Font = New Font("segoe ui", 10, FontStyle.Regular)
+                DataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
+                DataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+                DataGridView1.AllowUserToAddRows = False
+                DataGridView1.AllowUserToDeleteRows = False
+                DataGridView1.AllowUserToResizeColumns = False
+                DataGridView1.AllowUserToResizeRows = False
+                DataGridView1.RowHeadersVisible = False
+                DataGridView1.ScrollBars = ScrollBars.Both
             End Using
 
         Catch ex As Exception
@@ -127,6 +147,15 @@ Public Class SelectStudent_Form
         End If
 
         ' Close this form
+        allowclose = True
         Me.Close()
+    End Sub
+
+    Private Sub Label1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label1.Click
+
+    End Sub
+
+    Private Sub DataGridView1_CellContentClick_1(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+
     End Sub
 End Class

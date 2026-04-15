@@ -1,31 +1,27 @@
 ﻿Imports System.Data.Odbc
 Imports System.IO
-Public Class profile
+Public Class profprofile
     Dim response As DialogResult
-    Private Sub profile_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub profprofile_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        profileinfo()
         LoadImage()
-        MakeRoundedButton(Button1, 25)
-        MakeRoundedButton(Button2, 25)
-        MakeRoundedButton(Button3, 25)
-        MakeRoundedPanel(Panel1, 30)
-        MakeRoundedPanel(Panel2, 30)
-        MakeRoundedPanel(Panel3, 30)
     End Sub
-#Region "Load StudentInfo"
 
+#Region "account"
 
     Public Sub profileinfo()
         Try
             Connect_me()
 
-            Dim cmdProfile As New OdbcCommand("SELECT * , section.section " & _
-                                              "FROM student " & _
-                                              "Left Join section On student.section_id = section.section_id " & _
-                                              "WHERE email=?", con)
+            Dim cmdProfile As New OdbcCommand("SELECT prof.* , account.acc_id " & _
+                                              "FROM prof " & _
+                                              "LEFT JOIN account On prof.acc_id = account.acc_id " & _
+                                              "WHERE prof.email = ?", con)
+
             cmdProfile.Parameters.AddWithValue("?", login_logic.loginuser)
 
             Dim reader As OdbcDataReader = cmdProfile.ExecuteReader()
-           
+
             If reader.Read() Then
 
                 Dim firstname As String = StrConv(reader("firstname").ToString(), VbStrConv.ProperCase)
@@ -33,16 +29,11 @@ Public Class profile
                 Dim middlename As String = StrConv(reader("middlename").ToString(), VbStrConv.ProperCase)
                 Dim g As String = StrConv(reader("gender").ToString(), VbStrConv.ProperCase)
 
-                id.Text = reader("stud_id").ToString()
+                profid.Text = reader("prof_id").ToString()
                 Label1.Text = firstname & " " & lastname
                 gender.Text = g
                 fname.Text = firstname & " " & middlename & " " & lastname
                 Label15.Text = reader("email").ToString()
-                course.Text = reader("course").ToString()
-                yr_lvl.Text = reader("yr_lvl").ToString()
-                section.Text = reader("section").ToString()
-            Else
-                MessageBox.Show("No student record found.")
             End If
 
             reader.Close()
@@ -53,6 +44,7 @@ Public Class profile
         End Try
     End Sub
 #End Region
+
 #Region "Add/Replace Image"
 
     ' ============================================
@@ -133,7 +125,7 @@ Public Class profile
             Connect_me()
 
             ' Get image filename and gender from database
-            Dim query As String = "SELECT image_path, gender FROM student WHERE acc_id = ?"
+            Dim query As String = "SELECT image_path, gender FROM prof WHERE acc_id = ?"
             Using cmd As New OdbcCommand(query, con)
                 cmd.Parameters.AddWithValue("?", Login_Form.id)
 
@@ -148,10 +140,10 @@ Public Class profile
 
                         If String.IsNullOrEmpty(fileName) Then
                             ' No image - show default based on gender
-                            ShowDefaultImage(reader("gender").ToString().Trim())
+                            ShowDefaultImage1(reader("gender").ToString().Trim())
                         Else
                             ' Has image - show it
-                            ShowUploadedImage(fileName)
+                            ShowUploadedImage1(fileName)
                         End If
                     End If
                 End Using
@@ -192,7 +184,7 @@ Public Class profile
     End Sub
 
     ' Show default image based on gender
-    Private Sub ShowDefaultImage(ByVal gender As String)
+    Private Sub ShowDefaultImage1(ByVal gender As String)
         Try
             Dim defaultImageName As String
             If gender.ToLower() = "female" Then
@@ -216,7 +208,7 @@ Public Class profile
     End Sub
 
     ' Show uploaded image
-    Private Sub ShowUploadedImage(ByVal fileName As String)
+    Private Sub ShowUploadedImage1(ByVal fileName As String)
         Try
             Dim imagePath As String = GetImageDestinationPath(fileName)
 
@@ -258,7 +250,7 @@ Public Class profile
         Try
             Connect_me()
 
-            Dim query As String = "SELECT image_path FROM student WHERE acc_id = ?"
+            Dim query As String = "SELECT image_path FROM prof WHERE acc_id = ?"
             Using cmd As New OdbcCommand(query, con)
                 cmd.Parameters.AddWithValue("?", Login_Form.id)
 
@@ -283,7 +275,7 @@ Public Class profile
         Try
             Connect_me()
 
-            Dim query As String = "UPDATE student SET image_path = ? WHERE acc_id = ?"
+            Dim query As String = "UPDATE prof SET image_path = ? WHERE acc_id = ?"
             Using cmd As New OdbcCommand(query, con)
                 cmd.Parameters.AddWithValue("?", fileName)
                 cmd.Parameters.AddWithValue("?", Login_Form.id)
@@ -301,7 +293,7 @@ Public Class profile
         Try
             Connect_me()
 
-            Dim query As String = "UPDATE student SET image_path = NULL WHERE acc_id = ?"
+            Dim query As String = "UPDATE prof SET image_path = NULL WHERE acc_id = ?"
             Using cmd As New OdbcCommand(query, con)
                 cmd.Parameters.AddWithValue("?", Login_Form.id)
                 cmd.ExecuteNonQuery()
@@ -353,60 +345,6 @@ Public Class profile
 #End Region
 
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
-        accountcenter.Show()
-    End Sub
-
-    Private Sub Label1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label1.Click
-
-    End Sub
-
-    Private Sub course_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles course.Click
-
-    End Sub
-
-    Private Sub Label8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label8.Click
-
-    End Sub
-
-    Private Sub Panel1_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles Panel1.Paint
-
-    End Sub
-
-#Region "rounded button"
-    Private Sub MakeRoundedButton(ByVal btn As Button, ByVal radius As Integer)
-        Dim path As New Drawing.Drawing2D.GraphicsPath()
-
-        path.StartFigure()
-        path.AddArc(0, 0, radius, radius, 180, 90)
-        path.AddArc(btn.Width - radius, 0, radius, radius, 270, 90)
-        path.AddArc(btn.Width - radius, btn.Height - radius, radius, radius, 0, 90)
-        path.AddArc(0, btn.Height - radius, radius, radius, 90, 90)
-        path.CloseFigure()
-        btn.Region = New Region(path)
-    End Sub
-#End Region
-
-    Private Sub MakeRoundedPanel(ByVal pnl As Panel, ByVal radius As Integer)
-        Dim path As New Drawing.Drawing2D.GraphicsPath()
-
-        path.StartFigure()
-        path.AddArc(0, 0, radius, radius, 180, 90)
-        path.AddArc(pnl.Width - radius, 0, radius, radius, 270, 90)
-        path.AddArc(pnl.Width - radius, pnl.Height - radius, radius, radius, 0, 90)
-        path.AddArc(0, pnl.Height - radius, radius, radius, 90, 90)
-        path.CloseFigure()
-        pnl.Region = New Region(path)
-    End Sub
-
-    Private Sub Label6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label6.Click
-
-    End Sub
-
-    Private Sub Panel3_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles Panel3.Paint
-
-    End Sub
-
-    Private Sub PictureBox1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PictureBox1.Click
-
+        accountcenterprof.Show()
     End Sub
 End Class

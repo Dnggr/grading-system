@@ -10,6 +10,7 @@ Public Class Student_Form
     Dim sched As New schedule()
     Dim acccenter As New accountcenter()
     Dim Dashboard As New Dashboard()
+
 #Region "roundedbutton"
     Private Sub MakeRoundedButton(ByVal btn As Button, ByVal radius As Integer)
         Dim path As New Drawing.Drawing2D.GraphicsPath()
@@ -439,6 +440,10 @@ Public Class Student_Form
     End Sub
 
     Private Sub Label1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label1.Click
+
+    End Sub
+
+    Private Sub mainpanel_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles mainpanel.Paint
 
     End Sub
 End Class

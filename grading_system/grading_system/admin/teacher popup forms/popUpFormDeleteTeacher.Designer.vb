@@ -34,6 +34,7 @@ Partial Class popUpFormDeleteTeacher
         '
         'Cancel_Button
         '
+        Me.Cancel_Button.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Cancel_Button.Location = New System.Drawing.Point(306, 263)
         Me.Cancel_Button.Name = "Cancel_Button"
         Me.Cancel_Button.Size = New System.Drawing.Size(75, 23)
@@ -50,6 +51,8 @@ Partial Class popUpFormDeleteTeacher
         '
         'Delete_Teacher_DataGridView
         '
+        Me.Delete_Teacher_DataGridView.BackgroundColor = System.Drawing.Color.Azure
+        Me.Delete_Teacher_DataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.Delete_Teacher_DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.Delete_Teacher_DataGridView.Location = New System.Drawing.Point(10, 86)
         Me.Delete_Teacher_DataGridView.Name = "Delete_Teacher_DataGridView"
@@ -59,45 +62,51 @@ Partial Class popUpFormDeleteTeacher
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(24, 50)
+        Me.Label1.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(42, 47)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(39, 13)
+        Me.Label1.Size = New System.Drawing.Size(48, 17)
         Me.Label1.TabIndex = 5
-        Me.Label1.Text = "search"
+        Me.Label1.Text = "Search"
         '
         'Delete_Button
         '
+        Me.Delete_Button.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Delete_Button.Location = New System.Drawing.Point(225, 263)
         Me.Delete_Button.Name = "Delete_Button"
         Me.Delete_Button.Size = New System.Drawing.Size(75, 23)
         Me.Delete_Button.TabIndex = 6
-        Me.Delete_Button.Text = "inactive"
+        Me.Delete_Button.Text = "Inactive"
         Me.Delete_Button.UseVisualStyleBackColor = True
         '
         'Refresh_Button
         '
+        Me.Refresh_Button.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Refresh_Button.Location = New System.Drawing.Point(10, 243)
         Me.Refresh_Button.Name = "Refresh_Button"
         Me.Refresh_Button.Size = New System.Drawing.Size(75, 23)
         Me.Refresh_Button.TabIndex = 10
-        Me.Refresh_Button.Text = "refresh"
+        Me.Refresh_Button.Text = "Refresh"
         Me.Refresh_Button.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.Refresh_Button.UseVisualStyleBackColor = True
         '
         'Activate_Button
         '
+        Me.Activate_Button.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Activate_Button.Location = New System.Drawing.Point(144, 263)
         Me.Activate_Button.Name = "Activate_Button"
         Me.Activate_Button.Size = New System.Drawing.Size(75, 23)
         Me.Activate_Button.TabIndex = 11
-        Me.Activate_Button.Text = "active"
+        Me.Activate_Button.Text = "Active"
         Me.Activate_Button.UseVisualStyleBackColor = True
         '
         'popUpFormDeleteTeacher
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.CadetBlue
         Me.ClientSize = New System.Drawing.Size(426, 337)
+        Me.ControlBox = False
         Me.Controls.Add(Me.Activate_Button)
         Me.Controls.Add(Me.Refresh_Button)
         Me.Controls.Add(Me.Cancel_Button)
@@ -105,7 +114,11 @@ Partial Class popUpFormDeleteTeacher
         Me.Controls.Add(Me.Delete_Teacher_DataGridView)
         Me.Controls.Add(Me.Delete_Button)
         Me.Controls.Add(Me.Label1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "popUpFormDeleteTeacher"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "popUpFormDeleteTeacher"
         CType(Me.Delete_Teacher_DataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)

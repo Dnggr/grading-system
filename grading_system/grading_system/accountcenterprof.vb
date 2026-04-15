@@ -1,10 +1,9 @@
 ﻿Imports System.Data.Odbc
-Public Class accountcenter
+Public Class accountcenterprof
 
-    Private Sub Label1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label1.Click
+    Private Sub accountcenterprof_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
     End Sub
-
     Private Sub accountcenter_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         TextBox1.Text.Trim()
         TextBox2.Text.Trim()
@@ -16,18 +15,18 @@ Public Class accountcenter
         Try
             Connect_me()
 
-            Dim cmdProfile As New OdbcCommand("SELECT * , section.section " & _
-                                              "FROM student " & _
-                                              "Left Join section On student.section_id = section.section_id " & _
-                                              "WHERE email=?", con)
+            Dim cmdProfile As New OdbcCommand("SELECT p.*, a.acc_id, a.email AS acc_email " & _
+                                  "FROM account a " & _
+                                  "LEFT JOIN prof p ON a.acc_id = p.acc_id " & _
+                                  "WHERE a.email = ?", con)
             cmdProfile.Parameters.AddWithValue("?", login_logic.loginuser)
 
             Dim reader As OdbcDataReader = cmdProfile.ExecuteReader()
 
             If reader.Read() Then
-                email.Text = reader("email").ToString()
+                email.Text = reader("acc_email").ToString()
             Else
-                MessageBox.Show("No student record found.")
+                MessageBox.Show("No teacher record found.")
             End If
 
             reader.Close()

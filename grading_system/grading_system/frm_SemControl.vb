@@ -57,6 +57,41 @@ Public Class frm_SemControl
         Finally
             If con.State = ConnectionState.Open Then con.Close()
         End Try
+
+        'to control the dgv
+        dgvTeachers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
+        dgvTeachers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+        dgvTeachers.AllowUserToAddRows = False
+        dgvTeachers.AllowUserToDeleteRows = False
+        dgvTeachers.AllowUserToResizeColumns = False
+        dgvTeachers.AllowUserToResizeRows = False
+        dgvTeachers.RowHeadersVisible = False
+        dgvTeachers.ReadOnly = True
+        dgvTeachers.Enabled = False
+
+
+        'to fill the gray space in dgv
+        Try
+            If dgvTeachers.Rows.Count > 0 Then
+
+                Dim totalHeight As Integer = dgvTeachers.ClientSize.Height - dgvTeachers.ColumnHeadersHeight
+                Dim rowHeight As Integer = totalHeight \ dgvTeachers.Rows.Count
+
+                For Each row As DataGridViewRow In dgvTeachers.Rows
+                    row.Height = rowHeight
+                Next
+
+            End If
+
+
+            'para mabago yung font ng dgv
+            dgvTeachers.DefaultCellStyle.Font = New Font("segoe ui", 10, FontStyle.Regular)
+
+            dgvTeachers.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+            dgvTeachers.MultiSelect = False
+        Catch ex As Exception
+            MessageBox.Show("error dgv" & ex.Message)
+        End Try
     End Sub
 
 #End Region
@@ -523,4 +558,11 @@ Public Class frm_SemControl
 
 #End Region
 
+    Private Sub dgvTeacher_SelectionChanged(ByVal sender As Object, ByVal e As EventArgs) Handles dgvTeachers.SelectionChanged
+        dgvTeachers.ClearSelection()
+    End Sub
+
+    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+
+    End Sub
 End Class

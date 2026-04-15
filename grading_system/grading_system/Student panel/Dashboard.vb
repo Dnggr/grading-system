@@ -137,6 +137,7 @@ Public Class Dashboard
             'to control the dgv
             DataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
             DataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+            DataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells
             DataGridView1.AllowUserToAddRows = False
             DataGridView1.AllowUserToDeleteRows = False
             DataGridView1.AllowUserToResizeColumns = False
@@ -159,7 +160,7 @@ Public Class Dashboard
 
 
             'para mabago yung font ng dgv
-            DataGridView1.DefaultCellStyle.Font = New Font("segoe ui", 15, FontStyle.Bold)
+            DataGridView1.DefaultCellStyle.Font = New Font("segoe ui", 12, FontStyle.Regular)
 
             DataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect
             DataGridView1.MultiSelect = False
@@ -196,6 +197,7 @@ Public Class Dashboard
             'to control the dgv
             DataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
             DataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+            DataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells
             DataGridView2.AllowUserToAddRows = False
             DataGridView2.AllowUserToDeleteRows = False
             DataGridView2.AllowUserToResizeColumns = False
@@ -218,7 +220,7 @@ Public Class Dashboard
 
 
             'para mabago yung font ng dgv
-            DataGridView2.DefaultCellStyle.Font = New Font("segoe ui", 15, FontStyle.Bold)
+            DataGridView2.DefaultCellStyle.Font = New Font("segoe ui", 12, FontStyle.Regular)
 
             DataGridView2.SelectionMode = DataGridViewSelectionMode.FullRowSelect
             DataGridView2.MultiSelect = False
@@ -249,6 +251,10 @@ Public Class Dashboard
 #End Region
 
     Private Sub TableLayoutPanel2_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles TableLayoutPanel2.Paint
+
+    End Sub
+
+    Private Sub DataGridView1_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
 
     End Sub
 End Class

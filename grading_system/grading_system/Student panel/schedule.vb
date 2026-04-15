@@ -65,7 +65,7 @@ Public Class schedule
 
 
             'para mabago yung font ng dgv
-            DataGridView1.DefaultCellStyle.Font = New Font("segoe ui", 15, FontStyle.Bold)
+            DataGridView1.DefaultCellStyle.Font = New Font("segoe ui", 15, FontStyle.Regular)
 
             DataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect
             DataGridView1.MultiSelect = False

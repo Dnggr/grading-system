@@ -46,6 +46,7 @@ Partial Class popUpFormModifyStudent
         '
         'Modify_Student_Panel
         '
+        Me.Modify_Student_Panel.BackColor = System.Drawing.Color.CadetBlue
         Me.Modify_Student_Panel.Controls.Add(Me.Modify_Cancel_Button)
         Me.Modify_Student_Panel.Controls.Add(Me.Modify_Button)
         Me.Modify_Student_Panel.Controls.Add(Me.Modify_Student_DataGridView)
@@ -70,15 +71,17 @@ Partial Class popUpFormModifyStudent
         '
         'Modify_Cancel_Button
         '
+        Me.Modify_Cancel_Button.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Modify_Cancel_Button.Location = New System.Drawing.Point(388, 380)
         Me.Modify_Cancel_Button.Name = "Modify_Cancel_Button"
         Me.Modify_Cancel_Button.Size = New System.Drawing.Size(75, 23)
         Me.Modify_Cancel_Button.TabIndex = 35
-        Me.Modify_Cancel_Button.Text = "cancel"
+        Me.Modify_Cancel_Button.Text = "Cancel"
         Me.Modify_Cancel_Button.UseVisualStyleBackColor = True
         '
         'Modify_Button
         '
+        Me.Modify_Button.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Modify_Button.Location = New System.Drawing.Point(287, 380)
         Me.Modify_Button.Name = "Modify_Button"
         Me.Modify_Button.Size = New System.Drawing.Size(75, 23)
@@ -88,6 +91,7 @@ Partial Class popUpFormModifyStudent
         '
         'Modify_Student_DataGridView
         '
+        Me.Modify_Student_DataGridView.BackgroundColor = System.Drawing.Color.Azure
         Me.Modify_Student_DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.Modify_Student_DataGridView.Location = New System.Drawing.Point(14, 78)
         Me.Modify_Student_DataGridView.Name = "Modify_Student_DataGridView"
@@ -104,27 +108,30 @@ Partial Class popUpFormModifyStudent
         'Modify_Student_Label1
         '
         Me.Modify_Student_Label1.AutoSize = True
-        Me.Modify_Student_Label1.Location = New System.Drawing.Point(35, 51)
+        Me.Modify_Student_Label1.Font = New System.Drawing.Font("Segoe UI Semibold", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Modify_Student_Label1.Location = New System.Drawing.Point(46, 48)
         Me.Modify_Student_Label1.Name = "Modify_Student_Label1"
-        Me.Modify_Student_Label1.Size = New System.Drawing.Size(38, 13)
+        Me.Modify_Student_Label1.Size = New System.Drawing.Size(49, 19)
         Me.Modify_Student_Label1.TabIndex = 30
         Me.Modify_Student_Label1.Text = "Name:"
         '
         'Modify_Label6
         '
         Me.Modify_Label6.AutoSize = True
-        Me.Modify_Label6.Location = New System.Drawing.Point(98, 318)
+        Me.Modify_Label6.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Modify_Label6.Location = New System.Drawing.Point(89, 315)
         Me.Modify_Label6.Name = "Modify_Label6"
-        Me.Modify_Label6.Size = New System.Drawing.Size(35, 13)
+        Me.Modify_Label6.Size = New System.Drawing.Size(43, 17)
         Me.Modify_Label6.TabIndex = 27
         Me.Modify_Label6.Text = "Email:"
         '
         'Modify_Label5
         '
         Me.Modify_Label5.AutoSize = True
-        Me.Modify_Label5.Location = New System.Drawing.Point(90, 344)
+        Me.Modify_Label5.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Modify_Label5.Location = New System.Drawing.Point(79, 341)
         Me.Modify_Label5.Name = "Modify_Label5"
-        Me.Modify_Label5.Size = New System.Drawing.Size(43, 13)
+        Me.Modify_Label5.Size = New System.Drawing.Size(53, 17)
         Me.Modify_Label5.TabIndex = 26
         Me.Modify_Label5.Text = "Course:"
         '
@@ -146,9 +153,10 @@ Partial Class popUpFormModifyStudent
         'Modify_Label4
         '
         Me.Modify_Label4.AutoSize = True
-        Me.Modify_Label4.Location = New System.Drawing.Point(87, 291)
+        Me.Modify_Label4.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Modify_Label4.Location = New System.Drawing.Point(76, 288)
         Me.Modify_Label4.Name = "Modify_Label4"
-        Me.Modify_Label4.Size = New System.Drawing.Size(45, 13)
+        Me.Modify_Label4.Size = New System.Drawing.Size(56, 17)
         Me.Modify_Label4.TabIndex = 23
         Me.Modify_Label4.Text = "Gender:"
         '
@@ -163,27 +171,30 @@ Partial Class popUpFormModifyStudent
         'Modify_Label3
         '
         Me.Modify_Label3.AutoSize = True
-        Me.Modify_Label3.Location = New System.Drawing.Point(60, 265)
+        Me.Modify_Label3.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Modify_Label3.Location = New System.Drawing.Point(40, 262)
         Me.Modify_Label3.Name = "Modify_Label3"
-        Me.Modify_Label3.Size = New System.Drawing.Size(72, 13)
+        Me.Modify_Label3.Size = New System.Drawing.Size(92, 17)
         Me.Modify_Label3.TabIndex = 21
         Me.Modify_Label3.Text = "Middle Name:"
         '
         'Modify_Label2
         '
         Me.Modify_Label2.AutoSize = True
-        Me.Modify_Label2.Location = New System.Drawing.Point(73, 239)
+        Me.Modify_Label2.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Modify_Label2.Location = New System.Drawing.Point(56, 236)
         Me.Modify_Label2.Name = "Modify_Label2"
-        Me.Modify_Label2.Size = New System.Drawing.Size(60, 13)
+        Me.Modify_Label2.Size = New System.Drawing.Size(77, 17)
         Me.Modify_Label2.TabIndex = 20
         Me.Modify_Label2.Text = "First Name:"
         '
         'Modify_Label1
         '
         Me.Modify_Label1.AutoSize = True
-        Me.Modify_Label1.Location = New System.Drawing.Point(72, 213)
+        Me.Modify_Label1.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Modify_Label1.Location = New System.Drawing.Point(58, 210)
         Me.Modify_Label1.Name = "Modify_Label1"
-        Me.Modify_Label1.Size = New System.Drawing.Size(61, 13)
+        Me.Modify_Label1.Size = New System.Drawing.Size(75, 17)
         Me.Modify_Label1.TabIndex = 19
         Me.Modify_Label1.Text = "Last Name:"
         '
@@ -213,8 +224,13 @@ Partial Class popUpFormModifyStudent
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(489, 424)
+        Me.ControlBox = False
         Me.Controls.Add(Me.Modify_Student_Panel)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "popUpFormModifyStudent"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "popUpFormModifyStudent"
         Me.Modify_Student_Panel.ResumeLayout(False)
         Me.Modify_Student_Panel.PerformLayout()

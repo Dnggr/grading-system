@@ -7,9 +7,9 @@ Public Class Teacher_Form
     Public Shared sm As Integer
     Dim allGradesData As New DataSet()
     Private filteredView As DataView
+    Dim allowclose As Boolean = False
 
     Private Sub Teacher_Form_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        
         sy = ""
         sm = 0
         GetCurrentSem(sy, sm)   ' from Module_SemControl
@@ -19,12 +19,21 @@ Public Class Teacher_Form
         ShowDeleteButtons()
         getSchoolYear()
         LoadSemesters()
-       
+
         If ComboBox4.SelectedIndex >= 0 Then
             LoadAllGrades(ComboBox4.SelectedValue.ToString())
         End If
 
     End Sub
+
+#Region "disabled x button"
+    Private Sub Teacher_Form_FormClosing(ByVal sender As Object, ByVal e As FormClosingEventArgs) Handles Me.FormClosing
+        If Not allowclose Then
+            e.Cancel = True
+            MessageBox.Show("Please use the exit button!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
+        End If
+    End Sub
+#End Region
 
 #Region "Database Getters"
 
@@ -123,9 +132,9 @@ Public Class Teacher_Form
 
                     ' Apply initial filter (show all)
                     ApplyFilters()
-                    
+
                 Else
-                    
+
                     DataGridView2.DataSource = Nothing
 
                 End If
@@ -315,7 +324,9 @@ Public Class Teacher_Form
                                                      MessageBoxButtons.YesNo, _
                                                      MessageBoxIcon.Question)
         If result = DialogResult.Yes Then
-            Application.Exit()
+            allowclose = True
+            Prof_panel.Show()
+            Me.Close()
         End If
 
 
@@ -401,7 +412,6 @@ Public Class Teacher_Form
                 gID = selectedRow.Cells("gID").Value.ToString()
             End If
 
-            Label3.Text = gID
 
             Dim addGrade As New AddGrade_Form()
 
@@ -448,7 +458,7 @@ Public Class Teacher_Form
         End If
     End Sub
 
-    
+
     Private Sub DeleteGrade(ByVal rowIndex As Integer)
         ' ... your delete code ...
         Try
@@ -516,4 +526,15 @@ Public Class Teacher_Form
     End Sub
 
 
+    Private Sub DataGridView3_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs)
+
+    End Sub
+
+    Private Sub DataGridView1_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs)
+
+    End Sub
+
+    Private Sub Label7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label7.Click
+
+    End Sub
 End Class
