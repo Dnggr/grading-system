@@ -87,7 +87,7 @@ Public Class Admin_Form
         End If
     End Sub
 
-    Private Sub Exit_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Exit_Button.Click
+    Private Sub Exit_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Dim result As DialogResult = MessageBox.Show( _
             "Are you sure you want to exit the application?" & vbCrLf & "All unsaved changes will be lost.", _
             "Exit Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
@@ -132,7 +132,9 @@ Public Class Admin_Form
     ' ════════════════════════════════════════════════════════════════════
 #Region "Student Panel - DataGridView Initialization"
     ' ════════════════════════════════════════════════════════════════════
-
+    Private Sub student_list_DataGridView_SelectionChanged(ByVal sender As Object, ByVal e As EventArgs) Handles Student_List_DataGridView.SelectionChanged
+        Student_List_DataGridView.ClearSelection()
+    End Sub
     Private Sub InitializeStudentDataGridView()
         Try
             Student_List_DataGridView.ReadOnly = True
@@ -142,7 +144,11 @@ Public Class Admin_Form
             Student_List_DataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect
             Student_List_DataGridView.MultiSelect = False
             Student_List_DataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
-            Student_List_DataGridView.AlternatingRowsDefaultCellStyle.BackColor = System.Drawing.Color.LightGray
+            Student_List_DataGridView.DefaultCellStyle.Font = New Font("segoe ui", 12, FontStyle.Regular)
+            Student_List_DataGridView.RowHeadersVisible = False
+            Student_List_DataGridView.AllowUserToResizeColumns = False
+            Student_List_DataGridView.AllowUserToResizeRows = False
+            Student_List_DataGridView.ScrollBars = ScrollBars.Both
         Catch ex As Exception
             MessageBox.Show("Error initializing Student DataGridView: " & ex.Message, _
                             "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -337,7 +343,9 @@ Public Class Admin_Form
     ' ════════════════════════════════════════════════════════════════════
 #Region "Teacher Panel - DataGridView Initialization"
     ' ════════════════════════════════════════════════════════════════════
-
+    Private Sub teacher_list_DataGridView_SelectionChanged(ByVal sender As Object, ByVal e As EventArgs) Handles Teacher_List_DataGridView.SelectionChanged
+        Teacher_List_DataGridView.ClearSelection()
+    End Sub
     Private Sub InitializeTeacherDataGridView()
         Try
             Teacher_List_DataGridView.ReadOnly = True
@@ -347,7 +355,11 @@ Public Class Admin_Form
             Teacher_List_DataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect
             Teacher_List_DataGridView.MultiSelect = False
             Teacher_List_DataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
-            Teacher_List_DataGridView.AlternatingRowsDefaultCellStyle.BackColor = System.Drawing.Color.LightGray
+            Teacher_List_DataGridView.DefaultCellStyle.Font = New Font("segoe ui", 12, FontStyle.Regular)
+            Teacher_List_DataGridView.RowHeadersVisible = False
+            Teacher_List_DataGridView.AllowUserToResizeColumns = False
+            Teacher_List_DataGridView.AllowUserToResizeRows = False
+            Teacher_List_DataGridView.ScrollBars = ScrollBars.Both
         Catch ex As Exception
             MessageBox.Show("Error initializing Teacher DataGridView: " & ex.Message, _
                             "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -684,12 +696,15 @@ Public Class Admin_Form
             DataGridView1.Columns("course_code").HeaderText = "Code"
             DataGridView1.Columns("course_name").HeaderText = "Course"
             DataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+            DataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells
+            DataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
             DataGridView1.AllowUserToAddRows = False
             DataGridView1.AllowUserToDeleteRows = False
             DataGridView1.AllowUserToResizeRows = False
             DataGridView1.AllowUserToResizeColumns = False
             DataGridView1.RowHeadersVisible = False
-            DataGridView1.Enabled = False
+            DataGridView1.DefaultCellStyle.Font = New Font("segoe ui", 13, FontStyle.Regular)
+            DataGridView1.ScrollBars = ScrollBars.Both
 
             If DataGridView1.Rows.Count > 0 Then
 
@@ -832,4 +847,7 @@ Public Class Admin_Form
 
 
 
+    Private Sub Navigation_Panel_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles Navigation_Panel.Paint
+
+    End Sub
 End Class

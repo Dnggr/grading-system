@@ -224,11 +224,13 @@ Partial Class popUpFormModifyStudent
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(489, 424)
+        Me.ControlBox = False
         Me.Controls.Add(Me.Modify_Student_Panel)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "popUpFormModifyStudent"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "popUpFormModifyStudent"
         Me.Modify_Student_Panel.ResumeLayout(False)
         Me.Modify_Student_Panel.PerformLayout()

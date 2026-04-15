@@ -60,7 +60,7 @@ Partial Class frm_SemControl
         Me.GroupBox1.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(733, 94)
+        Me.GroupBox1.Size = New System.Drawing.Size(782, 94)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Semester Status"
@@ -68,7 +68,7 @@ Partial Class frm_SemControl
         'lblSubmitted
         '
         Me.lblSubmitted.AutoSize = True
-        Me.lblSubmitted.Location = New System.Drawing.Point(525, 50)
+        Me.lblSubmitted.Location = New System.Drawing.Point(557, 50)
         Me.lblSubmitted.Name = "lblSubmitted"
         Me.lblSubmitted.Size = New System.Drawing.Size(46, 17)
         Me.lblSubmitted.TabIndex = 13
@@ -77,7 +77,7 @@ Partial Class frm_SemControl
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(515, 28)
+        Me.Label7.Location = New System.Drawing.Point(547, 28)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(71, 17)
         Me.Label7.TabIndex = 12
@@ -86,7 +86,7 @@ Partial Class frm_SemControl
         'lblTotalTeachers
         '
         Me.lblTotalTeachers.AutoSize = True
-        Me.lblTotalTeachers.Location = New System.Drawing.Point(397, 50)
+        Me.lblTotalTeachers.Location = New System.Drawing.Point(429, 50)
         Me.lblTotalTeachers.Name = "lblTotalTeachers"
         Me.lblTotalTeachers.Size = New System.Drawing.Size(46, 17)
         Me.lblTotalTeachers.TabIndex = 11
@@ -95,7 +95,7 @@ Partial Class frm_SemControl
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(381, 28)
+        Me.Label5.Location = New System.Drawing.Point(413, 28)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(95, 17)
         Me.Label5.TabIndex = 10
@@ -104,7 +104,7 @@ Partial Class frm_SemControl
         'lblLockStatus
         '
         Me.lblLockStatus.AutoSize = True
-        Me.lblLockStatus.Location = New System.Drawing.Point(253, 50)
+        Me.lblLockStatus.Location = New System.Drawing.Point(285, 50)
         Me.lblLockStatus.Name = "lblLockStatus"
         Me.lblLockStatus.Size = New System.Drawing.Size(46, 17)
         Me.lblLockStatus.TabIndex = 9
@@ -113,7 +113,7 @@ Partial Class frm_SemControl
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(253, 28)
+        Me.Label3.Location = New System.Drawing.Point(285, 28)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(80, 17)
         Me.Label3.TabIndex = 8
@@ -122,7 +122,7 @@ Partial Class frm_SemControl
         'lblCurrentSem
         '
         Me.lblCurrentSem.AutoSize = True
-        Me.lblCurrentSem.Location = New System.Drawing.Point(17, 50)
+        Me.lblCurrentSem.Location = New System.Drawing.Point(49, 50)
         Me.lblCurrentSem.Name = "lblCurrentSem"
         Me.lblCurrentSem.Size = New System.Drawing.Size(46, 17)
         Me.lblCurrentSem.TabIndex = 7
@@ -131,7 +131,7 @@ Partial Class frm_SemControl
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(17, 28)
+        Me.Label1.Location = New System.Drawing.Point(49, 28)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(84, 17)
         Me.Label1.TabIndex = 6
@@ -140,7 +140,7 @@ Partial Class frm_SemControl
         'btnRefresh
         '
         Me.btnRefresh.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnRefresh.Location = New System.Drawing.Point(643, 44)
+        Me.btnRefresh.Location = New System.Drawing.Point(683, 44)
         Me.btnRefresh.Name = "btnRefresh"
         Me.btnRefresh.Size = New System.Drawing.Size(84, 23)
         Me.btnRefresh.TabIndex = 5
@@ -153,7 +153,7 @@ Partial Class frm_SemControl
         Me.GroupBox2.Controls.Add(Me.dgvTeachers)
         Me.GroupBox2.Location = New System.Drawing.Point(12, 140)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(733, 244)
+        Me.GroupBox2.Size = New System.Drawing.Size(782, 244)
         Me.GroupBox2.TabIndex = 1
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "GroupBox2"
@@ -164,7 +164,7 @@ Partial Class frm_SemControl
         Me.dgvTeachers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvTeachers.Location = New System.Drawing.Point(7, 71)
         Me.dgvTeachers.Name = "dgvTeachers"
-        Me.dgvTeachers.Size = New System.Drawing.Size(720, 166)
+        Me.dgvTeachers.Size = New System.Drawing.Size(769, 166)
         Me.dgvTeachers.TabIndex = 0
         '
         'btnIncrement
@@ -194,20 +194,20 @@ Partial Class frm_SemControl
         Me.StatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.ToolStripStatusLabel2})
         Me.StatusStrip.Location = New System.Drawing.Point(0, 436)
         Me.StatusStrip.Name = "StatusStrip"
-        Me.StatusStrip.Size = New System.Drawing.Size(757, 22)
+        Me.StatusStrip.Size = New System.Drawing.Size(806, 22)
         Me.StatusStrip.TabIndex = 5
         Me.StatusStrip.Text = "StatusStrip1"
         '
         'ToolStripStatusLabel1
         '
         Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
-        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(120, 17)
+        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(119, 17)
         Me.ToolStripStatusLabel1.Text = "ToolStripStatusLabel1"
         '
         'ToolStripStatusLabel2
         '
         Me.ToolStripStatusLabel2.Name = "ToolStripStatusLabel2"
-        Me.ToolStripStatusLabel2.Size = New System.Drawing.Size(120, 17)
+        Me.ToolStripStatusLabel2.Size = New System.Drawing.Size(119, 17)
         Me.ToolStripStatusLabel2.Text = "ToolStripStatusLabel2"
         '
         'frm_SemControl
@@ -215,7 +215,8 @@ Partial Class frm_SemControl
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.CadetBlue
-        Me.ClientSize = New System.Drawing.Size(757, 458)
+        Me.ClientSize = New System.Drawing.Size(806, 458)
+        Me.ControlBox = False
         Me.Controls.Add(Me.StatusStrip)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.btnIncrement)
@@ -225,6 +226,7 @@ Partial Class frm_SemControl
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frm_SemControl"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "frm_SemControl"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()

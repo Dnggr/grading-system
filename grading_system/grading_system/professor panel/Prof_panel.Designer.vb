@@ -73,7 +73,7 @@ Partial Class Prof_panel
         '
         Me.PictureBoxprof.Location = New System.Drawing.Point(24, 51)
         Me.PictureBoxprof.Name = "PictureBoxprof"
-        Me.PictureBoxprof.Size = New System.Drawing.Size(136, 119)
+        Me.PictureBoxprof.Size = New System.Drawing.Size(136, 129)
         Me.PictureBoxprof.TabIndex = 6
         Me.PictureBoxprof.TabStop = False
         '
@@ -82,7 +82,7 @@ Partial Class Prof_panel
         Me.Label1.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(20, 188)
+        Me.Label1.Location = New System.Drawing.Point(20, 183)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(70, 25)
         Me.Label1.TabIndex = 4
@@ -158,6 +158,9 @@ Partial Class Prof_panel
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
         Me.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "Prof_panel"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Prof_panel"

@@ -259,8 +259,12 @@ Partial Class popUpFormAssignSubjectToTeacher
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(904, 646)
+        Me.ControlBox = False
         Me.Controls.Add(Me.Assign_Teacher_Panel)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "popUpFormAssignSubjectToTeacher"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "popUpFormAssignSubjectToTeacher"
         Me.Assign_Teacher_Panel.ResumeLayout(False)
         Me.Assign_Teacher_Panel.PerformLayout()

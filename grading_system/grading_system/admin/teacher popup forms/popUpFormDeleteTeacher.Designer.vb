@@ -106,6 +106,7 @@ Partial Class popUpFormDeleteTeacher
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.CadetBlue
         Me.ClientSize = New System.Drawing.Size(426, 337)
+        Me.ControlBox = False
         Me.Controls.Add(Me.Activate_Button)
         Me.Controls.Add(Me.Refresh_Button)
         Me.Controls.Add(Me.Cancel_Button)
@@ -117,6 +118,7 @@ Partial Class popUpFormDeleteTeacher
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "popUpFormDeleteTeacher"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "popUpFormDeleteTeacher"
         CType(Me.Delete_Teacher_DataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)

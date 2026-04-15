@@ -137,6 +137,7 @@ Public Class Dashboard
             'to control the dgv
             DataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
             DataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+            DataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells
             DataGridView1.AllowUserToAddRows = False
             DataGridView1.AllowUserToDeleteRows = False
             DataGridView1.AllowUserToResizeColumns = False
@@ -196,6 +197,7 @@ Public Class Dashboard
             'to control the dgv
             DataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
             DataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+            DataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells
             DataGridView2.AllowUserToAddRows = False
             DataGridView2.AllowUserToDeleteRows = False
             DataGridView2.AllowUserToResizeColumns = False

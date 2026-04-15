@@ -193,7 +193,10 @@ Partial Class accountcenterprof
         Me.Controls.Add(Me.email)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "accountcenterprof"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "accountcenterprof"
         Me.ResumeLayout(False)
         Me.PerformLayout()

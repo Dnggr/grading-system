@@ -144,7 +144,7 @@ Partial Class Student_Form
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(51, 188)
+        Me.Label1.Location = New System.Drawing.Point(35, 201)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(70, 25)
         Me.Label1.TabIndex = 4
@@ -254,9 +254,13 @@ Partial Class Student_Form
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1350, 729)
+        Me.ControlBox = False
         Me.Controls.Add(Me.mainpanel)
         Me.Controls.Add(Me.s)
         Me.Controls.Add(Me.Panel1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "Student_Form"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Student_Form"

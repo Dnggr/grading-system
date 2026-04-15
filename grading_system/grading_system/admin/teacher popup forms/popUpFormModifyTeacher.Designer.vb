@@ -189,6 +189,7 @@ Partial Class popUpFormModifyTeacher
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.CadetBlue
         Me.ClientSize = New System.Drawing.Size(480, 392)
+        Me.ControlBox = False
         Me.Controls.Add(Me.Refresh_Button)
         Me.Controls.Add(Me.Modify_Cancel_Button)
         Me.Controls.Add(Me.Modify_Button)
@@ -209,6 +210,7 @@ Partial Class popUpFormModifyTeacher
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "popUpFormModifyTeacher"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "popUpFormModifyTeacher"
         CType(Me.Modify_Teacher_DataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
